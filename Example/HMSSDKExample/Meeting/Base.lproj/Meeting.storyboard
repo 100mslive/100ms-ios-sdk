@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Meeting View Controller-->
+        <scene sceneID="AB1-0p-zeJ">
+            <objects>
+                <viewController id="mjG-Ba-if7" customClass="MeetingViewController" customModule="HMSSDKExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dqf-yv-7Bl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
+                                <rect key="frame" x="323" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="FBk-xL-BtU"/>
+                                    <constraint firstAttribute="width" constant="44" id="Kah-tw-fMH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="bold">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9C-pq-ppt">
+                                <rect key="frame" x="279" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="JGd-Pu-Vel"/>
+                                </constraints>
+                                <state key="normal" image="arrow.triangle.2.circlepath.camera" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="switchCameraTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="oYx-wA-9sj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1F-BP-LLz">
+                                <rect key="frame" x="235" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="ll8-3i-2Qf"/>
+                                </constraints>
+                                <state key="normal" image="speaker.wave.3.fill" catalog="system">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <state key="selected" image="speaker.slash.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="muteRemoteStreamsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="Jbp-9w-rfQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Kd-OJO">
+                                <rect key="frame" x="8" y="44" width="231" height="44"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Room ">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="medium"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="roomNameTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="O68-VI-z7Y"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKq-UE-p7N">
+                                <rect key="frame" x="0.0" y="88" width="375" height="1"/>
+                                <color key="backgroundColor" systemColor="separatorColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="RHP-tp-D0r"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyH-bp-NTF">
+                                <rect key="frame" x="0.0" y="88" width="375" height="646"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" sectionInsetReference="safeArea" id="X0O-qo-onW">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="Cell" id="0EI-A3-zvS" customClass="VideoCollectionViewCell" customModule="HMSSDKExample" customModuleProvider="target">
+                                        <rect key="frame" x="4" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="eIA-rh-Vt1">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-Q2-mQX" customClass="HMSVideoView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6D-tx-bL7">
+                                                    <rect key="frame" x="32" y="32" width="64" height="64"/>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="8iO-FH-d9J"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="Zp3-N3-vcY"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="5DJ-Az-o0i">
+                                                    <rect key="frame" x="8.6666666666666714" y="80" width="111" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5b-uY-ZDM">
+                                                            <rect key="frame" x="8" y="8" width="31" height="28"/>
+                                                            <color key="tintColor" systemColor="linkColor"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" systemColor="linkColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ecl-i0-jxF">
+                                                            <rect key="frame" x="39" y="8" width="32" height="28"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="32" id="xU5-CX-JeH"/>
+                                                            </constraints>
+                                                            <state key="normal" image="speaker.wave.2.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                </preferredSymbolConfiguration>
+                                                            </state>
+                                                            <state key="selected" image="speaker.slash.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                </preferredSymbolConfiguration>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="muteTapped:" destination="0EI-A3-zvS" eventType="touchUpInside" id="5Q5-fG-mzD"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obx-KY-CNX">
+                                                            <rect key="frame" x="71" y="8" width="32" height="28"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="32" id="pfi-Bu-oot"/>
+                                                            </constraints>
+                                                            <state key="normal" image="video.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                </preferredSymbolConfiguration>
+                                                            </state>
+                                                            <state key="selected" image="video.slash.fill" catalog="system">
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                                </preferredSymbolConfiguration>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="stopVideoTapped:" destination="0EI-A3-zvS" eventType="touchUpInside" id="3Dt-vU-D0c"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="olz-LZ-k0V"/>
+                                                    </constraints>
+                                                    <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5DJ-Az-o0i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="top" id="0lv-ZF-2Tc"/>
+                                                <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
+                                                <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" id="CYl-d3-NMQ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
+                                                <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
+                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" id="Yc4-VI-PBE"/>
+                                                <constraint firstItem="5DJ-Az-o0i" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="aBk-Ug-1WD"/>
+                                                <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" id="ehd-uv-Mt4"/>
+                                                <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
+                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="swZ-Nr-YfD"/>
+                                                <constraint firstItem="w6D-tx-bL7" firstAttribute="centerY" secondItem="eIA-rh-Vt1" secondAttribute="centerY" id="zzF-RU-orm"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarLabel" destination="w6D-tx-bL7" id="ekL-KC-qRr"/>
+                                            <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
+                                            <outlet property="nameLabel" destination="i5b-uY-ZDM" id="U3V-ov-dqn"/>
+                                            <outlet property="stackView" destination="5DJ-Az-o0i" id="Ikz-3f-3nA"/>
+                                            <outlet property="stopVideoButton" destination="obx-KY-CNX" id="PZg-Oi-nKt"/>
+                                            <outlet property="videoView" destination="nEX-Q2-mQX" id="wdm-Ax-ohZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-icon" id="oQb-0c-kLb">
+                                <rect key="frame" x="0.0" y="83" width="375" height="646"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Tb2-3p-SS0">
+                                <rect key="frame" x="0.0" y="734" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXn-tX-gSM">
+                                        <rect key="frame" x="8" y="0.0" width="83.666666666666671" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2r2-nP-Ppa"/>
+                                        </constraints>
+                                        <state key="normal" image="video.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <state key="selected" image="video.slash.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="videoTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="fsv-nu-s1V"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-0T-b7l">
+                                        <rect key="frame" x="99.666666666666686" y="0.0" width="84" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="gnA-SC-CIG"/>
+                                        </constraints>
+                                        <state key="normal" image="mic.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <state key="selected" image="mic.slash.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="micTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="bth-WE-Rka"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg" customClass="BadgeButton" customModule="HMSSDKExample" customModuleProvider="target">
+                                        <rect key="frame" x="191.66666666666666" y="0.0" width="83.666666666666657" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
+                                        </constraints>
+                                        <state key="normal" image="message.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="chatTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="3YE-2Y-Jch"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-Fg-dAU">
+                                        <rect key="frame" x="283.33333333333331" y="0.0" width="83.666666666666686" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="MxJ-hy-oBa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" systemColor="systemRedColor"/>
+                                        <state key="normal" image="phone.down.fill" catalog="system">
+                                            <color key="titleColor" systemColor="systemRedColor"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="disconnectTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="pXX-DI-L9N"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="0PR-Rz-GYz"/>
+                                </constraints>
+                                <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kDS-UD-GQA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="bottom" constant="8" symbolic="YES" id="6BK-wy-0t3"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
+                            <constraint firstItem="gdt-Kd-OJO" firstAttribute="top" secondItem="i1F-BP-LLz" secondAttribute="top" id="DZN-P3-ehW"/>
+                            <constraint firstItem="e9C-pq-ppt" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="EaT-W8-Za3"/>
+                            <constraint firstItem="e9C-pq-ppt" firstAttribute="bottom" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="H2q-rx-LEt"/>
+                            <constraint firstItem="e9C-pq-ppt" firstAttribute="leading" secondItem="i1F-BP-LLz" secondAttribute="trailing" id="Iix-A7-yaH"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="kDS-UD-GQA" secondAttribute="top" id="Ny9-re-MbV"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="top" secondItem="e9C-pq-ppt" secondAttribute="top" id="OvR-sO-FCg"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="dbh-7g-s3g" secondAttribute="trailing" constant="8" id="XEz-uO-kgn"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" constant="-4" id="Y3D-QU-DJO"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="ZNn-6N-Bo0"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="bottom" secondItem="e9C-pq-ppt" secondAttribute="bottom" id="Zkr-SO-5Bf"/>
+                            <constraint firstItem="NKq-UE-p7N" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="bSm-sI-jDc"/>
+                            <constraint firstItem="NKq-UE-p7N" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="cli-Gu-K2b"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="dhU-gY-ww1"/>
+                            <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="i1F-BP-LLz" secondAttribute="bottom" id="f0b-4f-rQl"/>
+                            <constraint firstItem="gdt-Kd-OJO" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="8" id="frJ-19-L9J"/>
+                            <constraint firstItem="Tb2-3p-SS0" firstAttribute="bottom" secondItem="kDS-UD-GQA" secondAttribute="bottom" id="kEC-yb-W5b"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" constant="8" symbolic="YES" id="nva-4l-9tN"/>
+                            <constraint firstItem="Tb2-3p-SS0" firstAttribute="top" secondItem="DyH-bp-NTF" secondAttribute="bottom" id="o75-dd-mk7"/>
+                            <constraint firstItem="Tb2-3p-SS0" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="qsD-NW-0k6"/>
+                            <constraint firstItem="dbh-7g-s3g" firstAttribute="leading" secondItem="e9C-pq-ppt" secondAttribute="trailing" id="vck-dG-6af"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Tb2-3p-SS0" secondAttribute="trailing" id="vqV-8I-DxR"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6BK-wy-0t3"/>
+                                <exclude reference="Ny9-re-MbV"/>
+                                <exclude reference="nva-4l-9tN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="dhU-gY-ww1"/>
+                                <exclude reference="6BK-wy-0t3"/>
+                                <include reference="Ny9-re-MbV"/>
+                                <exclude reference="ZNn-6N-Bo0"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="nva-4l-9tN"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="nva-4l-9tN"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="badgeButton" destination="Cxf-bq-abg" id="1mm-tg-yyk"/>
+                        <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
+                        <outlet property="loadingIcon" destination="oQb-0c-kLb" id="wkn-qX-R21"/>
+                        <outlet property="publishAudioButton" destination="hKQ-0T-b7l" id="ubh-Yl-SjS"/>
+                        <outlet property="publishVideoButton" destination="qXn-tX-gSM" id="peS-c5-lIf"/>
+                        <outlet property="roomNameButton" destination="gdt-Kd-OJO" id="Qlv-ck-6Nf"/>
+                        <outlet property="settingsButton" destination="dbh-7g-s3g" id="GOT-4A-N3Y"/>
+                        <outlet property="speakerButton" destination="i1F-BP-LLz" id="7dX-jI-W96"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dZE-GK-SnT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="83" y="63"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="100ms-icon" width="1598" height="1598"/>
+        <image name="arrow.triangle.2.circlepath.camera" catalog="system" width="128" height="94"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="mic.fill" catalog="system" width="108" height="128"/>
+        <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
+        <image name="phone.down.fill" catalog="system" width="128" height="52"/>
+        <image name="speaker.slash.fill" catalog="system" width="124" height="128"/>
+        <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
+        <image name="speaker.wave.3.fill" catalog="system" width="128" height="86"/>
+        <image name="video.fill" catalog="system" width="128" height="82"/>
+        <image name="video.slash.fill" catalog="system" width="128" height="106"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

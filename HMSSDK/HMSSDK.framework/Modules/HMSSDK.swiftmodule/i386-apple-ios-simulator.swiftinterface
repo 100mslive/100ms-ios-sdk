@@ -1,0 +1,266 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target i386-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name HMSSDK
+import Foundation
+@_exported import HMSSDK
+import HMSSDK_Private
+import Swift
+@objc public class HMSSpeaker : ObjectiveC.NSObject, Swift.Codable {
+  final public let peerID: Swift.String
+  final public let trackID: Swift.String
+  final public let level: Swift.Int
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class HMSPeer : ObjectiveC.NSObject {
+  @objc final public let peerID: Swift.String
+  @objc public var name: Swift.String
+  @objc final public let isLocal: Swift.Bool
+  @objc final public let customerUserID: Swift.String?
+  @objc public var customerDescription: Swift.String?
+  @objc public var audioTrack: HMSSDK.HMSAudioTrack?
+  @objc public var videoTrack: HMSSDK.HMSVideoTrack?
+  @objc public var auxiliaryTracks: [HMSSDK.HMSTrack]?
+  @objc public var role: HMSSDK.HMSRole
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension HMSPeer {
+  public static func == (lhs: HMSSDK.HMSPeer, rhs: HMSSDK.HMSPeer) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSLocalPeer : HMSSDK.HMSPeer {
+  @objc public func localAudioTrack() -> HMSSDK.HMSLocalAudioTrack?
+  @objc public func localVideoTrack() -> HMSSDK.HMSLocalVideoTrack?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSRemotePeer : HMSSDK.HMSPeer {
+  @objc public func remoteAudioTrack() -> HMSSDK.HMSRemoteAudioTrack?
+  @objc public func remoteVideoTrack() -> HMSSDK.HMSRemoteVideoTrack?
+  @objc deinit
+}
+public protocol HMSDataSourceDelegate {
+  func didUpdate(_ model: HMSSDK.HMSViewModel?)
+  func didUpdate(_ speakers: [HMSSDK.HMSViewModel])
+}
+public class HMSDataSource : HMSSDK.HMSUpdateListener {
+  public var hms: HMSSDK.HMSSDK?
+  public var sections: [HMSSDK.HMSSection]
+  public var allModels: [HMSSDK.HMSViewModel] {
+    get
+  }
+  public var delegate: HMSSDK.HMSDataSourceDelegate?
+  public var sortComparator: ((HMSSDK.HMSViewModel, HMSSDK.HMSViewModel) -> Swift.Bool)?
+  public var filter: ((HMSSDK.HMSViewModel) -> Swift.Bool)?
+  public var sectionProducer: ((HMSSDK.HMSViewModel) -> HMSSDK.HMSSection.SectionIdentifier)?
+  public init()
+  @objc public func on(join room: HMSSDK.HMSRoom)
+  @objc public func on(room: HMSSDK.HMSRoom, update: HMSSDK.HMSRoomUpdate)
+  @objc public func on(peer: HMSSDK.HMSPeer, update: HMSSDK.HMSPeerUpdate)
+  @objc public func on(track: HMSSDK.HMSTrack, update: HMSSDK.HMSTrackUpdate, for peer: HMSSDK.HMSPeer)
+  @objc public func on(updated speakers: [HMSSDK.HMSSpeaker])
+  @objc public func on(error: HMSSDK.HMSError)
+  @objc public func on(message: HMSSDK.HMSMessage)
+  @objc public func onReconnecting()
+  @objc public func onReconnected()
+  public func reload()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class HMSViewModel : Swift.Hashable {
+  public var identifier: Swift.String
+  final public let peer: HMSSDK.HMSPeer
+  public var videoTrack: HMSSDK.HMSVideoTrack?
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: HMSSDK.HMSViewModel, rhs: HMSSDK.HMSViewModel) -> Swift.Bool
+  @objc deinit
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class HMSSection : Swift.Hashable {
+  public typealias SectionIdentifier = Swift.String
+  public var models: [HMSSDK.HMSViewModel]
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (lhs: HMSSDK.HMSSection, rhs: HMSSDK.HMSSection) -> Swift.Bool
+  @objc deinit
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class HMSNetworkQuality : ObjectiveC.NSObject {
+  @objc final public let peer: HMSSDK.HMSPeer
+  public var incomingAvailableBitrate: Swift.Int?
+  public var outgoingAvailableBitrate: Swift.Int?
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public enum HMSRoomUpdate : Swift.Int, Swift.CustomStringConvertible {
+  case roomTypeChanged
+  case metaDataUpdated
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum HMSTrackUpdate : Swift.Int, Swift.CustomStringConvertible {
+  case trackAdded
+  case trackRemoved
+  case trackMuted
+  case trackUnmuted
+  case trackDescriptionChanged
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class HMSRoom : ObjectiveC.NSObject {
+  @objc final public let id: Swift.String
+  @objc final public let name: Swift.String
+  @objc final public let metaData: Swift.String?
+  @objc public var peers: [HMSSDK.HMSPeer]
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class HMSMessage : ObjectiveC.NSObject, Swift.Codable {
+  @objc final public let sender: Swift.String
+  @objc final public let receiver: Swift.String?
+  @objc final public let time: Swift.String
+  @objc final public let type: Swift.String
+  @objc final public let message: Swift.String?
+  @objc public init(sender: Swift.String, receiver: Swift.String? = nil, time: Swift.String, type: Swift.String, message: Swift.String)
+  @objc override dynamic public init()
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class HMSUtilities : ObjectiveC.NSObject {
+  @objc public class func getDevices() -> [HMSSDK.HMSDevice]
+  @objc public class func getAllVideoTracks(for room: HMSSDK.HMSRoom) -> [HMSSDK.HMSVideoTrack]
+  @objc public class func getAllAudioTracks(for room: HMSSDK.HMSRoom) -> [HMSSDK.HMSAudioTrack]
+  @objc public class func getPeer(for id: Swift.String, in room: HMSSDK.HMSRoom) -> HMSSDK.HMSPeer?
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class HMSRole : ObjectiveC.NSObject {
+  @objc public var name: Swift.String
+  @objc public var mode: HMSSDK.HMSMode
+  @objc public var priority: Swift.Int
+  @objc public var metaData: Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum HMSMode : Swift.Int {
+  case publishAndSubscribe
+  case onlySubscribe
+  case onlyPublish
+  case auto
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @objcMembers public class HMSConfig : ObjectiveC.NSObject {
+  @objc final public let userName: Swift.String
+  @objc final public let userID: Swift.String
+  @objc final public let roomID: Swift.String
+  @objc final public let authToken: Swift.String
+  @objc final public let joiningMode: HMSSDK.HMSMode
+  @objc final public let shouldSkipPIIEvents: Swift.Bool
+  @objc final public let metaData: Swift.String?
+  @objc final public let endpoint: Swift.String?
+  @objc public init(userName: Swift.String = "iOS User", userID: Swift.String, roomID: Swift.String, authToken: Swift.String, joiningMode: HMSSDK.HMSMode = .publishAndSubscribe, shouldSkipPIIEvents: Swift.Bool = false, metaData: Swift.String? = nil, endpoint: Swift.String? = nil)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public protocol HMSUpdateListener {
+  @objc(onJoin:) func on(join room: HMSSDK.HMSRoom)
+  @objc(onRoom:update:) func on(room: HMSSDK.HMSRoom, update: HMSSDK.HMSRoomUpdate)
+  @objc(onPeer:update:) func on(peer: HMSSDK.HMSPeer, update: HMSSDK.HMSPeerUpdate)
+  @objc(onTrack:update:peer:) func on(track: HMSSDK.HMSTrack, update: HMSSDK.HMSTrackUpdate, for peer: HMSSDK.HMSPeer)
+  @objc(onError:) func on(error: HMSSDK.HMSError)
+  @objc(onMessage:) func on(message: HMSSDK.HMSMessage)
+  @objc(onUpdatedSpeakers:) func on(updated speakers: [HMSSDK.HMSSpeaker])
+  @objc func onReconnecting()
+  @objc func onReconnected()
+}
+@objc public protocol HMSLumberjack {
+  @objc(logMessage:level:) func log(_ message: Swift.String, _ level: HMSSDK.HMSLogLevel)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSSDK : ObjectiveC.NSObject {
+  @objc public func join(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSUpdateListener)
+  @objc public func leave()
+  @objc public var localPeer: HMSSDK.HMSLocalPeer? {
+    @objc get
+  }
+  @objc public var remotePeers: [HMSSDK.HMSRemotePeer]? {
+    @objc get
+  }
+  @objc public var room: HMSSDK.HMSRoom? {
+    @objc get
+  }
+  @objc public func send(message: HMSSDK.HMSMessage)
+  @objc public func startScreenShare()
+  @objc public func stopScreenShare()
+  @objc public func add(delegate: HMSSDK.HMSUpdateListener)
+  @objc public func remove(delegate: HMSSDK.HMSUpdateListener)
+  @objc public static func build(block: ((HMSSDK.HMSSDK) -> Swift.Void)? = nil) -> HMSSDK.HMSSDK
+  @objc public var trackSettings: HMSSDK.HMSTrackSettings {
+    @objc get
+    @objc set
+  }
+  @objc public var analyticsLevel: HMSSDK.HMSAnalyticsEventLevel {
+    @objc get
+    @objc set
+  }
+  @objc public var logLevel: HMSSDK.HMSLogLevel {
+    @objc get
+    @objc set
+  }
+  @objc public var logger: HMSSDK.HMSLumberjack? {
+    @objc get
+    @objc set
+  }
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class HMSDevice : ObjectiveC.NSObject {
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public enum HMSPeerUpdate : Swift.Int, Swift.CustomStringConvertible {
+  case peerJoined
+  case peerLeft
+  case peerKnocked
+  case audioToggled
+  case videoToggled
+  case roleUpdated
+  case defaultUpdate
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension HMSSDK.HMSRoomUpdate : Swift.Equatable {}
+extension HMSSDK.HMSRoomUpdate : Swift.Hashable {}
+extension HMSSDK.HMSRoomUpdate : Swift.RawRepresentable {}
+extension HMSSDK.HMSTrackUpdate : Swift.Equatable {}
+extension HMSSDK.HMSTrackUpdate : Swift.Hashable {}
+extension HMSSDK.HMSTrackUpdate : Swift.RawRepresentable {}
+extension HMSSDK.HMSMode : Swift.Equatable {}
+extension HMSSDK.HMSMode : Swift.Hashable {}
+extension HMSSDK.HMSMode : Swift.RawRepresentable {}
+extension HMSSDK.HMSPeerUpdate : Swift.Equatable {}
+extension HMSSDK.HMSPeerUpdate : Swift.Hashable {}
+extension HMSSDK.HMSPeerUpdate : Swift.RawRepresentable {}

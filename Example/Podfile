@@ -1,0 +1,22 @@
+
+
+platform :ios, '13.0'
+
+target 'HMSSDKExample' do
+  pod 'HMSSDK', :path => "../HMSSDK.podspec"
+  
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/AppDistribution'
+  pod 'Firebase/Analytics'
+  pod 'CocoaLumberjack/Swift'
+
+  target 'HMSSDKExampleTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+end

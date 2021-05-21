@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="QeC-l7-vGf">
+            <objects>
+                <viewController storyboardIdentifier="LoginController" id="SMR-Mj-Sg7" customClass="LoginViewController" customModule="HMSSDKExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jQ1-tl-f6e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7m-VC-yE1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="822"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-CH-SJE">
+                                <rect key="frame" x="303" y="44" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="FJP-AP-4Am"/>
+                                    <constraint firstAttribute="width" constant="64" id="p6q-Md-1Sb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="gear" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="settingsTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="12j-ki-Uzh"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
+                                <rect key="frame" x="0.0" y="44" width="215" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="Xdu-Ni-NoP">
+                                <rect key="frame" x="0.0" y="278" width="375" height="256"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="OEq-rU-lzb">
+                                        <rect key="frame" x="99.666666666666686" y="0.0" width="176" height="64"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2u-ed-mZu">
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="io6-xb-Q0l"/>
+                                                    <constraint firstAttribute="width" constant="64" id="tE8-mK-E0m"/>
+                                                </constraints>
+                                                <state key="normal" image="video.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <state key="selected" image="video.slash.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cameraTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="cD3-MV-TT8"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCM-uq-NA0">
+                                                <rect key="frame" x="112" y="0.0" width="64" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="1E5-IN-XPG"/>
+                                                    <constraint firstAttribute="width" constant="64" id="YcR-mA-orD"/>
+                                                </constraints>
+                                                <state key="normal" image="mic.circle.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <state key="selected" image="mic.slash.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="micTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="Mfz-zz-nUE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Hgt-OM-PBn">
+                                        <rect key="frame" x="8" y="112" width="359" height="144"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a Meeting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycw-3w-dwc">
+                                                <rect key="frame" x="15" y="7.9999999999999982" width="329" height="20.333333333333329"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <color key="textColor" systemColor="linkColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="acw-NV-HwS">
+                                                <rect key="frame" x="15" y="36.333333333333314" width="329" height="39.666666666666657"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="join" enablesReturnKeyAutomatically="YES" textContentType="name"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="SMR-Mj-Sg7" id="Rv4-zY-yku"/>
+                                                </connections>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ta-CK-XYA">
+                                                <rect key="frame" x="15" y="84" width="329" height="52"/>
+                                                <color key="backgroundColor" systemColor="linkColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="HzS-Mx-OL9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Join Meeting" image="arrow.up.right.video" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startMeetingTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="PLB-h2-qTf"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="144" id="RJb-Qv-yK4"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
+                                    </stackView>
+                                </subviews>
+                                <variation key="heightClass=compact-widthClass=compact" spacingType="standard"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FhJ-Ef-bMr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Xdu-Ni-NoP" firstAttribute="centerY" secondItem="jQ1-tl-f6e" secondAttribute="centerY" id="1rs-uc-ZJC"/>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Bcw-CH-SJE" secondAttribute="trailing" constant="8" id="5Kt-ln-qG7"/>
+                            <constraint firstItem="Hgt-OM-PBn" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" constant="8" id="7pK-WV-Lc3"/>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Hgt-OM-PBn" secondAttribute="trailing" constant="8" id="ABV-Rw-YSM"/>
+                            <constraint firstItem="Xdu-Ni-NoP" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" id="Ddb-DS-3z4"/>
+                            <constraint firstItem="Xdu-Ni-NoP" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="GoT-EH-oce"/>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="bottom" secondItem="N7m-VC-yE1" secondAttribute="bottom" constant="-2" id="LLW-ij-ZCe">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-24"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="160" id="P2f-qc-78M"/>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Xdu-Ni-NoP" secondAttribute="trailing" id="Q5N-a1-rwb"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="FhJ-Ef-bMr" secondAttribute="top" id="USt-HX-x7x"/>
+                            <constraint firstItem="N7m-VC-yE1" firstAttribute="top" secondItem="FhJ-Ef-bMr" secondAttribute="top" id="ZSL-lg-2ZQ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" constant="20" symbolic="YES" id="jjf-8D-Wvx"/>
+                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="N7m-VC-yE1" secondAttribute="trailing" id="uh9-JE-Lb2">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="N7m-VC-yE1" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" id="wBY-Jz-JUx">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-44"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="subviews">
+                                <exclude reference="Bcw-CH-SJE"/>
+                                <exclude reference="C2U-dF-Uy4"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="WAo-RG-heA"/>
+                    <connections>
+                        <outlet property="cameraPreview" destination="N7m-VC-yE1" id="CYM-MB-Jig"/>
+                        <outlet property="containerStackView" destination="Xdu-Ni-NoP" id="UQT-Rk-64H"/>
+                        <outlet property="joinMeetingButton" destination="9ta-CK-XYA" id="gIo-4o-E4d"/>
+                        <outlet property="joinMeetingIDField" destination="acw-NV-HwS" id="omq-yN-2nG"/>
+                        <outlet property="joinMeetingStackView" destination="Hgt-OM-PBn" id="PTj-r0-034"/>
+                        <outlet property="publishAudioButton" destination="pCM-uq-NA0" id="zg7-e6-DAQ"/>
+                        <outlet property="publishVideoButton" destination="W2u-ed-mZu" id="e0D-hD-WTt"/>
+                        <outlet property="settingsButton" destination="Bcw-CH-SJE" id="rpD-aT-4zb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p3x-pC-Zih" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.600000000000001" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2Qz-Tb-TXU">
+            <objects>
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="JHd-X7-1X6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OOd-DE-Z3f">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SMR-Mj-Sg7" kind="relationship" relationship="rootViewController" id="ifg-1A-2Xu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d2I-7p-X8D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-901.60000000000002" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="100ms-logo" width="7052" height="2130"/>
+        <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
+        <image name="video.fill" catalog="system" width="128" height="82"/>
+        <image name="video.slash.fill" catalog="system" width="128" height="106"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

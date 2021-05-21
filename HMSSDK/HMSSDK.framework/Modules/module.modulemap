@@ -1,0 +1,11 @@
+framework module HMSSDK {
+  umbrella header "HMSSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module HMSSDK.Swift {
+    header "HMSSDK-Swift.h"
+    requires objc
+}

@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Switch Camera"; ObjectID = "0Fo-VL-jGt"; */
+"0Fo-VL-jGt.normalTitle" = "Switch Camera";
+
+/* Class = "UIButton"; normalTitle = "Mute"; ObjectID = "0r7-Ku-OeV"; */
+"0r7-Ku-OeV.normalTitle" = "Mute";
+
+/* Class = "UIButton"; normalTitle = "Video"; ObjectID = "Jgm-1w-jCu"; */
+"Jgm-1w-jCu.normalTitle" = "Video";
+
+/* Class = "UILabel"; text = "Speaking: "; ObjectID = "ort-Dc-XtC"; */
+"ort-Dc-XtC.text" = "Speaking: ";

@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "Enter Name"; ObjectID = "3IR-ix-Tf0"; */
+"3IR-ix-Tf0.text" = "Enter Name";
+
+/* Class = "UITextField"; placeholder = "Enter Name"; ObjectID = "7HE-IK-4mD"; */
+"7HE-IK-4mD.placeholder" = "Enter Name";
+
+/* Class = "UITextField"; text = "iOS User"; ObjectID = "7HE-IK-4mD"; */
+"7HE-IK-4mD.text" = "iOS User";
+
+/* Class = "UITextField"; placeholder = "Enter Meeting Name"; ObjectID = "FHx-L6-4DO"; */
+"FHx-L6-4DO.placeholder" = "Enter Meeting Name";
+
+/* Class = "UITextField"; text = "Enter Meeting Name"; ObjectID = "FHx-L6-4DO"; */
+"FHx-L6-4DO.text" = "Enter Meeting Name";
+
+/* Class = "UIButton"; normalTitle = " Start a Meeting"; ObjectID = "M9x-jp-1dT"; */
+"M9x-jp-1dT.normalTitle" = " Start a Meeting";
+
+/* Class = "UILabel"; text = "Get Started"; ObjectID = "fOf-2q-sK6"; */
+"fOf-2q-sK6.text" = "Get Started";
+
+/* Class = "UILabel"; text = "Join Meeting"; ObjectID = "fyV-uo-euy"; */
+"fyV-uo-euy.text" = "Join Meeting";
+
+/* Class = "UILabel"; text = "Record Meeting"; ObjectID = "iqm-l3-nQu"; */
+"iqm-l3-nQu.text" = "Record Meeting";
+
+/* Class = "UILabel"; text = "100ms"; ObjectID = "mrU-qd-8x0"; */
+"mrU-qd-8x0.text" = "100ms";
+
+/* Class = "UITextField"; placeholder = "Enter Meeting ID"; ObjectID = "oHK-xx-jcU"; */
+"oHK-xx-jcU.placeholder" = "Enter Meeting ID";
+
+/* Class = "UITextField"; text = "Enter Meeting ID"; ObjectID = "oHK-xx-jcU"; */
+"oHK-xx-jcU.text" = "Enter Meeting ID";
+
+/* Class = "UIButton"; normalTitle = " Join Now"; ObjectID = "sLi-29-TEO"; */
+"sLi-29-TEO.normalTitle" = " Join Now";

@@ -1,0 +1,139 @@
+PODS:
+  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack/Swift (3.7.2):
+    - CocoaLumberjack/Core
+  - Firebase/Analytics (7.10.0):
+    - Firebase/Core
+  - Firebase/AppDistribution (7.10.0):
+    - Firebase/CoreOnly
+    - FirebaseAppDistribution (~> 7.10.0-beta)
+  - Firebase/Core (7.10.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (~> 7.10.0)
+  - Firebase/CoreOnly (7.10.0):
+    - FirebaseCore (= 7.10.0)
+  - Firebase/Crashlytics (7.10.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 7.10.0)
+  - FirebaseAnalytics (7.10.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleAppMeasurement (= 7.10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30908.0)
+  - FirebaseAppDistribution (7.10.0-beta):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleDataTransport (~> 8.4)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+  - FirebaseCore (7.10.0):
+    - FirebaseCoreDiagnostics (~> 7.4)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+  - FirebaseCoreDiagnostics (7.10.0):
+    - GoogleDataTransport (~> 8.4)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+    - nanopb (~> 2.30908.0)
+  - FirebaseCrashlytics (7.10.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleDataTransport (~> 8.4)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstallations (7.10.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+    - PromisesObjC (~> 1.2)
+  - GoogleAppMeasurement (7.10.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/MethodSwizzler (~> 7.0)
+    - GoogleUtilities/Network (~> 7.0)
+    - "GoogleUtilities/NSData+zlib (~> 7.0)"
+    - nanopb (~> 2.30908.0)
+  - GoogleDataTransport (8.4.0):
+    - GoogleUtilities/Environment (~> 7.2)
+    - nanopb (~> 2.30908.0)
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.3.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.3.1):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (7.3.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.3.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.3.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.3.1)"
+  - GoogleUtilities/Reachability (7.3.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.3.1):
+    - GoogleUtilities/Logger
+  - GoogleWebRTC (1.1.31999)
+  - HMSSDK (0.0.1):
+    - GoogleWebRTC (= 1.1.31999)
+  - nanopb (2.30908.0):
+    - nanopb/decode (= 2.30908.0)
+    - nanopb/encode (= 2.30908.0)
+  - nanopb/decode (2.30908.0)
+  - nanopb/encode (2.30908.0)
+  - PromisesObjC (1.2.12)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - Firebase/Analytics
+  - Firebase/AppDistribution
+  - Firebase/Crashlytics
+  - HMSSDK (from `../HMSSDK.podspec`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAppDistribution
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
+    - FirebaseInstallations
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleUtilities
+    - GoogleWebRTC
+    - nanopb
+    - PromisesObjC
+
+EXTERNAL SOURCES:
+  HMSSDK:
+    :path: "../HMSSDK.podspec"
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  Firebase: fffddd0bab8677d07376538365faa93ff3889b39
+  FirebaseAnalytics: 4641d7ae4220174f6ca5626163ffc5de2e90391e
+  FirebaseAppDistribution: 9cf70e48677948d8f0a641559c5a7ea4fe4a62f6
+  FirebaseCore: ec566d917b2195fc2610aeb148dae99f57a788f9
+  FirebaseCoreDiagnostics: 5662a3823ffcc0acbaa9a21ba5ed302fac634705
+  FirebaseCrashlytics: e7669d368a22d202f1d0c7546ffdfdff496e1a8c
+  FirebaseInstallations: bf2ec8dbf36ff4c91af6b9a003d15855757680c1
+  GoogleAppMeasurement: 1c863b1161fc3c8cf614a7460d1be6a7c262aab3
+  GoogleDataTransport: cd9db2180fcecd8da1b561aea31e3e56cf834aa7
+  GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
+  HMSSDK: 50471cc045fc45f2631e84cac93000875bb819d9
+  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+
+PODFILE CHECKSUM: d7d3e1ea3b34462fb68e518436c66b0c14abddc0
+
+COCOAPODS: 1.10.1
