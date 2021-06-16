@@ -25,7 +25,7 @@ final class PeersListViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
 
     var peers: [HMSPeer]? {
-        if let peers = interactor?.hms?.room?.peers {
+        if let peers = interactor?.hmsSDK?.room?.peers {
             let sortedPeers = peers.sorted { (lhs, rhs) -> Bool in
                 lhs.name.lowercased() < rhs.name.lowercased()
             }
@@ -46,7 +46,7 @@ final class PeersListViewController: UIViewController {
     }
 
     fileprivate func updatePeersCount() {
-        let count = interactor?.hms?.room?.peers.count ?? 0
+        let count = interactor?.hmsSDK?.room?.peers.count ?? 0
         let title = "Participants " + (count > 0 ? "(\(count))" : "")
         participantsTitle.setTitle(title, for: .normal)
     }
@@ -82,7 +82,6 @@ final class PeersListViewController: UIViewController {
     func update(_ cell: PeersListTableViewCell, for peer: HMSPeer) {
         cell.peer = peer
         cell.nameLabel.text = peer.name
-        cell.roleLabel.text = peer.role.name
 
         updatePeersCount()
 

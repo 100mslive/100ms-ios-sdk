@@ -72,6 +72,14 @@ final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPic
         super.viewDidLoad()
 
         observeNotifications()
+        
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+            print(#function, "permission granted: ", granted)
+        }
+        
+        AVCaptureDevice.requestAccess(for: .audio) { granted in
+            print(#function, "permission granted: ", granted)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -30,7 +30,11 @@ final class VideoCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var muteButton: UIButton!
 
-    @IBOutlet weak var videoView: HMSVideoView!
+    @IBOutlet weak var videoView: HMSVideoView! {
+        didSet {
+            Utilities.applyBorder(on: videoView, skipColor: true)
+        }
+    }
 
     @IBOutlet weak var stopVideoButton: UIButton!
 
@@ -39,21 +43,13 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             avatarLabel.layer.cornerRadius = 32
         }
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
         Utilities.applyBorder(on: self)
 
-//        _ = NotificationCenter.default.addObserver(forName: Constants.muteALL,
-//                                               object: nil,
-//                                               queue: .main) { [weak self] _ in
-//            if let audioEnabled = self?.model?.stream.audioTracks?.first?.enabled {
-//                self?.muteButton.isSelected = !audioEnabled
-//            }
-//        }
-//
-        _ = NotificationCenter.default.addObserver(forName: Constants.peerAudioToggled,
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleAudioTapped,
                                                    object: nil,
                                                    queue: .main) { [weak self] notification in
 
@@ -65,14 +61,16 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             }
         }
 
-        _ = NotificationCenter.default.addObserver(forName: Constants.peerVideoToggled,
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleVideoTapped,
                                                    object: nil,
                                                    queue: .main) { [weak self] notification in
-            if let video = notification.userInfo?["video"] as? HMSLocalVideoTrack,
-               video.trackId == self?.viewModel?.videoTrack?.trackId {
-                self?.stopVideoButton.isSelected = video.isMute()
-                self?.avatarLabel.isHidden = !video.isMute()
-            }
+            self?.updateVideoButton(notification)
+        }
+        
+        _ = NotificationCenter.default.addObserver(forName: Constants.updateVideoCellButton,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+            self?.updateVideoButton(notification)
         }
     }
 
@@ -89,7 +87,7 @@ final class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @IBAction func muteTapped(_ sender: UIButton) {
-        print(#function, sender.isSelected, viewModel?.peer.name as Any)
+        
         if let localPeer = viewModel?.peer as? HMSLocalPeer {
             localPeer.localAudioTrack()?.setMute(!sender.isSelected)
         } else if let remotePeer = viewModel?.peer as? HMSRemotePeer {
@@ -97,10 +95,16 @@ final class VideoCollectionViewCell: UICollectionViewCell {
         }
 
         sender.isSelected = !sender.isSelected
+        
+        if let audio = viewModel?.peer.audioTrack {
+            NotificationCenter.default.post(name: Constants.toggleAudioTapped,
+                                            object: nil,
+                                            userInfo: ["audio": audio])
+        }
     }
 
     @IBAction func stopVideoTapped(_ sender: UIButton) {
-        print(#function, sender.isSelected, viewModel?.peer.name as Any)
+        
         if let localPeer = viewModel?.peer as? HMSLocalPeer {
             localPeer.localVideoTrack()?.setMute(!sender.isSelected)
         } else if let remotePeer = viewModel?.peer as? HMSRemotePeer {
@@ -108,11 +112,20 @@ final class VideoCollectionViewCell: UICollectionViewCell {
         }
 
         avatarLabel.isHidden = sender.isSelected
+        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
         sender.isSelected = !sender.isSelected
         if let video = viewModel?.videoTrack {
-            NotificationCenter.default.post(name: Constants.stopVideoTapped,
+            NotificationCenter.default.post(name: Constants.toggleVideoTapped,
                                             object: nil,
                                             userInfo: ["video": video])
+        }
+    }
+    
+    private func updateVideoButton(_ notification: Notification) {
+        if let video = notification.userInfo?["video"] as? HMSLocalVideoTrack,
+           video.trackId == viewModel?.videoTrack?.trackId {
+            stopVideoButton.isSelected = video.isMute()
+            avatarLabel.isHidden = !video.isMute()
         }
     }
 }

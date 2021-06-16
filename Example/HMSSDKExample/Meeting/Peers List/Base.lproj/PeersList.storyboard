@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NL3-Z8-d19">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NL3-Z8-d19">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -38,26 +38,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="0r4-27-usk" customClass="PeersListTableViewCell" customModule="HMSSDKExample" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0r4-27-usk" id="Emk-gI-Ft5">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaU-wR-p5M">
-                                                    <rect key="frame" x="20" y="-0.5" width="256" height="44.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyN-YP-uCb">
-                                                    <rect key="frame" x="364" y="11.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="20" y="-0.5" width="290" height="44.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebu-V5-JwX">
-                                                    <rect key="frame" x="276" y="-0.5" width="48" height="44.5"/>
+                                                    <rect key="frame" x="310" y="-0.5" width="48" height="44.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="48" id="F1s-ct-mWP"/>
                                                         <constraint firstAttribute="height" constant="44" id="bC6-FS-4RY"/>
@@ -77,7 +71,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="speaker.slash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eZJ-md-Amb">
-                                                    <rect key="frame" x="328" y="7.5" width="32" height="29"/>
+                                                    <rect key="frame" x="362" y="7.5" width="32" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="1k8-ET-gG9"/>
                                                         <constraint firstAttribute="width" constant="32" id="v6H-Wi-HCf"/>
@@ -86,13 +80,11 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="DyN-YP-uCb" secondAttribute="trailing" constant="8" id="0Rj-C8-zs4"/>
+                                                <constraint firstAttribute="trailing" secondItem="eZJ-md-Amb" secondAttribute="trailing" constant="20" symbolic="YES" id="3wL-VI-L5d"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="EsN-mu-GAL"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="leading" secondItem="Emk-gI-Ft5" secondAttribute="leading" constant="20" symbolic="YES" id="I2R-yP-QaO"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="top" secondItem="ebu-V5-JwX" secondAttribute="top" id="XdA-5n-KXu"/>
                                                 <constraint firstItem="ebu-V5-JwX" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="a3z-4M-Y2f"/>
-                                                <constraint firstItem="DyN-YP-uCb" firstAttribute="leading" secondItem="eZJ-md-Amb" secondAttribute="trailing" constant="4" id="c4u-uz-j5I"/>
-                                                <constraint firstItem="DyN-YP-uCb" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="lvO-wL-P4A"/>
                                                 <constraint firstItem="eZJ-md-Amb" firstAttribute="leading" secondItem="ebu-V5-JwX" secondAttribute="trailing" constant="4" id="nXO-Dc-qui"/>
                                                 <constraint firstItem="eZJ-md-Amb" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="qbt-PQ-EIQ"/>
                                                 <constraint firstItem="ebu-V5-JwX" firstAttribute="leading" secondItem="MaU-wR-p5M" secondAttribute="trailing" id="v9Y-ql-Rzp"/>
@@ -100,7 +92,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="MaU-wR-p5M" id="I1B-xZ-N4g"/>
-                                            <outlet property="roleLabel" destination="DyN-YP-uCb" id="Vp0-X0-tbi"/>
                                             <outlet property="speakingImageView" destination="eZJ-md-Amb" id="TSd-co-qvw"/>
                                             <outlet property="videoButton" destination="ebu-V5-JwX" id="3H1-vn-lNp"/>
                                         </connections>

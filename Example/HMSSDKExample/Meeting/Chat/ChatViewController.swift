@@ -95,7 +95,7 @@ final class ChatViewController: UIViewController {
         guard let message = textField.text,
               !message.isEmpty,
               let interactor = interactor,
-              let peerID = interactor.hms?.localPeer?.peerID else { return }
+              let peerID = interactor.hmsSDK?.localPeer?.peerID else { return }
 
         sender.isEnabled = false
 
@@ -105,7 +105,7 @@ final class ChatViewController: UIViewController {
                                    type: "chat",
                                    message: message)
 
-        interactor.hms?.send(message: broadcast)
+        interactor.hmsSDK?.send(message: broadcast)
 
         interactor.messages.append(broadcast)
 
@@ -144,9 +144,9 @@ extension ChatViewController {
         var name = message.sender
         var isLocal = false
 
-        if let room = interactor?.hms?.room, let peer = HMSUtilities.getPeer(for: message.sender, in: room) {
+        if let room = interactor?.hmsSDK?.room, let peer = HMSUtilities.getPeer(for: message.sender, in: room) {
             name = peer.name
-            isLocal = (peer.peerID == interactor?.hms?.localPeer?.peerID)
+            isLocal = (peer.peerID == interactor?.hmsSDK?.localPeer?.peerID)
         }
 
         if isLocal {

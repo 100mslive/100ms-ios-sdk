@@ -12,8 +12,8 @@
 
 @class HMSError;
 
-typedef void (^HMSOperationStatusHandler)(BOOL isSuccess, NSError * _Nullable error);
-typedef void (^HMSRequestCompletionHandler)(id _Nullable result, NSError * _Nullable error);
+typedef void (^HMSOperationStatusHandler)(BOOL isSuccess, HMSError * _Nullable error);
+typedef void (^HMSRequestCompletionHandler)(id _Nullable result, HMSError * _Nullable error);
 
 typedef NS_ENUM(NSUInteger, HMSVideoCodec) {
     kHMSVideoCodecH264,
@@ -45,14 +45,6 @@ typedef NS_ENUM(NSUInteger, HMSCameraFacing) {
 
 typedef struct CGSize HMSVideoResolution;
 
-typedef NS_ENUM(NSUInteger, HMSLogLevel) {
-    kHMSLogLevelOff = 0,
-    kHMSLogLevelError = 1,
-    kHMSLogLevelWarning = 2,
-    kHMSLogLevelInfo = 3,
-    kHMSLogLevelVerbose = 4
-};
-
 typedef NS_ENUM(NSInteger, HMSAnalyticsEventLevel) {
     kHMSAnalyticsEventLevelOff,
     kHMSAnalyticsEventLevelError,
@@ -65,15 +57,7 @@ typedef NS_ENUM(NSUInteger, HMSVideoConnectionState) {
     kHMSVideoConnectionStateConnecting,
     kHMSVideoConnectionStateConnected,
     kHMSVideoConnectionStateDisconnected,
-    kHMSVideoConnectionStateReconnecting,
     kHMSVideoConnectionStateFailed
 };
-
-@protocol HMSLogger <NSObject>
-@property (nonatomic, assign) HMSLogLevel logLevel;
-
-- (void)logMessage:(NSString * __nonnull)message withLogLevel:(HMSLogLevel)level;
-@end
-
 
 #endif /* HMSCommonDefs_h */

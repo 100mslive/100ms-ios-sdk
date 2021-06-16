@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Firebase
 import HMSSDK
 
 final class HMSSDKInteractor: HMSUpdateListener {
 
-    internal var hms: HMSSDK?
+    internal var hmsSDK: HMSSDK?
 
     // MARK: - Instance Properties
 
@@ -39,9 +40,9 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func setup(for user: String, in room: String, token: String) {
 
-        hms = HMSSDK.build { (hms) in
-            hms.logLevel = .verbose
-            hms.analyticsLevel = .verbose
+        hmsSDK = HMSSDK.build { sdk in
+            sdk.logLevel = .verbose
+            sdk.analyticsLevel = .verbose
             let videoSettings = HMSVideoTrackSettings(codec: .VP8,
                                                       resolution: .init(width: 320, height: 180),
                                                       maxBitrate: 512,
@@ -49,33 +50,30 @@ final class HMSSDKInteractor: HMSUpdateListener {
                                                       cameraFacing: .front,
                                                       trackDescription: "Just a normal video track")
             let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track")
-            hms.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
-            hms.logger = self
+            sdk.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
+            sdk.logger = self
         }
 
-        let config = HMSConfig(userName: user,
+        var config = HMSConfig(userName: user,
                                userID: UUID().uuidString,
                                roomID: room,
                                authToken: token)
 
-        hms?.join(config: config, delegate: self)
+        hmsSDK?.join(config: config, delegate: self)
     }
 
     // MARK: - HMSSDK Update Callbacks
 
     func on(join room: HMSRoom) {
-        print(#function)
         if let peer = room.peers.first {
             NotificationCenter.default.post(name: Constants.joinedRoom, object: nil, userInfo: ["peer": peer])
         }
     }
 
     func on(room: HMSRoom, update: HMSRoomUpdate) {
-        print(#function, "update:", update.description)
     }
 
     func on(peer: HMSPeer, update: HMSPeerUpdate) {
-        print(#function, "peer:", peer.name, "update:", update.description)
         NotificationCenter.default.post(name: Constants.peersUpdated, object: nil, userInfo: ["peer": peer])
 
         switch update {
@@ -89,11 +87,9 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(track: HMSTrack, update: HMSTrackUpdate, for peer: HMSPeer) {
-        print(#function, "peer:", peer.name, "track:", track.kind.rawValue, "update:", update.description)
     }
 
     func on(error: HMSError) {
-        print(#function, error.localizedDescription)
         NotificationCenter.default.post(name: Constants.gotError,
                                         object: nil,
                                         userInfo: ["error": error.message])
@@ -101,7 +97,6 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func on(message: HMSMessage) {
 
-        print(#function, message)
         messages.append(message)
         NotificationCenter.default.post(name: Constants.messageReceived, object: nil)
     }
@@ -121,7 +116,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
 extension HMSSDKInteractor: HMSLumberjack {
     func log(_ message: String, _ level: HMSLogLevel) {
-        guard let logLevel = hms?.logLevel, level.rawValue >= logLevel.rawValue else { return }
+        Crashlytics.crashlytics().log(message)
+        guard let logLevel = hmsSDK?.logLevel, logLevel.rawValue >= level.rawValue else { return }
         print(message)
     }
 }

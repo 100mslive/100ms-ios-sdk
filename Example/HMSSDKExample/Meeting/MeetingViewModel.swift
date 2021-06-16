@@ -15,14 +15,13 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Properties
 
-    private lazy var dataSource: HMSDataSource = {
-        return HMSDataSource()
-    }()
-
     internal var mode: ViewModes = .regular {
         didSet {
             switch mode {
-            case .audioOnly, .speakers:
+            case .audioOnly:
+                switchVideo(isOn: false)
+                fallthrough
+            case .speakers, .spotlight:
                 dataSource.sortComparator = speakersSort(_:_:)
             case .videoOnly:
                 dataSource.sortComparator = videoOnlySort(_:_:)
@@ -39,15 +38,9 @@ final class MeetingViewModel: NSObject,
 
     private weak var collectionView: UICollectionView?
 
-    private let sectionInsets = UIEdgeInsets(top: 2.0, left: 4.0, bottom: 2.0, right: 4.0)
-
-    private var widthInsets: CGFloat {
-        sectionInsets.left + sectionInsets.right
-    }
-
-    private var heightInsets: CGFloat {
-        2*(sectionInsets.top + sectionInsets.bottom)
-    }
+    private lazy var dataSource = {
+        HMSDataSource()
+    }()
 
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<HMSSection, HMSViewModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<HMSSection, HMSViewModel>
@@ -56,30 +49,33 @@ final class MeetingViewModel: NSObject,
 
     // MARK: Peers Data Source
 
-    var shouldPlayAudio = true
-
     private var pinnedTiles = Set<String>()
 
     internal var speakers = [HMSViewModel]() {
         didSet {
 
-            for speaker in oldValue where !speakers.contains(speaker) {
-                clearSpeakerBorder(for: speaker)
+            if mode == .speakers || mode == .audioOnly || mode == .spotlight {
+                dataSource.reload()
             }
-
-            for speaker in speakers where !oldValue.contains(speaker) {
-                drawSpeakerBorder(for: speaker)
+            
+            if mode == .speakers {
+                for speaker in oldValue where speaker != speakers.first {
+                    animateSpeakerQuiet(speaker)
+                }
+                
+                if let speaker = speakers.first {
+                    animateSpeakerSpeaking(speaker)
+                }
             }
-
+            
             NotificationCenter.default.post(name: Constants.updatedSpeaker,
                                             object: nil,
                                             userInfo: ["speakers": speakers])
-
-            if mode == .speakers || mode == .audioOnly {
-                dataSource.reload()
-            }
         }
     }
+    
+    private var shouldPlayAudio = true
+    
 
     // MARK: - Initializers
 
@@ -92,6 +88,8 @@ final class MeetingViewModel: NSObject,
         }
 
         setup(collectionView)
+        
+        addObservers()
     }
 
     deinit {
@@ -105,18 +103,24 @@ final class MeetingViewModel: NSObject,
 
     private func setupDataSource() {
         dataSource.delegate = self
-        interactor?.hms?.add(delegate: dataSource)
+        interactor?.hmsSDK?.add(delegate: dataSource)
         dataSource.sortComparator = regularSort(_:_:)
     }
 
     private func regularSort(_ lhs: HMSViewModel, _ rhs: HMSViewModel) -> Bool {
 
-        if let lhsTrackSource = lhs.videoTrack?.source.rawValue,
-           let rhsTrackSource = rhs.videoTrack?.source.rawValue,
-           lhsTrackSource != rhsTrackSource {
+        let lhsTrackSource = lhs.videoTrack?.source.rawValue ?? 0
+        let rhsTrackSource = rhs.videoTrack?.source.rawValue ?? 0
+        
+        let lhsAuxTracks = lhs.peer.auxiliaryTracks?.count ?? 0
+        let rhsAuxTracks = rhs.peer.auxiliaryTracks?.count ?? 0
+        
+        if lhsTrackSource != rhsTrackSource {
             return lhsTrackSource > rhsTrackSource
         } else if isPinned(lhs) != isPinned(rhs) {
             return isPinned(lhs) && !isPinned(rhs)
+        } else if lhsAuxTracks != rhsAuxTracks {
+            return lhsAuxTracks > rhsAuxTracks
         } else if dataSource.allModels.count > 4 {
             return lhs.peer.name.lowercased() < rhs.peer.name.lowercased()
         } else {
@@ -135,7 +139,14 @@ final class MeetingViewModel: NSObject,
     private func speakersSort(_ lhs: HMSViewModel, _ rhs: HMSViewModel) -> Bool {
 
         if speakers.contains(lhs) {
-            if let lhsIndex = diffableDataSource?.indexPath(for: lhs)?.item, lhsIndex < 4 {
+            var count = 4
+            if mode == .audioOnly {
+                count = 6
+            } else if mode == .spotlight {
+                count = 1
+            }
+            
+            if let lhsIndex = diffableDataSource?.indexPath(for: lhs)?.item, lhsIndex < count {
                 return false
             }
             return true
@@ -194,12 +205,6 @@ final class MeetingViewModel: NSObject,
         //            self?.togglePinned(viewModel)
         //        }
 
-        if speakers.contains(viewModel) {
-            Utilities.applySpeakingBorder(on: cell)
-        } else {
-            Utilities.applyBorder(on: cell)
-        }
-
         switch mode {
         case .audioOnly:
             cell.videoView.setVideoTrack(nil)
@@ -221,41 +226,56 @@ final class MeetingViewModel: NSObject,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let width = collectionView.frame.size.width - 2*widthInsets
-
-        if let viewModel = diffableDataSource?.itemIdentifier(for: indexPath) {
-            if isPinned(viewModel) ||
-                viewModel.videoTrack?.source == .screen ||
-                viewModel.videoTrack?.source == .plugin ||
-                mode == .pinned {
-                return .init(width: width,
-                             height: collectionView.frame.size.height - heightInsets)
-            }
+        if mode == .spotlight {
+            return .init(width: collectionView.frame.size.width,
+                         height: collectionView.frame.size.height)
+        }
+        
+        if let size = sizeFor(indexPath: indexPath, collectionView) {
+            return size
         }
 
         if let count = diffableDataSource?.collectionView(collectionView, numberOfItemsInSection: indexPath.section) {
 
             switch count {
             case 0, 1:
-                return .init(width: width,
-                             height: collectionView.frame.size.height - heightInsets)
+                return .init(width: collectionView.frame.size.width,
+                             height: collectionView.frame.size.height)
             case 2:
-                return .init(width: width,
-                             height: collectionView.frame.size.height/2 - heightInsets)
+                return .init(width: collectionView.frame.size.width,
+                             height: collectionView.frame.size.height/2)
             case 3:
-                return .init(width: width,
-                             height: collectionView.frame.size.height/3 - heightInsets)
+                return .init(width: collectionView.frame.size.width,
+                             height: collectionView.frame.size.height/3)
             default:
                 if mode == .audioOnly && count > 5 {
-                    return .init(width: width/2, height: collectionView.frame.size.height/3 - heightInsets)
+                    return .init(width: collectionView.frame.size.width/2,
+                                 height: collectionView.frame.size.height/3)
                 } else {
-                    return .init(width: width/2,
-                                 height: collectionView.frame.size.height/2.0 - heightInsets)
+                    return .init(width: collectionView.frame.size.width/2,
+                                 height: collectionView.frame.size.height/2.0)
                 }
             }
         }
 
         return .zero
+    }
+    
+    private func sizeFor(indexPath: IndexPath, _ collectionView: UICollectionView) -> CGSize? {
+        let isLandscape = UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft
+        
+        if mode == .pinned || mode == .regular || mode == .videoOnly || isLandscape,
+           let viewModel = diffableDataSource?.itemIdentifier(for: indexPath) {
+            if isPinned(viewModel) ||
+                viewModel.videoTrack?.source == .screen ||
+                viewModel.videoTrack?.source == .plugin ||
+                mode == .pinned ||
+                isLandscape {
+                return .init(width: collectionView.frame.size.width,
+                             height: collectionView.frame.size.height)
+            }
+        }
+        return nil
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -294,24 +314,70 @@ final class MeetingViewModel: NSObject,
         }
         return nil
     }
+    
+    private func animateSpeakerSpeaking(_ model: HMSViewModel) {
+        
+        let count = mode == .audioOnly ? 6 : 4
+        
+        guard let cell = cellFor(model),
+              let collectionView = collectionView,
+              let total = self.diffableDataSource?.collectionView(collectionView, numberOfItemsInSection: 0), total > 4,
+              let index = diffableDataSource?.indexPath(for: model),
+              index.item < count || index.item == 0 else { return }
+        
+        UIView.animate(withDuration: 0.5) {
+            
+            cell.layer.zPosition = 1000.0
+            
+            var x = 0.5, y = 0.5
 
-    private func drawSpeakerBorder(for model: HMSViewModel) {
-        guard let cell = cellFor(model) else { return }
-
-        Utilities.applySpeakingBorder(on: cell)
+            if cell.center.x < collectionView.center.x {
+                x = 0.43
+            } else {
+                x = 0.57
+            }
+            
+            if cell.center.y < collectionView.center.y {
+                y = 0.43
+            } else {
+                y = 0.57
+            }
+            
+            cell.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+            cell.layer.anchorPoint = .init(x: x, y: y)
+        }
     }
-
-    private func clearSpeakerBorder(for model: HMSViewModel) {
+    
+    private func animateSpeakerQuiet(_ model: HMSViewModel) {
         guard let cell = cellFor(model) else { return }
-
-        Utilities.applyBorder(on: cell)
+        UIView.animate(withDuration: 0.1) {
+            cell.transform = .identity
+            cell.layer.zPosition = 0
+            cell.layer.anchorPoint = .init(x: 0.5, y: 0.5)
+        }
+    }
+    
+    private func addObservers() {
+     
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self?.collectionView?.reloadData()
+            }
+        }
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+            self?.cleanup()
+        }
     }
 
     // MARK: - Action Handlers
 
     func cleanup() {
-        interactor?.hms?.leave()
-        interactor?.hms = nil
+        interactor?.hmsSDK?.leave()
+        interactor?.hmsSDK = nil
         interactor = nil
     }
 
@@ -327,43 +393,43 @@ final class MeetingViewModel: NSObject,
     }
 
     func switchCamera() {
-        if let track = interactor?.hms?.localPeer?.videoTrack as? HMSLocalVideoTrack {
+        if let track = interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack {
             track.switchCamera()
         }
     }
 
     func switchAudio(isOn: Bool) {
-        if let peer = interactor?.hms?.localPeer, let audioTrack = peer.audioTrack as? HMSLocalAudioTrack {
+        if let peer = interactor?.hmsSDK?.localPeer, let audioTrack = peer.audioTrack as? HMSLocalAudioTrack {
             audioTrack.setMute(!isOn)
-            print(#function, isOn)
-            NotificationCenter.default.post(name: Constants.peerAudioToggled, object: nil, userInfo: ["peer": peer])
+            NotificationCenter.default.post(name: Constants.toggleAudioTapped, object: nil, userInfo: ["peer": peer])
         }
     }
 
     func switchVideo(isOn: Bool) {
-        if let videoTrack = interactor?.hms?.localPeer?.videoTrack as? HMSLocalVideoTrack {
-            videoTrack.setMute(!isOn)
-            print(#function, isOn)
-            NotificationCenter.default.post(name: Constants.peerVideoToggled,
-                                            object: nil,
-                                            userInfo: ["video": videoTrack])
+        guard let videoTrack = interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack else {
+            return
         }
+        videoTrack.setMute(!isOn)
+        NotificationCenter.default.post(name: Constants.toggleVideoTapped,
+                                        object: nil,
+                                        userInfo: ["video": videoTrack])
     }
 
     func muteRemoteStreams(_ isMuted: Bool) {
 
-        setMuteStatus(isMuted, for: interactor?.hms?.room?.peers)
-
         shouldPlayAudio = isMuted
+        
+        setMuteStatus()
 
         NotificationCenter.default.post(name: Constants.muteALL, object: nil)
     }
 
-    func setMuteStatus(_ isMuted: Bool, for peers: [HMSPeer]?) {
-        if let peers = peers {
-            for peer in peers {
-                guard let remotePeer = peer as? HMSRemotePeer else { continue }
-                remotePeer.remoteAudioTrack()?.setPlaybackAllowed(isMuted)
+    func setMuteStatus() {
+        for model in dataSource.allModels {
+            if let peer = model.peer as? HMSRemotePeer,
+               let audio = peer.remoteAudioTrack(),
+               audio.isPlaybackAllowed() != shouldPlayAudio {
+                audio.setPlaybackAllowed(shouldPlayAudio)
             }
         }
     }
@@ -376,6 +442,8 @@ extension MeetingViewModel: HMSDataSourceDelegate {
             update(cell, for: model)
         }
         applySnapshot()
+        
+        setMuteStatus()
     }
 
     func didUpdate(_ speakers: [HMSViewModel]) {
@@ -384,5 +452,5 @@ extension MeetingViewModel: HMSDataSourceDelegate {
 }
 
 enum ViewModes: String {
-    case regular, audioOnly, videoOnly, speakers, pinned
+    case regular, audioOnly, videoOnly, speakers, pinned, spotlight
 }

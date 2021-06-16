@@ -31,12 +31,12 @@ final class PeersListTableViewCell: UITableViewCell {
     @objc func micButtonTapped(_ sender: UITapGestureRecognizer) {
         if let localPeer = peer as? HMSLocalPeer, let audio = localPeer.localAudioTrack() {
             audio.setMute(!audio.isMute())
-            NotificationCenter.default.post(name: Constants.peerAudioToggled,
+            NotificationCenter.default.post(name: Constants.toggleAudioTapped,
                                             object: nil,
                                             userInfo: ["peer": localPeer])
         } else if let remotePeer = peer as? HMSRemotePeer, let audio = remotePeer.remoteAudioTrack() {
             audio.setPlaybackAllowed(!audio.isPlaybackAllowed())
-            NotificationCenter.default.post(name: Constants.peerAudioToggled,
+            NotificationCenter.default.post(name: Constants.toggleAudioTapped,
                                             object: nil,
                                             userInfo: ["peer": remotePeer])
         }
@@ -53,6 +53,6 @@ final class PeersListTableViewCell: UITableViewCell {
         }
 
         sender.isSelected = !sender.isSelected
-        NotificationCenter.default.post(name: Constants.peerVideoToggled, object: nil)
+        NotificationCenter.default.post(name: Constants.toggleVideoTapped, object: nil)
     }
 }

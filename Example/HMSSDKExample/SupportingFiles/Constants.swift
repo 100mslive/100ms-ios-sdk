@@ -13,7 +13,7 @@ struct Constants {
     // MARK: - HMSSDK Interactor
 
     static let tokenEndpoint = <#InsertTokenEndpointHere#>
-    
+
     static let tokenQuery = "api/token"
     
     static let getTokenURL = tokenEndpoint + tokenQuery
@@ -50,17 +50,17 @@ struct Constants {
 
     static let muteALL = NSNotification.Name("MUTE_ALL")
 
-    static let peerVideoToggled = NSNotification.Name("LOCAL_VIDEO_TOGGLED")
-
-    static let peerAudioToggled = NSNotification.Name("LOCAL_AUDIO_TOGGLED")
-
     static let deeplinkTapped = NSNotification.Name("DEEPLINK_TAPPED")
 
     static let appInBackground = NSNotification.Name("APP_BACKGROUND")
 
     static let updatedSpeaker = Notification.Name("UPDATED_SPEAKERS")
 
-    static let stopVideoTapped = Notification.Name("STOP_VIDEO_TAPPED")
+    static let toggleVideoTapped = Notification.Name("TOGGLE_VIDEO_TAPPED")
+    
+    static let updateVideoCellButton = Notification.Name("UPDATE_VIDEO_CELL_BUTTON")
+    
+    static let toggleAudioTapped = Notification.Name("TOGGLE_AUDIO_TAPPED")
 
     // MARK: - View Constants
 

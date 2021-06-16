@@ -33,34 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             view.removeFromSuperview()
         }
     }
-
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-              let incomingURL = userActivity.webpageURL,
-              let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
-              let host = components.host,
-              var meetingID = incomingURL.pathComponents.last else {
-            print(#function, "Error: Could not get correct URL!")
-            return false
-        }
-
-        if !meetingID.isAlphanumeric {
-            for component in incomingURL.pathComponents.reversed() where component.isAlphanumeric {
+    
+    func meetingIDFromURL(_ url: URL) -> String? {
+        var meetingID: String?
+        var prevComponent = ""
+        for component in url.pathComponents {
+            if (prevComponent == "meeting" || prevComponent == "preview") {
                 meetingID = component
-                break
             }
+            prevComponent = component
         }
-
-        let userInfo = [ Constants.roomIDKey: meetingID,
-                         Constants.hostKey: host ]
-
-        NotificationCenter.default.post(name: Constants.deeplinkTapped,
-                                        object: nil,
-                                        userInfo: userInfo)
-
-        return true
+        
+        return meetingID
     }
 }

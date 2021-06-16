@@ -87,9 +87,9 @@ struct RoomService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        let body = [  "room_id": room,
+        var body = [  "room_id": room,
                       "user_id": user,
-                      "role": Roles(rawValue: role)?.getRole() ?? "Host"]
+                      "role": Roles(rawValue: role)?.getRole().lowercased() ?? "host"]
 
         print(#function, "URL: ", url, "\nBody: ", body)
 
@@ -131,20 +131,20 @@ struct RoomService {
 }
 
 enum Roles: Int, CaseIterable {
-    case teacher, student, host, viewer, admin
+    case student, teacher, host, viewer, admin
 
     func getRole() -> String {
         switch self {
-        case .teacher:
-            return "Teacher"
         case .student:
-            return "Student"
+            return "student"
+        case .teacher:
+            return "teacher"
         case .host:
-            return "Host"
+            return "host"
         case .viewer:
-            return "Viewer"
+            return "viewer"
         case .admin:
-            return "Admin"
+            return "admin"
         }
     }
 

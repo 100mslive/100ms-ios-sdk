@@ -22,6 +22,5 @@ FOUNDATION_EXPORT const unsigned char HMSVersionString[];
 #import <HMSSDK/HMSVideoTrack.h>
 #import <HMSSDK/HMSLocalVideoTrack.h>
 #import <HMSSDK/HMSRemoteVideoTrack.h>
-#import <HMSSDK/HMSError.h>
 #import <HMSSDK/HMSCommonDefs.h>
 #import <HMSSDK/HMSVideoView.h>

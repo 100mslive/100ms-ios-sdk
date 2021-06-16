@@ -11,36 +11,28 @@ import QuartzCore
 
 final class Utilities {
 
-    static func applyBorder(on view: UIView, radius: CGFloat = 16) {
-
-        view.layer.borderColor = UIColor(named: "Border")?.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = radius
-        view.layer.masksToBounds = true
-    }
-
-    static func drawCorner(on view: UIView) {
+    class func drawCorner(on view: UIView) {
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     }
-
-    static func applyDominantSpeakerBorder(on view: UIView) {
-        view.layer.borderColor = UIColor(named: "speakerColor")?.cgColor
-        view.layer.borderWidth = 8
-        view.layer.cornerRadius = 16
+    
+    class func applyBorder(on view: UIView, skipColor: Bool = false) {
+        if !skipColor {
+            view.layer.borderColor = UIColor(named: "Border")?.cgColor
+            view.layer.borderWidth = 1
+        }
+        view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
     }
 
-    static func applySpeakingBorder(on view: UIView) {
-
-//        view.layer.borderColor = UIColor(named: "speakerColor")?.withAlphaComponent(0.5).cgColor
+    class func applySpeakingBorder(on view: UIView) {
         view.layer.borderColor = UIColor.link.cgColor
-        view.layer.borderWidth = 6
-        view.layer.cornerRadius = 16
+        view.layer.borderWidth = 4
+        view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
     }
 
-    static func getAvatarName(from name: String) -> String {
+    class func getAvatarName(from name: String) -> String {
         let words = name.components(separatedBy: " ")
 
         var avatar = ""
@@ -61,7 +53,7 @@ final class Utilities {
         return avatar.uppercased()
     }
 
-    static func showToast(message: String) {
+    class func showToast(message: String) {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
               window.subviews.first(where: { $0.tag == 101 }) == nil
               else { return }
@@ -144,5 +136,20 @@ extension UIImageView {
 extension String {
     var isAlphanumeric: Bool {
         return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+}
+
+struct Orientation {
+    // indicate current device is in the LandScape orientation
+    static var isLandscape: Bool {
+        UIDevice.current.orientation.isValidInterfaceOrientation
+            ? UIDevice.current.orientation.isLandscape
+            : (UIApplication.shared.windows.first?.windowScene?.interfaceOrientation.isLandscape)!
+    }
+    // indicate current device is in the Portrait orientation
+    static var isPortrait: Bool {
+        UIDevice.current.orientation.isValidInterfaceOrientation
+            ? UIDevice.current.orientation.isPortrait
+            : (UIApplication.shared.windows.first?.windowScene?.interfaceOrientation.isPortrait)!
     }
 }

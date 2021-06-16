@@ -37,6 +37,12 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet private weak var publishVideoButton: UIButton! {
         didSet {
+            
+            if role == 3 {
+                publishVideoButton.isSelected = true
+                return
+            }
+            
             if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
                 publishVideoButton.isSelected = !publishVideo
             } else {
@@ -47,6 +53,12 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet private weak var publishAudioButton: UIButton! {
         didSet {
+            
+            if role == 3 {
+                publishAudioButton.isSelected = true
+                return
+            }
+            
 //            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
 //                publishAudioButton.isSelected = !publishAudio
 //            } else {
@@ -98,6 +110,13 @@ final class MeetingViewController: UIViewController {
                     self.viewModel.mode = .pinned
                 }
             }),
+            UIAction(title: "Spotlight Mode",
+                     image: UIImage(systemName: "figure.wave.circle.fill")?.withTintColor(.link)) { _ in
+
+                if self.viewModel.mode != .spotlight {
+                    self.viewModel.mode = .spotlight
+                }
+            },
             UIAction(title: "Default Mode",
                      image: UIImage(systemName: "rectangle.grid.2x2.fill")?.withTintColor(.link)) { _ in
 
@@ -225,14 +244,25 @@ final class MeetingViewController: UIViewController {
             }
         }
 
-        _ = NotificationCenter.default.addObserver(forName: Constants.stopVideoTapped,
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleVideoTapped,
                                                    object: nil,
                                                    queue: .main) { [weak self] notification in
 
             if let video = notification.userInfo?["video"] as? HMSVideoTrack,
-               video.trackId == self?.viewModel.interactor?.hms?.localPeer?.videoTrack?.trackId {
-
+               video.trackId == self?.viewModel.interactor?.hmsSDK?.localPeer?.videoTrack?.trackId {
+                
                 self?.publishVideoButton.isSelected = video.isMute()
+            }
+        }
+        
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleAudioTapped,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+
+            if let audio = notification.userInfo?["audio"] as? HMSAudioTrack,
+               audio.trackId == self?.viewModel.interactor?.hmsSDK?.localPeer?.audioTrack?.trackId {
+
+                self?.publishAudioButton.isSelected = audio.isMute()
             }
         }
     }
@@ -259,9 +289,16 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBAction private func videoTapped(_ sender: UIButton) {
-        viewModel.switchVideo(isOn: sender.isSelected)
+        guard viewModel.mode != .audioOnly,
+              let videoTrack = viewModel.interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack else {
+            return
+        }
+        videoTrack.setMute(!sender.isSelected)
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
         sender.isSelected = !sender.isSelected
+        NotificationCenter.default.post(name: Constants.updateVideoCellButton,
+                                        object: nil,
+                                        userInfo: ["video": videoTrack])
     }
 
     @IBAction private func micTapped(_ sender: UIButton) {
@@ -297,6 +334,5 @@ final class MeetingViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "NO", style: .cancel))
 
         self.present(alertController, animated: true, completion: nil)
-
     }
 }

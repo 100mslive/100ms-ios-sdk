@@ -92,26 +92,26 @@
                                     <constraint firstAttribute="height" constant="1" id="RHP-tp-D0r"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyH-bp-NTF">
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleAspectFit" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyH-bp-NTF">
                                 <rect key="frame" x="0.0" y="88" width="375" height="646"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" sectionInsetReference="safeArea" id="X0O-qo-onW">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="X0O-qo-onW">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="Cell" id="0EI-A3-zvS" customClass="VideoCollectionViewCell" customModule="HMSSDKExample" customModuleProvider="target">
-                                        <rect key="frame" x="4" y="0.0" width="128" height="128"/>
+                                    <collectionViewCell multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="Cell" id="0EI-A3-zvS" customClass="VideoCollectionViewCell" customModule="HMSSDKExample" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="eIA-rh-Vt1">
+                                        <collectionViewCellContentView key="contentView" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="eIA-rh-Vt1">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-Q2-mQX" customClass="HMSVideoView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-Q2-mQX" customClass="HMSVideoView">
+                                                    <rect key="frame" x="2" y="2" width="124" height="124"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6D-tx-bL7">
                                                     <rect key="frame" x="32" y="32" width="64" height="64"/>
@@ -183,14 +183,14 @@
                                             <constraints>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="top" id="0lv-ZF-2Tc"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
-                                                <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" id="CYl-d3-NMQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" constant="2" id="CYl-d3-NMQ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
                                                 <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
-                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" id="Yc4-VI-PBE"/>
+                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="2" id="Yc4-VI-PBE"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="aBk-Ug-1WD"/>
-                                                <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" id="ehd-uv-Mt4"/>
+                                                <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" constant="2" id="ehd-uv-Mt4"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
-                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="swZ-Nr-YfD"/>
+                                                <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="2" id="swZ-Nr-YfD"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerY" secondItem="eIA-rh-Vt1" secondAttribute="centerY" id="zzF-RU-orm"/>
                                             </constraints>
                                         </collectionViewCellContentView>
