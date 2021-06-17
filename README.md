@@ -111,6 +111,34 @@ You can download the [Sample App via TestFlight here](https://testflight.apple.c
 }
 ```
   
+## 🤔 How to listen to Track, Peer and Room updates? 
+
+  The HMS SDK sends updates to the application about any change in HMSPeer , HMSTrack or HMSRoom via the callbacks in HMSUpdateListener.
+  Application need to listen to the corresponding updates in onPeerUpdate , onTrackUpdate or onRoomUpdate
+
+  The following are the different types of updates that are emitted by the SDK - 
+```
+  HMSPeerUpdate
+    case PEER_JOINED A new peer joins the room
+    case PEER_LEFT - An existing peer leaves the room
+    case BECAME_DOMINANT_SPEAKER - A peer becomes a dominant speaker
+    case NO_DOMINANT_SPEAKER - There is silence in the room (No speaker is detected)
+    
+  HMSTrackUpdate
+    case TRACK_ADDED - A new track is added by a remote peer
+    case TRACK_REMOVED - An existing track is removed from a remote peer
+    case TRACK_MUTED - An existing track of a remote peer is muted
+    case TRACK_UNMUTED - An existing track of a remote peer is unmuted
+    case TRACK_DESCRIPTION_CHANGED - The optional description of a track of a remote peer is changed
+ ```
+  
+## 🛤 How to know the type and source of Track?
+
+  HMSTrack contain a field called source which denotes the source of the Track. 
+  Source can have the following values - regular (normal), screen (for screenshare)and plugin (for plugins)
+
+  To know the type of track, check the value of type which would be one of the enum values - AUDIO or VIDEO
+  
 ## 🤝 Provide joining configuration
 
 To join a room created by following the steps described in the above section, clients need to create a `HMSConfig` instance and use that instance to call `join` method of `HMSSDK`
