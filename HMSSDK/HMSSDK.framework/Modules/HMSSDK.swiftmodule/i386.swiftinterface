@@ -4,7 +4,6 @@
 import AVKit
 import Foundation
 @_exported import HMSSDK
-import HMSSDK_Private
 import Swift
 @objc public class HMSSpeaker : ObjectiveC.NSObject, Swift.Codable {
   final public let peerID: Swift.String
