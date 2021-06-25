@@ -11,14 +11,13 @@ import Foundation
 struct RoomService {
 
     static func setup(for flow: MeetingFlow,
-                      _ role: Int,
                       _ user: String,
                       _ room: String,
                       completion: @escaping (String?, String?) -> Void) {
 
         switch flow {
         case .join:
-            getToken(for: user, room, role) { (token, roomID) in
+            getToken(for: user, room) { (token, roomID) in
                 completion(token, roomID)
             }
         }
@@ -28,10 +27,9 @@ struct RoomService {
 
     private static func getToken(for user: String,
                                  _ room: String,
-                                 _ role: Int,
                                  completion: @escaping (String?, String?) -> Void) {
 
-        requestToken(for: user, room, role) { token, error in
+        requestToken(for: user, room) { token, error in
 
             guard error == nil, let token = token
             else {
@@ -51,10 +49,9 @@ struct RoomService {
 
     private static func requestToken(for user: String,
                                      _ roomID: String,
-                                     _ role: Int,
                                      completion: @escaping (String?, Error?) -> Void) {
 
-        if let request = createRequest(for: Constants.getTokenURL, user, roomID, role: role) {
+        if let request = createRequest(for: Constants.getTokenURL, user, roomID) {
 
             URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -76,7 +73,7 @@ struct RoomService {
 
     // MARK: - Service Helpers
 
-    private static func createRequest(for url: String, _ user: String, _ room: String, role: Int = 0) -> URLRequest? {
+    private static func createRequest(for url: String, _ user: String, _ room: String) -> URLRequest? {
 
         guard let url = URL(string: url)
         else {
@@ -87,9 +84,9 @@ struct RoomService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        var body = [  "room_id": room,
+        let body = [  "room_id": room,
                       "user_id": user,
-                      "role": Roles(rawValue: role)?.getRole().lowercased() ?? "host"]
+                      "role": "host"]
 
         print(#function, "URL: ", url, "\nBody: ", body)
 
@@ -128,24 +125,4 @@ struct RoomService {
 
         return (nil, NSError(domain: "RoomService", code: 0, userInfo: ["error": "Unexpected Data Format"]))
     }
-}
-
-enum Roles: Int, CaseIterable {
-    case student, teacher, host, viewer, admin
-
-    func getRole() -> String {
-        switch self {
-        case .student:
-            return "student"
-        case .teacher:
-            return "teacher"
-        case .host:
-            return "host"
-        case .viewer:
-            return "viewer"
-        case .admin:
-            return "admin"
-        }
-    }
-
 }

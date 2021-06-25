@@ -148,6 +148,8 @@ extension HMSSection : Swift.Hashable {
   case tracksErrorNothingToReturn = 3005
   case tracksErrorInvalidVideoSettings = 3006
   case tracksErrorCodecChangeNotPermitted = 3007
+  case tracksErrorAudioVideoSubsystemFailure = 3008
+  case tracksErrorAudioShouldBeSilenced = 3009
   case webrtcErrorCreateOfferFailed = 4001
   case webrtcErrorCreateAnswerFailed = 4002
   case webrtcErrorSetLocalDescriptionFailed = 4003
@@ -235,7 +237,7 @@ extension HMSSection : Swift.Hashable {
   @objc func onReconnecting()
   @objc func onReconnected()
 }
-@objc public protocol HMSLumberjack {
+@objc public protocol HMSLogger {
   @objc(logMessage:level:) func log(_ message: Swift.String, _ level: HMSSDK.HMSLogLevel)
 }
 @objc public enum HMSLogLevel : Swift.Int {
@@ -277,7 +279,7 @@ extension HMSSection : Swift.Hashable {
     @objc get
     @objc set
   }
-  @objc public var logger: HMSSDK.HMSLumberjack? {
+  @objc public var logger: HMSSDK.HMSLogger? {
     @objc get
     @objc set
   }

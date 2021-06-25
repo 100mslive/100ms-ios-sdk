@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 import HMSSDK
 
 final class HMSSDKInteractor: HMSUpdateListener {
@@ -23,10 +22,9 @@ final class HMSSDKInteractor: HMSUpdateListener {
     init(for user: String,
          in room: String,
          _ flow: MeetingFlow,
-         _ role: Int,
          _ completion: @escaping () -> Void) {
 
-        RoomService.setup(for: flow, role, user, room) { [weak self] token, aRoom in
+        RoomService.setup(for: flow, user, room) { [weak self] token, aRoom in
             guard let token = token else {
                 print(#function, "Error fetching token")
                 return
@@ -54,7 +52,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
             sdk.logger = self
         }
 
-        var config = HMSConfig(userName: user,
+        let config = HMSConfig(userName: user,
                                userID: UUID().uuidString,
                                roomID: room,
                                authToken: token)
@@ -114,9 +112,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 }
 
-extension HMSSDKInteractor: HMSLumberjack {
+extension HMSSDKInteractor: HMSLogger {
     func log(_ message: String, _ level: HMSLogLevel) {
-        Crashlytics.crashlytics().log(message)
         guard let logLevel = hmsSDK?.logLevel, logLevel.rawValue >= level.rawValue else { return }
         print(message)
     }

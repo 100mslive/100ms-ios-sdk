@@ -277,6 +277,8 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeTracksErrorNothingToReturn = 3005,
   HMSErrorCodeTracksErrorInvalidVideoSettings = 3006,
   HMSErrorCodeTracksErrorCodecChangeNotPermitted = 3007,
+  HMSErrorCodeTracksErrorAudioVideoSubsystemFailure = 3008,
+  HMSErrorCodeTracksErrorAudioShouldBeSilenced = 3009,
   HMSErrorCodeWebrtcErrorCreateOfferFailed = 4001,
   HMSErrorCodeWebrtcErrorCreateAnswerFailed = 4002,
   HMSErrorCodeWebrtcErrorSetLocalDescriptionFailed = 4003,
@@ -331,8 +333,8 @@ typedef SWIFT_ENUM(NSInteger, HMSLogLevel, open) {
 };
 
 
-SWIFT_PROTOCOL("_TtP6HMSSDK13HMSLumberjack_")
-@protocol HMSLumberjack
+SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
+@protocol HMSLogger
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
@@ -443,7 +445,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// set the logging level
 @property (nonatomic) enum HMSLogLevel logLevel;
-@property (nonatomic, strong) id <HMSLumberjack> _Nullable logger;
+@property (nonatomic, strong) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -801,6 +803,8 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeTracksErrorNothingToReturn = 3005,
   HMSErrorCodeTracksErrorInvalidVideoSettings = 3006,
   HMSErrorCodeTracksErrorCodecChangeNotPermitted = 3007,
+  HMSErrorCodeTracksErrorAudioVideoSubsystemFailure = 3008,
+  HMSErrorCodeTracksErrorAudioShouldBeSilenced = 3009,
   HMSErrorCodeWebrtcErrorCreateOfferFailed = 4001,
   HMSErrorCodeWebrtcErrorCreateAnswerFailed = 4002,
   HMSErrorCodeWebrtcErrorSetLocalDescriptionFailed = 4003,
@@ -855,8 +859,8 @@ typedef SWIFT_ENUM(NSInteger, HMSLogLevel, open) {
 };
 
 
-SWIFT_PROTOCOL("_TtP6HMSSDK13HMSLumberjack_")
-@protocol HMSLumberjack
+SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
+@protocol HMSLogger
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
@@ -967,7 +971,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// set the logging level
 @property (nonatomic) enum HMSLogLevel logLevel;
-@property (nonatomic, strong) id <HMSLumberjack> _Nullable logger;
+@property (nonatomic, strong) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1329,6 +1333,8 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeTracksErrorNothingToReturn = 3005,
   HMSErrorCodeTracksErrorInvalidVideoSettings = 3006,
   HMSErrorCodeTracksErrorCodecChangeNotPermitted = 3007,
+  HMSErrorCodeTracksErrorAudioVideoSubsystemFailure = 3008,
+  HMSErrorCodeTracksErrorAudioShouldBeSilenced = 3009,
   HMSErrorCodeWebrtcErrorCreateOfferFailed = 4001,
   HMSErrorCodeWebrtcErrorCreateAnswerFailed = 4002,
   HMSErrorCodeWebrtcErrorSetLocalDescriptionFailed = 4003,
@@ -1383,8 +1389,8 @@ typedef SWIFT_ENUM(NSInteger, HMSLogLevel, open) {
 };
 
 
-SWIFT_PROTOCOL("_TtP6HMSSDK13HMSLumberjack_")
-@protocol HMSLumberjack
+SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
+@protocol HMSLogger
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
@@ -1495,7 +1501,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// set the logging level
 @property (nonatomic) enum HMSLogLevel logLevel;
-@property (nonatomic, strong) id <HMSLumberjack> _Nullable logger;
+@property (nonatomic, strong) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1853,6 +1859,8 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeTracksErrorNothingToReturn = 3005,
   HMSErrorCodeTracksErrorInvalidVideoSettings = 3006,
   HMSErrorCodeTracksErrorCodecChangeNotPermitted = 3007,
+  HMSErrorCodeTracksErrorAudioVideoSubsystemFailure = 3008,
+  HMSErrorCodeTracksErrorAudioShouldBeSilenced = 3009,
   HMSErrorCodeWebrtcErrorCreateOfferFailed = 4001,
   HMSErrorCodeWebrtcErrorCreateAnswerFailed = 4002,
   HMSErrorCodeWebrtcErrorSetLocalDescriptionFailed = 4003,
@@ -1907,8 +1915,8 @@ typedef SWIFT_ENUM(NSInteger, HMSLogLevel, open) {
 };
 
 
-SWIFT_PROTOCOL("_TtP6HMSSDK13HMSLumberjack_")
-@protocol HMSLumberjack
+SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
+@protocol HMSLogger
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
@@ -2019,7 +2027,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// set the logging level
 @property (nonatomic) enum HMSLogLevel logLevel;
-@property (nonatomic, strong) id <HMSLumberjack> _Nullable logger;
+@property (nonatomic, strong) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

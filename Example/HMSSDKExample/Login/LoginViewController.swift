@@ -8,7 +8,7 @@
 import UIKit
 import AVKit
 
-final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
 
@@ -63,8 +63,6 @@ final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPic
     private var input: AVCaptureDeviceInput?
     private var output: AVCapturePhotoOutput?
     private var previewLayer: AVCaptureVideoPreviewLayer?
-
-    private var selectedRoleRow = 0
 
     // MARK: - View Lifecycle
 
@@ -201,43 +199,20 @@ final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPic
         showInputAlert(flow: .join)
     }
 
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        Roles.allCases.count
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        Roles(rawValue: row)?.getRole()
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRoleRow = row
-    }
-
     private func showInputAlert(flow: MeetingFlow) {
 
         let title = "Join a Meeting"
         let action = "Join"
 
         let alertController = UIAlertController(title: title,
-                                                message: "\n\n\n\n\n\n\n\n\n",
+                                                message: nil,
                                                 preferredStyle: .alert)
 
         alertController.addTextField { textField in
             textField.placeholder = "Enter your Name"
             textField.clearButtonMode = .always
-            textField.text = UserDefaults.standard.string(forKey: Constants.defaultName) ?? "iOS User"
+            textField.text =  UserDefaults.standard.string(forKey: Constants.defaultName)
         }
-
-        let pickerView = UIPickerView(frame:
-            CGRect(x: 0, y: 50, width: 270, height: 162))
-        pickerView.dataSource = self
-        pickerView.delegate = self
-
-        alertController.view.addSubview(pickerView)
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
@@ -263,7 +238,7 @@ final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPic
                 .instantiateInitialViewController() as? MeetingViewController
         else {
             dismiss(animated: true)
-            let message = "Could not join meeting"
+            let message = "Enter Name!"
             showErrorAlert(with: message)
             return
         }
@@ -271,7 +246,6 @@ final class LoginViewController: UIViewController, UIPickerViewDataSource, UIPic
         viewController.user = name
         viewController.flow = flow
         viewController.roomName = room
-        viewController.role = selectedRoleRow
 
         save(name, room)
 

@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47A9246A36F23DA04FBCBF59 /* libPods-HMSSDKExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C7FC9D2F3EF12C4D334C808 /* libPods-HMSSDKExampleTests.a */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		6C93FDB17D42B73EE12FBEC5 /* libPods-HMSSDKExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D02379CBC024B9C8528840DC /* libPods-HMSSDKExampleTests.a */; };
 		E44618962E5579DC60167A75 /* libPods-HMSSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD07183472B4CF2C889F80E /* libPods-HMSSDKExample.a */; };
-		EC71A916263394A000D12742 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EC71A915263394A000D12742 /* GoogleService-Info.plist */; };
 		EC8CEE71261E297F002DC12E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE40261E297F002DC12E /* Settings.storyboard */; };
 		EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE42261E297F002DC12E /* SettingsViewController.swift */; };
 		EC8CEE76261E297F002DC12E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE48261E297F002DC12E /* Login.storyboard */; };
@@ -28,7 +27,6 @@
 		EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */; };
 		EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */; };
 		EC8CEE87261E297F002DC12E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE63261E297F002DC12E /* Constants.swift */; };
-		EC8CEE88261E297F002DC12E /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */; };
 		EC8CEE8A261E297F002DC12E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE67261E297F002DC12E /* Utilities.swift */; };
 		EC8CEE8B261E297F002DC12E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE68261E297F002DC12E /* LaunchScreen.storyboard */; };
 		EC8CEE8C261E297F002DC12E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE6A261E297F002DC12E /* Images.xcassets */; };
@@ -46,20 +44,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EC80EBD3266F5B32006E0BCB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
+		4C7FC9D2F3EF12C4D334C808 /* libPods-HMSSDKExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSSDKExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ED1A46523BEA2BB86188D61 /* Pods-HMSSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5FD07183472B4CF2C889F80E /* libPods-HMSSDKExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSSDKExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		60726F408B5B73352239A36F /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* HMSSDKExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMSSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* HMSSDKExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMSSDKExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		66D4752BDADE442DD46B46ED /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
-		D02379CBC024B9C8528840DC /* libPods-HMSSDKExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSSDKExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D35C2ECD018536ADD2580564 /* Pods-HMSSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EC71A915263394A000D12742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EC7807E7261E2B1C0021903D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		EC80EBD0266F5B32006E0BCB /* HMSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HMSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC8CEE41261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		EC8CEE42261E297F002DC12E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EC8CEE49261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
@@ -77,7 +86,6 @@
 		EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
 		EC8CEE63261E297F002DC12E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseInteractor.swift; sourceTree = "<group>"; };
 		EC8CEE67261E297F002DC12E /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		EC8CEE69261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC8CEE6A261E297F002DC12E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -87,7 +95,6 @@
 		EC8CEE6F261E297F002DC12E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EC8CEE94261E29EE002DC12E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
 		EC8CEE97261E29FC002DC12E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
-		ECC56B7A2668BE4500CC97BC /* HMSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HMSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD4C308261E2B9F00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PeersList.strings; sourceTree = "<group>"; };
 		ECD4C309261E2BAE00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
 		ECD4C30C261E2BCE00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
@@ -106,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C93FDB17D42B73EE12FBEC5 /* libPods-HMSSDKExampleTests.a in Frameworks */,
+				47A9246A36F23DA04FBCBF59 /* libPods-HMSSDKExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,10 +123,8 @@
 		1041C860E962BA7C1E0CA76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EC80EBD0266F5B32006E0BCB /* HMSSDK.framework */,
-				ECC56B7A2668BE4500CC97BC /* HMSSDK.framework */,
 				5FD07183472B4CF2C889F80E /* libPods-HMSSDKExample.a */,
-				D02379CBC024B9C8528840DC /* libPods-HMSSDKExampleTests.a */,
+				4C7FC9D2F3EF12C4D334C808 /* libPods-HMSSDKExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -166,8 +171,8 @@
 			children = (
 				3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */,
 				734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */,
-				D35C2ECD018536ADD2580564 /* Pods-HMSSDKExampleTests.debug.xcconfig */,
-				60726F408B5B73352239A36F /* Pods-HMSSDKExampleTests.release.xcconfig */,
+				5ED1A46523BEA2BB86188D61 /* Pods-HMSSDKExampleTests.debug.xcconfig */,
+				66D4752BDADE442DD46B46ED /* Pods-HMSSDKExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -179,7 +184,6 @@
 				EC8CEE4C261E297F002DC12E /* Meeting */,
 				EC8CEE3D261E297F002DC12E /* Settings */,
 				EC8CEE62261E297F002DC12E /* SupportingFiles */,
-				EC71A915263394A000D12742 /* GoogleService-Info.plist */,
 			);
 			path = HMSSDKExample;
 			sourceTree = "<group>";
@@ -234,7 +238,6 @@
 			children = (
 				EC8CEE6B261E297F002DC12E /* AppDelegate.swift */,
 				EC8CEE63261E297F002DC12E /* Constants.swift */,
-				EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */,
 				EC8CEE67261E297F002DC12E /* Utilities.swift */,
 				EC8CEE6C261E297F002DC12E /* HMSSDKExample.entitlements */,
 				EC8CEE6D261E297F002DC12E /* Info.plist */,
@@ -264,8 +267,8 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				EC6E6CF625EC9AD60011DC67 /* ShellScript */,
 				1EEFFDBD1C6431CDBD8436A9 /* [CP] Embed Pods Frameworks */,
+				EC80EBD3266F5B32006E0BCB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,7 +283,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HMSSDKExampleTests" */;
 			buildPhases = (
-				C0A1C0421C4E49BF5C8053CF /* [CP] Check Pods Manifest.lock */,
+				44F9AB236A20C728D8312920 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -342,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8CEE80261E297F002DC12E /* Chat.storyboard in Resources */,
-				EC71A916263394A000D12742 /* GoogleService-Info.plist in Resources */,
 				EC8CEE76261E297F002DC12E /* Login.storyboard in Resources */,
 				EC8CEE7C261E297F002DC12E /* PeersList.storyboard in Resources */,
 				EC8CEE77261E297F002DC12E /* Meeting.storyboard in Resources */,
@@ -382,6 +384,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		44F9AB236A20C728D8312920 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8DB70A62722B5F658EC064DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,47 +428,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0A1C0421C4E49BF5C8053CF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExampleTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EC6E6CF625EC9AD60011DC67 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -453,7 +436,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */,
-				EC8CEE88261E297F002DC12E /* FirebaseInteractor.swift in Sources */,
 				EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */,
 				EC8CEE8A261E297F002DC12E /* Utilities.swift in Sources */,
 				EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */,
@@ -579,7 +561,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 120;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -642,7 +624,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 120;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -676,13 +658,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourdomain.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -708,13 +690,13 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yourdomain.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -731,10 +713,10 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D35C2ECD018536ADD2580564 /* Pods-HMSSDKExampleTests.debug.xcconfig */;
+			baseConfigurationReference = 5ED1A46523BEA2BB86188D61 /* Pods-HMSSDKExampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -746,6 +728,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -757,10 +740,10 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 60726F408B5B73352239A36F /* Pods-HMSSDKExampleTests.release.xcconfig */;
+			baseConfigurationReference = 66D4752BDADE442DD46B46ED /* Pods-HMSSDKExampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -768,6 +751,7 @@
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

@@ -4,11 +4,6 @@ platform :ios, '13.0'
 
 target 'HMSSDKExample' do
   pod 'HMSSDK', :path => "../HMSSDK.podspec"
-  
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/AppDistribution'
-  pod 'Firebase/Analytics'
-  pod 'CocoaLumberjack/Swift'
 
   target 'HMSSDKExampleTests' do
     inherit! :search_paths

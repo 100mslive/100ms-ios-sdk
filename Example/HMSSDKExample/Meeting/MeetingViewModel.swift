@@ -14,19 +14,33 @@ final class MeetingViewModel: NSObject,
                               UICollectionViewDelegateFlowLayout {
 
     // MARK: - Properties
-
-    internal var mode: ViewModes = .regular {
+    
+    var mode: ViewModes = .regular {
         didSet {
             switch mode {
             case .audioOnly:
                 switchVideo(isOn: false)
                 fallthrough
-            case .speakers, .spotlight:
+            case .speakers, .spotlight, .hero:
                 dataSource.sortComparator = speakersSort(_:_:)
             case .videoOnly:
                 dataSource.sortComparator = videoOnlySort(_:_:)
             case .regular, .pinned:
                 dataSource.sortComparator = regularSort(_:_:)
+            }
+            if oldValue == .speakers {
+                dataSource.allModels.forEach { model in
+                    animateSpeakerQuiet(model)
+                }
+            }
+            if mode == .hero {
+                if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+                    layout.scrollDirection = .vertical
+                }
+            } else if oldValue == .hero {
+                if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+                    layout.scrollDirection = .horizontal
+                }
             }
             dataSource.reload()
             collectionView?.reloadData()
@@ -54,7 +68,7 @@ final class MeetingViewModel: NSObject,
     internal var speakers = [HMSViewModel]() {
         didSet {
 
-            if mode == .speakers || mode == .audioOnly || mode == .spotlight {
+            if mode == .speakers || mode == .audioOnly || mode == .spotlight || mode == .hero {
                 dataSource.reload()
             }
             
@@ -79,11 +93,11 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Initializers
 
-    init(_ user: String, _ room: String, _ flow: MeetingFlow, _ role: Int, _ collectionView: UICollectionView) {
+    init(_ user: String, _ room: String, _ flow: MeetingFlow, _ collectionView: UICollectionView) {
 
         super.init()
 
-        interactor = HMSSDKInteractor(for: user, in: room, flow, role) { [weak self] in
+        interactor = HMSSDKInteractor(for: user, in: room, flow) { [weak self] in
             self?.setupDataSource()
         }
 
@@ -138,6 +152,18 @@ final class MeetingViewModel: NSObject,
 
     private func speakersSort(_ lhs: HMSViewModel, _ rhs: HMSViewModel) -> Bool {
 
+        let lhsTrackSource = lhs.videoTrack?.source.rawValue ?? 0
+        let rhsTrackSource = rhs.videoTrack?.source.rawValue ?? 0
+        
+        let lhsAuxTracks = lhs.peer.auxiliaryTracks?.count ?? 0
+        let rhsAuxTracks = rhs.peer.auxiliaryTracks?.count ?? 0
+        
+        if lhsTrackSource != rhsTrackSource {
+            return lhsTrackSource > rhsTrackSource
+        } else if lhsAuxTracks != rhsAuxTracks {
+            return lhsAuxTracks > rhsAuxTracks
+        }
+        
         if speakers.contains(lhs) {
             var count = 4
             if mode == .audioOnly {
@@ -229,6 +255,14 @@ final class MeetingViewModel: NSObject,
         if mode == .spotlight {
             return .init(width: collectionView.frame.size.width,
                          height: collectionView.frame.size.height)
+        } else if mode == .hero {
+            if indexPath.item == 0 {
+                return .init(width: collectionView.frame.size.width,
+                             height: collectionView.frame.size.height * 0.75)
+            } else {
+                return .init(width: collectionView.frame.size.width * 0.33,
+                             height: collectionView.frame.size.height * 0.25)
+            }
         }
         
         if let size = sizeFor(indexPath: indexPath, collectionView) {
@@ -348,8 +382,8 @@ final class MeetingViewModel: NSObject,
         }
     }
     
-    private func animateSpeakerQuiet(_ model: HMSViewModel) {
-        guard let cell = cellFor(model) else { return }
+    private func animateSpeakerQuiet(_ model: HMSViewModel?) {
+        guard let model = model, let cell = cellFor(model) else { return }
         UIView.animate(withDuration: 0.1) {
             cell.transform = .identity
             cell.layer.zPosition = 0
@@ -452,5 +486,5 @@ extension MeetingViewModel: HMSDataSourceDelegate {
 }
 
 enum ViewModes: String {
-    case regular, audioOnly, videoOnly, speakers, pinned, spotlight
+    case regular, audioOnly, videoOnly, speakers, pinned, spotlight, hero
 }

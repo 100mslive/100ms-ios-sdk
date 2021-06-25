@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        FirebaseInteractor()
         return true
     }
 
@@ -32,18 +31,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let view = window?.rootViewController?.view.subviews.first(where: { $0.tag == 1 }) {
             view.removeFromSuperview()
         }
-    }
-    
-    func meetingIDFromURL(_ url: URL) -> String? {
-        var meetingID: String?
-        var prevComponent = ""
-        for component in url.pathComponents {
-            if (prevComponent == "meeting" || prevComponent == "preview") {
-                meetingID = component
-            }
-            prevComponent = component
-        }
-        
-        return meetingID
     }
 }

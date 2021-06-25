@@ -16,7 +16,6 @@ final class MeetingViewController: UIViewController {
     internal var user: String!
     internal var roomName: String!
     internal var flow: MeetingFlow!
-    internal var role: Int!
 
     private var viewModel: MeetingViewModel!
 
@@ -37,12 +36,6 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet private weak var publishVideoButton: UIButton! {
         didSet {
-            
-            if role == 3 {
-                publishVideoButton.isSelected = true
-                return
-            }
-            
             if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
                 publishVideoButton.isSelected = !publishVideo
             } else {
@@ -52,13 +45,7 @@ final class MeetingViewController: UIViewController {
     }
 
     @IBOutlet private weak var publishAudioButton: UIButton! {
-        didSet {
-            
-            if role == 3 {
-                publishAudioButton.isSelected = true
-                return
-            }
-            
+        didSet {            
 //            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
 //                publishAudioButton.isSelected = !publishAudio
 //            } else {
@@ -117,6 +104,13 @@ final class MeetingViewController: UIViewController {
                     self.viewModel.mode = .spotlight
                 }
             },
+            UIAction(title: "Hero Mode",
+                     image: UIImage(systemName: "shield.checkerboard")?.withTintColor(.link)) { _ in
+
+                if self.viewModel.mode != .hero {
+                    self.viewModel.mode = .hero
+                }
+            },
             UIAction(title: "Default Mode",
                      image: UIImage(systemName: "rectangle.grid.2x2.fill")?.withTintColor(.link)) { _ in
 
@@ -140,7 +134,7 @@ final class MeetingViewController: UIViewController {
 
         UIApplication.shared.isIdleTimerDisabled = true
 
-        viewModel = MeetingViewModel(self.user, self.roomName, flow, role, collectionView)
+        viewModel = MeetingViewModel(self.user, self.roomName, flow, collectionView)
 
         handleError()
         observeBroadcast()
