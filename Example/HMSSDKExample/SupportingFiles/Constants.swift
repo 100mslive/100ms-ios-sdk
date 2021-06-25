@@ -12,7 +12,7 @@ struct Constants {
 
     // MARK: - HMSSDK Interactor
 
-    static let tokenEndpoint = ""
+    static let tokenEndpoint = <#InsertTokenEndpointHere#>
     
     static let tokenQuery = "api/token"
     
