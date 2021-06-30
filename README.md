@@ -22,17 +22,17 @@ You can download the [Sample App via TestFlight here](https://testflight.apple.c
 
 ## 🚂 Setup Guide
   
-  - Host your token generation service [following this guide](https://docs.100ms.live/v2/server-side/Generate-client-side-token)
+  1. Host your token generation service [following this guide](https://docs.100ms.live/v2/server-side/Generate-client-side-token)
 
-  - Get Access Keys: Sign up on https://dashboard.100ms.live/register & visit the Developer tab to get your access credentials
+  2. Get Access Keys: Sign up on https://dashboard.100ms.live/register & visit the Developer tab to get your access credentials
 
-  - Generate a server-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-server-side-token
+  3. Generate a server-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-server-side-token
 
-  - Create a room, follow the steps described here - https://docs.100ms.live/v2/server-side/Create-room
+  4. Create a room, follow the steps described here - https://docs.100ms.live/v2/server-side/Create-room
 
-  - Generate a client-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-client-side-token
+  5. Generate a client-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-client-side-token
   
-  - Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
+  6. Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
   ```
   // Podfile
   
