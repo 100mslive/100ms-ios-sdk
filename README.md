@@ -16,7 +16,7 @@ Here you will find everything you need to build experiences with video using 100
   
 You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
 
-For running the Sample app locally, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
   
 ## ☝️ Pre-requisites
 - Xcode 12 or higher
