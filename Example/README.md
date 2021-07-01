@@ -21,3 +21,4 @@ You can download the [Sample App via TestFlight here](https://testflight.apple.c
     ```
 2. Ensure that [Cocoapods](https://cocoapods.org/) is installed on your Mac.
 3. In the Example folder, run `pod install` to install dependencies of the Example app.
+4. In the Login Screen of the app, for the first you'll be prompted for permission to access Camera & Microphone.
