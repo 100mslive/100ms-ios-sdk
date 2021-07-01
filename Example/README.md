@@ -60,7 +60,7 @@ On clicking Join Meeting, you'll be taken to the Meeting Screen & will see a spi
 - [MeetingViewModel](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/MeetingViewModel.swift): Controls the View layout & conforms to `HMSDataSourceDelegate` protocol through which it populates Video Tracks on UI.
 - [RoomService](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/RoomService.swift): Implements logic to fetch [Client Side Token](https://docs.100ms.live/v2/server-side/Generate-client-side-token) & pass it on `HMSSDKInteractor` while joining a room.
 
-#### View Modes
+## 🤩 View Modes
 
 The Sample app has various View Modes which change the layout of the Meeting. Clicking the Change Meeting Layout button on the top right of the screen shows the following Mode options - 
 1. Audio Only Mode
