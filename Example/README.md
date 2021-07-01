@@ -44,7 +44,8 @@ https://user-images.githubusercontent.com/8512357/124134349-60e25400-daa0-11eb-9
 #### Meeting Screen
 On clicking Join Meeting, you'll be taken to the Meeting Screen & will see a spinner until you have joined the Room. On the Meeting screen, you have multiple controls for - 
 - Showing Meeting Room Name
-- Tap on Meeting Room Name to view Participants List
+- Tap on Meeting Room Name to view Peers List
+- Mute Audio of all Peers
 - Switch Camera (Front/Back)
 - Change Meeting Layout
 - Muting/Unmuting Camera
