@@ -36,4 +36,4 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 - You'll be prompted to Enter your Name. Type in the name you want to use in the Meeting Room. 
 
 <img align="left" width="320" height="700" src="https://user-images.githubusercontent.com/8512357/124082030-e3035600-da69-11eb-9dff-f0cb862c9410.png">
-<!-- ![Login Screen Simulator Screen Shot - iPhone 12](https://user-images.githubusercontent.com/8512357/124082030-e3035600-da69-11eb-9dff-f0cb862c9410.png) -->
+<img align="right" width="320" height="700" src="https://user-images.githubusercontent.com/8512357/124086386-9ff7b180-da6e-11eb-917a-ba4ad060a92b.png">
