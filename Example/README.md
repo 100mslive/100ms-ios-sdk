@@ -55,6 +55,12 @@ On clicking Join Meeting, you'll be taken to the Meeting Screen & will see a spi
 
 <img width="412" alt="Meeting Screen" src="https://user-images.githubusercontent.com/8512357/124134849-e1a15000-daa0-11eb-89bd-22c0bc24ba1e.png">
 
+## 📁 Files of importance 
+- [HMSSDKInteractor](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/HMSSDKInteractor.swift): Interacts with HMSSDK & conforms to the HMSUpdateListener protocol to listen for updates like Peer Join/Leave, Track Mute/Unmute, etc coming in from the SDK.
+- [MeetingViewModel](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/MeetingViewModel.swift): Controls the View layout & conforms to `HMSDataSourceDelegate` protocol through which it populates Video Tracks on UI.
+- [RoomService](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/RoomService.swift): Implements logic to fetch [Client Side Token](https://docs.100ms.live/v2/server-side/Generate-client-side-token) & pass it on `HMSSDKInteractor` while joining a room.
+
+#### View Modes
 
 The Sample app has various View Modes which change the layout of the Meeting. Clicking the Change Meeting Layout button on the top right of the screen shows the following Mode options - 
 1. Audio Only Mode
@@ -67,7 +73,4 @@ The Sample app has various View Modes which change the layout of the Meeting. Cl
 
 https://user-images.githubusercontent.com/8512357/124134456-7a839b80-daa0-11eb-8220-7c37c745c58e.mov
 
-The files of importance are listed below -
-- [HMSSDKInteractor](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/HMSSDKInteractor.swift): Interacts with HMSSDK & conforms to the HMSUpdateListener protocol to listen for updates like Peer Join/Leave, Track Mute/Unmute, etc coming in from the SDK.
-- [MeetingViewModel](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/MeetingViewModel.swift): Controls the View layout & conforms to `HMSDataSourceDelegate` protocol through which it populates Video Tracks on UI.
-- [RoomService](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/RoomService.swift): Implements logic to fetch [Client Side Token](https://docs.100ms.live/v2/server-side/Generate-client-side-token) & pass it on `HMSSDKInteractor` while joining a room.
+
