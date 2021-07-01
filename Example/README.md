@@ -29,5 +29,9 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 5. To run the Example app on your device, you'll need to add your Apple Developer Team in Signing & Capabilites tab of Xcode.
 
 ## 🏞 Layout
-In the Login Screen of the app, for the first you'll be prompted for permission to access Camera & Microphone.
+For the first run of the app, you'll be prompted for permission to access Camera & Microphone.
+
+In the Login Screen of the app, Enter your Meeting RoomID & click on Join Meeting.
+
+You'll be prompted to Enter your Name. Type in the name you want to use in the Meeting Room. 
 
