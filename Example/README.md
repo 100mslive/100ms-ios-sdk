@@ -66,3 +66,6 @@ The Sample app has various View Modes which change the layout of the Meeting. Cl
 7. Default Mode
 
 https://user-images.githubusercontent.com/8512357/124134456-7a839b80-daa0-11eb-8220-7c37c745c58e.mov
+
+The files of importance are listed below -
+- [HMSSDKInteractor](https://github.com/100mslive/100ms-ios-sdk/blob/main/Example/HMSSDKExample/Meeting/HMSSDKInteractor.swift): Interacts with HMSSDK & conforms to the HMSUpdateListener protocol to listen for updates like Peer Join/Leave, Track Mute/Unmute, etc coming in from the SDK.
