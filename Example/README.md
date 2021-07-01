@@ -2,6 +2,8 @@
 
 You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
 
+For the SDK integration guide, checkout the [ReadMe here](https://github.com/100mslive/100ms-ios-sdk/).
+
 ## ☝️ Pre-requistes
 - Xcode 12 or higher
 - Support for iOS 10 or higher
