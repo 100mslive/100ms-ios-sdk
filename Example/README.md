@@ -28,3 +28,6 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 4. Open the `HMSSDKExample.xcworkspace` file & Build & Run the `HMSSDKExample` target on Simulator.
 5. To run the Example app on your device, you'll need to add your Apple Developer Team in Signing & Capabilites tab of Xcode.
 
+## 🏞 Layout
+In the Login Screen of the app, for the first you'll be prompted for permission to access Camera & Microphone.
+
