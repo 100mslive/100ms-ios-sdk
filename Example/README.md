@@ -37,6 +37,19 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 
 - You'll be prompted to Enter your Name. Type in the name you want to use in the Meeting Room. 
 
-https://user-images.githubusercontent.com/8512357/124090567-95d7b200-da72-11eb-8b5b-4967c0122779.mov
+https://user-images.githubusercontent.com/8512357/124128909-dd723400-da9a-11eb-9ca9-2cc8a547ebce.mov
 
 
+
+#### Meeting Screen
+In the Meeting screen of the Example app you have multiple controls for - 
+- Show Meeting Room Name
+- Tap on Meeting Room Name to view Participants List
+- Switch Camera (Front/Back)
+- Meeting Settings
+- Muting/Unmuting Camera
+- Muting/Unmuting Microphone
+- Show Chat Screen
+- Leave Meeting 
+
+https://user-images.githubusercontent.com/8512357/124132106-17910500-da9e-11eb-8cf0-998ed6a69384.mov
