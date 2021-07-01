@@ -276,4 +276,4 @@ class HMSLocalAudioTrack : HMSAudioTrack {
   ```
 
   
-  🏃 Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+ 🏃‍♀️ Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
