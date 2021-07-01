@@ -1,6 +1,6 @@
 # Example App
 
-This guide walks you through the Example app implementation showcasing how 100ms SDK can be utilized to build delightful apps.
+This guide walks you through the Example app implementation showcasing how 100ms SDK can be utilized to build delightful apps.🤩
 
 You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
 
