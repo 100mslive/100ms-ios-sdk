@@ -20,3 +20,4 @@ You can download the [Sample App via TestFlight here](https://testflight.apple.c
     static let tokenEndpoint = "https://prod-in.100ms.live/hmsapi/<your-subdomain>"   # ❌ invalid
     ```
 2. Ensure that [Cocoapods](https://cocoapods.org/) is installed on your Mac.
+3. In the Example folder, run `pod install` to install dependencies of the Example app.
