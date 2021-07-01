@@ -72,3 +72,7 @@ The Sample app has various View Modes which change the layout of the Meeting. Cl
 7. Default Mode
 
 https://user-images.githubusercontent.com/8512357/124134456-7a839b80-daa0-11eb-8220-7c37c745c58e.mov
+
+
+
+Refer the [Getting Started - iOS](https://docs.100ms.live/v2/client-sdks/Getting-Started-iOS) guide to get detailed SDK information.
