@@ -53,7 +53,7 @@ On clicking Join Meeting, you'll be taken to the Meeting Screen & will see a spi
 - Show Chat Screen
 - Leave Meeting 
 
-<img width="412" alt="Screenshot 2021-07-01 at 7 15 00 PM" src="https://user-images.githubusercontent.com/8512357/124134849-e1a15000-daa0-11eb-89bd-22c0bc24ba1e.png">
+<img width="412" alt="Meeting Screen" src="https://user-images.githubusercontent.com/8512357/124134849-e1a15000-daa0-11eb-89bd-22c0bc24ba1e.png">
 
 
 The Sample app has various View Modes which change the layout of the Meeting. Clicking the Change Meeting Layout button on the top right of the screen shows the following Mode options - 
@@ -66,3 +66,5 @@ The Sample app has various View Modes which change the layout of the Meeting. Cl
 7. Default Mode
 
 https://user-images.githubusercontent.com/8512357/124134456-7a839b80-daa0-11eb-8220-7c37c745c58e.mov
+
+
