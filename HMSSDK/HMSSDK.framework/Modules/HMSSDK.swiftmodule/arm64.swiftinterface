@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name HMSSDK
 import AVKit
 import Foundation
@@ -39,7 +39,7 @@ extension HMSPeer {
   @objc public func remoteVideoTrack() -> HMSSDK.HMSRemoteVideoTrack?
   @objc deinit
 }
-public protocol HMSDataSourceDelegate {
+public protocol HMSDataSourceDelegate : AnyObject {
   func didUpdate(_ model: HMSSDK.HMSViewModel?)
   func didUpdate(_ speakers: [HMSSDK.HMSViewModel])
 }
@@ -49,7 +49,7 @@ public class HMSDataSource {
   public var allModels: [HMSSDK.HMSViewModel] {
     get
   }
-  public var delegate: HMSSDK.HMSDataSourceDelegate?
+  weak public var delegate: HMSSDK.HMSDataSourceDelegate?
   public var sortComparator: ((HMSSDK.HMSViewModel, HMSSDK.HMSViewModel) -> Swift.Bool)?
   public var filter: ((HMSSDK.HMSViewModel) -> Swift.Bool)?
   public var sectionProducer: ((HMSSDK.HMSViewModel) -> HMSSDK.HMSSection.SectionIdentifier)?
@@ -177,6 +177,8 @@ extension HMSSection : Swift.Hashable {
   case trackMuted
   case trackUnmuted
   case trackDescriptionChanged
+  case trackDegraded
+  case trackRestored
   public var description: Swift.String {
     get
   }
@@ -205,6 +207,64 @@ extension HMSSection : Swift.Hashable {
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
+}
+public struct HMSRoleInfo : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct PublishParams : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct AudioParams : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum AudioCodec : Swift.String, Swift.Codable {
+  case opus
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct VideoParams : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum VideoCodec : Swift.String, Swift.Codable {
+  case h264
+  case vp8
+  case vp9
+  case h265
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum StreamType : Swift.String, Swift.Codable {
+  case audio
+  case video
+  case screen
+  case plugin
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct Simulcast : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct HMSSubscribeParams : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct HMSPermissions : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class HMSUtilities : ObjectiveC.NSObject {
   @objc public class func getDevices() -> [HMSSDK.HMSDevice]
@@ -237,6 +297,10 @@ extension HMSSection : Swift.Hashable {
   @objc func onReconnecting()
   @objc func onReconnected()
 }
+@objc public protocol HMSPreviewListener {
+  @objc(onPreview:localTracks:) func onPreview(room: HMSSDK.HMSRoom, localTracks: [HMSSDK.HMSTrack])
+  @objc(onError:) func on(error: HMSSDK.HMSError)
+}
 @objc public protocol HMSLogger {
   @objc(logMessage:level:) func log(_ message: Swift.String, _ level: HMSSDK.HMSLogLevel)
 }
@@ -254,6 +318,7 @@ extension HMSSection : Swift.Hashable {
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSSDK : ObjectiveC.NSObject {
   @objc public func join(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSUpdateListener)
   @objc public func leave()
+  @objc public func preview(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSPreviewListener)
   @objc public var localPeer: HMSSDK.HMSLocalPeer? {
     @objc get
   }
@@ -279,7 +344,7 @@ extension HMSSection : Swift.Hashable {
     @objc get
     @objc set
   }
-  @objc public var logger: HMSSDK.HMSLogger? {
+  @objc weak public var logger: HMSSDK.HMSLogger? {
     @objc get
     @objc set
   }
@@ -315,6 +380,15 @@ extension HMSSDK.HMSErrorCode : Swift.RawRepresentable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Equatable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Hashable {}
 extension HMSSDK.HMSTrackUpdate : Swift.RawRepresentable {}
+extension HMSSDK.AudioCodec : Swift.Equatable {}
+extension HMSSDK.AudioCodec : Swift.Hashable {}
+extension HMSSDK.AudioCodec : Swift.RawRepresentable {}
+extension HMSSDK.VideoCodec : Swift.Equatable {}
+extension HMSSDK.VideoCodec : Swift.Hashable {}
+extension HMSSDK.VideoCodec : Swift.RawRepresentable {}
+extension HMSSDK.StreamType : Swift.Equatable {}
+extension HMSSDK.StreamType : Swift.Hashable {}
+extension HMSSDK.StreamType : Swift.RawRepresentable {}
 extension HMSSDK.HMSLogLevel : Swift.Equatable {}
 extension HMSSDK.HMSLogLevel : Swift.Hashable {}
 extension HMSSDK.HMSLogLevel : Swift.RawRepresentable {}

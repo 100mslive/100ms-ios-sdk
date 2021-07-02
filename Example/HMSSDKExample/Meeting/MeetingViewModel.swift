@@ -93,13 +93,13 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Initializers
 
-    init(_ user: String, _ room: String, _ flow: MeetingFlow, _ collectionView: UICollectionView) {
+    init(_ user: String, _ room: String, _ collectionView: UICollectionView, interactor: HMSSDKInteractor) {
 
         super.init()
 
-        interactor = HMSSDKInteractor(for: user, in: room, flow) { [weak self] in
-            self?.setupDataSource()
-        }
+        self.interactor = interactor
+        setupDataSource()
+        interactor.join()
 
         setup(collectionView)
         
@@ -187,14 +187,14 @@ final class MeetingViewModel: NSObject,
 
         guard let collectionView = collectionView else { return nil }
 
-        return DiffableDataSource(collectionView: collectionView) { (view, index, model) -> UICollectionViewCell? in
+        return DiffableDataSource(collectionView: collectionView) { [weak self] (view, index, model) -> UICollectionViewCell? in
 
             guard let cell = view.dequeueReusableCell(withReuseIdentifier: "Cell",
                                                       for: index) as? VideoCollectionViewCell else {
                 return nil
             }
 
-            self.update(cell, for: model)
+            self?.update(cell, for: model)
 
             return cell
         }
@@ -237,6 +237,7 @@ final class MeetingViewModel: NSObject,
             cell.stopVideoButton.isSelected = true
             cell.avatarLabel.isHidden = false
         default:
+            cell.videoView.isHidden = viewModel.videoTrack?.isDegraded() ?? false
             cell.videoView.setVideoTrack(viewModel.videoTrack)
             if let video = viewModel.videoTrack {
                 cell.stopVideoButton.isSelected = video.isMute()
@@ -410,6 +411,8 @@ final class MeetingViewModel: NSObject,
     // MARK: - Action Handlers
 
     func cleanup() {
+        dataSource.delegate = nil
+        dataSource.sortComparator = nil
         interactor?.hmsSDK?.leave()
         interactor?.hmsSDK = nil
         interactor = nil

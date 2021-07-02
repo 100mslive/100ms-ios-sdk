@@ -15,7 +15,7 @@ final class MeetingViewController: UIViewController {
 
     internal var user: String!
     internal var roomName: String!
-    internal var flow: MeetingFlow!
+    internal var interactor: HMSSDKInteractor!
 
     private var viewModel: MeetingViewModel!
 
@@ -34,25 +34,8 @@ final class MeetingViewController: UIViewController {
 
     @IBOutlet private weak var badgeButton: BadgeButton!
 
-    @IBOutlet private weak var publishVideoButton: UIButton! {
-        didSet {
-            if let publishVideo = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
-                publishVideoButton.isSelected = !publishVideo
-            } else {
-                publishVideoButton.isSelected = false
-            }
-        }
-    }
-
-    @IBOutlet private weak var publishAudioButton: UIButton! {
-        didSet {            
-//            if let publishAudio = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
-//                publishAudioButton.isSelected = !publishAudio
-//            } else {
-                publishAudioButton.isSelected = false
-//            }
-        }
-    }
+    @IBOutlet private weak var publishVideoButton: UIButton!
+    @IBOutlet private weak var publishAudioButton: UIButton!
 
     @IBOutlet weak var loadingIcon: UIImageView! {
         didSet {
@@ -74,46 +57,50 @@ final class MeetingViewController: UIViewController {
     var menuItems: [UIAction] {
         return [
             UIAction(title: "Audio Only Mode",
-                     image: UIImage(systemName: "speaker.zzz.fill")?.withTintColor(.link)) { _ in
+                     image: UIImage(systemName: "speaker.zzz.fill")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
                 if self.viewModel.mode != .audioOnly {
                     self.viewModel.mode = .audioOnly
                 }
             },
             UIAction(title: "Show Active Speakers",
-                     image: UIImage(systemName: "person.3.fill")?.withTintColor(.link), handler: { (_) in
-                if self.viewModel.mode != .speakers {
-                    self.viewModel.mode = .speakers
-                }
-            }),
+                     image: UIImage(systemName: "person.3.fill")?.withTintColor(.link), handler: { [weak self] (_) in
+                        guard let self = self else { return }
+                        if self.viewModel.mode != .speakers {
+                            self.viewModel.mode = .speakers
+                        }
+                     }),
             UIAction(title: "Video Only Mode",
-                     image: UIImage(systemName: "video.badge.checkmark")?.withTintColor(.link), handler: { (_) in
-                if self.viewModel.mode != .videoOnly {
-                    self.viewModel.mode = .videoOnly
-                }
-            }),
+                     image: UIImage(systemName: "video.badge.checkmark")?.withTintColor(.link), handler: { [weak self] (_) in
+                        guard let self = self else { return }
+                        if self.viewModel.mode != .videoOnly {
+                            self.viewModel.mode = .videoOnly
+                        }
+                     }),
             UIAction(title: "All Pinned Mode",
-                     image: UIImage(systemName: "pin.circle.fill")?.withTintColor(.link), handler: { (_) in
-                if self.viewModel.mode != .pinned {
-                    self.viewModel.mode = .pinned
-                }
-            }),
+                     image: UIImage(systemName: "pin.circle.fill")?.withTintColor(.link), handler: { [weak self] (_) in
+                        guard let self = self else { return }
+                        if self.viewModel.mode != .pinned {
+                            self.viewModel.mode = .pinned
+                        }
+                     }),
             UIAction(title: "Spotlight Mode",
-                     image: UIImage(systemName: "figure.wave.circle.fill")?.withTintColor(.link)) { _ in
-
+                     image: UIImage(systemName: "figure.wave.circle.fill")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
                 if self.viewModel.mode != .spotlight {
                     self.viewModel.mode = .spotlight
                 }
             },
             UIAction(title: "Hero Mode",
-                     image: UIImage(systemName: "shield.checkerboard")?.withTintColor(.link)) { _ in
-
+                     image: UIImage(systemName: "shield.checkerboard")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
                 if self.viewModel.mode != .hero {
                     self.viewModel.mode = .hero
                 }
             },
             UIAction(title: "Default Mode",
-                     image: UIImage(systemName: "rectangle.grid.2x2.fill")?.withTintColor(.link)) { _ in
-
+                     image: UIImage(systemName: "rectangle.grid.2x2.fill")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
                 if self.viewModel.mode != .regular {
                     self.viewModel.mode = .regular
                 }
@@ -134,7 +121,8 @@ final class MeetingViewController: UIViewController {
 
         UIApplication.shared.isIdleTimerDisabled = true
 
-        viewModel = MeetingViewModel(self.user, self.roomName, flow, collectionView)
+        viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
+        setupButtonStates()
 
         handleError()
         observeBroadcast()
@@ -142,9 +130,13 @@ final class MeetingViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
-            UIApplication.shared.isIdleTimerDisabled = false
-            viewModel.cleanup()
+            cleanup()
         }
+    }
+    
+    private func cleanup() {
+        UIApplication.shared.isIdleTimerDisabled = false
+        viewModel.cleanup()
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -219,7 +211,8 @@ final class MeetingViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "Okay",
                                               style: .default,
                                               handler: { _ in
-                                                self?.navigationController?.popViewController(animated: true)
+                                                self?.cleanup()
+                                                self?.navigationController?.popToRootViewController(animated: true)
                                               }))
                 strongSelf.present(alert, animated: true) {
                     print(#function)
@@ -321,12 +314,31 @@ final class MeetingViewController: UIViewController {
                                                 message: nil,
                                                 preferredStyle: .alert)
 
-        alertController.addAction(UIAlertAction(title: "YES", style: .destructive) { (_) in
-            self.navigationController?.popViewController(animated: true)
+        alertController.addAction(UIAlertAction(title: "YES", style: .destructive) { [weak self] (_) in
+            self?.cleanup()
+            self?.navigationController?.popToRootViewController(animated: true)
         })
 
         alertController.addAction(UIAlertAction(title: "NO", style: .cancel))
 
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func setupButtonStates() {
+        guard let localPeer = viewModel.interactor?.hmsSDK?.localPeer else {
+            return
+        }
+        
+        if let videoTrack = localPeer.videoTrack as? HMSLocalVideoTrack {
+            publishVideoButton.isSelected = videoTrack.isMute()
+        } else {
+            publishVideoButton.isSelected = true
+        }
+        
+        if let audioTrack = localPeer.audioTrack as? HMSLocalAudioTrack {
+            publishAudioButton.isSelected = audioTrack.isMute()
+        } else {
+            publishAudioButton.isSelected = true
+        }
     }
 }

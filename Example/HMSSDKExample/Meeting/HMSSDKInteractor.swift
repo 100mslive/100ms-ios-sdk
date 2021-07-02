@@ -12,19 +12,21 @@ import HMSSDK
 final class HMSSDKInteractor: HMSUpdateListener {
 
     internal var hmsSDK: HMSSDK?
+    internal var onPreview: ((HMSRoom, [HMSTrack]) -> Void)?
 
     // MARK: - Instance Properties
 
     internal var messages = [HMSMessage]()
+    
+    private var config: HMSConfig?
 
     // MARK: - Setup Stream
 
     init(for user: String,
          in room: String,
-         _ flow: MeetingFlow,
          _ completion: @escaping () -> Void) {
 
-        RoomService.setup(for: flow, user, room) { [weak self] token, aRoom in
+        RoomService.setup(for: user, room) { [weak self] token, aRoom in
             guard let token = token else {
                 print(#function, "Error fetching token")
                 return
@@ -52,12 +54,22 @@ final class HMSSDKInteractor: HMSUpdateListener {
             sdk.logger = self
         }
 
-        let config = HMSConfig(userName: user,
+        config = HMSConfig(userName: user,
                                userID: UUID().uuidString,
                                roomID: room,
                                authToken: token)
 
+        guard let config = config else { return }
+        hmsSDK?.preview(config: config, delegate: self)
+    }
+    
+    func join() {
+        guard let config = config else { return }
         hmsSDK?.join(config: config, delegate: self)
+    }
+    
+    func leave() {
+        hmsSDK?.leave()
     }
 
     // MARK: - HMSSDK Update Callbacks
@@ -109,6 +121,12 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func onReconnected() {
         print("Reconnected")
+    }
+}
+
+extension HMSSDKInteractor: HMSPreviewListener {
+    func onPreview(room: HMSRoom, localTracks: [HMSTrack]) {
+        onPreview?(room, localTracks)
     }
 }
 

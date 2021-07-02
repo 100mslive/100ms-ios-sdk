@@ -10,16 +10,12 @@ import Foundation
 
 struct RoomService {
 
-    static func setup(for flow: MeetingFlow,
-                      _ user: String,
+    static func setup(for user: String,
                       _ room: String,
                       completion: @escaping (String?, String?) -> Void) {
 
-        switch flow {
-        case .join:
-            getToken(for: user, room) { (token, roomID) in
-                completion(token, roomID)
-            }
+        getToken(for: user, room) { (token, roomID) in
+            completion(token, roomID)
         }
     }
 
@@ -84,7 +80,7 @@ struct RoomService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        let body = [  "room_id": room,
+        var body = [  "room_id": room,
                       "user_id": user,
                       "role": "host"]
 

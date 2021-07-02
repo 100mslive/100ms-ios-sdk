@@ -65,6 +65,8 @@ struct Constants {
     // MARK: - View Constants
 
     static let meeting = "Meeting"
+    
+    static let previewControllerIdentifier = "PreviewController"
 
     static let settings = "Settings"
 

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSVideoTrack : HMSTrack
 
+- (BOOL)isDegraded;
 - (void)addSink:(id)sink;
 - (void)removeSink:(id)sink;
 

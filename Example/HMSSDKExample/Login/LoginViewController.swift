@@ -45,51 +45,18 @@ final class LoginViewController: UIViewController {
         }
     }
 
-    @IBOutlet private weak var publishVideoButton: UIButton! {
-        didSet {
-            UserDefaults.standard.set(true, forKey: Constants.publishVideo)
-        }
-    }
-
-    @IBOutlet private weak var publishAudioButton: UIButton! {
-        didSet {
-            UserDefaults.standard.set(true, forKey: Constants.publishAudio)
-        }
-    }
-
-    @IBOutlet private weak var cameraPreview: UIView!
-
-    private var session: AVCaptureSession?
-    private var input: AVCaptureDeviceInput?
-    private var output: AVCapturePhotoOutput?
-    private var previewLayer: AVCaptureVideoPreviewLayer?
-
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         observeNotifications()
-        
-        AVCaptureDevice.requestAccess(for: .video) { granted in
-            print(#function, "permission granted: ", granted)
-        }
-        
-        AVCaptureDevice.requestAccess(for: .audio) { granted in
-            print(#function, "permission granted: ", granted)
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         joinMeetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomIDKey) ?? Constants.defaultRoomID
         settingsButton.imageView?.rotate()
-        setupCameraPreview()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        updateCameraView()
     }
 
     override func willTransition(to newCollection: UITraitCollection,
@@ -98,54 +65,12 @@ final class LoginViewController: UIViewController {
         super.willTransition(to: newCollection, with: coordinator)
 
         coordinator.animate { _ in
-            self.updateCameraView()
             self.joinMeetingIDField.resignFirstResponder()
         }
     }
 
     // MARK: - View Modifiers
-
-    private func setupCameraPreview() {
-
-        session = AVCaptureSession()
-        output = AVCapturePhotoOutput()
-        if let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
-            do {
-                input = try AVCaptureDeviceInput(device: camera)
-            } catch let error as NSError {
-                print(error)
-                input = nil
-            }
-
-            guard let input = input, let output = output, let session = session else { return }
-
-            if session.canAddInput(input) {
-                session.addInput(input)
-
-                if session.canAddOutput(output) {
-                    session.addOutput(output)
-                }
-
-                let settings = AVCapturePhotoSettings()
-                let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
-
-                let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
-                                     kCVPixelBufferWidthKey as String: view.frame.size.width,
-                                     kCVPixelBufferHeightKey as String: view.frame.size.height] as [String: Any]
-                settings.previewPhotoFormat = previewFormat
-
-                output.capturePhoto(with: settings, delegate: self)
-            }
-        }
-    }
-
-    private func updateCameraView() {
-        if let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation {
-            let videoOrientation = AVCaptureVideoOrientation(rawValue: orientation.rawValue) ?? .portrait
-            previewLayer?.connection?.videoOrientation = videoOrientation
-            previewLayer?.frame = cameraPreview.bounds
-        }
-    }
+ 
 
     // MARK: - Action Handlers
 
@@ -161,7 +86,7 @@ final class LoginViewController: UIViewController {
 
             self.joinMeetingIDField.text = roomID
 
-            self.showInputAlert(flow: .join)
+            self.showInputAlert()
         }
     }
 
@@ -169,37 +94,13 @@ final class LoginViewController: UIViewController {
         joinMeetingIDField.resignFirstResponder()
     }
 
-    @IBAction private func cameraTapped(_ sender: UIButton) {
-
-        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
-        sender.isSelected = !sender.isSelected
-
-        if let session = session {
-            if sender.isSelected {
-                if session.isRunning {
-                    session.stopRunning()
-                    previewLayer?.removeFromSuperlayer()
-                }
-            } else {
-                if !session.isRunning {
-                    session.startRunning()
-                    cameraPreview.layer.addSublayer(previewLayer ?? CALayer())
-                }
-            }
-        }
-    }
-
-    @IBAction private func micTapped(_ sender: UIButton) {
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
-        sender.isSelected = !sender.isSelected
-    }
+    
 
     @IBAction private func startMeetingTapped(_ sender: UIButton) {
-        showInputAlert(flow: .join)
+        showInputAlert()
     }
 
-    private func showInputAlert(flow: MeetingFlow) {
+    private func showInputAlert() {
 
         let title = "Join a Meeting"
         let action = "Join"
@@ -217,13 +118,13 @@ final class LoginViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
 
-            self?.handleActions(for: alertController, in: flow)
+            self?.handleActions(for: alertController)
         })
 
         present(alertController, animated: true)
     }
 
-    private func handleActions(for alertController: UIAlertController, in flow: MeetingFlow) {
+    private func handleActions(for alertController: UIAlertController) {
         var room: String
 
         if !joinMeetingIDField.text!.isEmpty {
@@ -234,8 +135,7 @@ final class LoginViewController: UIViewController {
         }
 
         guard let name = alertController.textFields?[0].text, !name.isEmpty,
-              let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
-                .instantiateInitialViewController() as? MeetingViewController
+              let viewController = self.storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? PreviewViewController
         else {
             dismiss(animated: true)
             let message = "Enter Name!"
@@ -244,7 +144,6 @@ final class LoginViewController: UIViewController {
         }
 
         viewController.user = name
-        viewController.flow = flow
         viewController.roomName = room
 
         save(name, room)
@@ -283,20 +182,4 @@ final class LoginViewController: UIViewController {
         present(viewController, animated: true)
     }
 }
-
-@available(iOS 11.0, *)
-extension LoginViewController: AVCapturePhotoCaptureDelegate {
-
-    func photoOutput(_ output: AVCapturePhotoOutput,
-                     didFinishProcessingPhoto photo: AVCapturePhoto,
-                     error: Error?) {
-
-        if let session = session {
-            previewLayer = AVCaptureVideoPreviewLayer(session: session)
-            previewLayer?.videoGravity = .resizeAspectFill
-            updateCameraView()
-            cameraPreview.layer.addSublayer(previewLayer!)
-            session.startRunning()
-        }
-    }
-}
+ 

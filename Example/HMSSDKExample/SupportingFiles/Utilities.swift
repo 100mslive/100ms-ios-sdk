@@ -100,10 +100,6 @@ protocol ErrorProtocol: LocalizedError {
 
 }
 
-enum MeetingFlow {
-    case join
-}
-
 enum Layout {
     case grid, portrait
 }
