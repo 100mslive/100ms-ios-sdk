@@ -13,8 +13,6 @@
 # 🎉 100ms SDK ＆ Sample App 🚀
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
-  
-You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
 
 To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
   

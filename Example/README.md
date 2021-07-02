@@ -2,8 +2,6 @@
 
 This guide walks you through the Example app implementation showcasing how 100ms SDK can be utilized to build delightful apps.🤩
 
-You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
-
 For the SDK integration guide, checkout the [ReadMe here](https://github.com/100mslive/100ms-ios-sdk/).
 
 ## ☝️ Pre-requistes
