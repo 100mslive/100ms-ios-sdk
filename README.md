@@ -13,8 +13,8 @@
 # 🎉 100ms SDK ＆ Sample App 🚀
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
-  
-You can download the [Sample App via TestFlight here](https://testflight.apple.com/join/dhUSE7N8).
+
+To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
   
 ## ☝️ Pre-requisites
 - Xcode 12 or higher
@@ -22,17 +22,17 @@ You can download the [Sample App via TestFlight here](https://testflight.apple.c
 
 ## 🚂 Setup Guide
   
-  - Host your token generation service [following this guide](https://docs.100ms.live/v2/server-side/Generate-client-side-token)
+  1. Host your token generation service [following this guide](https://docs.100ms.live/v2/server-side/Generate-client-side-token)
 
-  - Get Access Keys: Sign up on https://dashboard.100ms.live/register & visit the Developer tab to get your access credentials
+  2. Get Access Keys: Sign up on https://dashboard.100ms.live/register & visit the Developer tab to get your access credentials
 
-  - Generate a server-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-server-side-token
+  3. Generate a server-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-server-side-token
 
-  - Create a room, follow the steps described here - https://docs.100ms.live/v2/server-side/Create-room
+  4. Create a room, follow the steps described here - https://docs.100ms.live/v2/server-side/Create-room
 
-  - Generate a client-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-client-side-token
+  5. Generate a client-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-client-side-token
   
-  - Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
+  6. Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
   ```
   // Podfile
   
@@ -255,3 +255,23 @@ class HMSLocalAudioTrack : HMSAudioTrack {
           - LocalVideoTrack
           - RemoteVideoTrack
 ```
+  
+## 🎞 Display a Track
+  To display a video track, first get the `HMSVideoTrack` & pass it on to `HMSVideoView` using `setVideoTrack` function. Ensure to attach the `HMSVideoView` to your UI hierarchy.
+
+  ```
+  // The following code is a sample.
+
+  // Get the video track to be displayed
+  let track = peer.videoTrack  
+
+  // Create a view for rendering video track and add to the UI hierarchy
+
+  let videoView = HMSVideoView()
+  videoView.setVideoTrack(track)
+  view.addSubview(videoView)
+
+  ```
+
+  
+ 🏃‍♀️ Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
