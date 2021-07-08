@@ -107,7 +107,7 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
     ///
     /// ## A HMSSpeaker object contains -
     ///    - HMSPeer: the peer who is speaking
-    ///    - trackID: the track identifier which is emitting audio
+    ///    - trackID: the track identifier of HMSTrack which is emitting audio
     ///    - level: a number within range 1-100 indicating the audio volume
     ///
     /// A peer who is not present in the list indicates that the peer is not speaking
