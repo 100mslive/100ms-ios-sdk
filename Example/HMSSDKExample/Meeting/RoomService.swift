@@ -80,7 +80,7 @@ struct RoomService {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        var body = [  "room_id": room,
+        let body = [  "room_id": room,
                       "user_id": user,
                       "role": "host"]
 

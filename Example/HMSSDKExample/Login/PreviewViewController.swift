@@ -14,8 +14,8 @@ class PreviewViewController: UIViewController {
     internal var user: String!
     internal var roomName: String!
     
-    private var videoTrack: HMSLocalVideoTrack!
-    private var audioTrack: HMSLocalAudioTrack!
+    private var videoTrack: HMSLocalVideoTrack?
+    private var audioTrack: HMSLocalAudioTrack?
     private var interactor: HMSSDKInteractor!
 
     @IBOutlet private weak var  previewView: HMSVideoView!
@@ -27,6 +27,8 @@ class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         interactor = HMSSDKInteractor(for: user, in: roomName) {}
         joinButton.isEnabled = false
+        publishVideoButton.isHidden = true
+        publishAudioButton.isHidden = true
         
         interactor.onPreview = { [weak self] room, tracks in
             self?.setupTracks(tracks: tracks)
@@ -59,10 +61,12 @@ class PreviewViewController: UIViewController {
             if let videoTrack = track as? HMSLocalVideoTrack {
                 self.videoTrack = videoTrack
                 previewView.setVideoTrack(videoTrack)
+                publishVideoButton.isHidden = false
             }
             
             if let audioTrack = track as? HMSLocalAudioTrack {
                 self.audioTrack = audioTrack
+                publishAudioButton.isHidden = false
             }
         }
     }
@@ -88,11 +92,11 @@ class PreviewViewController: UIViewController {
     
     @IBAction private func cameraTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        videoTrack.setMute(sender.isSelected)
+        videoTrack?.setMute(sender.isSelected)
     }
 
     @IBAction private func micTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        audioTrack.setMute(sender.isSelected)
+        audioTrack?.setMute(sender.isSelected)
     }
 }

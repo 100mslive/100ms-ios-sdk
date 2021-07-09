@@ -15,9 +15,9 @@
 typedef void (^HMSOperationStatusHandler)(BOOL isSuccess, HMSError * _Nullable error);
 typedef void (^HMSRequestCompletionHandler)(id _Nullable result, HMSError * _Nullable error);
 
-typedef NS_ENUM(NSUInteger, HMSVideoCodec) {
-    kHMSVideoCodecH264,
-    kHMSVideoCodecVP8
+typedef NS_ENUM(NSUInteger, HMSCodec) {
+    kHMSCodecH264,
+    kHMSCodecVP8
 };
 
 typedef NS_ENUM(NSUInteger, HMSSimulcastLayer) {

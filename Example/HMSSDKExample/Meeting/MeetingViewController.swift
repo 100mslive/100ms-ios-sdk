@@ -122,10 +122,70 @@ final class MeetingViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
 
         viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
+        viewModel.onMoreButtonTap = { [weak self] peer, button in
+            self?.showPeerActionsMenu(for: peer, on: button)
+        }
         setupButtonStates()
 
         handleError()
         observeBroadcast()
+        
+        interactor.onRoleChange = { [weak self] request in
+            self?.handle(roleChange: request)
+        }
+
+    }
+    
+    private func showPeerActionsMenu(for peer: HMSRemotePeer, on button: UIButton) {
+        let title = "Select action"
+        let action = "Change role"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .actionSheet)
+
+
+        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
+            self?.showRoleChangePrompt(for: peer)
+        })
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        if let popoverController = alertController.popoverPresentationController {
+            alertController.modalPresentationStyle = .popover
+            popoverController.sourceView = button //to set the source of your alert
+            popoverController.sourceRect = button.bounds
+            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+        }
+        present(alertController, animated: true)
+    }
+    
+    private func showRoleChangePrompt(for peer: HMSRemotePeer) {
+        let title = "Role change request"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter role"
+            textField.clearButtonMode = .always
+            textField.text =  "teacher"
+        }
+
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak alertController] _ in
+            guard let roleName = alertController?.textFields?[0].text else {
+                return
+            }
+            
+            let trimmedRoleName = roleName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            guard !trimmedRoleName.isEmpty else { return }
+            
+            self?.interactor?.changeRole(for: peer, to: trimmedRoleName)
+        })
+
+        present(alertController, animated: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -340,5 +400,21 @@ final class MeetingViewController: UIViewController {
         } else {
             publishAudioButton.isSelected = true
         }
+    }
+    
+    private func handle(roleChange request: HMSRoleChangeRequest) {
+        let title = "Do you want to change your role to: \(request.suggestedRole.name)"
+        let action = "Yes"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel))
+        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
+            self?.interactor?.accept(cahngeRole: request)
+        })
+
+        present(alertController, animated: true)
     }
 }

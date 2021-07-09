@@ -13,7 +13,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     internal var hmsSDK: HMSSDK?
     internal var onPreview: ((HMSRoom, [HMSTrack]) -> Void)?
-
+    internal var onRoleChange: ((HMSRoleChangeRequest) -> Void)?
+    
     // MARK: - Instance Properties
 
     internal var messages = [HMSMessage]()
@@ -71,6 +72,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
     func leave() {
         hmsSDK?.leave()
     }
+    
+    func changeRole(for peer: HMSRemotePeer, to role: String) {
+        hmsSDK?.changeRole(for: peer, to: role)
+    }
+    
+    func accept(cahngeRole request: HMSRoleChangeRequest) {
+        hmsSDK?.accept(changeRole: request)
+    }
 
     // MARK: - HMSSDK Update Callbacks
 
@@ -113,6 +122,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func on(updated speakers: [HMSSpeaker]) {
 //        print(speakers)
+    }
+    
+    func on(roleChangeRequest: HMSRoleChangeRequest) {
+        onRoleChange?(roleChangeRequest)
     }
 
     func onReconnecting() {

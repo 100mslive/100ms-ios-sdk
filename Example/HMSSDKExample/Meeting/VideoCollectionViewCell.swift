@@ -16,6 +16,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
 
     var onPinToggle: (() -> Void)?
     var onMuteToggle: (() -> Void)?
+    
+    var onMoreButtonTap: ((UIButton)-> Void)?
 
     @IBOutlet weak var stackView: UIStackView! {
         didSet {
@@ -29,6 +31,7 @@ final class VideoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pinButton: UIButton!
 
     @IBOutlet weak var muteButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
 
     @IBOutlet weak var videoView: HMSVideoView! {
         didSet {
@@ -119,6 +122,10 @@ final class VideoCollectionViewCell: UICollectionViewCell {
                                             object: nil,
                                             userInfo: ["video": video])
         }
+    }
+    
+    @IBAction func moreButtonTapped(_ sender: UIButton) {
+        onMoreButtonTap?(sender)
     }
     
     private func updateVideoButton(_ notification: Notification) {

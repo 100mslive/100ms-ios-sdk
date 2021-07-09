@@ -27,8 +27,8 @@ typedef NS_ENUM(NSUInteger, HMSConnectionRole) {
 };
 
 @interface HMSUtility : NSObject
-+ (NSString *)codecStringFromCodec:(HMSVideoCodec)codec;
-+ (HMSVideoCodec)codecFromString:(NSString *)string;
++ (NSString *)codecStringFromCodec:(HMSCodec)codec;
++ (HMSCodec)codecFromString:(NSString *)string;
 
 + (HMSTrackSource)sourceFromString:(NSString *)string;
 + (NSString *)sourceStringFromSource:(HMSTrackSource)source;

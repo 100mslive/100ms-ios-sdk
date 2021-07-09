@@ -10,9 +10,13 @@ import Foundation
 
 struct Constants {
 
-    // MARK: - HMSSDK Interactor
-
+    // MARK: - Add your Token Endpoint
+    
+    /// only enter your token endpoint, no need to edit any other fields in this file
     static let tokenEndpoint = <#InsertTokenEndpointHere#>
+
+    
+    // MARK: - No Modifications required 👇
     
     static let tokenQuery = "api/token"
     

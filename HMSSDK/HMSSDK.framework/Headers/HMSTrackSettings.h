@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HMSVideoTrackSettings : NSObject <NSCopying>
-@property (nonatomic, assign, readonly) HMSVideoCodec codec;
+@property (nonatomic, assign, readonly) HMSCodec codec;
 @property (nonatomic, assign, readonly) HMSVideoResolution resolution;
 @property (nonatomic, assign, readonly) NSInteger maxBitrate;
 @property (nonatomic, assign, readonly) NSInteger maxFrameRate;
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly, nullable) NSString *trackDescription;
 
 
-- (instancetype)initWithCodec:(HMSVideoCodec)codec resolution:(HMSVideoResolution)resolution maxBitrate:(NSInteger)maxBitrate maxFrameRate:(NSInteger)maxFrameRate cameraFacing:(HMSCameraFacing)cameraFacing trackDescription:(NSString *__nullable)trackDescription;
+- (instancetype)initWithCodec:(HMSCodec)codec resolution:(HMSVideoResolution)resolution maxBitrate:(NSInteger)maxBitrate maxFrameRate:(NSInteger)maxFrameRate cameraFacing:(HMSCameraFacing)cameraFacing trackDescription:(NSString *__nullable)trackDescription;
 - (instancetype)init;
 
 @end

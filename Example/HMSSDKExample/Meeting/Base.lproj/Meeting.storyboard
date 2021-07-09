@@ -124,6 +124,26 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rW-Vt-Pb1" userLabel="More Button">
+                                                    <rect key="frame" x="84" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="B19-3S-hLs"/>
+                                                        <constraint firstAttribute="height" constant="44" id="kAR-wZ-rvT"/>
+                                                    </constraints>
+                                                    <state key="normal" image="ellipsis" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        </preferredSymbolConfiguration>
+                                                    </state>
+                                                    <state key="selected" image="speaker.slash.fill" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        </preferredSymbolConfiguration>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="moreButtonTapped:" destination="0EI-A3-zvS" eventType="touchUpInside" id="2yS-HK-pLK"/>
+                                                    </connections>
+                                                </button>
                                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="5DJ-Az-o0i">
                                                     <rect key="frame" x="8.6666666666666714" y="80" width="111" height="44"/>
                                                     <subviews>
@@ -183,6 +203,7 @@
                                             <constraints>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="top" id="0lv-ZF-2Tc"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
+                                                <constraint firstAttribute="trailing" secondItem="0rW-Vt-Pb1" secondAttribute="trailing" id="8oe-Rg-iJZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" constant="2" id="CYl-d3-NMQ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
                                                 <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
@@ -191,11 +212,13 @@
                                                 <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" constant="2" id="ehd-uv-Mt4"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="2" id="swZ-Nr-YfD"/>
+                                                <constraint firstItem="0rW-Vt-Pb1" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="z1J-DT-m6W"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerY" secondItem="eIA-rh-Vt1" secondAttribute="centerY" id="zzF-RU-orm"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="avatarLabel" destination="w6D-tx-bL7" id="ekL-KC-qRr"/>
+                                            <outlet property="moreButton" destination="0rW-Vt-Pb1" id="kvN-eJ-NKL"/>
                                             <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
                                             <outlet property="nameLabel" destination="i5b-uY-ZDM" id="U3V-ov-dqn"/>
                                             <outlet property="stackView" destination="5DJ-Az-o0i" id="Ikz-3f-3nA"/>
@@ -366,6 +389,7 @@
         <image name="100ms-icon" width="1598" height="1598"/>
         <image name="arrow.triangle.2.circlepath.camera" catalog="system" width="128" height="94"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>

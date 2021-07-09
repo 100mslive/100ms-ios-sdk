@@ -30,7 +30,7 @@ final class MeetingViewModel: NSObject,
             }
             if oldValue == .speakers {
                 dataSource.allModels.forEach { model in
-                    animateSpeakerQuiet(model)
+                    applyQuietBorder(model)
                 }
             }
             if mode == .hero {
@@ -48,6 +48,8 @@ final class MeetingViewModel: NSObject,
         }
     }
 
+    var onMoreButtonTap: ((HMSRemotePeer, UIButton) -> Void)?
+    
     private(set) var interactor: HMSSDKInteractor?
 
     private weak var collectionView: UICollectionView?
@@ -72,14 +74,12 @@ final class MeetingViewModel: NSObject,
                 dataSource.reload()
             }
             
-            if mode == .speakers {
-                for speaker in oldValue where speaker != speakers.first {
-                    animateSpeakerQuiet(speaker)
-                }
-                
-                if let speaker = speakers.first {
-                    animateSpeakerSpeaking(speaker)
-                }
+            for speaker in oldValue {
+                applyQuietBorder(speaker)
+            }
+            
+            for speaker in speakers {
+                applySpeakingBorder(speaker)
             }
             
             NotificationCenter.default.post(name: Constants.updatedSpeaker,
@@ -230,7 +230,20 @@ final class MeetingViewModel: NSObject,
         //        cell.onPinToggle = { [weak self] in
         //            self?.togglePinned(viewModel)
         //        }
-
+        
+        
+        
+        if let remotePeer = viewModel.peer as? HMSRemotePeer {
+            cell.onMoreButtonTap = { [weak self] button in
+                self?.onMoreButtonTap?(remotePeer, button)
+            }
+            cell.moreButton.isHidden = false
+        } else {
+            cell.onMoreButtonTap = nil
+            cell.moreButton.isHidden = true
+        }
+        
+        
         switch mode {
         case .audioOnly:
             cell.videoView.setVideoTrack(nil)
@@ -350,46 +363,14 @@ final class MeetingViewModel: NSObject,
         return nil
     }
     
-    private func animateSpeakerSpeaking(_ model: HMSViewModel) {
-        
-        let count = mode == .audioOnly ? 6 : 4
-        
-        guard let cell = cellFor(model),
-              let collectionView = collectionView,
-              let total = self.diffableDataSource?.collectionView(collectionView, numberOfItemsInSection: 0), total > 4,
-              let index = diffableDataSource?.indexPath(for: model),
-              index.item < count || index.item == 0 else { return }
-        
-        UIView.animate(withDuration: 0.5) {
-            
-            cell.layer.zPosition = 1000.0
-            
-            var x = 0.5, y = 0.5
-
-            if cell.center.x < collectionView.center.x {
-                x = 0.43
-            } else {
-                x = 0.57
-            }
-            
-            if cell.center.y < collectionView.center.y {
-                y = 0.43
-            } else {
-                y = 0.57
-            }
-            
-            cell.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
-            cell.layer.anchorPoint = .init(x: x, y: y)
-        }
+    private func applySpeakingBorder(_ model: HMSViewModel) {
+        guard let cell = cellFor(model) else { return }
+        Utilities.applySpeakingBorder(on: cell)
     }
     
-    private func animateSpeakerQuiet(_ model: HMSViewModel?) {
+    private func applyQuietBorder(_ model: HMSViewModel?) {
         guard let model = model, let cell = cellFor(model) else { return }
-        UIView.animate(withDuration: 0.1) {
-            cell.transform = .identity
-            cell.layer.zPosition = 0
-            cell.layer.anchorPoint = .init(x: 0.5, y: 0.5)
-        }
+        Utilities.applyBorder(on: cell)
     }
     
     private func addObservers() {

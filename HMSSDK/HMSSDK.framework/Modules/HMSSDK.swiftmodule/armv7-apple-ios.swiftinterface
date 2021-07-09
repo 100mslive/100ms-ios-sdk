@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
 // swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name HMSSDK
 import AVKit
 import Foundation
@@ -17,7 +17,7 @@ import Swift
   @objc final public let peerID: Swift.String
   @objc public var name: Swift.String
   @objc final public let isLocal: Swift.Bool
-  @objc public var role: Swift.String?
+  public var role: HMSSDK.HMSRole?
   @objc final public let customerUserID: Swift.String?
   @objc public var customerDescription: Swift.String?
   @objc public var audioTrack: HMSSDK.HMSAudioTrack?
@@ -132,6 +132,11 @@ extension HMSSection : Swift.Hashable {
     get
   }
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HMSRoleChangeRequest : ObjectiveC.NSObject {
+  public var suggestedRole: HMSSDK.HMSRole
+  @objc override dynamic public init()
+  @objc deinit
+}
 @objc public enum HMSErrorCode : Swift.Int {
   case websocketGenericError = 1000
   case websocketConnectionLost = 1003
@@ -208,19 +213,36 @@ extension HMSSection : Swift.Hashable {
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
 }
-public struct HMSRoleInfo : Swift.Codable {
+public struct HMSRole : Swift.Codable {
+  public let name: Swift.String
+  public let publishSettings: HMSSDK.HMSPublishSettings
+  public let subscribeSettings: HMSSDK.HMSSubscribeSettings
+  public let permissions: HMSSDK.HMSPermissions
+  public let priority: Swift.Int
+  public let generalPermissions: [Swift.String : Swift.String]?
+  public let internalPlugins: [Swift.String : Swift.String]?
+  public let externalPlugins: [Swift.String : Swift.String]?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public struct PublishParams : Swift.Codable {
+public struct HMSPublishSettings : Swift.Codable {
+  public let audio: HMSSDK.HMSAudioSettings
+  public let video: HMSSDK.HMSVideoSettings
+  public let screen: HMSSDK.HMSVideoSettings
+  public let audioSimulcast: HMSSDK.HMSSimulcastSettings?
+  public let videoSimulcast: HMSSDK.HMSSimulcastSettings?
+  public let screenSimulcast: HMSSDK.HMSSimulcastSettings?
+  public let allowed: [HMSSDK.HMSStreamType]?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public struct AudioParams : Swift.Codable {
+public struct HMSAudioSettings : Swift.Codable {
+  public let bitRate: Swift.Int
+  public let codec: HMSSDK.HMSAudioCodec
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public enum AudioCodec : Swift.String, Swift.Codable {
+public enum HMSAudioCodec : Swift.String, Swift.Codable {
   case opus
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
@@ -228,11 +250,16 @@ public enum AudioCodec : Swift.String, Swift.Codable {
     get
   }
 }
-public struct VideoParams : Swift.Codable {
+public struct HMSVideoSettings : Swift.Codable {
+  public let bitRate: Swift.Int?
+  public let codec: HMSSDK.HMSVideoCodec
+  public let frameRate: Swift.Int
+  public let width: Swift.Int
+  public let height: Swift.Int
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public enum VideoCodec : Swift.String, Swift.Codable {
+public enum HMSVideoCodec : Swift.String, Swift.Codable {
   case h264
   case vp8
   case vp9
@@ -243,7 +270,7 @@ public enum VideoCodec : Swift.String, Swift.Codable {
     get
   }
 }
-public enum StreamType : Swift.String, Swift.Codable {
+public enum HMSStreamType : Swift.String, Swift.Codable {
   case audio
   case video
   case screen
@@ -254,15 +281,28 @@ public enum StreamType : Swift.String, Swift.Codable {
     get
   }
 }
-public struct Simulcast : Swift.Codable {
+public struct HMSSimulcastSettings : Swift.Codable {
+  public let low: [Swift.String : Swift.String]
+  public let med: [Swift.String : Swift.String]
+  public let high: [Swift.String : Swift.String]
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public struct HMSSubscribeParams : Swift.Codable {
+public struct HMSSubscribeSettings : Swift.Codable {
+  public let subscribeToRoles: [Swift.String]?
+  public let maxSubsBitRate: Swift.Int
+  public let maxDisplayTiles: Swift.Int?
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public struct HMSPermissions : Swift.Codable {
+  public let endRoom: Swift.Bool
+  public let removeOthers: Swift.Bool
+  public let stopPresentation: Swift.Bool
+  public let muteAll: Swift.Bool
+  public let askToUnmute: Swift.Bool
+  public let muteSelective: Swift.Bool
+  public let changeRole: Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -293,6 +333,7 @@ public struct HMSPermissions : Swift.Codable {
   @objc(onTrack:update:peer:) func on(track: HMSSDK.HMSTrack, update: HMSSDK.HMSTrackUpdate, for peer: HMSSDK.HMSPeer)
   @objc(onError:) func on(error: HMSSDK.HMSError)
   @objc(onMessage:) func on(message: HMSSDK.HMSMessage)
+  @objc(roleChangeRequest:) optional func on(roleChangeRequest: HMSSDK.HMSRoleChangeRequest)
   @objc(onUpdatedSpeakers:) func on(updated speakers: [HMSSDK.HMSSpeaker])
   @objc func onReconnecting()
   @objc func onReconnected()
@@ -331,6 +372,8 @@ public struct HMSPermissions : Swift.Codable {
   @objc public func send(message: HMSSDK.HMSMessage)
   @objc public func add(delegate: HMSSDK.HMSUpdateListener)
   @objc public func remove(delegate: HMSSDK.HMSUpdateListener)
+  @objc public func changeRole(for peer: HMSSDK.HMSRemotePeer, to role: Swift.String, force: Swift.Bool = false)
+  @objc public func accept(changeRole request: HMSSDK.HMSRoleChangeRequest)
   @objc public static func build(block: ((HMSSDK.HMSSDK) -> Swift.Void)? = nil) -> HMSSDK.HMSSDK
   @objc public var trackSettings: HMSSDK.HMSTrackSettings {
     @objc get
@@ -380,15 +423,15 @@ extension HMSSDK.HMSErrorCode : Swift.RawRepresentable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Equatable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Hashable {}
 extension HMSSDK.HMSTrackUpdate : Swift.RawRepresentable {}
-extension HMSSDK.AudioCodec : Swift.Equatable {}
-extension HMSSDK.AudioCodec : Swift.Hashable {}
-extension HMSSDK.AudioCodec : Swift.RawRepresentable {}
-extension HMSSDK.VideoCodec : Swift.Equatable {}
-extension HMSSDK.VideoCodec : Swift.Hashable {}
-extension HMSSDK.VideoCodec : Swift.RawRepresentable {}
-extension HMSSDK.StreamType : Swift.Equatable {}
-extension HMSSDK.StreamType : Swift.Hashable {}
-extension HMSSDK.StreamType : Swift.RawRepresentable {}
+extension HMSSDK.HMSAudioCodec : Swift.Equatable {}
+extension HMSSDK.HMSAudioCodec : Swift.Hashable {}
+extension HMSSDK.HMSAudioCodec : Swift.RawRepresentable {}
+extension HMSSDK.HMSVideoCodec : Swift.Equatable {}
+extension HMSSDK.HMSVideoCodec : Swift.Hashable {}
+extension HMSSDK.HMSVideoCodec : Swift.RawRepresentable {}
+extension HMSSDK.HMSStreamType : Swift.Equatable {}
+extension HMSSDK.HMSStreamType : Swift.Hashable {}
+extension HMSSDK.HMSStreamType : Swift.RawRepresentable {}
 extension HMSSDK.HMSLogLevel : Swift.Equatable {}
 extension HMSSDK.HMSLogLevel : Swift.Hashable {}
 extension HMSSDK.HMSLogLevel : Swift.RawRepresentable {}
