@@ -8,6 +8,7 @@
 [![License](https://img.shields.io/cocoapods/l/HMSSDK.svg?style=flat)](http://cocoapods.org/pods/HMSSDK)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/)
 [![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
+[![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](mailto:founders@100ms.live)
 
 # 🎉 100ms SDK ＆ Sample App 🚀
@@ -62,14 +63,14 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
     /// This will be called on a successful JOIN of the room by the user
     /// This is the point where applications can stop showing its loading state
     /// - Parameter room: the room which was joined
-    func on(join room: HMSSDK.HMSRoom)
+    func on(join room: HMSRoom)
 
   
     /// This is called when there is a change in any property of the Room
     /// - Parameters:
     ///   - room: the room which was joined
     ///   - update: the triggered update type. Should be used to perform different UI Actions
-    func on(room: HMSSDK.HMSRoom, update: HMSSDK.HMSRoomUpdate)
+    func on(room: HMSRoom, update: HMSRoomUpdate)
 
   
     /// This will be called whenever there is an update on an existing peer
@@ -78,7 +79,7 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
     /// - Parameters:
     ///   - peer: the peer who joined/left or was updated
     ///   - update: the triggered update type. Should be used to perform different UI Actions
-    func on(peer: HMSSDK.HMSPeer, update: HMSSDK.HMSPeerUpdate)
+    func on(peer: HMSPeer, update: HMSPeerUpdate)
 
   
     /// This is called when there are updates on an existing track
@@ -88,7 +89,7 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
     ///   - track: the track which was added, removed or updated
     ///   - update: the triggered update type
     ///   - peer: the peer for which track was added, removed or updated
-    func on(track: HMSTrack, update: HMSSDK.HMSTrackUpdate, for peer: HMSSDK.HMSPeer)
+    func on(track: HMSTrack, update: HMSTrackUpdate, for peer: HMSPeer)
 
   
     /// This will be called when there is an error in the system
@@ -100,10 +101,21 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
     /// This is called when there is a new broadcast message from any other peer in the room
     /// This can be used to implement chat is the room
     /// - Parameter message: the received broadcast message
-    func on(message: HMSSDK.HMSMessage)
+    func on(message: HMSMessage)
 
   
-    func on(updated speakers: [HMSSDK.HMSSpeaker])
+    /// This is called every 1 second with list of active speakers
+    ///
+    /// ## A HMSSpeaker object contains -
+    ///    - HMSPeer: the peer who is speaking
+    ///    - trackID: the track identifier of HMSTrack which is emitting audio
+    ///    - level: a number within range 1-100 indicating the audio volume
+    ///
+    /// A peer who is not present in the list indicates that the peer is not speaking
+    ///
+    /// This can be used to highlight currently speaking peers in the room
+    /// - Parameter speakers: the list of speakers
+    func on(updated speakers: [HMSSpeaker])
 
     @objc func onReconnecting()
 
@@ -273,5 +285,34 @@ class HMSLocalAudioTrack : HMSAudioTrack {
 
   ```
 
+## 📨 Chat Messaging
+You can send a chat or any other kind of message from local peer to all remote peers in the room.
+
+To send a message first create an instance of `HMSMessage` object.
+
+Add the information to be sent in the `message` property of `HMSMessage`.
+
+Then use the `func send(message: HMSMessage)` function on instance of HMSSDK.
+
+When you(the local peer) receives a message from others(any remote peer), `func on(message: HMSMessage)` function of `HMSUpdateListener` is invoked.
+  
+```
+  // following is an example implementation of chat messaging
+
+  // to send a broadcast message
+  let broadcast = HMSMessage(sender: "peerID", // the peerID of local peer, can be empty
+                             time: "\(Date())", // the timestamp when message is being sent, can be empty
+                             type: "chat", // the type of message, you can set it to any arbitary string value & use it to filter on your Chat UI
+                             message: "my message") // the message information to be sent in string
+
+  hmsSDK.send(message: broadcast) // hmsSDK is an instance of `HMSSDK` object
+
+  // receiving messages
+  // the object conforming to `HMSUpdateListener` will be invoked with `on(message: HMSMessage)`, add your logic to update Chat UI within this listener
+  func on(message: HMSMessage) {
+      let messageReceived = message.message // extract message payload from `HMSMessage` object that is received
+      // update your Chat UI with the messageReceived
+  }
+```
   
  🏃‍♀️ Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
