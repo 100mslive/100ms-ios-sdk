@@ -99,7 +99,7 @@ final class LoginViewController: UIViewController {
     @IBAction private func startMeetingTapped(_ sender: UIButton) {
         showInputAlert()
     }
-
+    
     private func showInputAlert() {
 
         let title = "Join a Meeting"
@@ -117,7 +117,6 @@ final class LoginViewController: UIViewController {
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
-
             self?.handleActions(for: alertController)
         })
 

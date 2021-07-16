@@ -218,7 +218,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="avatarLabel" destination="w6D-tx-bL7" id="ekL-KC-qRr"/>
-                                            <outlet property="moreButton" destination="0rW-Vt-Pb1" id="kvN-eJ-NKL"/>
+                                            <outlet property="moreButton" destination="0rW-Vt-Pb1" id="5g5-zJ-7H8"/>
                                             <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
                                             <outlet property="nameLabel" destination="i5b-uY-ZDM" id="U3V-ov-dqn"/>
                                             <outlet property="stackView" destination="5DJ-Az-o0i" id="Ikz-3f-3nA"/>

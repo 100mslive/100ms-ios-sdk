@@ -50,6 +50,8 @@ final class MeetingViewModel: NSObject,
 
     var onMoreButtonTap: ((HMSRemotePeer, UIButton) -> Void)?
     
+    internal var updateLocalPeerTracks: (() -> Void)?
+    
     private(set) var interactor: HMSSDKInteractor?
 
     private weak var collectionView: UICollectionView?
@@ -237,7 +239,12 @@ final class MeetingViewModel: NSObject,
             cell.onMoreButtonTap = { [weak self] button in
                 self?.onMoreButtonTap?(remotePeer, button)
             }
-            cell.moreButton.isHidden = false
+            
+            if viewModel.videoTrack?.source == .screen || viewModel.videoTrack?.source == .plugin {
+                cell.moreButton.isHidden = true
+            } else {
+                cell.moreButton.isHidden = false
+            }
         } else {
             cell.onMoreButtonTap = nil
             cell.moreButton.isHidden = true
@@ -459,9 +466,13 @@ extension MeetingViewModel: HMSDataSourceDelegate {
         if let model = model, let cell = cellFor(model) {
             update(cell, for: model)
         }
-        applySnapshot()
+        
+        if model?.peer.peerID == interactor?.hmsSDK?.localPeer?.peerID {
+            updateLocalPeerTracks?()
+        }
         
         setMuteStatus()
+        applySnapshot()
     }
 
     func didUpdate(_ speakers: [HMSViewModel]) {

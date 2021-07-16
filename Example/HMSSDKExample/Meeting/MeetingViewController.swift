@@ -133,21 +133,42 @@ final class MeetingViewController: UIViewController {
         interactor.onRoleChange = { [weak self] request in
             self?.handle(roleChange: request)
         }
-
+        
+        viewModel.updateLocalPeerTracks = { [weak self] in
+            self?.setupButtonStates()
+        }
     }
     
     private func showPeerActionsMenu(for peer: HMSRemotePeer, on button: UIButton) {
         let title = "Select action"
-        let action = "Change role"
 
         let alertController = UIAlertController(title: title,
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
 
 
-        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
-            self?.showRoleChangePrompt(for: peer)
+        alertController.addAction(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
+            guard let peer = peer else { return }
+            self?.showRoleChangePrompt(for: peer, force: false)
         })
+        
+        alertController.addAction(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
+            guard let peer = peer else { return }
+            self?.showRoleChangePrompt(for: peer, force: true)
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Select high layer", style: .default) { [weak peer] _ in
+            peer?.remoteVideoTrack()?.layer = .high
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Select mid layer", style: .default) { [weak peer] _ in
+            peer?.remoteVideoTrack()?.layer = .mid
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Select low layer", style: .default) { [weak peer] _ in
+            peer?.remoteVideoTrack()?.layer = .low
+        })
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         if let popoverController = alertController.popoverPresentationController {
@@ -159,7 +180,7 @@ final class MeetingViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    private func showRoleChangePrompt(for peer: HMSRemotePeer) {
+    private func showRoleChangePrompt(for peer: HMSRemotePeer, force: Bool) {
         let title = "Role change request"
 
         let alertController = UIAlertController(title: title,
@@ -172,7 +193,7 @@ final class MeetingViewController: UIViewController {
             textField.text =  "teacher"
         }
 
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak alertController] _ in
             guard let roleName = alertController?.textFields?[0].text else {
@@ -182,8 +203,32 @@ final class MeetingViewController: UIViewController {
             let trimmedRoleName = roleName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             guard !trimmedRoleName.isEmpty else { return }
             
-            self?.interactor?.changeRole(for: peer, to: trimmedRoleName)
+            guard let currentRoleName = peer.role?.name.lowercased(), trimmedRoleName != currentRoleName else {
+                self?.showRoleIsSameError(for: peer, role: roleName)
+                return
+            }
+            
+            guard let targetRole = self?.interactor.roles?.first(where: { $0.name.lowercased() == trimmedRoleName }) else {
+                return
+            }
+            
+            self?.interactor?.changeRole(for: peer, to: targetRole, force: force)
         })
+
+        present(alertController, animated: true)
+    }
+    
+    private func showRoleIsSameError(for peer: HMSRemotePeer, role: String) {
+        let title = "Error"
+
+        let alertController = UIAlertController(title: title,
+                                                message: "\(peer.name) is already a '\(role)'",
+                                                preferredStyle: .alert)
+        
+         
+
+
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
 
         present(alertController, animated: true)
     }
@@ -404,15 +449,15 @@ final class MeetingViewController: UIViewController {
     
     private func handle(roleChange request: HMSRoleChangeRequest) {
         let title = "Do you want to change your role to: \(request.suggestedRole.name)"
-        let action = "Yes"
 
         let alertController = UIAlertController(title: title,
                                                 message: nil,
                                                 preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: "No", style: .cancel))
-        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
-            self?.interactor?.accept(cahngeRole: request)
+        alertController.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            self?.interactor?.accept(changeRole: request)
+            self?.setupButtonStates()
         })
 
         present(alertController, animated: true)

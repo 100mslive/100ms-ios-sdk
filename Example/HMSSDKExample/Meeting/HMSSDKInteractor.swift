@@ -20,6 +20,11 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var messages = [HMSMessage]()
     
     private var config: HMSConfig?
+    
+    var roles: [HMSRole]? {
+        hmsSDK?.roles
+    }
+
 
     // MARK: - Setup Stream
 
@@ -73,14 +78,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
         hmsSDK?.leave()
     }
     
-    func changeRole(for peer: HMSRemotePeer, to role: String) {
-        hmsSDK?.changeRole(for: peer, to: role)
+    func changeRole(for peer: HMSRemotePeer, to role: HMSRole, force: Bool = false) {
+        hmsSDK?.changeRole(for: peer, to: role, force: force)
     }
     
-    func accept(cahngeRole request: HMSRoleChangeRequest) {
+    func accept(changeRole request: HMSRoleChangeRequest) {
         hmsSDK?.accept(changeRole: request)
     }
-
+    
     // MARK: - HMSSDK Update Callbacks
 
     func on(join room: HMSRoom) {
@@ -97,9 +102,13 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
         switch update {
         case .peerJoined:
-            Utilities.showToast(message: "🙌 \(peer.name) joined! ")
+            Utilities.showToast(message: "🙌 \(peer.name) joined!")
         case .peerLeft:
             Utilities.showToast(message: "👋 \(peer.name) left!")
+        case .roleUpdated:
+            if let role = peer.role?.name {
+                Utilities.showToast(message: "🎉 \(peer.name)'s role updated to \(role)")
+            }
         default:
             print(#function, peer.name, update)
         }

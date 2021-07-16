@@ -12,8 +12,9 @@ import QuartzCore
 
 final class VideoCollectionViewCell: UICollectionViewCell {
 
-    weak var viewModel: HMSViewModel?
+    weak var viewModel: HMSViewModel? 
 
+    @IBOutlet weak var moreButton: UIButton!
     var onPinToggle: (() -> Void)?
     var onMuteToggle: (() -> Void)?
     
@@ -31,7 +32,6 @@ final class VideoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pinButton: UIButton!
 
     @IBOutlet weak var muteButton: UIButton!
-    @IBOutlet weak var moreButton: UIButton!
 
     @IBOutlet weak var videoView: HMSVideoView! {
         didSet {
