@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/HMSAnalyticsEventFactory.h</key>
 		<data>
-		D1SGwbe1U3poALOzN/w6kgltn8Y=
+		uEWLdhmfTHhYHGlyfDmsXPwS900=
 		</data>
 		<key>Headers/HMSAnalyticsService.h</key>
 		<data>
@@ -44,9 +44,9 @@
 		<data>
 		iA8VjX7uuyhjhQI9eN0MZoC+m8g=
 		</data>
-		<key>Headers/HMSNetworkQualityInfo.h</key>
+		<key>Headers/HMSRTCStatsInfo.h</key>
 		<data>
-		zz9DZwx2SjQVxtDQWxILxInZBWs=
+		gUG+SHwfhrg0DgY/h9HfxQSoxxY=
 		</data>
 		<key>Headers/HMSRemoteAudioTrack.h</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Headers/HMSRemoteVideoTrack.h</key>
 		<data>
-		HH4xWxMkB5k7yiPXmTOHzMg7F6M=
+		TfZR6eaI/0fb7aJkiHSye5h/STo=
 		</data>
 		<key>Headers/HMSSDK-Swift.h</key>
 		<data>
-		bq7tC/E8wGM8pyRitihZH7gqwqI=
+		gDD8DDNqSxBw3kbZvrDsf5IO0Rs=
 		</data>
 		<key>Headers/HMSSDK.h</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Headers/HMSTransport.h</key>
 		<data>
-		WuQJhWBViHJPNBlulnkSrzzO4pA=
+		uTasJxgn5AHKoBCfXf3z5XIqPhw=
 		</data>
 		<key>Headers/HMSUtility.h</key>
 		<data>
@@ -94,31 +94,31 @@
 		</data>
 		<key>Headers/HMSVideoView.h</key>
 		<data>
-		RnEzCwaEcVD8LFifPMtj9Zd1vKA=
+		41K1Wy3uqeMPqSPbdx37uwMcWOo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		+uUFkltLtEhuIdVRfF5p/DDXx50=
+		XwrQ+UGLeaMQYUHrxIXucB03y2M=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm.swiftsourceinfo</key>
 		<data>
-		kciW9x38ISXBrYc1ejGwtMC2oI8=
+		0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		MO+oWfcZmXtV5p9BhBtfilyhmis=
+		plyYNDBxUf/tNAEoTL2lLalFZyA=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		MO+oWfcZmXtV5p9BhBtfilyhmis=
+		plyYNDBxUf/tNAEoTL2lLalFZyA=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/Project/armv7-apple-ios.swiftsourceinfo</key>
 		<data>
-		kciW9x38ISXBrYc1ejGwtMC2oI8=
+		0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/Project/armv7.swiftsourceinfo</key>
 		<data>
-		kciW9x38ISXBrYc1ejGwtMC2oI8=
+		0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -126,11 +126,11 @@
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm.swiftinterface</key>
 		<data>
-		b3VdvdwWUyxqV5xQVuBT53pLmck=
+		5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm.swiftmodule</key>
 		<data>
-		G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+		J4kIRXre1Jn6UgcyLQUBNstG0uU=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -138,11 +138,11 @@
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		k9S7OqJPvYpRw2ATteyMSCiLWMw=
+		wkYtbmk96FoKYFa3s36OokCfu70=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		gT2fGVDIL5c5zyJPuYy5QjmZw84=
+		DvXUIZgXw18cgMAfznXJodv9z5M=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -150,11 +150,11 @@
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		k9S7OqJPvYpRw2ATteyMSCiLWMw=
+		wkYtbmk96FoKYFa3s36OokCfu70=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		gT2fGVDIL5c5zyJPuYy5QjmZw84=
+		DvXUIZgXw18cgMAfznXJodv9z5M=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7-apple-ios.swiftdoc</key>
 		<data>
@@ -162,11 +162,11 @@
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7-apple-ios.swiftinterface</key>
 		<data>
-		b3VdvdwWUyxqV5xQVuBT53pLmck=
+		5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<data>
-		G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+		J4kIRXre1Jn6UgcyLQUBNstG0uU=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7.swiftdoc</key>
 		<data>
@@ -174,11 +174,11 @@
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7.swiftinterface</key>
 		<data>
-		b3VdvdwWUyxqV5xQVuBT53pLmck=
+		5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 		</data>
 		<key>Modules/HMSSDK.swiftmodule/armv7.swiftmodule</key>
 		<data>
-		G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+		J4kIRXre1Jn6UgcyLQUBNstG0uU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -202,11 +202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			D1SGwbe1U3poALOzN/w6kgltn8Y=
+			uEWLdhmfTHhYHGlyfDmsXPwS900=
 			</data>
 			<key>hash2</key>
 			<data>
-			51Ww0t6/xvkfBWoAa4OgNxuJiPWWjnIban9evxz2h18=
+			ym6Aiq5UPxT0M4z4pu1EGS3FKBeUBQpETnkCDN9wv3c=
 			</data>
 		</dict>
 		<key>Headers/HMSAnalyticsService.h</key>
@@ -297,15 +297,15 @@
 			w/xzf1eW0LEhwGkgf3qLmzU3/6Mmqlr1bHLUp1Lehmc=
 			</data>
 		</dict>
-		<key>Headers/HMSNetworkQualityInfo.h</key>
+		<key>Headers/HMSRTCStatsInfo.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zz9DZwx2SjQVxtDQWxILxInZBWs=
+			gUG+SHwfhrg0DgY/h9HfxQSoxxY=
 			</data>
 			<key>hash2</key>
 			<data>
-			yVP2g8OonsdpH7rK2JS+IhmLiyr9LpNuD5I27mrIOA8=
+			yvZtZlSWepYMYQ+3jt+O3WzPBYol8/lwsww1+9AoVmc=
 			</data>
 		</dict>
 		<key>Headers/HMSRemoteAudioTrack.h</key>
@@ -323,22 +323,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HH4xWxMkB5k7yiPXmTOHzMg7F6M=
+			TfZR6eaI/0fb7aJkiHSye5h/STo=
 			</data>
 			<key>hash2</key>
 			<data>
-			IMwJBR0o9cBEZbmqgIqbRSZ1f4DSmhCVc24wpfZbBvs=
+			0WwtBlBva1n0LIbm8lcoDF62AZYNpH2l8q5sPWYHP84=
 			</data>
 		</dict>
 		<key>Headers/HMSSDK-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bq7tC/E8wGM8pyRitihZH7gqwqI=
+			gDD8DDNqSxBw3kbZvrDsf5IO0Rs=
 			</data>
 			<key>hash2</key>
 			<data>
-			ep/oapnQZ7I6cPJ2pLv9TZcjvxDlJdq/BY11kNxdcmw=
+			uxjXvCTPCLA106IFKCd2QAm1psdHzpreM0rFk/HflL4=
 			</data>
 		</dict>
 		<key>Headers/HMSSDK.h</key>
@@ -400,11 +400,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			WuQJhWBViHJPNBlulnkSrzzO4pA=
+			uTasJxgn5AHKoBCfXf3z5XIqPhw=
 			</data>
 			<key>hash2</key>
 			<data>
-			fQ3eWQyWQ1cnuYtJHecX3ZEtHJTDwYSgkX3PE1LTIPs=
+			W5HOaTcRdVjmbtF/uc24Fpo/G9sod3VKLNpzH5qA02k=
 			</data>
 		</dict>
 		<key>Headers/HMSUtility.h</key>
@@ -433,66 +433,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RnEzCwaEcVD8LFifPMtj9Zd1vKA=
+			41K1Wy3uqeMPqSPbdx37uwMcWOo=
 			</data>
 			<key>hash2</key>
 			<data>
-			mo95ED0VbJHOMevISDoRGK4A5EiPdo/fC/ycrtNfM7s=
+			+Zn0L6p1BHRdlVU1lElCRkMPAojpLlQLLKaECwGAUoQ=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kciW9x38ISXBrYc1ejGwtMC2oI8=
+			0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zV9cFSrUBiI/4kySCWrQ39uq1qWaB6vq18hB7wQwDdo=
+			JLpwVk9KICERF5O6tyLy92lpcrIrIutzsz+OuEuIOHA=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MO+oWfcZmXtV5p9BhBtfilyhmis=
+			plyYNDBxUf/tNAEoTL2lLalFZyA=
 			</data>
 			<key>hash2</key>
 			<data>
-			FkNnrrZWSTvtYQ7k+pvkrC9sQ95vUIm6pPp0bgsP+cE=
+			6VsERm4xUsbQDM+9iwCmoUMQagcJOiZP1TsxH70DXBM=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MO+oWfcZmXtV5p9BhBtfilyhmis=
+			plyYNDBxUf/tNAEoTL2lLalFZyA=
 			</data>
 			<key>hash2</key>
 			<data>
-			FkNnrrZWSTvtYQ7k+pvkrC9sQ95vUIm6pPp0bgsP+cE=
+			6VsERm4xUsbQDM+9iwCmoUMQagcJOiZP1TsxH70DXBM=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/Project/armv7-apple-ios.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kciW9x38ISXBrYc1ejGwtMC2oI8=
+			0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zV9cFSrUBiI/4kySCWrQ39uq1qWaB6vq18hB7wQwDdo=
+			JLpwVk9KICERF5O6tyLy92lpcrIrIutzsz+OuEuIOHA=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/Project/armv7.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kciW9x38ISXBrYc1ejGwtMC2oI8=
+			0T4r/yoHMYJ8cm9bmVfnI04WAR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			zV9cFSrUBiI/4kySCWrQ39uq1qWaB6vq18hB7wQwDdo=
+			JLpwVk9KICERF5O6tyLy92lpcrIrIutzsz+OuEuIOHA=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm.swiftdoc</key>
@@ -510,22 +510,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			b3VdvdwWUyxqV5xQVuBT53pLmck=
+			5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ln/BE1GXSEfY3GK8UbZwzc0/IsqYXH4VRyGCPFDMMIY=
+			XxeqkBcto5D5dHO7NBnmRtZN7KiXhEIgQUKklZukIVc=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+			J4kIRXre1Jn6UgcyLQUBNstG0uU=
 			</data>
 			<key>hash2</key>
 			<data>
-			saJumfLPWyJJaKX7FKiY/3zIHcPxe9nVuCtJGqJEkwA=
+			ZZF/+12xAfHLaHwNOlT2KADmijTB3Cki4xdREgicsig=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -543,22 +543,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			k9S7OqJPvYpRw2ATteyMSCiLWMw=
+			wkYtbmk96FoKYFa3s36OokCfu70=
 			</data>
 			<key>hash2</key>
 			<data>
-			kN61Xq3Bomq3eEbAASXhp7oX1XBY3DcYltMsVNdMm/o=
+			grgamcdw32xzjcE+ArZ+Fpa7qFAhlZCNxO3IXViq6p4=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gT2fGVDIL5c5zyJPuYy5QjmZw84=
+			DvXUIZgXw18cgMAfznXJodv9z5M=
 			</data>
 			<key>hash2</key>
 			<data>
-			HrTGFfx2k/QhKp1ag67a/Hi9aef8GZiFqGn8qqJXBwQ=
+			l93IFS9C1ukFweDyq/rlAkDqtD26bLM5w87qgpGQuR0=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm64.swiftdoc</key>
@@ -576,22 +576,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			k9S7OqJPvYpRw2ATteyMSCiLWMw=
+			wkYtbmk96FoKYFa3s36OokCfu70=
 			</data>
 			<key>hash2</key>
 			<data>
-			kN61Xq3Bomq3eEbAASXhp7oX1XBY3DcYltMsVNdMm/o=
+			grgamcdw32xzjcE+ArZ+Fpa7qFAhlZCNxO3IXViq6p4=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			gT2fGVDIL5c5zyJPuYy5QjmZw84=
+			DvXUIZgXw18cgMAfznXJodv9z5M=
 			</data>
 			<key>hash2</key>
 			<data>
-			HrTGFfx2k/QhKp1ag67a/Hi9aef8GZiFqGn8qqJXBwQ=
+			l93IFS9C1ukFweDyq/rlAkDqtD26bLM5w87qgpGQuR0=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/armv7-apple-ios.swiftdoc</key>
@@ -609,22 +609,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			b3VdvdwWUyxqV5xQVuBT53pLmck=
+			5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ln/BE1GXSEfY3GK8UbZwzc0/IsqYXH4VRyGCPFDMMIY=
+			XxeqkBcto5D5dHO7NBnmRtZN7KiXhEIgQUKklZukIVc=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+			J4kIRXre1Jn6UgcyLQUBNstG0uU=
 			</data>
 			<key>hash2</key>
 			<data>
-			saJumfLPWyJJaKX7FKiY/3zIHcPxe9nVuCtJGqJEkwA=
+			ZZF/+12xAfHLaHwNOlT2KADmijTB3Cki4xdREgicsig=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/armv7.swiftdoc</key>
@@ -642,22 +642,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			b3VdvdwWUyxqV5xQVuBT53pLmck=
+			5JXd9UpwT1e+8jMK9r/9cdFJ7U4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ln/BE1GXSEfY3GK8UbZwzc0/IsqYXH4VRyGCPFDMMIY=
+			XxeqkBcto5D5dHO7NBnmRtZN7KiXhEIgQUKklZukIVc=
 			</data>
 		</dict>
 		<key>Modules/HMSSDK.swiftmodule/armv7.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			G9dkSChTJLpTok1hJuxBuC6Cq1Q=
+			J4kIRXre1Jn6UgcyLQUBNstG0uU=
 			</data>
 			<key>hash2</key>
 			<data>
-			saJumfLPWyJJaKX7FKiY/3zIHcPxe9nVuCtJGqJEkwA=
+			ZZF/+12xAfHLaHwNOlT2KADmijTB3Cki4xdREgicsig=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

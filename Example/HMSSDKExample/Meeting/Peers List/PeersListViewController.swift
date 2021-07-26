@@ -14,10 +14,12 @@ final class PeersListViewController: UIViewController {
     @IBOutlet private weak var participantsTitle: UIButton!
 
     @IBOutlet private  weak var table: UITableView!
-
+    
     internal var interactor: HMSSDKInteractor?
 
     internal var speakers = [HMSViewModel]()
+    
+    var onSettingsButtonTap: ((HMSPeer, UIButton) -> Void)?
 
     typealias DataSource = UITableViewDiffableDataSource<PeersSection, HMSPeer>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PeersSection, HMSPeer>
@@ -82,6 +84,13 @@ final class PeersListViewController: UIViewController {
     func update(_ cell: PeersListTableViewCell, for peer: HMSPeer) {
         cell.peer = peer
         cell.nameLabel.text = peer.name
+        if let role = peer.role?.name {
+            cell.roleLabel.text = role
+        }
+    
+        cell.onSettingsButtonTap = { [weak self] button in
+            self?.onSettingsButtonTap?(peer, button)
+        }
 
         updatePeersCount()
 

@@ -21,7 +21,6 @@
 		EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE56261E297F002DC12E /* ChatViewController.swift */; };
 		EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */; };
 		EC8CEE80261E297F002DC12E /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE5A261E297F002DC12E /* Chat.storyboard */; };
-		EC8CEE81261E297F002DC12E /* BadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5C261E297F002DC12E /* BadgeButton.swift */; };
 		EC8CEE82261E297F002DC12E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */; };
 		EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5F261E297F002DC12E /* RoomService.swift */; };
 		EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */; };
@@ -68,7 +67,6 @@
 		EC8CEE56261E297F002DC12E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		EC8CEE5B261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
-		EC8CEE5C261E297F002DC12E /* BadgeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeButton.swift; sourceTree = "<group>"; };
 		EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		EC8CEE5F261E297F002DC12E /* RoomService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
 		EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 				EC8CEE56261E297F002DC12E /* ChatViewController.swift */,
 				EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */,
 				EC8CEE5A261E297F002DC12E /* Chat.storyboard */,
-				EC8CEE5C261E297F002DC12E /* BadgeButton.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -430,7 +427,6 @@
 				EC8CEE8A261E297F002DC12E /* Utilities.swift in Sources */,
 				EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */,
 				EC8CEE78261E297F002DC12E /* HMSSDKInteractor.swift in Sources */,
-				EC8CEE81261E297F002DC12E /* BadgeButton.swift in Sources */,
 				EC8CEE8D261E297F002DC12E /* AppDelegate.swift in Sources */,
 				EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */,
 				EC8CEE87261E297F002DC12E /* Constants.swift in Sources */,

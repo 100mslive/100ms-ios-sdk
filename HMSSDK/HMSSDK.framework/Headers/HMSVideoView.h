@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HMSVideoTrack;
 
 @interface HMSVideoView : UIView
+@property (nonatomic) BOOL disableAutoSimulcastLayerSelect;
 
 - (void)setVideoTrack:(HMSVideoTrack * __nullable)track;
 

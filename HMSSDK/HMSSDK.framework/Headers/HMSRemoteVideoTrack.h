@@ -12,7 +12,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface HMSSimulcastLayerDefinition: NSObject
+@property (nonatomic) HMSSimulcastLayer layer;
+@property (nonatomic) CGSize resolution;
+
+- (instancetype)initWithLayer:(HMSSimulcastLayer)layer resolution:(CGSize)resolution;
+@end
+
+
 @interface HMSRemoteVideoTrack : HMSVideoTrack
+@property (nonatomic, nullable) NSArray<HMSSimulcastLayerDefinition *> *layerDefinitions;
 @property (nonatomic) HMSSimulcastLayer layer;
 
 - (BOOL)isPlaybackAllowed;

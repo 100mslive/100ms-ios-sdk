@@ -156,6 +156,7 @@ extension HMSSection : Swift.Hashable {
   case tracksErrorCodecChangeNotPermitted = 3007
   case tracksErrorAudioVideoSubsystemFailure = 3008
   case tracksErrorAudioShouldBeSilenced = 3009
+  case tracksErrorMicCaptureFailed = 3011
   case webrtcErrorCreateOfferFailed = 4001
   case webrtcErrorCreateAnswerFailed = 4002
   case webrtcErrorSetLocalDescriptionFailed = 4003
@@ -264,8 +265,8 @@ extension HMSSection : Swift.Hashable {
 }
 @objcMembers public class HMSSimulcastLayerSettingsPolicy : Swift.Codable {
   @objc final public let rid: Swift.String
-  @objc final public let scaleResolutionDownBy: Swift.Double
-  @objc final public let maxBitrate: Swift.Int, maxFramerate: Swift.Int
+  final public let scaleResolutionDownBy: Swift.Double?
+  final public let maxBitrate: Swift.Int?, maxFramerate: Swift.Int?
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
@@ -273,18 +274,25 @@ extension HMSSection : Swift.Hashable {
 @objcMembers public class HMSSubscribeSettings : Swift.Codable {
   @objc final public let subscribeToRoles: [Swift.String]?
   @objc final public let maxSubsBitRate: Swift.Int
+  final public let subscribeDegradation: HMSSDK.HMSSubscribeDegradationPolicy?
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class HMSSubscribeDegradationPolicy : Swift.Codable {
+  public var packetLossThreshold: Swift.Int?, degradeGracePeriodSeconds: Swift.Int?, recoverGracePeriodSeconds: Swift.Int?
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
 }
 @objcMembers public class HMSPermissions : Swift.Codable {
-  @objc final public let endRoom: Swift.Bool
-  @objc final public let removeOthers: Swift.Bool
-  @objc final public let stopPresentation: Swift.Bool
-  @objc final public let muteAll: Swift.Bool
-  @objc final public let askToUnmute: Swift.Bool
-  @objc final public let muteSelective: Swift.Bool
-  @objc final public let changeRole: Swift.Bool
+  final public let endRoom: Swift.Bool?
+  final public let removeOthers: Swift.Bool?
+  final public let stopPresentation: Swift.Bool?
+  final public let muteAll: Swift.Bool?
+  final public let askToUnmute: Swift.Bool?
+  final public let muteSelective: Swift.Bool?
+  final public let changeRole: Swift.Bool?
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws

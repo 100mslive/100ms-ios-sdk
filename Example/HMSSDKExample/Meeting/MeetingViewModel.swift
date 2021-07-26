@@ -444,17 +444,33 @@ final class MeetingViewModel: NSObject,
 
         shouldPlayAudio = isMuted
         
-        setMuteStatus()
+        setMuteStatus(nil)
 
         NotificationCenter.default.post(name: Constants.muteALL, object: nil)
     }
 
-    func setMuteStatus() {
-        for model in dataSource.allModels {
-            if let peer = model.peer as? HMSRemotePeer,
-               let audio = peer.remoteAudioTrack(),
-               audio.isPlaybackAllowed() != shouldPlayAudio {
-                audio.setPlaybackAllowed(shouldPlayAudio)
+    func setMuteStatus(_ model: HMSViewModel?) {
+        
+        let models: [HMSViewModel]
+        if let model = model {
+            models = [model]
+        } else {
+            models = dataSource.allModels
+        }
+        
+        for model in models {
+            if let peer = model.peer as? HMSRemotePeer {
+                if let audio = peer.remoteAudioTrack(),
+                   audio.isPlaybackAllowed() != shouldPlayAudio {
+                    audio.setPlaybackAllowed(shouldPlayAudio)
+                }
+                if let auxTracks = model.peer.auxiliaryTracks {
+                    for track in auxTracks {
+                        if let audio = track as? HMSRemoteAudioTrack {
+                            audio.setPlaybackAllowed(shouldPlayAudio)
+                        }
+                    }
+                }
             }
         }
     }
@@ -471,7 +487,7 @@ extension MeetingViewModel: HMSDataSourceDelegate {
             updateLocalPeerTracks?()
         }
         
-        setMuteStatus()
+        setMuteStatus(model)
         applySnapshot()
     }
 

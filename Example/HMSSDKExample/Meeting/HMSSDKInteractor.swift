@@ -24,6 +24,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
     var roles: [HMSRole]? {
         hmsSDK?.roles
     }
+    
+    var currentRole: HMSRole? {
+        hmsSDK?.localPeer?.role
+    }
 
 
     // MARK: - Setup Stream
@@ -127,6 +131,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
         messages.append(message)
         NotificationCenter.default.post(name: Constants.messageReceived, object: nil)
+        Utilities.showToast(message: "💬 \(message.sender) sent you a message")
     }
 
     func on(updated speakers: [HMSSpeaker]) {

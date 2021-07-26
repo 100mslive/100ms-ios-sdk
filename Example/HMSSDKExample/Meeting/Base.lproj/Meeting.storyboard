@@ -273,7 +273,7 @@
                                             <action selector="micTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="bth-WE-Rka"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg" customClass="BadgeButton" customModule="HMSSDKExample" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg">
                                         <rect key="frame" x="191.66666666666666" y="0.0" width="83.666666666666657" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
@@ -370,7 +370,6 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="badgeButton" destination="Cxf-bq-abg" id="1mm-tg-yyk"/>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
                         <outlet property="loadingIcon" destination="oQb-0c-kLb" id="wkn-qX-R21"/>
                         <outlet property="publishAudioButton" destination="hKQ-0T-b7l" id="ubh-Yl-SjS"/>

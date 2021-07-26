@@ -9,7 +9,7 @@ import UIKit
 import HMSSDK
 import MediaPlayer
 
-final class MeetingViewController: UIViewController {
+final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     // MARK: - View Properties
 
@@ -31,8 +31,6 @@ final class MeetingViewController: UIViewController {
     @IBOutlet private weak var speakerButton: UIButton!
 
     @IBOutlet private weak var collectionView: UICollectionView!
-
-    @IBOutlet private weak var badgeButton: BadgeButton!
 
     @IBOutlet private weak var publishVideoButton: UIButton!
     @IBOutlet private weak var publishAudioButton: UIButton!
@@ -112,8 +110,6 @@ final class MeetingViewController: UIViewController {
         UIMenu(title: "Change Layout", image: nil, identifier: nil, options: [], children: menuItems)
     }
 
-    private var chatBadgeCount = 0
-
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
@@ -140,75 +136,77 @@ final class MeetingViewController: UIViewController {
     }
     
     private func showPeerActionsMenu(for peer: HMSRemotePeer, on button: UIButton) {
-        let title = "Select action"
 
-        let alertController = UIAlertController(title: title,
+        var actions = [UIAlertAction]()
+        
+        if canRoleChange() {
+            actions.append(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
+                guard let peer = peer else { return }
+                self?.showRoleChangePrompt(for: peer, force: false)
+            })
+            actions.append(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
+                guard let peer = peer else { return }
+                self?.showRoleChangePrompt(for: peer, force: true)
+            })
+        }
+        
+        let layerNameMap: [HMSSimulcastLayer : String] = [ .high : "high", .mid : "mid", .low : "low" ]
+        peer.remoteVideoTrack()?.layerDefinitions?.forEach {
+            let layer = $0.layer
+            guard let layerName = layerNameMap[layer] else { return }
+            actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak peer] _ in
+                peer?.remoteVideoTrack()?.layer = layer
+            })
+        }
+        
+        guard actions.count > 0 else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: "Select action",
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
-
-
-        alertController.addAction(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
-            guard let peer = peer else { return }
-            self?.showRoleChangePrompt(for: peer, force: false)
-        })
         
-        alertController.addAction(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
-            guard let peer = peer else { return }
-            self?.showRoleChangePrompt(for: peer, force: true)
-        })
-        
-        alertController.addAction(UIAlertAction(title: "Select high layer", style: .default) { [weak peer] _ in
-            peer?.remoteVideoTrack()?.layer = .high
-        })
-        
-        alertController.addAction(UIAlertAction(title: "Select mid layer", style: .default) { [weak peer] _ in
-            peer?.remoteVideoTrack()?.layer = .mid
-        })
-        
-        alertController.addAction(UIAlertAction(title: "Select low layer", style: .default) { [weak peer] _ in
-            peer?.remoteVideoTrack()?.layer = .low
-        })
+        actions.forEach { alertController.addAction($0) }
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         if let popoverController = alertController.popoverPresentationController {
             alertController.modalPresentationStyle = .popover
-            popoverController.sourceView = button //to set the source of your alert
+            popoverController.sourceView = button
             popoverController.sourceRect = button.bounds
-            popoverController.permittedArrowDirections = [] //to hide the arrow of any particular direction
+            popoverController.permittedArrowDirections = []
         }
         present(alertController, animated: true)
+    }
+    
+    private func canRoleChange() -> Bool {
+        interactor?.currentRole?.permissions.changeRole ?? false
     }
     
     private func showRoleChangePrompt(for peer: HMSRemotePeer, force: Bool) {
         let title = "Role change request"
 
         let alertController = UIAlertController(title: title,
-                                                message: nil,
+                                                message: "\n\n\n\n\n\n\n\n\n",
                                                 preferredStyle: .alert)
-        
-        alertController.addTextField { textField in
-            textField.placeholder = "Enter role"
-            textField.clearButtonMode = .always
-            textField.text =  "teacher"
-        }
 
-        
+        let pickerView = UIPickerView(frame:
+            CGRect(x: 0, y: 50, width: 270, height: 162))
+        pickerView.dataSource = self
+        pickerView.delegate = self
+
+        alertController.view.addSubview(pickerView)
+ 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak alertController] _ in
-            guard let roleName = alertController?.textFields?[0].text else {
+        alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak pickerView] _ in
+            guard let rowIndex = pickerView?.selectedRow(inComponent: 0),
+                  let targetRole = self?.interactor.roles?[rowIndex] else {
                 return
             }
             
-            let trimmedRoleName = roleName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            guard !trimmedRoleName.isEmpty else { return }
-            
-            guard let currentRoleName = peer.role?.name.lowercased(), trimmedRoleName != currentRoleName else {
-                self?.showRoleIsSameError(for: peer, role: roleName)
-                return
-            }
-            
-            guard let targetRole = self?.interactor.roles?.first(where: { $0.name.lowercased() == trimmedRoleName }) else {
+            guard let currentRoleName = peer.role?.name, currentRoleName != targetRole.name else {
+                self?.showRoleIsSameError(for: peer, role: peer.role?.name ?? "")
                 return
             }
             
@@ -231,6 +229,22 @@ final class MeetingViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
 
         present(alertController, animated: true)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        interactor.roles?.count ?? 0
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let role = interactor.roles?[row] else {
+            return ""
+        }
+        
+        return role.name
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -287,14 +301,7 @@ final class MeetingViewController: UIViewController {
     }
 
     private func observeBroadcast() {
-        _ = NotificationCenter.default.addObserver(forName: Constants.messageReceived,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] _ in
-            if let strongSelf = self {
-                strongSelf.chatBadgeCount += 1
-                strongSelf.badgeButton.badge = "\(strongSelf.chatBadgeCount)"
-            }
-        }
+        
 
         _ = NotificationCenter.default.addObserver(forName: Constants.joinedRoom,
                                                    object: nil,
@@ -367,6 +374,12 @@ final class MeetingViewController: UIViewController {
 
         viewController.interactor = viewModel.interactor
         viewController.speakers = viewModel.speakers
+        viewController.onSettingsButtonTap = { [weak self] peer, button in
+            guard let remotePeer = peer as? HMSRemotePeer else { return }
+            self?.dismiss(animated: true, completion: {
+                self?.showPeerActionsMenu(for: remotePeer, on: button)
+            })   
+        }
 
         present(viewController, animated: true)
     }
@@ -406,11 +419,7 @@ final class MeetingViewController: UIViewController {
         }
 
         viewController.interactor = viewModel.interactor
-
-        chatBadgeCount = 0
-
-        badgeButton.badge = nil
-
+        
         present(viewController, animated: true)
     }
 
@@ -436,14 +445,16 @@ final class MeetingViewController: UIViewController {
         
         if let videoTrack = localPeer.videoTrack as? HMSLocalVideoTrack {
             publishVideoButton.isSelected = videoTrack.isMute()
+            publishVideoButton.isHidden = false
         } else {
-            publishVideoButton.isSelected = true
+            publishVideoButton.isHidden = true
         }
         
         if let audioTrack = localPeer.audioTrack as? HMSLocalAudioTrack {
             publishAudioButton.isSelected = audioTrack.isMute()
+            publishAudioButton.isHidden = false
         } else {
-            publishAudioButton.isSelected = true
+            publishAudioButton.isHidden = true
         }
     }
     

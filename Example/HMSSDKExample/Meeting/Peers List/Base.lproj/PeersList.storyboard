@@ -45,7 +45,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaU-wR-p5M">
-                                                    <rect key="frame" x="20" y="-0.5" width="290" height="44.5"/>
+                                                    <rect key="frame" x="20" y="-0.5" width="35.5" height="44.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -70,6 +70,26 @@
                                                         <action selector="videoButtonTapped:" destination="0r4-27-usk" eventType="touchUpInside" id="xMn-PH-0rR"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLE-a7-pjD">
+                                                    <rect key="frame" x="270" y="-0.5" width="40" height="44.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="ncD-IR-qPT"/>
+                                                        <constraint firstAttribute="width" constant="40" id="yOg-Rv-NAW"/>
+                                                    </constraints>
+                                                    <state key="normal" image="gearIcon">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        </preferredSymbolConfiguration>
+                                                    </state>
+                                                    <state key="selected" image="video.slash.fill" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        </preferredSymbolConfiguration>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="settingsButtonTapped:" destination="0r4-27-usk" eventType="touchUpInside" id="r7L-Bs-zv0"/>
+                                                    </connections>
+                                                </button>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="speaker.slash.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eZJ-md-Amb">
                                                     <rect key="frame" x="362" y="7.5" width="32" height="29"/>
                                                     <constraints>
@@ -78,20 +98,33 @@
                                                     </constraints>
                                                     <imageReference key="image" image="speaker.wave.2.fill" catalog="system" symbolScale="medium"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3r-PA-VaC">
+                                                    <rect key="frame" x="227" y="-0.5" width="42" height="44.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="eZJ-md-Amb" secondAttribute="trailing" constant="20" symbolic="YES" id="3wL-VI-L5d"/>
+                                                <constraint firstItem="R3r-PA-VaC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MaU-wR-p5M" secondAttribute="trailing" id="7Xv-ja-FGB"/>
+                                                <constraint firstItem="WLE-a7-pjD" firstAttribute="leading" secondItem="R3r-PA-VaC" secondAttribute="trailing" constant="1" id="A2C-dU-4dc"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="EsN-mu-GAL"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="leading" secondItem="Emk-gI-Ft5" secondAttribute="leading" constant="20" symbolic="YES" id="I2R-yP-QaO"/>
+                                                <constraint firstItem="ebu-V5-JwX" firstAttribute="leading" secondItem="WLE-a7-pjD" secondAttribute="trailing" id="Mhm-td-lgW"/>
+                                                <constraint firstItem="WLE-a7-pjD" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="Sej-PI-xbm"/>
                                                 <constraint firstItem="MaU-wR-p5M" firstAttribute="top" secondItem="ebu-V5-JwX" secondAttribute="top" id="XdA-5n-KXu"/>
                                                 <constraint firstItem="ebu-V5-JwX" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="a3z-4M-Y2f"/>
+                                                <constraint firstItem="R3r-PA-VaC" firstAttribute="top" secondItem="ebu-V5-JwX" secondAttribute="top" id="hBq-84-YkG"/>
+                                                <constraint firstItem="R3r-PA-VaC" firstAttribute="bottom" secondItem="ebu-V5-JwX" secondAttribute="bottom" id="j4J-gY-Kpe"/>
                                                 <constraint firstItem="eZJ-md-Amb" firstAttribute="leading" secondItem="ebu-V5-JwX" secondAttribute="trailing" constant="4" id="nXO-Dc-qui"/>
                                                 <constraint firstItem="eZJ-md-Amb" firstAttribute="centerY" secondItem="Emk-gI-Ft5" secondAttribute="centerY" id="qbt-PQ-EIQ"/>
-                                                <constraint firstItem="ebu-V5-JwX" firstAttribute="leading" secondItem="MaU-wR-p5M" secondAttribute="trailing" id="v9Y-ql-Rzp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="MaU-wR-p5M" id="I1B-xZ-N4g"/>
+                                            <outlet property="roleLabel" destination="R3r-PA-VaC" id="aXW-fo-cdr"/>
+                                            <outlet property="settingsButton" destination="WLE-a7-pjD" id="lRt-uP-VPT"/>
                                             <outlet property="speakingImageView" destination="eZJ-md-Amb" id="TSd-co-qvw"/>
                                             <outlet property="videoButton" destination="ebu-V5-JwX" id="3H1-vn-lNp"/>
                                         </connections>
@@ -139,6 +172,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gearIcon" width="24" height="24"/>
         <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
         <image name="speaker.slash.fill" catalog="system" width="124" height="128"/>
         <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
