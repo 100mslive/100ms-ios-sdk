@@ -365,14 +365,12 @@ SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
 
 
 
+
 typedef SWIFT_ENUM(NSInteger, HMSPeerUpdate, open) {
   HMSPeerUpdatePeerJoined = 0,
   HMSPeerUpdatePeerLeft = 1,
-  HMSPeerUpdatePeerKnocked = 2,
-  HMSPeerUpdateAudioToggled = 3,
-  HMSPeerUpdateVideoToggled = 4,
-  HMSPeerUpdateRoleUpdated = 5,
-  HMSPeerUpdateDefaultUpdate = 6,
+  HMSPeerUpdateRoleUpdated = 2,
+  HMSPeerUpdateDefaultUpdate = 3,
 };
 
 @class HMSRoom;
@@ -459,8 +457,6 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
 /// set the analytical level
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
-/// set the logging level
-@property (nonatomic) enum HMSLogLevel logLevel;
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -941,14 +937,12 @@ SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
 
 
 
+
 typedef SWIFT_ENUM(NSInteger, HMSPeerUpdate, open) {
   HMSPeerUpdatePeerJoined = 0,
   HMSPeerUpdatePeerLeft = 1,
-  HMSPeerUpdatePeerKnocked = 2,
-  HMSPeerUpdateAudioToggled = 3,
-  HMSPeerUpdateVideoToggled = 4,
-  HMSPeerUpdateRoleUpdated = 5,
-  HMSPeerUpdateDefaultUpdate = 6,
+  HMSPeerUpdateRoleUpdated = 2,
+  HMSPeerUpdateDefaultUpdate = 3,
 };
 
 @class HMSRoom;
@@ -1035,8 +1029,6 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
 /// set the analytical level
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
-/// set the logging level
-@property (nonatomic) enum HMSLogLevel logLevel;
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1521,14 +1513,12 @@ SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
 
 
 
+
 typedef SWIFT_ENUM(NSInteger, HMSPeerUpdate, open) {
   HMSPeerUpdatePeerJoined = 0,
   HMSPeerUpdatePeerLeft = 1,
-  HMSPeerUpdatePeerKnocked = 2,
-  HMSPeerUpdateAudioToggled = 3,
-  HMSPeerUpdateVideoToggled = 4,
-  HMSPeerUpdateRoleUpdated = 5,
-  HMSPeerUpdateDefaultUpdate = 6,
+  HMSPeerUpdateRoleUpdated = 2,
+  HMSPeerUpdateDefaultUpdate = 3,
 };
 
 @class HMSRoom;
@@ -1615,8 +1605,6 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
 /// set the analytical level
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
-/// set the logging level
-@property (nonatomic) enum HMSLogLevel logLevel;
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2097,14 +2085,12 @@ SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
 
 
 
+
 typedef SWIFT_ENUM(NSInteger, HMSPeerUpdate, open) {
   HMSPeerUpdatePeerJoined = 0,
   HMSPeerUpdatePeerLeft = 1,
-  HMSPeerUpdatePeerKnocked = 2,
-  HMSPeerUpdateAudioToggled = 3,
-  HMSPeerUpdateVideoToggled = 4,
-  HMSPeerUpdateRoleUpdated = 5,
-  HMSPeerUpdateDefaultUpdate = 6,
+  HMSPeerUpdateRoleUpdated = 2,
+  HMSPeerUpdateDefaultUpdate = 3,
 };
 
 @class HMSRoom;
@@ -2191,8 +2177,6 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
 /// set the analytical level
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
-/// set the logging level
-@property (nonatomic) enum HMSLogLevel logLevel;
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");

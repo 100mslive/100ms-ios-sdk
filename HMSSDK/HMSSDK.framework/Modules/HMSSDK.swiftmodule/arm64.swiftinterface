@@ -380,10 +380,6 @@ extension HMSSection : Swift.Hashable {
     @objc get
     @objc set
   }
-  @objc public var logLevel: HMSSDK.HMSLogLevel {
-    @objc get
-    @objc set
-  }
   @objc weak public var logger: HMSSDK.HMSLogger? {
     @objc get
     @objc set
@@ -397,9 +393,6 @@ extension HMSSection : Swift.Hashable {
 @objc public enum HMSPeerUpdate : Swift.Int, Swift.CustomStringConvertible {
   case peerJoined
   case peerLeft
-  case peerKnocked
-  case audioToggled
-  case videoToggled
   case roleUpdated
   case defaultUpdate
   public var description: Swift.String {

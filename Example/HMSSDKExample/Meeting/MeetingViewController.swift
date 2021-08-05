@@ -150,13 +150,15 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             })
         }
         
-        let layerNameMap: [HMSSimulcastLayer : String] = [ .high : "high", .mid : "mid", .low : "low" ]
-        peer.remoteVideoTrack()?.layerDefinitions?.forEach {
-            let layer = $0.layer
-            guard let layerName = layerNameMap[layer] else { return }
-            actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak peer] _ in
-                peer?.remoteVideoTrack()?.layer = layer
-            })
+        if viewModel.mode != .audioOnly {
+            let layerNameMap: [HMSSimulcastLayer : String] = [ .high : "high", .mid : "mid", .low : "low" ]
+            peer.remoteVideoTrack()?.layerDefinitions?.forEach {
+                let layer = $0.layer
+                guard let layerName = layerNameMap[layer] else { return }
+                actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak peer] _ in
+                    peer?.remoteVideoTrack()?.layer = layer
+                })
+            }
         }
         
         guard actions.count > 0 else {

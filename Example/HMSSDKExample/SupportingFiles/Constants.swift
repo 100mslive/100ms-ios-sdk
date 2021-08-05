@@ -1,27 +1,21 @@
 //
 //  Constants.swift
-//  HMSVideo_Example
+//  HMSSDKExample
 //
-//  Created by Yogesh Singh on 26/02/21.
+//  Created by Yogesh Singh on 04/08/21.
 //  Copyright © 2021 100ms. All rights reserved.
 //
 
 import Foundation
 
+/// No Modifications required here. Ensure you have entered correct Token endpoint in the TokenEndpoint.swift file
 struct Constants {
-
-    // MARK: - HMSSDK Interactor
-    // MARK: - Add your Token Endpoint
     
-    /// only enter your token endpoint, no need to edit any other fields in this file
-    static let tokenEndpoint = <#InsertTokenEndpointHere#>
-
-    
-    // MARK: - No Modifications required 👇
+    // MARK: Room Setup
     
     static let tokenQuery = "api/token"
     
-    static let getTokenURL = tokenEndpoint + tokenQuery
+    static let getTokenURL = TokenEndpoint.tokenEndpoint + tokenQuery
 
     static let defaultRoomID = ""
 

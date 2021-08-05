@@ -483,7 +483,7 @@ extension MeetingViewModel: HMSDataSourceDelegate {
             update(cell, for: model)
         }
         
-        if model?.peer.peerID == interactor?.hmsSDK?.localPeer?.peerID {
+        if model?.peer.isLocal == true || model == nil {
             updateLocalPeerTracks?()
         }
         

@@ -27,11 +27,17 @@ typedef NS_ENUM(NSUInteger, HMSConnectionRole) {
 };
 
 @interface HMSUtility : NSObject
-+ (NSString *)codecStringFromCodec:(HMSCodec)codec;
-+ (HMSCodec)codecFromString:(NSString *)string;
 
-+ (HMSTrackSource)sourceFromString:(NSString *)string;
-+ (NSString *)sourceStringFromSource:(HMSTrackSource)source;
++ (NSString *)codecStringFrom:(HMSCodec)codec;
+
++ (HMSCodec)codecFrom:(NSString *)string;
+
++ (HMSTrackSource)sourceFrom:(NSString *)string;
+
++ (NSString *)sourceStringFrom:(HMSTrackSource)source;
+
++ (NSString *)kindStringFrom:(HMSTrackKind)kind;
+
 @end
 
 @interface NSDate(HMSConvenience)
