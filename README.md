@@ -6,7 +6,7 @@
 ![Cocoapods](https://img.shields.io/cocoapods/v/HMSSDK)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-yellow)
 [![License](https://img.shields.io/cocoapods/l/HMSSDK.svg?style=flat)](http://cocoapods.org/pods/HMSSDK)
-[![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/)
+[![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/ios/v2/foundation/Basics)
 [![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](mailto:founders@100ms.live)
@@ -23,17 +23,13 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
 
 ## 🚂 Setup Guide
   
-  1. Host your token generation service [following this guide](https://docs.100ms.live/v2/server-side/Generate-client-side-token)
-
-  2. Get Access Keys: Sign up on https://dashboard.100ms.live/register & visit the Developer tab to get your access credentials
-
-  3. Generate a server-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-server-side-token
-
-  4. Create a room, follow the steps described here - https://docs.100ms.live/v2/server-side/Create-room
-
-  5. Generate a client-side token, follow the steps described here - https://docs.100ms.live/v2/server-side/Generate-client-side-token
+  1. Sign up on https://dashboard.100ms.live/register & visit the Developer tab to access your credentials.
   
-  6. Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
+  2. Get familiarized with [Tokens & Security here](https://docs.100ms.live/ios/v2/foundation/Security-and-tokens)
+
+  3. Complete the steps in [Auth Token Quick Start Guide](https://docs.100ms.live/ios/v2/guides/Token)
+  
+  4. Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
   ```
   // Podfile
   
@@ -44,6 +40,7 @@ To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Exampl
   end
   ```
 
+  Follow the [iOS Quick Start Guide as mentioned here](https://docs.100ms.live/ios/v2/guides/Quickstart).
   
 ## 🧐 Key Concepts
 
