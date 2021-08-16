@@ -1,7 +1,8 @@
-<p align="center" >
+
   <a href="https://100ms.live/">
-  <img src="https://github.com/100mslive/100ms-ios-sdk/blob/main/100ms-logo.png" title="100ms logo" float=left>
-</p>
+<img src="https://github.com/100mslive/100ms-ios-sdk/blob/updateReadMe/100ms.gif" height=188/> 
+<img src="https://github.com/100mslive/100ms-ios-sdk/blob/main/100ms-logo.png" title="100ms logo" float=right height=188>
+
 
 ![Cocoapods](https://img.shields.io/cocoapods/v/HMSSDK)
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-yellow)
@@ -10,8 +11,6 @@
 [![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
 [![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](mailto:founders@100ms.live)
-
-<img src="https://github.com/100mslive/100ms-ios-sdk/blob/updateReadMe/100ms.gif" width="64" height="64" />
 
 # 🎉 100ms SDK ＆ Sample App 🚀
 
