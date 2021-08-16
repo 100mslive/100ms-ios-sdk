@@ -7,15 +7,17 @@
 ![iOS](https://img.shields.io/badge/iOS-10.0%2B-yellow)
 [![License](https://img.shields.io/cocoapods/l/HMSSDK.svg?style=flat)](http://cocoapods.org/pods/HMSSDK)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/ios/v2/foundation/Basics)
-[![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
+[![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](mailto:founders@100ms.live)
 
 # 🎉 100ms SDK ＆ Sample App 🚀
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
 
-To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+👀 To see a Example App implementation of 100ms SDK, checkout the [ReadMe in Example folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+
+📲 Download the 100ms fully featured Sample iOS app here: https://testflight.apple.com/join/dhUSE7N8
   
 ## ☝️ Pre-requisites
 - Xcode 12 or higher
@@ -311,5 +313,116 @@ When you(the local peer) receives a message from others(any remote peer), `func 
       // update your Chat UI with the messageReceived
   }
 ```
+
+## 🤳 Preview
+
+Preview screen is a frequently used UX element which allows users to check if their input devices are working properly and set the initial state (mute/unmute) of their audio and video tracks before joining. 100ms SDKs provide an easy-to-use API to back this feature. Additionally, the SDK will try to establish a connection to 100ms server to verify there are no network issues and that the auth credentials are valid so that if everything is in order the subsequent room join is instant.
+
+To invoke this API call
+
+```swift
+hmsSDK.preview(config: config, delegate: previewDelegate)
+```
+
+You would need the same config object that you would pass to [join API](Join). The `previewDelegate` is an object conforming to `HMSPreviewListener` protocol that has two callbacks:
+
+```swift
+func onPreview(room: HMSRoom, localTracks: [HMSTrack])
+```
+
+Which is called when SDK has passed all its preflight checks and established the connection to 100ms server. This will pass an array of local tracks that you can display to the user (see [Render Video](Render-Video) and [Mute](Mute) sections for more details).
+
+If however there was some error related to getting the input sources or some preflight check has failed 
+
+```swift
+func on(error: HMSError)
+```
+
+Delegate callback will be fired with the HMSError instance which you can use to find what went wrong.
+
+## ⚙️ Change Role
+
+Role is a powerful concept that takes a lot of complexity away in handling permissions and supporting features like breakout rooms. [Learn more about roles here.](../foundation/templates-and-roles)
+
+Each `HMSPeer` instance has a `role` property which returns an `HMSRole` instance. You can use this property to do following:
+
+1. Check what this role is allowed to publish. I.e can it send video (and at what resolution)? can it send audio? can it  share screen? Who can this role subscribe to? (I.e student can only see the teacher's video) This is can be discovered by checking `publishSettings` and `subscribeSettings` properties
+2. Check what actions this role can perform. i.e can it change someone else's current role, end meeting, remove someone from the room. This is can be discovered by checking `permissions` property
+
+In certain scenarios you may want to change someone's role. Imagine an audio room with 2 roles "speaker" and "listener". Only someone with a "speaker" role can publish audio to the room while "listener" can only subscribe. Now at some point "speaker" may decide to nominate some "listener" to become a "speaker". This is where the `changeRole` API comes in.
+
+To invoke the api you will need 2 things. An instance of `HMSPeer` of the peer who's role you want to change and the `HMSRole` instance for the target role.  All the peers that are in the current room are accessible via `peers` property of `HMSRoom` instance that you can get via `room` property of `HMSSDK` instance after successful room join. A list of all available roles in the current room can be accessed via `roles` property of `HMSSDK` 
+
+Once you have both you can invoke
+
+```swift
+ hmsSDK.changeRole(for: targetPeer, role: targetRole)
+```
+
+If the change role succeeds you will get a 
+
+```swift
+func on(peer: HMSPeer, update: HMSPeerUpdate)
+```
+
+delegate callback with the the same peer you passed as targetPeer and a `roleUpdated` update type.
+
+`changeRole` has an optional `force` parameter which is `false` by default meaning that `changeRole` is basically a polite request: "Would you like to change you role from listener to speaker?" which can be ignored by the other party. The way it works is the other party will first receive a 
+
+```swift
+func on(roleChangeRequest: HMSRoleChangeRequest)
+```
+
+delegate callback. At which point app can choose to show a prompt to the user asking for permission. If the user accepts, app should call 
+
+```swift
+hmsSDK.accept(changeRole: roleChangeRequest)
+```
+
+which completes the `changeRole` loop. Both parties will receive a `roleUpdated` callback so that they both can do necessary UI updates. Now the user actually becomes a speaker and the audio publishing will start automatically. 
+
+Now lets imagine the newly nominated speaker is not behaving nicely and we want to move him back to listener without a prompt. This is where the `force` parameter comes in. When it is set to `true` the other party will not receive a confirmation `roleChangeRequest` but instead will straight away receive a new set of updated permissions and stop publishing. `roleUpdated` callback will still be fired so that the app can update the user's UI state.
   
+
+## ❌ Error Handling
+
+When you make an API call to access an HMS SDK, the SDK may return error codes. ErrorCodes are returned when a problem that cannot be recovered without app intervention has occurred.
+
+These are returned as `HMSError` in the `func on(error: HMSError)` callback of the `HMSUpdateListner`.
+
+Following are the different error codes that are returned by the SDK . Before returning any error code, SDK retries the errors\(whichever is possible\).
+
+| **Error Code** | **Cause of the error**                                 | **Action to be taken**                                                                                     |
+| :------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------- |
+| **1003**       | Websocket disconnected - Happens due to network issues | Mention user to check their network connection or try again after some time.                                |
+| **2002**       | Invalid Endpoint URL                                   | Check the endpoint provided while calling `join` on `HMSSDK`.                                               |
+| **2003**       | Endpoint is not reachable                              | Mention user to check their network connection or try again after some time.                                |
+| **2004**       | Token is not in proper JWT format                      | The token passed while calling `join` is not in correct format. Retry getting a new token.                  |
+| **3001**       | Cant Access Capture Device                             | Ask user to check permission granted to audio/video capture devices.                                        |
+| **3002**       | Capture Device is not Available                        | Ask user to check if the audio/video capture device is connected or not.                                    |
+| **3003**       | Capture device is in use by some other application     | Show notification to user mentioning that the capturing device is used by some other application currently. |
+| **3008**       | Browser has throw an autoplay exception                | Show notification to user mentioning that the browser blocked autoplay |
+| **4001**       | WebRTC error                                           | Some webRTC error has occured. Need more logs to debug.                                                     |
+| **4002**       | WebRTC error                                           | Some webRTC error has occured. Need more logs to debug.                                                     |
+| **4003**       | WebRTC error                                           | Some webRTC error has occured. Need more logs to debug.                                                     |
+| **4004**       | WebRTC error                                           | Some webRTC error has occured. Need more logs to debug.                                                     |
+| **4005**       | ICE Connection Failed due to network issue             | Mention user to check their network connection or try again after some time.                                |
+| **5001**       | Trying to join a room which is already joined          | Trying to join an already joined room.                                                                     |
+| **6002**       | webRTC Error: Error while renegotiating                | Please try again.                                                                                           |
+| **40101**      | Token Error: Invalid Access Key                        | Access Key provided in the token is wrong.                                                                  |
+| **40102**      | Token Error: Invalid Room Id                           | RoomID provided in the token is wrong.                                                                      |
+| **40103**      | Token Error: Invalid Auth Id                           | AuthID provided in the token is wrong.                                                                      |
+| **40104**      | Token Error: Invalid App Id                            | App ID provided in the token is wrong.                                                                      |
+| **40105**      | Token Error: Invalid Customer Id                       | Customer Id provided in the token is wrong.                                                                 |
+| **40107**      | Token Error: Invalid User Id                           | User ID provided in the token is wrong.                                                                     |
+| **40108**      | Token Error: Invalid Role                              | The role provided in the token is wrong.                                                                    |
+| **40109**      | Token Error: Bad JWT Token                             | Bad JWT Token.                                                                                              |
+| **40100**      | Generic Error                                          | Need to debug further with logs.                                                                            |
+| **40001**      | Invalid Room                                           | Room ID provided while fetching the token is an invalid room.                                               |
+| **40002**      | Room Mismatched with Token                               | Room ID provided while fetching the token does not match.                                                   |
+| **40004**      | Peer already joined                                    | Peer who is trying to join has already joined the room.                                                     |
+| **41001**      | Peer is gone                                           | The peer is no more present in the room.                                                                    |
+
  🏃‍♀️ Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+
+📲 Download the 100ms fully featured Sample iOS app here: https://testflight.apple.com/join/dhUSE7N8
