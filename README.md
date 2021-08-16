@@ -423,6 +423,6 @@ Following are the different error codes that are returned by the SDK . Before re
 | **40004**      | Peer already joined                                    | Peer who is trying to join has already joined the room.                                                     |
 | **41001**      | Peer is gone                                           | The peer is no more present in the room.                                                                    |
 
- 🏃‍♀️ Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
+👀 Checkout the sample implementation in the [Example app folder](https://github.com/100mslive/100ms-ios-sdk/tree/main/Example).
 
 📲 Download the 100ms fully featured Sample iOS app here: https://testflight.apple.com/join/dhUSE7N8
