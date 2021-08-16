@@ -11,6 +11,8 @@
 [![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](mailto:founders@100ms.live)
 
+<img src="https://github.com/100mslive/100ms-ios-sdk/blob/updateReadMe/100ms.gif" width="64" height="64" />
+
 # 🎉 100ms SDK ＆ Sample App 🚀
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
