@@ -4,6 +4,8 @@ This guide walks you through the Example app implementation showcasing how 100ms
 
 For the SDK integration guide, checkout the [ReadMe here](https://github.com/100mslive/100ms-ios-sdk/).
 
+📲 Download this 100ms fully featured Sample iOS app here: https://testflight.apple.com/join/dhUSE7N8
+
 ## ☝️ Pre-requistes
 - Xcode 12 or higher
 - Support for iOS 10 or higher
