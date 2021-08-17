@@ -13,5 +13,4 @@ struct TokenEndpoint {
     /// Add your Token Endpoint here 👇
     /// only enter your token endpoint, you don't have to edit anything else in Constants.swift file
     static let tokenEndpoint = <#InsertTokenEndpointHere#>
-
 }

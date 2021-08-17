@@ -215,6 +215,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC6HMSSDK26HMSChangeTrackStateRequest")
+@interface HMSChangeTrackStateRequest : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSString;
 @class NSNumber;
 
@@ -297,6 +303,7 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeGenericErrorPeerMetadataMissing = 6007,
 };
 
+@class HMSRole;
 @class HMSAudioTrack;
 @class HMSVideoTrack;
 @class HMSTrack;
@@ -307,6 +314,7 @@ SWIFT_CLASS("_TtC6HMSSDK7HMSPeer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull peerID;
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) BOOL isLocal;
+@property (nonatomic, strong) HMSRole * _Nullable role;
 @property (nonatomic, readonly, copy) NSString * _Nullable customerUserID;
 @property (nonatomic, copy) NSString * _Nullable customerDescription;
 @property (nonatomic, strong) HMSAudioTrack * _Nullable audioTrack;
@@ -338,22 +346,38 @@ SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
+@class HMSMessageRecipient;
+@class NSDate;
 
-/// A local peer can send any message/data to all remote peers in the room
 SWIFT_CLASS("_TtC6HMSSDK10HMSMessage")
 @interface HMSMessage : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull sender;
-/// peerID, optional, default is nil in which case broadcast will be sent to all
-@property (nonatomic, readonly, copy) NSString * _Nullable receiver;
-@property (nonatomic, readonly, copy) NSString * _Nonnull time;
-/// default is Chat Type
+@property (nonatomic, readonly, copy) NSString * _Nonnull message;
 @property (nonatomic, readonly, copy) NSString * _Nonnull type;
-/// string
-@property (nonatomic, readonly, copy) NSString * _Nullable message;
-- (nonnull instancetype)initWithSender:(NSString * _Nonnull)sender receiver:(NSString * _Nullable)receiver time:(NSString * _Nonnull)time type:(NSString * _Nonnull)type message:(NSString * _Nonnull)message OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) HMSPeer * _Nullable sender;
+@property (nonatomic, strong) HMSMessageRecipient * _Nonnull recipient;
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type peerRecipient:(HMSPeer * _Nonnull)peerRecipient OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type rolesRecipient:(NSArray<HMSRole *> * _Nonnull)rolesRecipient OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+enum HMSMessageRecipientType : NSInteger;
+
+SWIFT_CLASS("_TtC6HMSSDK19HMSMessageRecipient")
+@interface HMSMessageRecipient : NSObject
+@property (nonatomic, readonly) enum HMSMessageRecipientType type;
+@property (nonatomic, readonly, strong) HMSPeer * _Nullable peerRecipient;
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nullable rolesRecipient;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+typedef SWIFT_ENUM(NSInteger, HMSMessageRecipientType, open) {
+  HMSMessageRecipientTypeBroadcast = 0,
+  HMSMessageRecipientTypePeer = 1,
+  HMSMessageRecipientTypeRoles = 2,
+};
 
 
 SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
@@ -391,6 +415,22 @@ SWIFT_CLASS("_TtC6HMSSDK13HMSRemotePeer")
 @end
 
 
+SWIFT_CLASS("_TtC6HMSSDK30HMSRemovedFromRoomNotification")
+@interface HMSRemovedFromRoomNotification : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC6HMSSDK7HMSRole")
+@interface HMSRole : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) NSInteger priority;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable generalPermissions;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable internalPlugins;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable externalPlugins;
+@end
+
+
 SWIFT_CLASS("_TtC6HMSSDK20HMSRoleChangeRequest")
 @interface HMSRoleChangeRequest : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -425,27 +465,6 @@ typedef SWIFT_ENUM(NSInteger, HMSRoomUpdate, open) {
 /// HMSSDK has other methods which the client app can use to get more info about the Room, Peer and Tracks
 SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @interface HMSSDK : NSObject
-/// To join a room created, clients need to create a HMSConfig instance and use that instance to call <code>join</code> method of HMSSDK
-/// Use the HMSConfig and HMSUpdateListener instances to call <code>join</code> method on the instance of HMSSDK.
-/// Once Join succeeds, all the callbacks keep coming on every change in the room and the app can react accordingly
-/// \param config the config object instance which contains joining information
-///
-/// \param delegate the update listener object which will receive all callbacks
-///
-- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
-/// Call the <code>leave</code> method on the HMSSDK instance to leave a room
-- (void)leave;
-- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
-/// Returns the local peer, which contains the local tracks
-@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
-/// Returns all remote peers in the room
-@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
-/// Returns the room which was joined
-@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
-- (void)sendWithMessage:(HMSMessage * _Nonnull)message;
-- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request;
 /// this will instantiate an HMSSDK object
 /// \param block pass a block with different settings as required
 ///
@@ -453,10 +472,110 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 /// returns:
 /// an instance of HMSSDK object
 + (HMSSDK * _Nonnull)buildWithBlock:(void (^ _Nullable)(HMSSDK * _Nonnull))block SWIFT_WARN_UNUSED_RESULT;
-/// to set a track settings different from default
+/// Begin a preview so that the local peer’s audio and video can be displayed to them before they join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks.
+///
+- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
+/// Join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks,
+///
+- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Call the <code>leave</code> method on the HMSSDK instance to leave the current room.
+- (void)leave;
+/// Returns the local peer, which contains the local tracks.
+@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
+/// Returns all remote peers in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
+/// Returns all roles in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nonnull roles;
+/// Returns the room which was joined.
+@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
+/// Sends a message to everyone in the room.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendBroadcastMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a message to the specified roles defined. All peers that belong to the specified roles will receive the message.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param roles The list of roles to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendGroupMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message roles:(NSArray<HMSRole *> * _Nonnull)roles completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a direct message to the specified peer only.
+/// \param type The type of message.
+///
+/// \param message Content of the message.
+///
+/// \param peer The peer to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendDirectMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message peer:(HMSPeer * _Nonnull)peer completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Requests a change of role for specified peer.
+/// \param peer The peer whose role should be changed.
+///
+/// \param role The target role.
+///
+/// \param force False if the peer should be prompted to accept the new role. true if their role should be changed without a prompt.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Call to accept the role change request sent to the current peer.
+/// Once this method is called, the peer’s role will be changed to the requested one.
+/// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// To change the mute status of a remote HMSTrack.
+/// \param remoteTrack The HMSTrack whose mute status needs to be changed.
+///
+/// \param mute True if the track needs to be muted, false otherwise.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeTrackStateFor:(HMSTrack * _Nonnull)remoteTrack mute:(BOOL)mute completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Removes the specified peer from the current room.
+/// \param peer The peer to remove
+///
+/// \param reason The reason for removing can be passed on to the peer.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)removePeer:(HMSPeer * _Nonnull)peer reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// End the room and make all participants leave.
+/// \param lock Whether rejoining the room should be disabled till the room is unlocked.
+///
+/// \param reason The reason for ending the room can be passed on to other peers.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)endRoomWithLock:(BOOL)lock reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Adds another listener of SDK updates
+/// \param delegate the update listener object which will receive all callbacks
+///
+- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Removes the listener of SDK updates
+/// \param delegate the update listener to remove
+///
+- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Use to override track settings coming from role policy
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
-/// set the analytical level
+/// Sets the verbosity of analytics events
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
+/// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -533,15 +652,23 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param roleChangeRequest the request for role change info
 ///
 - (void)roleChangeRequest:(HMSRoleChangeRequest * _Nonnull)roleChangeRequest;
+/// This is called when a change track state request arrives
+/// \param changeTrackStateRequest the request for changing track state
+///
+- (void)changeTrackStateRequest:(HMSChangeTrackStateRequest * _Nonnull)changeTrackStateRequest;
+/// This is called when someone removes the local peer for the current room
+/// \param notification the notification containing reason for removing and the initiating peer
+///
+- (void)removedFromRoom:(HMSRemovedFromRoomNotification * _Nonnull)notification;
 @required
 /// This is called every 1 second with list of active speakers
 /// <h2>A HMSSpeaker object contains -</h2>
 /// <ul>
 ///   <li>
-///     HMSPeer: the peer who is speaking
+///     peer: the peer who is speaking
 ///   </li>
 ///   <li>
-///     trackID: the track identifier which is emitting audio
+///     track: the track which is emitting audio
 ///   </li>
 ///   <li>
 ///     level: a number within range 1-100 indicating the audio volume
@@ -552,7 +679,9 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param speakers the list of speakers
 ///
 - (void)onUpdatedSpeakers:(NSArray<HMSSpeaker *> * _Nonnull)speakers;
+/// This is called when SDK detects a network issue and is trying to recover
 - (void)onReconnecting;
+/// This is called when SDK successfully recovered from a network issue
 - (void)onReconnected;
 @end
 
@@ -787,6 +916,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC6HMSSDK26HMSChangeTrackStateRequest")
+@interface HMSChangeTrackStateRequest : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSString;
 @class NSNumber;
 
@@ -869,6 +1004,7 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeGenericErrorPeerMetadataMissing = 6007,
 };
 
+@class HMSRole;
 @class HMSAudioTrack;
 @class HMSVideoTrack;
 @class HMSTrack;
@@ -879,6 +1015,7 @@ SWIFT_CLASS("_TtC6HMSSDK7HMSPeer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull peerID;
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) BOOL isLocal;
+@property (nonatomic, strong) HMSRole * _Nullable role;
 @property (nonatomic, readonly, copy) NSString * _Nullable customerUserID;
 @property (nonatomic, copy) NSString * _Nullable customerDescription;
 @property (nonatomic, strong) HMSAudioTrack * _Nullable audioTrack;
@@ -910,22 +1047,38 @@ SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
+@class HMSMessageRecipient;
+@class NSDate;
 
-/// A local peer can send any message/data to all remote peers in the room
 SWIFT_CLASS("_TtC6HMSSDK10HMSMessage")
 @interface HMSMessage : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull sender;
-/// peerID, optional, default is nil in which case broadcast will be sent to all
-@property (nonatomic, readonly, copy) NSString * _Nullable receiver;
-@property (nonatomic, readonly, copy) NSString * _Nonnull time;
-/// default is Chat Type
+@property (nonatomic, readonly, copy) NSString * _Nonnull message;
 @property (nonatomic, readonly, copy) NSString * _Nonnull type;
-/// string
-@property (nonatomic, readonly, copy) NSString * _Nullable message;
-- (nonnull instancetype)initWithSender:(NSString * _Nonnull)sender receiver:(NSString * _Nullable)receiver time:(NSString * _Nonnull)time type:(NSString * _Nonnull)type message:(NSString * _Nonnull)message OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) HMSPeer * _Nullable sender;
+@property (nonatomic, strong) HMSMessageRecipient * _Nonnull recipient;
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type peerRecipient:(HMSPeer * _Nonnull)peerRecipient OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type rolesRecipient:(NSArray<HMSRole *> * _Nonnull)rolesRecipient OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+enum HMSMessageRecipientType : NSInteger;
+
+SWIFT_CLASS("_TtC6HMSSDK19HMSMessageRecipient")
+@interface HMSMessageRecipient : NSObject
+@property (nonatomic, readonly) enum HMSMessageRecipientType type;
+@property (nonatomic, readonly, strong) HMSPeer * _Nullable peerRecipient;
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nullable rolesRecipient;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+typedef SWIFT_ENUM(NSInteger, HMSMessageRecipientType, open) {
+  HMSMessageRecipientTypeBroadcast = 0,
+  HMSMessageRecipientTypePeer = 1,
+  HMSMessageRecipientTypeRoles = 2,
+};
 
 
 SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
@@ -963,6 +1116,22 @@ SWIFT_CLASS("_TtC6HMSSDK13HMSRemotePeer")
 @end
 
 
+SWIFT_CLASS("_TtC6HMSSDK30HMSRemovedFromRoomNotification")
+@interface HMSRemovedFromRoomNotification : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC6HMSSDK7HMSRole")
+@interface HMSRole : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) NSInteger priority;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable generalPermissions;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable internalPlugins;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable externalPlugins;
+@end
+
+
 SWIFT_CLASS("_TtC6HMSSDK20HMSRoleChangeRequest")
 @interface HMSRoleChangeRequest : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -997,27 +1166,6 @@ typedef SWIFT_ENUM(NSInteger, HMSRoomUpdate, open) {
 /// HMSSDK has other methods which the client app can use to get more info about the Room, Peer and Tracks
 SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @interface HMSSDK : NSObject
-/// To join a room created, clients need to create a HMSConfig instance and use that instance to call <code>join</code> method of HMSSDK
-/// Use the HMSConfig and HMSUpdateListener instances to call <code>join</code> method on the instance of HMSSDK.
-/// Once Join succeeds, all the callbacks keep coming on every change in the room and the app can react accordingly
-/// \param config the config object instance which contains joining information
-///
-/// \param delegate the update listener object which will receive all callbacks
-///
-- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
-/// Call the <code>leave</code> method on the HMSSDK instance to leave a room
-- (void)leave;
-- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
-/// Returns the local peer, which contains the local tracks
-@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
-/// Returns all remote peers in the room
-@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
-/// Returns the room which was joined
-@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
-- (void)sendWithMessage:(HMSMessage * _Nonnull)message;
-- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request;
 /// this will instantiate an HMSSDK object
 /// \param block pass a block with different settings as required
 ///
@@ -1025,10 +1173,110 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 /// returns:
 /// an instance of HMSSDK object
 + (HMSSDK * _Nonnull)buildWithBlock:(void (^ _Nullable)(HMSSDK * _Nonnull))block SWIFT_WARN_UNUSED_RESULT;
-/// to set a track settings different from default
+/// Begin a preview so that the local peer’s audio and video can be displayed to them before they join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks.
+///
+- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
+/// Join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks,
+///
+- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Call the <code>leave</code> method on the HMSSDK instance to leave the current room.
+- (void)leave;
+/// Returns the local peer, which contains the local tracks.
+@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
+/// Returns all remote peers in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
+/// Returns all roles in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nonnull roles;
+/// Returns the room which was joined.
+@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
+/// Sends a message to everyone in the room.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendBroadcastMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a message to the specified roles defined. All peers that belong to the specified roles will receive the message.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param roles The list of roles to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendGroupMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message roles:(NSArray<HMSRole *> * _Nonnull)roles completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a direct message to the specified peer only.
+/// \param type The type of message.
+///
+/// \param message Content of the message.
+///
+/// \param peer The peer to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendDirectMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message peer:(HMSPeer * _Nonnull)peer completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Requests a change of role for specified peer.
+/// \param peer The peer whose role should be changed.
+///
+/// \param role The target role.
+///
+/// \param force False if the peer should be prompted to accept the new role. true if their role should be changed without a prompt.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Call to accept the role change request sent to the current peer.
+/// Once this method is called, the peer’s role will be changed to the requested one.
+/// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// To change the mute status of a remote HMSTrack.
+/// \param remoteTrack The HMSTrack whose mute status needs to be changed.
+///
+/// \param mute True if the track needs to be muted, false otherwise.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeTrackStateFor:(HMSTrack * _Nonnull)remoteTrack mute:(BOOL)mute completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Removes the specified peer from the current room.
+/// \param peer The peer to remove
+///
+/// \param reason The reason for removing can be passed on to the peer.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)removePeer:(HMSPeer * _Nonnull)peer reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// End the room and make all participants leave.
+/// \param lock Whether rejoining the room should be disabled till the room is unlocked.
+///
+/// \param reason The reason for ending the room can be passed on to other peers.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)endRoomWithLock:(BOOL)lock reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Adds another listener of SDK updates
+/// \param delegate the update listener object which will receive all callbacks
+///
+- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Removes the listener of SDK updates
+/// \param delegate the update listener to remove
+///
+- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Use to override track settings coming from role policy
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
-/// set the analytical level
+/// Sets the verbosity of analytics events
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
+/// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1105,15 +1353,23 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param roleChangeRequest the request for role change info
 ///
 - (void)roleChangeRequest:(HMSRoleChangeRequest * _Nonnull)roleChangeRequest;
+/// This is called when a change track state request arrives
+/// \param changeTrackStateRequest the request for changing track state
+///
+- (void)changeTrackStateRequest:(HMSChangeTrackStateRequest * _Nonnull)changeTrackStateRequest;
+/// This is called when someone removes the local peer for the current room
+/// \param notification the notification containing reason for removing and the initiating peer
+///
+- (void)removedFromRoom:(HMSRemovedFromRoomNotification * _Nonnull)notification;
 @required
 /// This is called every 1 second with list of active speakers
 /// <h2>A HMSSpeaker object contains -</h2>
 /// <ul>
 ///   <li>
-///     HMSPeer: the peer who is speaking
+///     peer: the peer who is speaking
 ///   </li>
 ///   <li>
-///     trackID: the track identifier which is emitting audio
+///     track: the track which is emitting audio
 ///   </li>
 ///   <li>
 ///     level: a number within range 1-100 indicating the audio volume
@@ -1124,7 +1380,9 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param speakers the list of speakers
 ///
 - (void)onUpdatedSpeakers:(NSArray<HMSSpeaker *> * _Nonnull)speakers;
+/// This is called when SDK detects a network issue and is trying to recover
 - (void)onReconnecting;
+/// This is called when SDK successfully recovered from a network issue
 - (void)onReconnected;
 @end
 
@@ -1363,6 +1621,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC6HMSSDK26HMSChangeTrackStateRequest")
+@interface HMSChangeTrackStateRequest : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSString;
 @class NSNumber;
 
@@ -1445,6 +1709,7 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeGenericErrorPeerMetadataMissing = 6007,
 };
 
+@class HMSRole;
 @class HMSAudioTrack;
 @class HMSVideoTrack;
 @class HMSTrack;
@@ -1455,6 +1720,7 @@ SWIFT_CLASS("_TtC6HMSSDK7HMSPeer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull peerID;
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) BOOL isLocal;
+@property (nonatomic, strong) HMSRole * _Nullable role;
 @property (nonatomic, readonly, copy) NSString * _Nullable customerUserID;
 @property (nonatomic, copy) NSString * _Nullable customerDescription;
 @property (nonatomic, strong) HMSAudioTrack * _Nullable audioTrack;
@@ -1486,22 +1752,38 @@ SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
+@class HMSMessageRecipient;
+@class NSDate;
 
-/// A local peer can send any message/data to all remote peers in the room
 SWIFT_CLASS("_TtC6HMSSDK10HMSMessage")
 @interface HMSMessage : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull sender;
-/// peerID, optional, default is nil in which case broadcast will be sent to all
-@property (nonatomic, readonly, copy) NSString * _Nullable receiver;
-@property (nonatomic, readonly, copy) NSString * _Nonnull time;
-/// default is Chat Type
+@property (nonatomic, readonly, copy) NSString * _Nonnull message;
 @property (nonatomic, readonly, copy) NSString * _Nonnull type;
-/// string
-@property (nonatomic, readonly, copy) NSString * _Nullable message;
-- (nonnull instancetype)initWithSender:(NSString * _Nonnull)sender receiver:(NSString * _Nullable)receiver time:(NSString * _Nonnull)time type:(NSString * _Nonnull)type message:(NSString * _Nonnull)message OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) HMSPeer * _Nullable sender;
+@property (nonatomic, strong) HMSMessageRecipient * _Nonnull recipient;
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type peerRecipient:(HMSPeer * _Nonnull)peerRecipient OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type rolesRecipient:(NSArray<HMSRole *> * _Nonnull)rolesRecipient OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+enum HMSMessageRecipientType : NSInteger;
+
+SWIFT_CLASS("_TtC6HMSSDK19HMSMessageRecipient")
+@interface HMSMessageRecipient : NSObject
+@property (nonatomic, readonly) enum HMSMessageRecipientType type;
+@property (nonatomic, readonly, strong) HMSPeer * _Nullable peerRecipient;
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nullable rolesRecipient;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+typedef SWIFT_ENUM(NSInteger, HMSMessageRecipientType, open) {
+  HMSMessageRecipientTypeBroadcast = 0,
+  HMSMessageRecipientTypePeer = 1,
+  HMSMessageRecipientTypeRoles = 2,
+};
 
 
 SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
@@ -1539,6 +1821,22 @@ SWIFT_CLASS("_TtC6HMSSDK13HMSRemotePeer")
 @end
 
 
+SWIFT_CLASS("_TtC6HMSSDK30HMSRemovedFromRoomNotification")
+@interface HMSRemovedFromRoomNotification : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC6HMSSDK7HMSRole")
+@interface HMSRole : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) NSInteger priority;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable generalPermissions;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable internalPlugins;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable externalPlugins;
+@end
+
+
 SWIFT_CLASS("_TtC6HMSSDK20HMSRoleChangeRequest")
 @interface HMSRoleChangeRequest : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -1573,27 +1871,6 @@ typedef SWIFT_ENUM(NSInteger, HMSRoomUpdate, open) {
 /// HMSSDK has other methods which the client app can use to get more info about the Room, Peer and Tracks
 SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @interface HMSSDK : NSObject
-/// To join a room created, clients need to create a HMSConfig instance and use that instance to call <code>join</code> method of HMSSDK
-/// Use the HMSConfig and HMSUpdateListener instances to call <code>join</code> method on the instance of HMSSDK.
-/// Once Join succeeds, all the callbacks keep coming on every change in the room and the app can react accordingly
-/// \param config the config object instance which contains joining information
-///
-/// \param delegate the update listener object which will receive all callbacks
-///
-- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
-/// Call the <code>leave</code> method on the HMSSDK instance to leave a room
-- (void)leave;
-- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
-/// Returns the local peer, which contains the local tracks
-@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
-/// Returns all remote peers in the room
-@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
-/// Returns the room which was joined
-@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
-- (void)sendWithMessage:(HMSMessage * _Nonnull)message;
-- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request;
 /// this will instantiate an HMSSDK object
 /// \param block pass a block with different settings as required
 ///
@@ -1601,10 +1878,110 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 /// returns:
 /// an instance of HMSSDK object
 + (HMSSDK * _Nonnull)buildWithBlock:(void (^ _Nullable)(HMSSDK * _Nonnull))block SWIFT_WARN_UNUSED_RESULT;
-/// to set a track settings different from default
+/// Begin a preview so that the local peer’s audio and video can be displayed to them before they join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks.
+///
+- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
+/// Join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks,
+///
+- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Call the <code>leave</code> method on the HMSSDK instance to leave the current room.
+- (void)leave;
+/// Returns the local peer, which contains the local tracks.
+@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
+/// Returns all remote peers in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
+/// Returns all roles in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nonnull roles;
+/// Returns the room which was joined.
+@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
+/// Sends a message to everyone in the room.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendBroadcastMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a message to the specified roles defined. All peers that belong to the specified roles will receive the message.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param roles The list of roles to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendGroupMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message roles:(NSArray<HMSRole *> * _Nonnull)roles completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a direct message to the specified peer only.
+/// \param type The type of message.
+///
+/// \param message Content of the message.
+///
+/// \param peer The peer to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendDirectMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message peer:(HMSPeer * _Nonnull)peer completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Requests a change of role for specified peer.
+/// \param peer The peer whose role should be changed.
+///
+/// \param role The target role.
+///
+/// \param force False if the peer should be prompted to accept the new role. true if their role should be changed without a prompt.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Call to accept the role change request sent to the current peer.
+/// Once this method is called, the peer’s role will be changed to the requested one.
+/// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// To change the mute status of a remote HMSTrack.
+/// \param remoteTrack The HMSTrack whose mute status needs to be changed.
+///
+/// \param mute True if the track needs to be muted, false otherwise.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeTrackStateFor:(HMSTrack * _Nonnull)remoteTrack mute:(BOOL)mute completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Removes the specified peer from the current room.
+/// \param peer The peer to remove
+///
+/// \param reason The reason for removing can be passed on to the peer.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)removePeer:(HMSPeer * _Nonnull)peer reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// End the room and make all participants leave.
+/// \param lock Whether rejoining the room should be disabled till the room is unlocked.
+///
+/// \param reason The reason for ending the room can be passed on to other peers.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)endRoomWithLock:(BOOL)lock reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Adds another listener of SDK updates
+/// \param delegate the update listener object which will receive all callbacks
+///
+- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Removes the listener of SDK updates
+/// \param delegate the update listener to remove
+///
+- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Use to override track settings coming from role policy
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
-/// set the analytical level
+/// Sets the verbosity of analytics events
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
+/// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -1681,15 +2058,23 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param roleChangeRequest the request for role change info
 ///
 - (void)roleChangeRequest:(HMSRoleChangeRequest * _Nonnull)roleChangeRequest;
+/// This is called when a change track state request arrives
+/// \param changeTrackStateRequest the request for changing track state
+///
+- (void)changeTrackStateRequest:(HMSChangeTrackStateRequest * _Nonnull)changeTrackStateRequest;
+/// This is called when someone removes the local peer for the current room
+/// \param notification the notification containing reason for removing and the initiating peer
+///
+- (void)removedFromRoom:(HMSRemovedFromRoomNotification * _Nonnull)notification;
 @required
 /// This is called every 1 second with list of active speakers
 /// <h2>A HMSSpeaker object contains -</h2>
 /// <ul>
 ///   <li>
-///     HMSPeer: the peer who is speaking
+///     peer: the peer who is speaking
 ///   </li>
 ///   <li>
-///     trackID: the track identifier which is emitting audio
+///     track: the track which is emitting audio
 ///   </li>
 ///   <li>
 ///     level: a number within range 1-100 indicating the audio volume
@@ -1700,7 +2085,9 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param speakers the list of speakers
 ///
 - (void)onUpdatedSpeakers:(NSArray<HMSSpeaker *> * _Nonnull)speakers;
+/// This is called when SDK detects a network issue and is trying to recover
 - (void)onReconnecting;
+/// This is called when SDK successfully recovered from a network issue
 - (void)onReconnected;
 @end
 
@@ -1935,6 +2322,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+
+SWIFT_CLASS("_TtC6HMSSDK26HMSChangeTrackStateRequest")
+@interface HMSChangeTrackStateRequest : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSString;
 @class NSNumber;
 
@@ -2017,6 +2410,7 @@ typedef SWIFT_ENUM(NSInteger, HMSErrorCode, open) {
   HMSErrorCodeGenericErrorPeerMetadataMissing = 6007,
 };
 
+@class HMSRole;
 @class HMSAudioTrack;
 @class HMSVideoTrack;
 @class HMSTrack;
@@ -2027,6 +2421,7 @@ SWIFT_CLASS("_TtC6HMSSDK7HMSPeer")
 @property (nonatomic, readonly, copy) NSString * _Nonnull peerID;
 @property (nonatomic, copy) NSString * _Nonnull name;
 @property (nonatomic, readonly) BOOL isLocal;
+@property (nonatomic, strong) HMSRole * _Nullable role;
 @property (nonatomic, readonly, copy) NSString * _Nullable customerUserID;
 @property (nonatomic, copy) NSString * _Nullable customerDescription;
 @property (nonatomic, strong) HMSAudioTrack * _Nullable audioTrack;
@@ -2058,22 +2453,38 @@ SWIFT_PROTOCOL("_TtP6HMSSDK9HMSLogger_")
 - (void)logMessage:(NSString * _Nonnull)message level:(enum HMSLogLevel)level;
 @end
 
+@class HMSMessageRecipient;
+@class NSDate;
 
-/// A local peer can send any message/data to all remote peers in the room
 SWIFT_CLASS("_TtC6HMSSDK10HMSMessage")
 @interface HMSMessage : NSObject
-@property (nonatomic, readonly, copy) NSString * _Nonnull sender;
-/// peerID, optional, default is nil in which case broadcast will be sent to all
-@property (nonatomic, readonly, copy) NSString * _Nullable receiver;
-@property (nonatomic, readonly, copy) NSString * _Nonnull time;
-/// default is Chat Type
+@property (nonatomic, readonly, copy) NSString * _Nonnull message;
 @property (nonatomic, readonly, copy) NSString * _Nonnull type;
-/// string
-@property (nonatomic, readonly, copy) NSString * _Nullable message;
-- (nonnull instancetype)initWithSender:(NSString * _Nonnull)sender receiver:(NSString * _Nullable)receiver time:(NSString * _Nonnull)time type:(NSString * _Nonnull)type message:(NSString * _Nonnull)message OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, strong) HMSPeer * _Nullable sender;
+@property (nonatomic, strong) HMSMessageRecipient * _Nonnull recipient;
+@property (nonatomic, readonly, copy) NSDate * _Nonnull time;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type peerRecipient:(HMSPeer * _Nonnull)peerRecipient OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMessage:(NSString * _Nonnull)message type:(NSString * _Nonnull)type rolesRecipient:(NSArray<HMSRole *> * _Nonnull)rolesRecipient OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+enum HMSMessageRecipientType : NSInteger;
+
+SWIFT_CLASS("_TtC6HMSSDK19HMSMessageRecipient")
+@interface HMSMessageRecipient : NSObject
+@property (nonatomic, readonly) enum HMSMessageRecipientType type;
+@property (nonatomic, readonly, strong) HMSPeer * _Nullable peerRecipient;
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nullable rolesRecipient;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+typedef SWIFT_ENUM(NSInteger, HMSMessageRecipientType, open) {
+  HMSMessageRecipientTypeBroadcast = 0,
+  HMSMessageRecipientTypePeer = 1,
+  HMSMessageRecipientTypeRoles = 2,
+};
 
 
 SWIFT_CLASS("_TtC6HMSSDK17HMSNetworkQuality")
@@ -2111,6 +2522,22 @@ SWIFT_CLASS("_TtC6HMSSDK13HMSRemotePeer")
 @end
 
 
+SWIFT_CLASS("_TtC6HMSSDK30HMSRemovedFromRoomNotification")
+@interface HMSRemovedFromRoomNotification : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC6HMSSDK7HMSRole")
+@interface HMSRole : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull name;
+@property (nonatomic, readonly) NSInteger priority;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable generalPermissions;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable internalPlugins;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nullable externalPlugins;
+@end
+
+
 SWIFT_CLASS("_TtC6HMSSDK20HMSRoleChangeRequest")
 @interface HMSRoleChangeRequest : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -2145,27 +2572,6 @@ typedef SWIFT_ENUM(NSInteger, HMSRoomUpdate, open) {
 /// HMSSDK has other methods which the client app can use to get more info about the Room, Peer and Tracks
 SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @interface HMSSDK : NSObject
-/// To join a room created, clients need to create a HMSConfig instance and use that instance to call <code>join</code> method of HMSSDK
-/// Use the HMSConfig and HMSUpdateListener instances to call <code>join</code> method on the instance of HMSSDK.
-/// Once Join succeeds, all the callbacks keep coming on every change in the room and the app can react accordingly
-/// \param config the config object instance which contains joining information
-///
-/// \param delegate the update listener object which will receive all callbacks
-///
-- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
-/// Call the <code>leave</code> method on the HMSSDK instance to leave a room
-- (void)leave;
-- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
-/// Returns the local peer, which contains the local tracks
-@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
-/// Returns all remote peers in the room
-@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
-/// Returns the room which was joined
-@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
-- (void)sendWithMessage:(HMSMessage * _Nonnull)message;
-- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
-- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request;
 /// this will instantiate an HMSSDK object
 /// \param block pass a block with different settings as required
 ///
@@ -2173,10 +2579,110 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 /// returns:
 /// an instance of HMSSDK object
 + (HMSSDK * _Nonnull)buildWithBlock:(void (^ _Nullable)(HMSSDK * _Nonnull))block SWIFT_WARN_UNUSED_RESULT;
-/// to set a track settings different from default
+/// Begin a preview so that the local peer’s audio and video can be displayed to them before they join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks.
+///
+- (void)previewWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSPreviewListener> _Nonnull)delegate;
+/// Join the room.
+/// \param config The config object instance which contains joining information.
+///
+/// \param delegate The update listener object which will receive all callbacks,
+///
+- (void)joinWithConfig:(HMSConfig * _Nonnull)config delegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Call the <code>leave</code> method on the HMSSDK instance to leave the current room.
+- (void)leave;
+/// Returns the local peer, which contains the local tracks.
+@property (nonatomic, readonly, strong) HMSLocalPeer * _Nullable localPeer;
+/// Returns all remote peers in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRemotePeer *> * _Nullable remotePeers;
+/// Returns all roles in the room.
+@property (nonatomic, readonly, copy) NSArray<HMSRole *> * _Nonnull roles;
+/// Returns the room which was joined.
+@property (nonatomic, readonly, strong) HMSRoom * _Nullable room;
+/// Sends a message to everyone in the room.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendBroadcastMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a message to the specified roles defined. All peers that belong to the specified roles will receive the message.
+/// \param type The type of message
+///
+/// \param message Content of the message.
+///
+/// \param roles The list of roles to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendGroupMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message roles:(NSArray<HMSRole *> * _Nonnull)roles completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Sends a direct message to the specified peer only.
+/// \param type The type of message.
+///
+/// \param message Content of the message.
+///
+/// \param peer The peer to whom this message is directed.
+///
+/// \param completion The completion handler to be invoked when message was sent, or when error happened during sending
+///
+- (void)sendDirectMessageWithType:(NSString * _Nonnull)type message:(NSString * _Nonnull)message peer:(HMSPeer * _Nonnull)peer completion:(void (^ _Nullable)(HMSMessage * _Nullable, HMSError * _Nullable))completion;
+/// Requests a change of role for specified peer.
+/// \param peer The peer whose role should be changed.
+///
+/// \param role The target role.
+///
+/// \param force False if the peer should be prompted to accept the new role. true if their role should be changed without a prompt.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Call to accept the role change request sent to the current peer.
+/// Once this method is called, the peer’s role will be changed to the requested one.
+/// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)acceptWithChangeRole:(HMSRoleChangeRequest * _Nonnull)request completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// To change the mute status of a remote HMSTrack.
+/// \param remoteTrack The HMSTrack whose mute status needs to be changed.
+///
+/// \param mute True if the track needs to be muted, false otherwise.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)changeTrackStateFor:(HMSTrack * _Nonnull)remoteTrack mute:(BOOL)mute completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Removes the specified peer from the current room.
+/// \param peer The peer to remove
+///
+/// \param reason The reason for removing can be passed on to the peer.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)removePeer:(HMSPeer * _Nonnull)peer reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// End the room and make all participants leave.
+/// \param lock Whether rejoining the room should be disabled till the room is unlocked.
+///
+/// \param reason The reason for ending the room can be passed on to other peers.
+///
+/// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
+///
+- (void)endRoomWithLock:(BOOL)lock reason:(NSString * _Nonnull)reason completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+/// Adds another listener of SDK updates
+/// \param delegate the update listener object which will receive all callbacks
+///
+- (void)addWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Removes the listener of SDK updates
+/// \param delegate the update listener to remove
+///
+- (void)removeWithDelegate:(id <HMSUpdateListener> _Nonnull)delegate;
+/// Use to override track settings coming from role policy
 @property (nonatomic, strong) HMSTrackSettings * _Nonnull trackSettings;
-/// set the analytical level
+/// Sets the verbosity of analytics events
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
+/// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -2253,15 +2759,23 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param roleChangeRequest the request for role change info
 ///
 - (void)roleChangeRequest:(HMSRoleChangeRequest * _Nonnull)roleChangeRequest;
+/// This is called when a change track state request arrives
+/// \param changeTrackStateRequest the request for changing track state
+///
+- (void)changeTrackStateRequest:(HMSChangeTrackStateRequest * _Nonnull)changeTrackStateRequest;
+/// This is called when someone removes the local peer for the current room
+/// \param notification the notification containing reason for removing and the initiating peer
+///
+- (void)removedFromRoom:(HMSRemovedFromRoomNotification * _Nonnull)notification;
 @required
 /// This is called every 1 second with list of active speakers
 /// <h2>A HMSSpeaker object contains -</h2>
 /// <ul>
 ///   <li>
-///     HMSPeer: the peer who is speaking
+///     peer: the peer who is speaking
 ///   </li>
 ///   <li>
-///     trackID: the track identifier which is emitting audio
+///     track: the track which is emitting audio
 ///   </li>
 ///   <li>
 ///     level: a number within range 1-100 indicating the audio volume
@@ -2272,7 +2786,9 @@ SWIFT_PROTOCOL("_TtP6HMSSDK17HMSUpdateListener_")
 /// \param speakers the list of speakers
 ///
 - (void)onUpdatedSpeakers:(NSArray<HMSSpeaker *> * _Nonnull)speakers;
+/// This is called when SDK detects a network issue and is trying to recover
 - (void)onReconnecting;
+/// This is called when SDK successfully recovered from a network issue
 - (void)onReconnected;
 @end
 

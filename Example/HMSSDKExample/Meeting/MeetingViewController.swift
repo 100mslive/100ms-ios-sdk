@@ -53,7 +53,8 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
     }
 
     var menuItems: [UIAction] {
-        return [
+        
+        var result = [
             UIAction(title: "Audio Only Mode",
                      image: UIImage(systemName: "speaker.zzz.fill")?.withTintColor(.link)) { [weak self] _ in
                 guard let self = self else { return }
@@ -104,6 +105,35 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
                 }
             }
         ]
+        
+        if canEndRoom() {
+            let endRoomAction = UIAction(title: "End Room",
+                                         image: UIImage(systemName: "xmark.octagon.fill")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
+                self.interactor?.hmsSDK?.endRoom(lock: false, reason: "Meeting Ended") { [weak self] success, error in
+                    if let error = error {
+                        self?.showActionError(error, action: "End Room")
+                        return
+                    }
+                    self?.cleanup()
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            result.append(endRoomAction)
+            
+            let endRoomAndLockAction = UIAction(title: "End Room And Lock",
+                                         image: UIImage(systemName: "lock.circle.fill")?.withTintColor(.link)) { [weak self] _ in
+                guard let self = self else { return }
+                self.interactor?.hmsSDK?.endRoom(lock: true, reason: "Meeting Ended")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+                    self?.cleanup()
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            result.append(endRoomAndLockAction)
+        }
+        
+        return result
     }
 
     var menu: UIMenu {
@@ -130,6 +160,14 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             self?.handle(roleChange: request)
         }
         
+        interactor.onChangeTrackState = { [weak self] request in
+            self?.handle(changeTrackState: request)
+        }
+        
+        interactor.onRemovedFromRoom = { [weak self] notification in
+            self?.handle(removedFromRoom: notification)
+        }
+        
         viewModel.updateLocalPeerTracks = { [weak self] in
             self?.setupButtonStates()
         }
@@ -147,6 +185,28 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             actions.append(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
                 guard let peer = peer else { return }
                 self?.showRoleChangePrompt(for: peer, force: true)
+            })
+        }
+        
+        if let audioTrack = peer.remoteAudioTrack(), canRemoteMute() {
+            let shouldMute = !audioTrack.isMute()
+            let actionName = shouldMute ? "Mute Audio" : "Ask To Unmute Audio"
+            actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
+                self?.interactor?.hmsSDK?.changeTrackState(for: audioTrack, mute: shouldMute)
+            })
+        }
+        
+        if let videoTrack = peer.remoteVideoTrack(), canRemoteMute() {
+            let shouldMute = !videoTrack.isMute()
+            let actionName = shouldMute ? "Mute Video" : "Ask To Unmute Video"
+            actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
+                self?.interactor?.hmsSDK?.changeTrackState(for: videoTrack, mute: shouldMute)
+            })
+        }
+        
+        if canRemovePeer() {
+            actions.append(UIAlertAction(title: "Remove Peer", style: .default) { [weak self] _ in
+                self?.interactor?.hmsSDK?.removePeer(peer, reason: "Your time is up")
             })
         }
         
@@ -184,6 +244,18 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
     
     private func canRoleChange() -> Bool {
         interactor?.currentRole?.permissions.changeRole ?? false
+    }
+    
+    private func canRemoteMute() -> Bool {
+        interactor?.currentRole?.permissions.mute ?? false
+    }
+    
+    private func canRemovePeer() -> Bool {
+        interactor?.currentRole?.permissions.removeOthers ?? false
+    }
+    
+    private func canEndRoom() -> Bool {
+        interactor?.currentRole?.permissions.endRoom ?? false
     }
     
     private func showRoleChangePrompt(for peer: HMSRemotePeer, force: Bool) {
@@ -227,6 +299,19 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         
          
 
+
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+
+        present(alertController, animated: true)
+    }
+    
+    private func showActionError(_ error: HMSError, action: String) {
+        let title = "Could Not \(action)"
+
+        let alertController = UIAlertController(title: title,
+                                                message: error.message,
+                                                preferredStyle: .alert)
+        
 
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
 
@@ -471,6 +556,48 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         alertController.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
             self?.interactor?.accept(changeRole: request)
             self?.setupButtonStates()
+        })
+
+        present(alertController, animated: true)
+    }
+    
+    private func handle(changeTrackState request: HMSChangeTrackStateRequest) {
+        setupButtonStates()
+        
+        guard !request.mute else { return }
+        
+        dismiss(animated: true) { [weak self] in
+            let title = "\(request.requestedBy.name) is asking you to unmute \(request.track.kind == .video ? "video" : "audio")"
+
+            let alertController = UIAlertController(title: title,
+                                                    message: nil,
+                                                    preferredStyle: .alert)
+
+            alertController.addAction(UIAlertAction(title: "Unmute", style: .default) { [weak self] _ in
+                if request.track.kind == .video {
+                    self?.viewModel.switchVideo(isOn: true)
+                } else {
+                    self?.viewModel.switchAudio(isOn: true)
+                }
+                
+                self?.setupButtonStates()
+            })
+            alertController.addAction(UIAlertAction(title: "Ignore", style: .cancel))
+
+            self?.present(alertController, animated: true)
+        }
+    }
+    
+    private func handle(removedFromRoom notification: HMSRemovedFromRoomNotification) {
+        let title = "\(notification.requestedBy.name) removed you from this room: \(notification.reason)"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel) { [weak self] _ in
+            self?.cleanup()
+            self?.navigationController?.popToRootViewController(animated: true)
         })
 
         present(alertController, animated: true)

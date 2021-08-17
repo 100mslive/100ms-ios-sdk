@@ -14,6 +14,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var hmsSDK: HMSSDK?
     internal var onPreview: ((HMSRoom, [HMSTrack]) -> Void)?
     internal var onRoleChange: ((HMSRoleChangeRequest) -> Void)?
+    internal var onChangeTrackState: ((HMSChangeTrackStateRequest) -> Void)?
+    internal var onRemovedFromRoom: ((HMSRemovedFromRoomNotification) -> Void)?
     
     // MARK: - Instance Properties
     
@@ -88,7 +90,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     func accept(changeRole request: HMSRoleChangeRequest) {
         hmsSDK?.accept(changeRole: request)
     }
-    
+        
     // MARK: - HMSSDK Update Callbacks
     
     func on(join room: HMSRoom) {
@@ -130,7 +132,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
         
         messages.append(message)
         NotificationCenter.default.post(name: Constants.messageReceived, object: nil)
-        Utilities.showToast(message: "💬 \(message.sender) sent you a message")
+        Utilities.showToast(message: "💬 \(message.sender!.name) sent you a message")
     }
     
     func on(updated speakers: [HMSSpeaker]) {
@@ -151,6 +153,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
     
     func onReconnected() {
         print(#function, "Reconnected")
+    }
+    
+    func on(changeTrackStateRequest: HMSChangeTrackStateRequest) {
+        onChangeTrackState?(changeTrackStateRequest)
+    }
+    
+    func on(removedFromRoom notification: HMSRemovedFromRoomNotification) {
+        onRemovedFromRoom?(notification)
     }
 }
 
