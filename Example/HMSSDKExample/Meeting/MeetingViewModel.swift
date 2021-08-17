@@ -233,7 +233,7 @@ final class MeetingViewModel: NSObject,
         //            self?.togglePinned(viewModel)
         //        }
         
-        
+        cell.videoView.videoContentMode = .scaleAspectFill
         
         if let remotePeer = viewModel.peer as? HMSRemotePeer {
             cell.onMoreButtonTap = { [weak self] button in
@@ -242,6 +242,7 @@ final class MeetingViewModel: NSObject,
             
             if viewModel.videoTrack?.source == .screen || viewModel.videoTrack?.source == .plugin {
                 cell.moreButton.isHidden = true
+                cell.videoView.videoContentMode = .scaleAspectFit
             } else {
                 cell.moreButton.isHidden = false
             }

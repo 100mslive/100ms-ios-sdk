@@ -17,7 +17,7 @@ import Swift
   @objc final public let peerID: Swift.String
   @objc public var name: Swift.String
   @objc final public let isLocal: Swift.Bool
-  public var role: HMSSDK.HMSRole?
+  @objc public var role: HMSSDK.HMSRole?
   @objc final public let customerUserID: Swift.String?
   @objc public var customerDescription: Swift.String?
   @objc public var audioTrack: HMSSDK.HMSAudioTrack?
@@ -132,8 +132,22 @@ extension HMSSection : Swift.Hashable {
     get
   }
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HMSRemovedFromRoomNotification : ObjectiveC.NSObject {
+  final public let requestedBy: HMSSDK.HMSPeer
+  final public let reason: Swift.String
+  final public let roomEnded: Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HMSRoleChangeRequest : ObjectiveC.NSObject {
   final public let suggestedRole: HMSSDK.HMSRole
+  final public let requestedBy: HMSSDK.HMSPeer
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class HMSChangeTrackStateRequest : ObjectiveC.NSObject {
+  final public let track: HMSSDK.HMSTrack
+  final public let mute: Swift.Bool
   final public let requestedBy: HMSSDK.HMSPeer
   @objc override dynamic public init()
   @objc deinit
@@ -203,19 +217,36 @@ extension HMSSection : Swift.Hashable {
   @objc override dynamic public init()
   @objc deinit
 }
-@objc @objcMembers public class HMSMessage : ObjectiveC.NSObject, Swift.Codable {
-  @objc final public let sender: Swift.String
-  @objc final public let receiver: Swift.String?
-  @objc final public let time: Swift.String
+@objc @_hasMissingDesignatedInitializers @objcMembers public class HMSMessage : ObjectiveC.NSObject {
+  @objc final public let message: Swift.String
   @objc final public let type: Swift.String
-  @objc final public let message: Swift.String?
-  @objc public init(sender: Swift.String, receiver: Swift.String? = nil, time: Swift.String, type: Swift.String, message: Swift.String)
+  @objc public var sender: HMSSDK.HMSPeer?
+  @objc public var recipient: HMSSDK.HMSMessageRecipient
+  @objc final public let time: Foundation.Date
+  @objc public init(message: Swift.String, type: Swift.String = "chat")
+  @objc public init(message: Swift.String, type: Swift.String = "chat", peerRecipient: HMSSDK.HMSPeer)
+  @objc public init(message: Swift.String, type: Swift.String = "chat", rolesRecipient: [HMSSDK.HMSRole])
   @objc override dynamic public init()
   @objc deinit
-  public func encode(to encoder: Swift.Encoder) throws
-  required public init(from decoder: Swift.Decoder) throws
 }
-@objcMembers public class HMSRole : Swift.Codable {
+@objc public enum HMSMessageRecipientType : Swift.Int {
+  case broadcast = 0
+  case peer
+  case roles
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSMessageRecipient : ObjectiveC.NSObject {
+  @objc final public let type: HMSSDK.HMSMessageRecipientType
+  @objc final public let peerRecipient: HMSSDK.HMSPeer?
+  @objc final public let rolesRecipient: [HMSSDK.HMSRole]?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class HMSRole : ObjectiveC.NSObject, Swift.Codable {
   @objc final public let name: Swift.String
   final public let publishSettings: HMSSDK.HMSPublishSettings
   final public let subscribeSettings: HMSSDK.HMSSubscribeSettings
@@ -290,8 +321,8 @@ extension HMSSection : Swift.Hashable {
   final public let removeOthers: Swift.Bool?
   final public let stopPresentation: Swift.Bool?
   final public let muteAll: Swift.Bool?
-  final public let askToUnmute: Swift.Bool?
-  final public let muteSelective: Swift.Bool?
+  final public let unmute: Swift.Bool?
+  final public let mute: Swift.Bool?
   final public let changeRole: Swift.Bool?
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
@@ -328,6 +359,8 @@ extension HMSSection : Swift.Hashable {
   @objc(onError:) func on(error: HMSSDK.HMSError)
   @objc(onMessage:) func on(message: HMSSDK.HMSMessage)
   @objc(roleChangeRequest:) optional func on(roleChangeRequest: HMSSDK.HMSRoleChangeRequest)
+  @objc(changeTrackStateRequest:) optional func on(changeTrackStateRequest: HMSSDK.HMSChangeTrackStateRequest)
+  @objc(removedFromRoom:) optional func on(removedFromRoom notification: HMSSDK.HMSRemovedFromRoomNotification)
   @objc(onUpdatedSpeakers:) func on(updated speakers: [HMSSDK.HMSSpeaker])
   @objc func onReconnecting()
   @objc func onReconnected()
@@ -351,27 +384,32 @@ extension HMSSection : Swift.Hashable {
   }
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class HMSSDK : ObjectiveC.NSObject {
+  @objc public static func build(block: ((HMSSDK.HMSSDK) -> Swift.Void)? = nil) -> HMSSDK.HMSSDK
+  @objc public func preview(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSPreviewListener)
   @objc public func join(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSUpdateListener)
   @objc public func leave()
-  @objc public func preview(config: HMSSDK.HMSConfig, delegate: HMSSDK.HMSPreviewListener)
   @objc public var localPeer: HMSSDK.HMSLocalPeer? {
     @objc get
   }
   @objc public var remotePeers: [HMSSDK.HMSRemotePeer]? {
     @objc get
   }
-  public var roles: [HMSSDK.HMSRole] {
-    get
+  @objc public var roles: [HMSSDK.HMSRole] {
+    @objc get
   }
   @objc public var room: HMSSDK.HMSRoom? {
     @objc get
   }
-  @objc public func send(message: HMSSDK.HMSMessage)
+  @objc public func sendBroadcastMessage(type: Swift.String = "chat", message: Swift.String, completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func sendGroupMessage(type: Swift.String = "chat", message: Swift.String, roles: [HMSSDK.HMSRole], completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func sendDirectMessage(type: Swift.String = "chat", message: Swift.String, peer: HMSSDK.HMSPeer, completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func changeRole(for peer: HMSSDK.HMSRemotePeer, to role: HMSSDK.HMSRole, force: Swift.Bool = false, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func accept(changeRole request: HMSSDK.HMSRoleChangeRequest, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func changeTrackState(for remoteTrack: HMSSDK.HMSTrack, mute: Swift.Bool, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func removePeer(_ peer: HMSSDK.HMSPeer, reason: Swift.String, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func endRoom(lock: Swift.Bool, reason: Swift.String, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func add(delegate: HMSSDK.HMSUpdateListener)
   @objc public func remove(delegate: HMSSDK.HMSUpdateListener)
-  public func changeRole(for peer: HMSSDK.HMSRemotePeer, to role: HMSSDK.HMSRole, force: Swift.Bool = false)
-  @objc public func accept(changeRole request: HMSSDK.HMSRoleChangeRequest)
-  @objc public static func build(block: ((HMSSDK.HMSSDK) -> Swift.Void)? = nil) -> HMSSDK.HMSSDK
   @objc public var trackSettings: HMSSDK.HMSTrackSettings {
     @objc get
     @objc set
@@ -413,6 +451,9 @@ extension HMSSDK.HMSErrorCode : Swift.RawRepresentable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Equatable {}
 extension HMSSDK.HMSTrackUpdate : Swift.Hashable {}
 extension HMSSDK.HMSTrackUpdate : Swift.RawRepresentable {}
+extension HMSSDK.HMSMessageRecipientType : Swift.Equatable {}
+extension HMSSDK.HMSMessageRecipientType : Swift.Hashable {}
+extension HMSSDK.HMSMessageRecipientType : Swift.RawRepresentable {}
 extension HMSSDK.HMSLogLevel : Swift.Equatable {}
 extension HMSSDK.HMSLogLevel : Swift.Hashable {}
 extension HMSSDK.HMSLogLevel : Swift.RawRepresentable {}
