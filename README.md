@@ -341,34 +341,119 @@ view.addSubview(videoView)
 ```
 
 ## 📨 Chat Messaging
-You can send a chat or any other kind of message from local peer to all remote peers in the room.
+What's a video without being able to send messages to each other too? 100ms supports chat for every video/audio room you create.
 
-To send a message first create an instance of `HMSMessage` object.
+You can see an example of every way of sending messages and interpreting messages in the advanced [sample app](https://github.com/100mslive/100ms-ios-sdk).
 
-Add the information to be sent in the `message` property of `HMSMessage`.
+### Addressing messages
 
-Then use the `func send(message: HMSMessage)` function on instance of HMSSDK.
+* [Broadcast messages](#sending-broadcast-messages) can be sent to Everyone in the chat `hmssdk.sendBroadcastMessage`.
 
-When you(the local peer) receives a message from others(any remote peer), `func on(message: HMSMessage)` function of `HMSUpdateListener` is invoked.
-  
+* [Direct messages](#sending-direct-messages) let you send message to a specific person `hmssdk.sendDirectMessage`.
+
+* [Group messages](#sending-group-messages) let you send a message to everyone with a particular `HMSRole`. Such as all `hosts` or all `teachers` or all `students` `hmsSdk.sendGroupMessage`
+
+### Sending Chat Messages
+
+#### Sending Broadcast Messages
+
+You want to let everyone in the chat know something? Call `sendBroadcastMessage` on the instance of `HMSSDK` to a send a broadcast.
+
+The text of the message, its type and a listener for whther the message reached the server or not are the parameters.
+
+> 💡 Note that the callback only lets you know if the server has received your request for the message or if there was some error. It does not convey whether the message was delivered to or read by the recipient.
+> also it's important to make a new callback per message because it will only contain the results of that particular call for sending a message.
+
+
 ```swift
-// following is an example implementation of chat messaging
+hmssdk.sendBroadcastMessage(type: "chat", message: "") { message, error in
 
-// to send a broadcast message
-let broadcast = HMSMessage(sender: "peerID", // the peerID of local peer, can be empty
-                           time: "\(Date())", // the timestamp when message is being sent, can be empty
-                           type: "chat", // the type of message, you can set it to any arbitary string value & use it to filter on your Chat UI
-                           message: "my message") // the message information to be sent in string
-
-hmsSDK.send(message: broadcast) // hmsSDK is an instance of `HMSSDK` object
-
-// receiving messages
-// the object conforming to `HMSUpdateListener` will be invoked with `on(message: HMSMessage)`, add your logic to update Chat UI within this listener
-func on(message: HMSMessage) {
-    let messageReceived = message.message // extract message payload from `HMSMessage` object that is received
-    // update your Chat UI with the messageReceived
 }
 ```
+
+#### Sending Direct Messages
+
+Got secrets to share? Send a message directly to a single person in the chat with a direct message. Call `sendDirectMessage` on an instance of `HMSSDK`.
+
+The text of the message, its type and a listener for whther the message reached the server or not are the parameters.
+
+> 💡 Note that the callback only lets you know if the server has received your request for the message or if there was some error. It does not convey whether the message was delivered to or read by the recipient.
+> also it's important to make a new callback per message because it will only contain the results of that particular call for sending a message.
+
+```swift
+hmssdk.sendDirectMessage(type: "chat", message: "", peer: recipientPeer) { message, error in
+
+}
+```
+
+#### Sending Group Messages
+
+Want to share with a group? Send a message directly to a group in the chat with a group message. Call `sendGroupMessage` on an instance of `HMSSDK`.
+
+The text of the message, its type and a listener for whether the message reached the server or not are the parameters.
+
+> 💡 Note that the callback only lets you know if the server has received your request for the message or if there was some error. It does not convey whether the message was delivered to or read by the recipient.
+> also it's important to make a new callback per message because it will only contain the results of that particular call for sending a message.
+
+```swift
+hmssdk.sendGroupMessage(type: "chat", message: "", roles: recipientRoles) { message, error in
+
+}
+```
+
+### Receiving Chat Messages
+
+When you called `hmsSdk.join(config, delegate)` to join a room, the `HMSUpdateListener` implementation that was passed in had the callback `on(message:)`.
+
+This where you'll receive new messages as `HMSMessage` during the call. It contains:
+
+```swift
+public class HMSMessage {
+    public let message: String
+    public let type: String
+    public var sender: HMSPeer?
+    public var recipient: HMSMessageRecipient
+    public let time: Date
+}
+```
+`message`: Content of the text message or the text description of the raw message.
+
+`type`: Type of message sent. Default value is `chat`.
+
+`recipient`: The intended recipient(s) of this message as a `HMSMessageRecipient`.
+
+`serverReceiveTime`: timestamp of when the messaging server receives this message. Update the time in your own messages when this comes back from the server in `on(message:)` for accurate ordering of your own messages.
+
+`sender`: The `HMSPeer` who is sending this message.
+
+Identifying Senders: The sender of a message is always contained in the `sender` field of HMSMessage. This lets you get the name and peer id for any message sender.
+
+Message Body: The body of the message is in `message` as a String.
+
+Time: The time the message was sent is contained in `time`.
+
+#### Identifying who the message was for
+
+The HMSMessageRecipient contained in the `recipient` field of `HMSMessage` lets you know who the message was for.
+
+The `HMSMessageRecipient` contains:
+```swift
+public class HMSMessageRecipient {
+    public let type: HMSMessageRecipientType
+    public let peerRecipient: HMSPeer?
+    public let rolesRecipient: [HMSRole]?
+}
+```
+
+`peerRecipient`: Only contains a peer when a specific single peer is being direct messaged.
+
+`rolesRecipient`: Only contains values when a group message is being sent to one or many roles.
+
+`type`: Will be `broadcast` for a message being sent to everyone. If this is true, the other two field will be null, empty respectively.
+
+`peer` will be set when it's a direct message.
+
+`roles` will be set when it's a message to one or many roles. 
 
 ## 🤳 Preview
 
