@@ -1,7 +1,7 @@
 
 <a href="https://100ms.live/">
-<img src="https://github.com/100mslive/100ms-ios-sdk/blob/updateReadMe/100ms.gif" height=256/> 
-<img src="https://github.com/100mslive/100ms-ios-sdk/blob/updateReadMe/100ms.svg" title="100ms logo" float=center height=256>
+<img src="https://github.com/100mslive/100ms-ios-sdk/blob/main/100ms.gif" height=256/> 
+<img src="https://github.com/100mslive/100ms-ios-sdk/blob/main/100ms.svg" title="100ms logo" float=center height=256>
 </a>
 
 [![Cocoapods](https://img.shields.io/cocoapods/v/HMSSDK)](https://www.100ms.live/)
