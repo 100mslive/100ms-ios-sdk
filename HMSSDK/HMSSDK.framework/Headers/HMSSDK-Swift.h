@@ -531,7 +531,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 ///
 /// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
 ///
-- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+- (void)changeRoleFor:(HMSPeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
 /// Call to accept the role change request sent to the current peer.
 /// Once this method is called, the peer’s role will be changed to the requested one.
 /// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
@@ -577,6 +577,8 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
+- (void)prepareForExternalAudioPlayback;
+- (void)resumeAfterExternalAudioPlayback;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1232,7 +1234,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 ///
 /// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
 ///
-- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+- (void)changeRoleFor:(HMSPeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
 /// Call to accept the role change request sent to the current peer.
 /// Once this method is called, the peer’s role will be changed to the requested one.
 /// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
@@ -1278,6 +1280,8 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
+- (void)prepareForExternalAudioPlayback;
+- (void)resumeAfterExternalAudioPlayback;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1937,7 +1941,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 ///
 /// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
 ///
-- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+- (void)changeRoleFor:(HMSPeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
 /// Call to accept the role change request sent to the current peer.
 /// Once this method is called, the peer’s role will be changed to the requested one.
 /// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
@@ -1983,6 +1987,8 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
+- (void)prepareForExternalAudioPlayback;
+- (void)resumeAfterExternalAudioPlayback;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2638,7 +2644,7 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 ///
 /// \param completion The completion handler to be invoked when the request succeeds or fails with an error.
 ///
-- (void)changeRoleFor:(HMSRemotePeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
+- (void)changeRoleFor:(HMSPeer * _Nonnull)peer to:(HMSRole * _Nonnull)role force:(BOOL)force completion:(void (^ _Nullable)(BOOL, HMSError * _Nullable))completion;
 /// Call to accept the role change request sent to the current peer.
 /// Once this method is called, the peer’s role will be changed to the requested one.
 /// \param request The request that the SDK had sent to this peer (in HMSUpdateListener.onRoleChangeRequest). 
@@ -2684,6 +2690,8 @@ SWIFT_CLASS("_TtC6HMSSDK6HMSSDK")
 @property (nonatomic) HMSAnalyticsEventLevel analyticsLevel;
 /// Sets the logger instance to use for piping logs
 @property (nonatomic, weak) id <HMSLogger> _Nullable logger;
+- (void)prepareForExternalAudioPlayback;
+- (void)resumeAfterExternalAudioPlayback;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end

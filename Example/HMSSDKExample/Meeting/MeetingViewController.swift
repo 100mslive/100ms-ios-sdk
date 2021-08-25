@@ -173,22 +173,24 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         }
     }
     
-    private func showPeerActionsMenu(for peer: HMSRemotePeer, on button: UIButton) {
+    private func showPeerActionsMenu(for peer: HMSPeer, on button: UIButton) {
 
         var actions = [UIAlertAction]()
         
         if canRoleChange() {
-            actions.append(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
-                guard let peer = peer else { return }
-                self?.showRoleChangePrompt(for: peer, force: false)
-            })
+            if (peer is HMSRemotePeer) {
+                actions.append(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
+                    guard let peer = peer else { return }
+                    self?.showRoleChangePrompt(for: peer, force: false)
+                })
+            }
             actions.append(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
                 guard let peer = peer else { return }
                 self?.showRoleChangePrompt(for: peer, force: true)
             })
         }
         
-        if let audioTrack = peer.remoteAudioTrack(), canRemoteMute() {
+        if let remotePeer = peer as? HMSRemotePeer, let audioTrack = remotePeer.remoteAudioTrack(), canRemoteMute() {
             let shouldMute = !audioTrack.isMute()
             let actionName = shouldMute ? "Mute Audio" : "Ask To Unmute Audio"
             actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
@@ -196,7 +198,7 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             })
         }
         
-        if let videoTrack = peer.remoteVideoTrack(), canRemoteMute() {
+        if let remotePeer = peer as? HMSRemotePeer, let videoTrack = remotePeer.remoteVideoTrack(), canRemoteMute() {
             let shouldMute = !videoTrack.isMute()
             let actionName = shouldMute ? "Mute Video" : "Ask To Unmute Video"
             actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
@@ -204,19 +206,19 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             })
         }
         
-        if canRemovePeer() {
+        if let remotePeer = peer as? HMSRemotePeer, canRemovePeer() {
             actions.append(UIAlertAction(title: "Remove Peer", style: .default) { [weak self] _ in
-                self?.interactor?.hmsSDK?.removePeer(peer, reason: "Your time is up")
+                self?.interactor?.hmsSDK?.removePeer(remotePeer, reason: "Your time is up")
             })
         }
         
-        if viewModel.mode != .audioOnly {
+        if let remotePeer = peer as? HMSRemotePeer, viewModel.mode != .audioOnly {
             let layerNameMap: [HMSSimulcastLayer : String] = [ .high : "high", .mid : "mid", .low : "low" ]
-            peer.remoteVideoTrack()?.layerDefinitions?.forEach {
+            remotePeer.remoteVideoTrack()?.layerDefinitions?.forEach {
                 let layer = $0.layer
                 guard let layerName = layerNameMap[layer] else { return }
-                actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak peer] _ in
-                    peer?.remoteVideoTrack()?.layer = layer
+                actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak remotePeer] _ in
+                    remotePeer?.remoteVideoTrack()?.layer = layer
                 })
             }
         }
@@ -258,7 +260,7 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         interactor?.currentRole?.permissions.endRoom ?? false
     }
     
-    private func showRoleChangePrompt(for peer: HMSRemotePeer, force: Bool) {
+    private func showRoleChangePrompt(for peer: HMSPeer, force: Bool) {
         let title = "Role change request"
 
         let alertController = UIAlertController(title: title,
@@ -290,7 +292,7 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         present(alertController, animated: true)
     }
     
-    private func showRoleIsSameError(for peer: HMSRemotePeer, role: String) {
+    private func showRoleIsSameError(for peer: HMSPeer, role: String) {
         let title = "Error"
 
         let alertController = UIAlertController(title: title,
@@ -462,9 +464,8 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         viewController.interactor = viewModel.interactor
         viewController.speakers = viewModel.speakers
         viewController.onSettingsButtonTap = { [weak self] peer, button in
-            guard let remotePeer = peer as? HMSRemotePeer else { return }
             self?.dismiss(animated: true, completion: {
-                self?.showPeerActionsMenu(for: remotePeer, on: button)
+                self?.showPeerActionsMenu(for: peer, on: button)
             })   
         }
 

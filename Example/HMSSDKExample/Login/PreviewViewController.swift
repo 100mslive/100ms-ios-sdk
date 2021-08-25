@@ -29,7 +29,8 @@ class PreviewViewController: UIViewController {
         joinButton.isEnabled = false
         publishVideoButton.isHidden = true
         publishAudioButton.isHidden = true
-        
+        previewView.mirror = true
+
         interactor.onPreview = { [weak self] room, tracks in
             self?.setupTracks(tracks: tracks)
             self?.joinButton.isEnabled = true

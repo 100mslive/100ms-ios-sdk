@@ -5,6 +5,7 @@ import AVKit
 import Foundation
 @_exported import HMSSDK
 import Swift
+import WebRTC
 @objc @objcMembers public class HMSSpeaker : ObjectiveC.NSObject {
   @objc final public let peer: HMSSDK.HMSPeer
   @objc final public let track: HMSSDK.HMSTrack
@@ -403,7 +404,7 @@ extension HMSSection : Swift.Hashable {
   @objc public func sendBroadcastMessage(type: Swift.String = "chat", message: Swift.String, completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func sendGroupMessage(type: Swift.String = "chat", message: Swift.String, roles: [HMSSDK.HMSRole], completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func sendDirectMessage(type: Swift.String = "chat", message: Swift.String, peer: HMSSDK.HMSPeer, completion: ((HMSSDK.HMSMessage?, HMSSDK.HMSError?) -> Swift.Void)? = nil)
-  @objc public func changeRole(for peer: HMSSDK.HMSRemotePeer, to role: HMSSDK.HMSRole, force: Swift.Bool = false, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
+  @objc public func changeRole(for peer: HMSSDK.HMSPeer, to role: HMSSDK.HMSRole, force: Swift.Bool = false, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func accept(changeRole request: HMSSDK.HMSRoleChangeRequest, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func changeTrackState(for remoteTrack: HMSSDK.HMSTrack, mute: Swift.Bool, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
   @objc public func removePeer(_ peer: HMSSDK.HMSPeer, reason: Swift.String, completion: ((Swift.Bool, HMSSDK.HMSError?) -> Swift.Void)? = nil)
@@ -422,6 +423,8 @@ extension HMSSection : Swift.Hashable {
     @objc get
     @objc set
   }
+  @objc public func prepareForExternalAudioPlayback()
+  @objc public func resumeAfterExternalAudioPlayback()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class HMSDevice : ObjectiveC.NSObject {

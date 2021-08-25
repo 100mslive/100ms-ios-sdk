@@ -83,7 +83,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
         hmsSDK?.leave()
     }
     
-    func changeRole(for peer: HMSRemotePeer, to role: HMSRole, force: Bool = false) {
+    func changeRole(for peer: HMSPeer, to role: HMSRole, force: Bool = false) {
         hmsSDK?.changeRole(for: peer, to: role, force: force)
     }
     

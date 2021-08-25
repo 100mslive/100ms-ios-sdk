@@ -246,9 +246,11 @@ final class MeetingViewModel: NSObject,
             } else {
                 cell.moreButton.isHidden = false
             }
+            cell.videoView.mirror = false
         } else {
             cell.onMoreButtonTap = nil
             cell.moreButton.isHidden = true
+            cell.videoView.mirror = true
         }
         
         
