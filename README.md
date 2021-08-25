@@ -9,7 +9,6 @@
 [![License](https://img.shields.io/cocoapods/l/HMSSDK.svg?style=flat)](https://www.100ms.live/)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/ios/v2/foundation/Basics)
 [![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
-[![Slack](https://img.shields.io/badge/Community-Join%20on%20Slack-blue)](https://join.slack.com/t/100mslive/shared_invite/zt-llwdnz11-vkb2RzptwacwXHO7UeY0CQ)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](https://dashboard.100ms.live/register)
 
 # 🎉 100ms SDK ＆ Sample App 🚀
