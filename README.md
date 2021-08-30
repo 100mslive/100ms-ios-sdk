@@ -8,7 +8,8 @@
 [![iOS](https://img.shields.io/badge/iOS-10.0%2B-yellow)](https://www.100ms.live/)
 [![License](https://img.shields.io/cocoapods/l/HMSSDK.svg?style=flat)](https://www.100ms.live/)
 [![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/ios/v2/foundation/Basics)
-[![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://discord.gg/F8cNgbjSaQ)
+[![Discord](https://img.shields.io/badge/Community-Join%20on%20Discord-blue)](https://100ms.live/discord)
+[![TestFlight](https://img.shields.io/badge/Download%20via-TestFlight-blue)](https://testflight.apple.com/join/dhUSE7N8)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](https://dashboard.100ms.live/register)
 
 # 🎉 100ms SDK ＆ Sample App 🚀
