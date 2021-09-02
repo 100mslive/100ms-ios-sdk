@@ -1,14 +1,6 @@
-#
-# Be sure to run `pod lib lint HMSVideo.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'HMSSDK'
-  s.version          = '0.0.11'
+  s.version          = '0.0.12'
   s.summary          = 'HMS Videoconferencing iOS SDK'
 
   s.description      = <<-DESC
@@ -18,19 +10,12 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/100mslive/100ms-ios-sdk/'
   s.license          = { :type => 'MIT'}
   s.author           = { 'Dmitry Fedoseyev' => 'dmitry@100ms.live', 'Yogesh Singh' => 'yogesh@100ms.live' }
-  s.source           = { :git => 'https://github.com/100mslive/100ms-ios-sdk.git', :tag => s.version.to_s }
-
+  s.source           = { :http => 'https://github.com/100mslive/100ms-ios-sdk/releases/download/0.0.12/HMSSDK.xcframework.zip',
+                           :sha256 => '1d33e89b8cae5aaf83dd38e73ce0a5a54d651eee278bbbc73299e766134a0f52'
+						}
   s.ios.deployment_target = '10.0'
-
-  s.source_files = 'HMSSDK/HMSSDK.framework/Headers/*.h'
-  s.public_header_files = 'HMSSDK/HMSSDK.framework/Headers/*.h'
-  s.vendored_frameworks = 'HMSSDK/HMSSDK.framework'
+  s.vendored_frameworks = 'HMSSDK.xcframework'
   
-  s.dependency 'GoogleWebRTC', '1.1.31999'
-  s.pod_target_xcconfig = {
-   'ENABLE_BITCODE' => 'NO',
-   'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-  }
-  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-
+  s.dependency 'HMSWebRTC', '1.0.4516'
+ 
 end
