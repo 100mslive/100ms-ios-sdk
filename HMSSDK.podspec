@@ -11,7 +11,7 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT'}
   s.author           = { 'Dmitry Fedoseyev' => 'dmitry@100ms.live', 'Yogesh Singh' => 'yogesh@100ms.live' }
   s.source           = { :http => 'https://github.com/100mslive/100ms-ios-sdk/releases/download/0.0.12/HMSSDK.xcframework.zip',
-                           :sha256 => '1d33e89b8cae5aaf83dd38e73ce0a5a54d651eee278bbbc73299e766134a0f52'
+                           :sha256 => '0cbfa93e9bbf2f1a47bb457fb718bd47d964f3c0b41047fd93c06709823e7c0c'
 						}
   s.ios.deployment_target = '10.0'
   s.vendored_frameworks = 'HMSSDK.xcframework'
