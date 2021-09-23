@@ -12,7 +12,7 @@ import HMSSDK
 final class PeersListTableViewCell: UITableViewCell {
 
     weak var peer: HMSPeer?
-    
+
     var onSettingsButtonTap: ((UIButton) -> Void)?
 
     @IBOutlet weak var speakingImageView: UIImageView! {
@@ -27,9 +27,8 @@ final class PeersListTableViewCell: UITableViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var videoButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var micButton: UIButton!
 
-    var wasHighlighted = false
+    private var wasHighlighted = false
 
     @objc func micButtonTapped(_ sender: UITapGestureRecognizer) {
         if let localPeer = peer as? HMSLocalPeer, let audio = localPeer.localAudioTrack() {
@@ -58,7 +57,7 @@ final class PeersListTableViewCell: UITableViewCell {
         sender.isSelected = !sender.isSelected
         NotificationCenter.default.post(name: Constants.toggleVideoTapped, object: nil)
     }
-    
+
     @IBAction func settingsButtonTapped(_ sender: UIButton) {
         onSettingsButtonTap?(sender)
     }

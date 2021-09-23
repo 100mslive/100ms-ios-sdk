@@ -36,12 +36,6 @@
                                     <action selector="settingsTapped:" destination="SMR-Mj-Sg7" eventType="touchUpInside" id="12j-ki-Uzh"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
-                                <rect key="frame" x="0.0" y="44" width="215" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
-                                </constraints>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="Xdu-Ni-NoP">
                                 <rect key="frame" x="0.0" y="334" width="375" height="144"/>
                                 <subviews>
@@ -92,25 +86,41 @@
                                 </subviews>
                                 <variation key="heightClass=compact-widthClass=compact" spacingType="standard"/>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bF0-6v-uqx">
+                                <rect key="frame" x="8" y="44" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Tfb-aR-8Rv"/>
+                                    <constraint firstAttribute="width" constant="64" id="jtL-ai-u29"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C2U-dF-Uy4">
+                                <rect key="frame" x="0.0" y="44" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="WfE-uQ-tMe"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FhJ-Ef-bMr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Xdu-Ni-NoP" firstAttribute="centerY" secondItem="jQ1-tl-f6e" secondAttribute="centerY" id="1rs-uc-ZJC"/>
                             <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Bcw-CH-SJE" secondAttribute="trailing" constant="8" id="5Kt-ln-qG7"/>
+                            <constraint firstItem="C2U-dF-Uy4" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="69W-Ja-nyb"/>
                             <constraint firstItem="Hgt-OM-PBn" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" constant="8" id="7pK-WV-Lc3"/>
                             <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Hgt-OM-PBn" secondAttribute="trailing" constant="8" id="ABV-Rw-YSM"/>
                             <constraint firstItem="Xdu-Ni-NoP" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" id="Ddb-DS-3z4"/>
+                            <constraint firstItem="bF0-6v-uqx" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="FKz-sD-48h"/>
                             <constraint firstItem="Xdu-Ni-NoP" firstAttribute="centerX" secondItem="jQ1-tl-f6e" secondAttribute="centerX" id="GoT-EH-oce"/>
-                            <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="C2U-dF-Uy4" secondAttribute="trailing" constant="160" id="P2f-qc-78M"/>
                             <constraint firstItem="FhJ-Ef-bMr" firstAttribute="trailing" secondItem="Xdu-Ni-NoP" secondAttribute="trailing" id="Q5N-a1-rwb"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="top" secondItem="FhJ-Ef-bMr" secondAttribute="top" id="USt-HX-x7x"/>
+                            <constraint firstItem="bF0-6v-uqx" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" constant="8" id="fYD-Xg-gJC"/>
                             <constraint firstItem="Bcw-CH-SJE" firstAttribute="centerY" secondItem="C2U-dF-Uy4" secondAttribute="centerY" id="gu5-Gy-9Nq"/>
                             <constraint firstItem="C2U-dF-Uy4" firstAttribute="leading" secondItem="FhJ-Ef-bMr" secondAttribute="leading" symbolic="YES" id="jjf-8D-Wvx"/>
                         </constraints>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="subviews">
                                 <exclude reference="Bcw-CH-SJE"/>
+                                <exclude reference="bF0-6v-uqx"/>
                                 <exclude reference="C2U-dF-Uy4"/>
                             </mask>
                         </variation>
@@ -118,6 +128,7 @@
                     <navigationItem key="navigationItem" id="WAo-RG-heA"/>
                     <connections>
                         <outlet property="containerStackView" destination="Xdu-Ni-NoP" id="UQT-Rk-64H"/>
+                        <outlet property="hmsGif" destination="bF0-6v-uqx" id="ICf-4U-f0X"/>
                         <outlet property="joinMeetingButton" destination="9ta-CK-XYA" id="gIo-4o-E4d"/>
                         <outlet property="joinMeetingIDField" destination="acw-NV-HwS" id="omq-yN-2nG"/>
                         <outlet property="joinMeetingStackView" destination="Hgt-OM-PBn" id="PTj-r0-034"/>
@@ -289,7 +300,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="100ms-logo" width="7052" height="2130"/>
+        <image name="100ms-logo" width="4706" height="2130"/>
         <image name="arrow.up.right.video" catalog="system" width="128" height="83"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="gear" catalog="system" width="128" height="119"/>

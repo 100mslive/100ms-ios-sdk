@@ -9,7 +9,7 @@ import UIKit
 import HMSSDK
 import MediaPlayer
 
-final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+final class MeetingViewController: UIViewController {
 
     // MARK: - View Properties
 
@@ -17,7 +17,7 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
     internal var roomName: String!
     internal var interactor: HMSSDKInteractor!
 
-    private var viewModel: MeetingViewModel!
+    private var viewModel: MeetingViewModel?
 
     @IBOutlet private weak var roomNameButton: UIButton! {
         didSet {
@@ -35,109 +35,20 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet private weak var publishVideoButton: UIButton!
     @IBOutlet private weak var publishAudioButton: UIButton!
 
-    @IBOutlet weak var loadingIcon: UIImageView! {
+    @IBOutlet private weak var loadingIcon: UIImageView! {
         didSet {
             loadingIcon.rotate()
         }
     }
-    @IBOutlet weak var settingsButton: UIButton! {
+
+    @IBOutlet private weak var settingsButton: UIButton! {
         didSet {
-            settingsButton.imageView?.rotate()
-            if #available(iOS 14.0, *) {
-                settingsButton.menu = menu
-                settingsButton.showsMenuAsPrimaryAction = true
-            } else {
-                // Fallback on earlier versions
-            }
+            updateSettingsButton()
         }
     }
 
-    var menuItems: [UIAction] {
-        
-        var result = [
-            UIAction(title: "Audio Only Mode",
-                     image: UIImage(systemName: "speaker.zzz.fill")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                if self.viewModel.mode != .audioOnly {
-                    self.viewModel.mode = .audioOnly
-                }
-            },
-            UIAction(title: "Show Active Speakers",
-                     image: UIImage(systemName: "person.3.fill")?.withTintColor(.link), handler: { [weak self] (_) in
-                        guard let self = self else { return }
-                        if self.viewModel.mode != .speakers {
-                            self.viewModel.mode = .speakers
-                        }
-                     }),
-            UIAction(title: "Video Only Mode",
-                     image: UIImage(systemName: "video.badge.checkmark")?.withTintColor(.link), handler: { [weak self] (_) in
-                        guard let self = self else { return }
-                        if self.viewModel.mode != .videoOnly {
-                            self.viewModel.mode = .videoOnly
-                        }
-                     }),
-            UIAction(title: "All Pinned Mode",
-                     image: UIImage(systemName: "pin.circle.fill")?.withTintColor(.link), handler: { [weak self] (_) in
-                        guard let self = self else { return }
-                        if self.viewModel.mode != .pinned {
-                            self.viewModel.mode = .pinned
-                        }
-                     }),
-            UIAction(title: "Spotlight Mode",
-                     image: UIImage(systemName: "figure.wave.circle.fill")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                if self.viewModel.mode != .spotlight {
-                    self.viewModel.mode = .spotlight
-                }
-            },
-            UIAction(title: "Hero Mode",
-                     image: UIImage(systemName: "shield.checkerboard")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                if self.viewModel.mode != .hero {
-                    self.viewModel.mode = .hero
-                }
-            },
-            UIAction(title: "Default Mode",
-                     image: UIImage(systemName: "rectangle.grid.2x2.fill")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                if self.viewModel.mode != .regular {
-                    self.viewModel.mode = .regular
-                }
-            }
-        ]
-        
-        if canEndRoom() {
-            let endRoomAction = UIAction(title: "End Room",
-                                         image: UIImage(systemName: "xmark.octagon.fill")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                self.interactor?.hmsSDK?.endRoom(lock: false, reason: "Meeting Ended") { [weak self] success, error in
-                    if let error = error {
-                        self?.showActionError(error, action: "End Room")
-                        return
-                    }
-                    self?.cleanup()
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
-            }
-            result.append(endRoomAction)
-            
-            let endRoomAndLockAction = UIAction(title: "End Room And Lock",
-                                         image: UIImage(systemName: "lock.circle.fill")?.withTintColor(.link)) { [weak self] _ in
-                guard let self = self else { return }
-                self.interactor?.hmsSDK?.endRoom(lock: true, reason: "Meeting Ended")
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
-                    self?.cleanup()
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
-            }
-            result.append(endRoomAndLockAction)
-        }
-        
-        return result
-    }
-
-    var menu: UIMenu {
-        UIMenu(title: "Change Layout", image: nil, identifier: nil, options: [], children: menuItems)
+    private var menu: UIMenu {
+        UIMenu(children: menuItems() + roleBasedActions())
     }
 
     // MARK: - View Lifecycle
@@ -148,215 +59,495 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         UIApplication.shared.isIdleTimerDisabled = true
 
         viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
-        viewModel.onMoreButtonTap = { [weak self] peer, button in
-            self?.showPeerActionsMenu(for: peer, on: button)
-        }
+
         setupButtonStates()
 
         handleError()
         observeBroadcast()
-        
+
         interactor.onRoleChange = { [weak self] request in
             self?.handle(roleChange: request)
         }
-        
+
         interactor.onChangeTrackState = { [weak self] request in
             self?.handle(changeTrackState: request)
         }
-        
+
         interactor.onRemovedFromRoom = { [weak self] notification in
             self?.handle(removedFromRoom: notification)
         }
         
-        viewModel.updateLocalPeerTracks = { [weak self] in
+        interactor.onRecordingUpdate = { [weak self] in
+            self?.updateSettingsButton()
+        }
+
+        viewModel?.updateLocalPeerTracks = { [weak self] in
             self?.setupButtonStates()
         }
-    }
-    
-    private func showPeerActionsMenu(for peer: HMSPeer, on button: UIButton) {
 
-        var actions = [UIAlertAction]()
-        
-        if canRoleChange() {
-            if (peer is HMSRemotePeer) {
-                actions.append(UIAlertAction(title: "Prompt to change role", style: .default) { [weak self, weak peer] _ in
-                    guard let peer = peer else { return }
-                    self?.showRoleChangePrompt(for: peer, force: false)
-                })
-            }
-            actions.append(UIAlertAction(title: "Force change role", style: .default) { [weak self, weak peer] _ in
-                guard let peer = peer else { return }
-                self?.showRoleChangePrompt(for: peer, force: true)
-            })
+        viewModel?.showRoleChangePrompt = { [weak self] peer, force in
+            self?.showRoleChangePrompt(for: peer, force: force)
         }
-        
-        if let remotePeer = peer as? HMSRemotePeer, let audioTrack = remotePeer.remoteAudioTrack(), canRemoteMute() {
-            let shouldMute = !audioTrack.isMute()
-            let actionName = shouldMute ? "Mute Audio" : "Ask To Unmute Audio"
-            actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
-                self?.interactor?.hmsSDK?.changeTrackState(for: audioTrack, mute: shouldMute)
-            })
-        }
-        
-        if let remotePeer = peer as? HMSRemotePeer, let videoTrack = remotePeer.remoteVideoTrack(), canRemoteMute() {
-            let shouldMute = !videoTrack.isMute()
-            let actionName = shouldMute ? "Mute Video" : "Ask To Unmute Video"
-            actions.append(UIAlertAction(title: actionName, style: .default) { [weak self] _ in
-                self?.interactor?.hmsSDK?.changeTrackState(for: videoTrack, mute: shouldMute)
-            })
-        }
-        
-        if let remotePeer = peer as? HMSRemotePeer, canRemovePeer() {
-            actions.append(UIAlertAction(title: "Remove Peer", style: .default) { [weak self] _ in
-                self?.interactor?.hmsSDK?.removePeer(remotePeer, reason: "Your time is up")
-            })
-        }
-        
-        if let remotePeer = peer as? HMSRemotePeer, viewModel.mode != .audioOnly {
-            let layerNameMap: [HMSSimulcastLayer : String] = [ .high : "high", .mid : "mid", .low : "low" ]
-            remotePeer.remoteVideoTrack()?.layerDefinitions?.forEach {
-                let layer = $0.layer
-                guard let layerName = layerNameMap[layer] else { return }
-                actions.append(UIAlertAction(title: "Select \(layerName) layer", style: .default) { [weak remotePeer] _ in
-                    remotePeer?.remoteVideoTrack()?.layer = layer
-                })
-            }
-        }
-        
-        guard actions.count > 0 else {
-            return
-        }
-        
-        let alertController = UIAlertController(title: "Select action",
-                                                message: nil,
-                                                preferredStyle: .actionSheet)
-        
-        actions.forEach { alertController.addAction($0) }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    }
 
-        if let popoverController = alertController.popoverPresentationController {
-            alertController.modalPresentationStyle = .popover
-            popoverController.sourceView = button
-            popoverController.sourceRect = button.bounds
-            popoverController.permittedArrowDirections = []
-        }
-        present(alertController, animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            settingsButton.imageView?.rotate()
+            navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    private func canRoleChange() -> Bool {
-        interactor?.currentRole?.permissions.changeRole ?? false
-    }
-    
-    private func canRemoteMute() -> Bool {
-        interactor?.currentRole?.permissions.mute ?? false
-    }
-    
-    private func canRemovePeer() -> Bool {
-        interactor?.currentRole?.permissions.removeOthers ?? false
-    }
-    
-    private func canEndRoom() -> Bool {
-        interactor?.currentRole?.permissions.endRoom ?? false
-    }
-    
-    private func showRoleChangePrompt(for peer: HMSPeer, force: Bool) {
-        let title = "Role change request"
-
-        let alertController = UIAlertController(title: title,
-                                                message: "\n\n\n\n\n\n\n\n\n",
-                                                preferredStyle: .alert)
-
-        let pickerView = UIPickerView(frame:
-            CGRect(x: 0, y: 50, width: 270, height: 162))
-        pickerView.dataSource = self
-        pickerView.delegate = self
-
-        alertController.view.addSubview(pickerView)
- 
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak pickerView] _ in
-            guard let rowIndex = pickerView?.selectedRow(inComponent: 0),
-                  let targetRole = self?.interactor.roles?[rowIndex] else {
-                return
-            }
-            
-            guard let currentRoleName = peer.role?.name, currentRoleName != targetRole.name else {
-                self?.showRoleIsSameError(for: peer, role: peer.role?.name ?? "")
-                return
-            }
-            
-            self?.interactor?.changeRole(for: peer, to: targetRole, force: force)
-        })
-
-        present(alertController, animated: true)
-    }
-    
-    private func showRoleIsSameError(for peer: HMSPeer, role: String) {
-        let title = "Error"
-
-        let alertController = UIAlertController(title: title,
-                                                message: "\(peer.name) is already a '\(role)'",
-                                                preferredStyle: .alert)
-        
-         
-
-
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
-
-        present(alertController, animated: true)
-    }
-    
-    private func showActionError(_ error: HMSError, action: String) {
-        let title = "Could Not \(action)"
-
-        let alertController = UIAlertController(title: title,
-                                                message: error.message,
-                                                preferredStyle: .alert)
-        
-
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
-
-        present(alertController, animated: true)
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        interactor.roles?.count ?? 0
-    }
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard let role = interactor.roles?[row] else {
-            return ""
-        }
-        
-        return role.name
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             cleanup()
         }
     }
-    
-    private func cleanup() {
-        UIApplication.shared.isIdleTimerDisabled = false
-        viewModel.cleanup()
-    }
 
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        collectionView.reloadData()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { [weak self] _ in
+            self?.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 
-    // MARK: - Action Handlers
+    // MARK: - View Modifiers
+
+    private func observeBroadcast() {
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.joinedRoom,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+            if let strongSelf = self {
+                strongSelf.loadingIcon.hide()
+                strongSelf.updateSettingsButton()
+            }
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.gotError,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+            if let strongSelf = self {
+                strongSelf.loadingIcon.hide()
+                let message = notification.userInfo?["error"] as? String
+                let alert = UIAlertController(title: "ERROR! ❌",
+                                              message: message,
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay",
+                                              style: .default,
+                                              handler: { _ in
+                                                self?.cleanup()
+                                                self?.navigationController?.popToRootViewController(animated: true)
+                                              }))
+                strongSelf.present(alert, animated: true) {
+                    print(#function)
+                }
+            }
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.updatedSpeaker,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] _ in
+
+            if let speaker = self?.viewModel?.speakers.first {
+                self?.roomNameButton.setTitle(" 🔊 " + speaker.peer.name, for: .normal)
+            } else {
+                self?.roomNameButton.setTitle(self?.roomName, for: .normal)
+            }
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleVideoTapped,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+
+            if let video = notification.userInfo?["video"] as? HMSVideoTrack,
+               video.trackId == self?.viewModel?.interactor?.hmsSDK?.localPeer?.videoTrack?.trackId {
+
+                self?.publishVideoButton.isSelected = video.isMute()
+            }
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.toggleAudioTapped,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+
+            if let audio = notification.userInfo?["audio"] as? HMSAudioTrack,
+               audio.trackId == self?.viewModel?.interactor?.hmsSDK?.localPeer?.audioTrack?.trackId {
+
+                self?.publishAudioButton.isSelected = audio.isMute()
+            }
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: Constants.roleUpdated, object: nil, queue: .main) { [weak self] _ in
+            self?.updateSettingsButton()
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.settingsButton.imageView?.rotate()
+        }
+    }
+
+    private func setupButtonStates() {
+        guard let localPeer = viewModel?.interactor?.hmsSDK?.localPeer else {
+            return
+        }
+
+        if let videoTrack = localPeer.videoTrack as? HMSLocalVideoTrack {
+            publishVideoButton.isSelected = videoTrack.isMute()
+            publishVideoButton.isHidden = false
+        } else {
+            publishVideoButton.isHidden = true
+        }
+
+        if let audioTrack = localPeer.audioTrack as? HMSLocalAudioTrack {
+            publishAudioButton.isSelected = audioTrack.isMute()
+            publishAudioButton.isHidden = false
+        } else {
+            publishAudioButton.isHidden = true
+        }
+    }
+
+    private func cleanup() {
+        UIApplication.shared.isIdleTimerDisabled = false
+        viewModel?.cleanup()
+    }
+    
+    // MARK: - Settings Menu Button
+    
+    private func updateSettingsButton() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if #available(iOS 14.0, *) {
+                self.settingsButton.menu = self.menu
+                self.settingsButton.showsMenuAsPrimaryAction = true
+            } else {
+                // Fallback on earlier versions
+            }
+            
+            self.settingsButton.setImage(self.settingsButtonIcon(), for: .normal)
+            self.settingsButton.tintColor = self.settingsButtonTint()
+        }
+    }
+    
+    private func settingsButtonIcon() -> UIImage  {
+        var iconName = "gear"
+        
+        if interactor.isStreaming {
+            iconName = "dot.radiowaves.left.and.right"
+        } else if interactor.isRecording {
+            iconName = "recordingtape"
+        }
+        
+        return UIImage(systemName: iconName) ?? UIImage()
+    }
+    
+    private func settingsButtonTint() -> UIColor  {
+        return interactor.isRecording ? UIColor.red : speakerButton.tintColor
+    }
+    
+    private func menuItems() -> [UIAction] {
+        
+        let currentMode = viewModel?.mode ?? .regular
+        
+        let actions = [
+            UIAction(title: "Audio Only Mode",
+                     image: UIImage(systemName: "megaphone.fill"),
+                     state: currentMode == .audioOnly ? .on : .off) { [weak self] _ in
+                if currentMode != .audioOnly {
+                    self?.viewModel?.mode = .audioOnly
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "Show Active Speakers",
+                     image: UIImage(systemName: "person.3.fill"),
+                     state: currentMode == .speakers ? .on : .off) { [weak self] (_) in
+                if currentMode != .speakers {
+                    self?.viewModel?.mode = .speakers
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "Video Only Mode",
+                     image: UIImage(systemName: "video.fill.badge.checkmark"),
+                     state: currentMode == .videoOnly ? .on : .off) { [weak self] (_) in
+                if currentMode != .videoOnly {
+                    self?.viewModel?.mode = .videoOnly
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "All Pinned Mode",
+                     image: UIImage(systemName: "pin.circle.fill"),
+                     state: currentMode == .pinned ? .on : .off) { [weak self] (_) in
+                if currentMode != .pinned {
+                    self?.viewModel?.mode = .pinned
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "Spotlight Mode",
+                     image: UIImage(systemName: "figure.wave.circle.fill"),
+                     state: currentMode == .spotlight ? .on : .off) { [weak self] _ in
+                if currentMode != .spotlight {
+                    self?.viewModel?.mode = .spotlight
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "Hero Mode",
+                     image: UIImage(systemName: "shield.checkerboard"),
+                     state: currentMode == .hero ? .on : .off) { [weak self] _ in
+                if currentMode != .hero,
+                   let remotePeers = self?.interactor.hmsSDK?.remotePeers?.count, remotePeers > 0 {
+                    self?.viewModel?.mode = .hero
+                    self?.updateSettingsButton()
+                }
+            },
+            UIAction(title: "Default Mode",
+                     image: UIImage(systemName: "rectangle.grid.2x2.fill"),
+                     state: currentMode == .regular ? .on : .off) { [weak self] _ in
+                if currentMode != .regular {
+                    self?.viewModel?.mode = .regular
+                    self?.updateSettingsButton()
+                }
+            }
+        ]
+        
+        return actions
+    }
+
+    private func roleBasedActions() -> [UIAction] {
+        
+        var actions = [UIAction]()
+        
+        if interactor.canRemoteMute {
+            let muteRolesAction = UIAction(title: "Remote Mute Role",
+                                           image: UIImage(systemName: "speaker.slash.circle.fill")) { [weak self] _ in
+                guard let self = self else { return }
+                self.showMutePrompt()
+            }
+            actions.append(muteRolesAction)
+            
+            let muteAllAction = UIAction(title: "Remote Mute All",
+                                         image: UIImage(systemName: "speaker.slash.fill")) { [weak self] _ in
+                guard let self = self else { return }
+                self.interactor.mute(role: nil)
+            }
+            actions.append(muteAllAction)
+        }
+        
+        if interactor.canChangeRole {
+            let changeAllRole = UIAction(title: "Change All Role To Role",
+                                         image: UIImage(systemName: "arrow.triangle.2.circlepath.circle.fill")) { [weak self] _ in
+                guard let roles = self?.interactor.roles else { return }
+                let changeAllRoleController = ChangeAllRoleViewController()
+                changeAllRoleController.knownRoles = roles
+                changeAllRoleController.delegate = self
+                self?.navigationController?.pushViewController(changeAllRoleController, animated: true)
+            }
+            actions.append(changeAllRole)
+        }
+        
+        let startRTMP = UIAction(title: "Start RTMP or Recording",
+                                     image: UIImage(systemName: "record.circle")) { [weak self] _ in
+            let rtmpSettingsController = RTMPSettingsViewController()
+            rtmpSettingsController.delegate = self
+            self?.navigationController?.pushViewController(rtmpSettingsController, animated: true)
+        }
+        actions.append(startRTMP)
+        
+        let stopRTMP = UIAction(title: "Stop RTMP and Recording",
+                                     image: UIImage(systemName: "stop.circle")) { [weak self] _ in
+            guard let self = self else { return }
+            self.interactor?.hmsSDK?.stopRTMPAndRecording() { [weak self] _, error in
+                if let error = error {
+                    self?.showActionError(error, action: "Stop RTMP/Recording")
+                    return
+                }
+                self?.updateSettingsButton()
+            }
+        }
+        actions.append(stopRTMP)
+        
+        if interactor.canEndRoom {
+            let endRoomAction = UIAction(title: "End Room",
+                                         image: UIImage(systemName: "xmark.octagon.fill")) { [weak self] _ in
+                guard let self = self else { return }
+                self.interactor?.hmsSDK?.endRoom(lock: false, reason: "Meeting Ended") { [weak self] _, error in
+                    if let error = error {
+                        self?.showActionError(error, action: "End Room")
+                        return
+                    }
+                    self?.cleanup()
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            actions.append(endRoomAction)
+            
+            let endRoomAndLockAction = UIAction(title: "End Room And Lock",
+                                                image: UIImage(systemName: "lock.circle.fill")) { [weak self] _ in
+                guard let self = self else { return }
+                self.interactor?.hmsSDK?.endRoom(lock: true, reason: "Meeting Ended")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) { [weak self] in
+                    self?.cleanup()
+                    self?.navigationController?.popToRootViewController(animated: true)
+                }
+            }
+            actions.append(endRoomAndLockAction)
+        }
+        
+        return actions
+    }
+    
+    // MARK: - Role Change Interactors
+
+    private func showRoleChangePrompt(for peer: HMSPeer, force: Bool) {
+
+        dismissPresentedController { [weak self] in
+
+            let title = force ? "Force Role Change for \(peer.name)" : "Request to Change Role for \(peer.name)"
+
+            let alertController = UIAlertController(title: title,
+                                                    message: "\n\n\n\n\n\n\n\n\n",
+                                                    preferredStyle: .alert)
+
+            let pickerView = UIPickerView(frame:
+                CGRect(x: 0, y: 50, width: 270, height: 162))
+            pickerView.dataSource = self
+            pickerView.delegate = self
+
+            alertController.view.addSubview(pickerView)
+
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alertController.addAction(UIAlertAction(title: "Send", style: .default) { [weak self, weak pickerView] _ in
+                guard let rowIndex = pickerView?.selectedRow(inComponent: 0),
+                      let targetRole = self?.interactor.roles?[rowIndex] else {
+                    return
+                }
+
+                guard let currentRoleName = peer.role?.name, currentRoleName != targetRole.name else {
+                    self?.showRoleIsSameError(for: peer, role: peer.role?.name ?? "")
+                    return
+                }
+
+                self?.interactor?.changeRole(for: peer, to: targetRole, force: force)
+            })
+
+            self?.present(alertController, animated: true)
+        }
+    }
+
+    private func showMutePrompt() {
+
+        dismissPresentedController { [weak self] in
+
+            let title = "Remote Mute Role"
+
+            let alertController = UIAlertController(title: title,
+                                                    message: "\n\n\n\n\n\n\n\n\n",
+                                                    preferredStyle: .alert)
+
+            let pickerView = UIPickerView(frame:
+                CGRect(x: 0, y: 50, width: 270, height: 162))
+            pickerView.dataSource = self
+            pickerView.delegate = self
+
+            alertController.view.addSubview(pickerView)
+
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            alertController.addAction(UIAlertAction(title: "Mute", style: .default) { [weak self, weak pickerView] _ in
+                guard let rowIndex = pickerView?.selectedRow(inComponent: 0),
+                      let targetRole = self?.interactor.roles?[rowIndex] else {
+                    return
+                }
+                self?.interactor?.mute(role: targetRole)
+            })
+
+            self?.present(alertController, animated: true)
+        }
+    }
+
+    private func dismissPresentedController(completion: @escaping () -> Void) {
+        if self.presentedViewController != nil {
+            self.dismiss(animated: true) {
+                completion()
+                return
+            }
+        }
+        completion()
+    }
+
+    private func showRoleIsSameError(for peer: HMSPeer, role: String) {
+        let title = "Error"
+
+        let alertController = UIAlertController(title: title,
+                                                message: "\(peer.name) is already a '\(role)'",
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+        present(alertController, animated: true)
+    }
+
+    private func handle(roleChange request: HMSRoleChangeRequest) {
+        let title = "Do you want to change your role to: \(request.suggestedRole.name)"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "No", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            self?.interactor?.accept(changeRole: request)
+            self?.setupButtonStates()
+        })
+
+        present(alertController, animated: true)
+    }
+
+    private func handle(changeTrackState request: HMSChangeTrackStateRequest) {
+
+        setupButtonStates()
+
+        guard !request.mute else { return }
+
+        dismiss(animated: true) { [weak self] in
+            let title = "\(request.requestedBy.name) is asking you to unmute \(request.track.kind == .video ? "video" : "audio")"
+
+            let alertController = UIAlertController(title: title,
+                                                    message: nil,
+                                                    preferredStyle: .alert)
+
+            alertController.addAction(UIAlertAction(title: "Unmute", style: .default) { [weak self] _ in
+                if request.track.kind == .video {
+                    self?.viewModel?.switchVideo(isOn: true)
+                } else {
+                    self?.viewModel?.switchAudio(isOn: true)
+                }
+
+                self?.setupButtonStates()
+            })
+            alertController.addAction(UIAlertAction(title: "Ignore", style: .cancel))
+
+            self?.present(alertController, animated: true)
+        }
+    }
+
+    private func handle(removedFromRoom notification: HMSRemovedFromRoomNotification) {
+        let title = "\(notification.requestedBy.name) removed you from this room: \(notification.reason)"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel) { [weak self] _ in
+            self?.cleanup()
+            self?.navigationController?.popToRootViewController(animated: true)
+        })
+
+        present(alertController, animated: true)
+    }
+
+    // MARK: - Error Handlers
 
     private func handleError() {
         _ = NotificationCenter.default.addObserver(forName: Constants.hmsError,
@@ -389,71 +580,19 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
         present(alertController, animated: true, completion: nil)
     }
 
-    private func observeBroadcast() {
-        
+    private func showActionError(_ error: HMSError, action: String) {
+        let title = "Could Not \(action)"
 
-        _ = NotificationCenter.default.addObserver(forName: Constants.joinedRoom,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] _ in
-            if let strongSelf = self {
-                strongSelf.loadingIcon.hide()
-            }
-        }
+        let alertController = UIAlertController(title: title,
+                                                message: error.message,
+                                                preferredStyle: .alert)
 
-        _ = NotificationCenter.default.addObserver(forName: Constants.gotError,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] notification in
-            if let strongSelf = self {
-                strongSelf.loadingIcon.hide()
-                let message = notification.userInfo?["error"] as? String
-                let alert = UIAlertController(title: "ERROR! ❌",
-                                              message: message,
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay",
-                                              style: .default,
-                                              handler: { _ in
-                                                self?.cleanup()
-                                                self?.navigationController?.popToRootViewController(animated: true)
-                                              }))
-                strongSelf.present(alert, animated: true) {
-                    print(#function)
-                }
-            }
-        }
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
 
-        _ = NotificationCenter.default.addObserver(forName: Constants.updatedSpeaker,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] _ in
-
-            if let speaker = self?.viewModel.speakers.first {
-                self?.roomNameButton.setTitle(" 🔊 " + speaker.peer.name, for: .normal)
-            } else {
-                self?.roomNameButton.setTitle(self?.roomName, for: .normal)
-            }
-        }
-
-        _ = NotificationCenter.default.addObserver(forName: Constants.toggleVideoTapped,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] notification in
-
-            if let video = notification.userInfo?["video"] as? HMSVideoTrack,
-               video.trackId == self?.viewModel.interactor?.hmsSDK?.localPeer?.videoTrack?.trackId {
-                
-                self?.publishVideoButton.isSelected = video.isMute()
-            }
-        }
-        
-        _ = NotificationCenter.default.addObserver(forName: Constants.toggleAudioTapped,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] notification in
-
-            if let audio = notification.userInfo?["audio"] as? HMSAudioTrack,
-               audio.trackId == self?.viewModel.interactor?.hmsSDK?.localPeer?.audioTrack?.trackId {
-
-                self?.publishAudioButton.isSelected = audio.isMute()
-            }
-        }
+        present(alertController, animated: true)
     }
+
+    // MARK: - Button Action Handlers
 
     @IBAction private func roomNameTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.peersList, bundle: nil)
@@ -461,29 +600,26 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             return
         }
 
-        viewController.interactor = viewModel.interactor
-        viewController.speakers = viewModel.speakers
-        viewController.onSettingsButtonTap = { [weak self] peer, button in
-            self?.dismiss(animated: true, completion: {
-                self?.showPeerActionsMenu(for: peer, on: button)
-            })   
-        }
+        viewController.roomName = roomName
+        
+        viewController.meetingViewModel = viewModel
+        viewController.speakers = viewModel?.speakers
 
         present(viewController, animated: true)
     }
 
     @IBAction private func muteRemoteStreamsTapped(_ sender: UIButton) {
-        viewModel.muteRemoteStreams(sender.isSelected)
+        viewModel?.muteRemoteStreams(sender.isSelected)
         sender.isSelected = !sender.isSelected
     }
 
     @IBAction private func switchCameraTapped(_ sender: UIButton) {
-        viewModel.switchCamera()
+        viewModel?.switchCamera()
     }
 
     @IBAction private func videoTapped(_ sender: UIButton) {
-        guard viewModel.mode != .audioOnly,
-              let videoTrack = viewModel.interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack else {
+        guard viewModel?.mode != .audioOnly,
+              let videoTrack = viewModel?.interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack else {
             return
         }
         videoTrack.setMute(!sender.isSelected)
@@ -495,7 +631,7 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
     }
 
     @IBAction private func micTapped(_ sender: UIButton) {
-        viewModel.switchAudio(isOn: sender.isSelected)
+        viewModel?.switchAudio(isOn: sender.isSelected)
         UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
         sender.isSelected = !sender.isSelected
     }
@@ -506,8 +642,8 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
             return
         }
 
-        viewController.interactor = viewModel.interactor
-        
+        viewController.interactor = viewModel?.interactor
+
         present(viewController, animated: true)
     }
 
@@ -525,82 +661,44 @@ final class MeetingViewController: UIViewController, UIPickerViewDataSource, UIP
 
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    func setupButtonStates() {
-        guard let localPeer = viewModel.interactor?.hmsSDK?.localPeer else {
-            return
-        }
-        
-        if let videoTrack = localPeer.videoTrack as? HMSLocalVideoTrack {
-            publishVideoButton.isSelected = videoTrack.isMute()
-            publishVideoButton.isHidden = false
-        } else {
-            publishVideoButton.isHidden = true
-        }
-        
-        if let audioTrack = localPeer.audioTrack as? HMSLocalAudioTrack {
-            publishAudioButton.isSelected = audioTrack.isMute()
-            publishAudioButton.isHidden = false
-        } else {
-            publishAudioButton.isHidden = true
-        }
+}
+
+// MARK: - Picker View Delegates
+
+extension MeetingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
     }
-    
-    private func handle(roleChange request: HMSRoleChangeRequest) {
-        let title = "Do you want to change your role to: \(request.suggestedRole.name)"
 
-        let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .alert)
-
-        alertController.addAction(UIAlertAction(title: "No", style: .cancel))
-        alertController.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-            self?.interactor?.accept(changeRole: request)
-            self?.setupButtonStates()
-        })
-
-        present(alertController, animated: true)
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        interactor.roles?.count ?? 0
     }
-    
-    private func handle(changeTrackState request: HMSChangeTrackStateRequest) {
-        setupButtonStates()
-        
-        guard !request.mute else { return }
-        
-        dismiss(animated: true) { [weak self] in
-            let title = "\(request.requestedBy.name) is asking you to unmute \(request.track.kind == .video ? "video" : "audio")"
 
-            let alertController = UIAlertController(title: title,
-                                                    message: nil,
-                                                    preferredStyle: .alert)
-
-            alertController.addAction(UIAlertAction(title: "Unmute", style: .default) { [weak self] _ in
-                if request.track.kind == .video {
-                    self?.viewModel.switchVideo(isOn: true)
-                } else {
-                    self?.viewModel.switchAudio(isOn: true)
-                }
-                
-                self?.setupButtonStates()
-            })
-            alertController.addAction(UIAlertAction(title: "Ignore", style: .cancel))
-
-            self?.present(alertController, animated: true)
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let role = interactor.roles?[row] else {
+            return ""
         }
+
+        return role.name
     }
-    
-    private func handle(removedFromRoom notification: HMSRemovedFromRoomNotification) {
-        let title = "\(notification.requestedBy.name) removed you from this room: \(notification.reason)"
+}
 
-        let alertController = UIAlertController(title: title,
-                                                message: nil,
-                                                preferredStyle: .alert)
+extension MeetingViewController: ChangeAllRoleViewControllerDelegate {
+    func changeAllRoleController(_ changeAllRoleController: ChangeAllRoleViewController, didSelect sourceRoles: [HMSRole]?, targetRole: HMSRole) {
+        interactor?.hmsSDK?.changeRolesOfAllPeers(to: targetRole, limitToRoles: sourceRoles)
+    }
+}
 
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel) { [weak self] _ in
-            self?.cleanup()
-            self?.navigationController?.popToRootViewController(animated: true)
-        })
-
-        present(alertController, animated: true)
+extension MeetingViewController: RTMPSettingsViewControllerDelegate {
+    func rtmpSettingsController(_ rtmpSettingsController: RTMPSettingsViewController, didSelect config: HMSRTMPConfig) {
+        interactor?.hmsSDK?.startRTMPOrRecording(config: config) { [weak self] _, error in
+            if let error = error {
+                self?.showActionError(error, action: "Start RTMP/Recording")
+                return
+            }
+            
+            self?.updateSettingsButton()
+        }
     }
 }

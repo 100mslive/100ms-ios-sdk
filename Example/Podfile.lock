@@ -1,23 +1,28 @@
 PODS:
-  - GoogleWebRTC (1.1.31999)
-  - HMSSDK (0.0.11):
-    - GoogleWebRTC (= 1.1.31999)
+  - Eureka (5.3.3)
+  - HMSSDK (0.0.12):
+    - HMSWebRTC (= 1.0.4516)
+  - HMSWebRTC (1.0.4516)
+  - SwiftyGif (5.4.0)
 
 DEPENDENCIES:
-  - HMSSDK (from `../HMSSDK.podspec`)
+  - Eureka
+  - HMSSDK
+  - SwiftyGif
 
 SPEC REPOS:
   trunk:
-    - GoogleWebRTC
-
-EXTERNAL SOURCES:
-  HMSSDK:
-    :path: "../HMSSDK.podspec"
+    - Eureka
+    - HMSSDK
+    - HMSWebRTC
+    - SwiftyGif
 
 SPEC CHECKSUMS:
-  GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
-  HMSSDK: 852430e29e1f409fc4dad3b52ede0d276c6660d8
+  Eureka: e6d720290c56bb23333ad1a0e020b2a98a0e9a43
+  HMSSDK: 95e3445835763f3cd7cac84f0a6e6e8f8e037bdd
+  HMSWebRTC: 0dbcff2b03adf79ce6f1129e541af5dc342ed88f
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
 
-PODFILE CHECKSUM: d46625b139324249268d541039005a0005b46897
+PODFILE CHECKSUM: 9550c7c0b43ebff6b93bf9b2c1d9cd4e04d5379f
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

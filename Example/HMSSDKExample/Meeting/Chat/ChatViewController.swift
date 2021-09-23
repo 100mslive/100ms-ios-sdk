@@ -27,51 +27,50 @@ final class ChatViewController: UIViewController {
             }
         }
     }
-    
+
     typealias DataSource = UITableViewDiffableDataSource<ChatSection, HMSMessage>
     typealias Snapshot = NSDiffableDataSourceSnapshot<ChatSection, HMSMessage>
 
     private lazy var dataSource = makeDataSource()
-    
+
     var menu: UIMenu {
-        UIMenu(title: "Send Message to", image: nil, identifier: nil, options: [], children: menuItems)
+        UIMenu(title: "Send Message to", children: menuItems)
     }
-    
+
     var menuItems: [UIAction] {
-        
+
         var result = [
             UIAction(title: "Everyone",
-                     image: UIImage(systemName: "speaker.wave.3")?.withTintColor(.link)) { [weak self] _ in
+                     image: UIImage(systemName: "speaker.wave.3.fill")) { [weak self] _ in
                 self?.selectedRecipient = nil // implies send message to all
                 self?.receiverButton.setTitle("Everyone", for: .normal)
             }
         ]
-        
+
         if let roles = interactor?.hmsSDK?.roles {
             roles.forEach { role in
-                result.append(UIAction(title: role.name, image: nil) { [weak self] _ in
+                result.append(UIAction(title: role.name, image: UIImage(systemName: "person.3.fill")) { [weak self] _ in
                     self?.selectedRecipient = role
                     self?.receiverButton.setTitle(role.name, for: .normal)
                 })
             }
         }
-        
+
         if let peers = interactor?.hmsSDK?.remotePeers {
             let sortedPeers = peers.sorted { $0.name < $1.name }
-            
+
             sortedPeers.forEach { peer in
-                result.append(UIAction(title: peer.name, image: nil) { [weak self] _ in
+                result.append(UIAction(title: peer.name, image: UIImage(systemName: "person.crop.circle")) { [weak self] _ in
                     self?.selectedRecipient = peer
                     self?.receiverButton.setTitle(peer.name, for: .normal)
                 })
             }
         }
-        
+
         return result
     }
-    
+
     var selectedRecipient: AnyObject?
-    
 
     // MARK: - View Lifecycle
 
@@ -91,12 +90,12 @@ final class ChatViewController: UIViewController {
         super.viewWillAppear(animated)
         textField.becomeFirstResponder()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         applySnapshot()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -113,13 +112,13 @@ final class ChatViewController: UIViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
 
         guard let userInfo = notification.userInfo,
-              var keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
+              var keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else { return }
 
         keyboardFrame = view.convert(keyboardFrame, from: nil)
 
         var contentInset = table.contentInset
-        contentInset.bottom = keyboardFrame.size.height + 30
+        contentInset.bottom = keyboardFrame.size.height
         table.contentInset = contentInset
     }
 
@@ -151,10 +150,10 @@ final class ChatViewController: UIViewController {
         else { return }
 
         sender.isEnabled = false
-        
+
         let messageHandler: ((HMSMessage?, HMSError?) -> Void) = { [weak self, weak sender] message, error in
             sender?.isEnabled = true
-            
+
             if let message = message {
                 self?.append(message)
             } else if let error = error {
@@ -171,24 +170,23 @@ final class ChatViewController: UIViewController {
             interactor.hmsSDK?.sendBroadcastMessage(message: message, completion: messageHandler)
         }
     }
-    
+
     private func showMessageSendError(_ error: HMSError) {
         let title = "Could Not Send a Message"
 
         let alertController = UIAlertController(title: title,
                                                 message: error.message,
                                                 preferredStyle: .alert)
-        
 
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
 
         present(alertController, animated: true)
     }
-    
-    private func append(_ message: HMSMessage)  {
+
+    private func append(_ message: HMSMessage) {
         interactor?.messages.append(message)
         applySnapshot()
-        
+
         if let index = dataSource?.indexPath(for: message) {
             table.scrollToRow(at: index, at: .top, animated: true)
         }
@@ -224,31 +222,31 @@ extension ChatViewController {
             name = peer.name
             isLocal = (peer.peerID == interactor?.hmsSDK?.localPeer?.peerID)
         }
-        
+
         guard let name = name else { return }
 
         if isLocal {
             cell.nameLabel.textAlignment = .right
-            cell.messageLabel.textAlignment = .right
+            cell.messageView.textAlignment = .right
         } else {
             cell.nameLabel.textAlignment = .left
-            cell.messageLabel.textAlignment = .left
+            cell.messageView.textAlignment = .left
         }
 
         let attributedString = NSMutableAttributedString(string: name, attributes: [.foregroundColor: UIColor.link])
-        
+
         if let attributedSender = getSender(message) {
             attributedString.append(attributedSender)
         }
-        
+
         cell.nameLabel.attributedText = attributedString
-        cell.messageLabel.text = message.message
+        cell.messageView.text = message.message
     }
-    
+
     func getSender(_ message: HMSMessage) -> NSAttributedString? {
         let attributes = [ NSAttributedString.Key.foregroundColor: UIColor.black,
                            NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .body)]
-        
+
         switch message.recipient.type {
         case .peer:
             if let name = message.recipient.peerRecipient?.name {

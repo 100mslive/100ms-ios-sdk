@@ -1,6 +1,6 @@
 //
 //  Utilities.swift
-//  HMSVideo_Example
+//  HMSSDKExample
 //
 //  Created by Yogesh Singh on 26/02/21.
 //  Copyright © 2021 100ms. All rights reserved.
@@ -15,7 +15,7 @@ final class Utilities {
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
     }
-    
+
     class func applyBorder(on view: UIView, skipColor: Bool = false) {
         if !skipColor {
             view.layer.borderColor = UIColor(named: "Border")?.cgColor
@@ -97,7 +97,6 @@ protocol ErrorProtocol: LocalizedError {
     var title: String { get }
     var code: Int? { get }
     var localizedDescription: String { get }
-
 }
 
 enum Layout {

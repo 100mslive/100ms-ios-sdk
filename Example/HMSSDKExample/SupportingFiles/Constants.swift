@@ -10,11 +10,11 @@ import Foundation
 
 /// No Modifications required here. Ensure you have entered correct Token endpoint in the TokenEndpoint.swift file
 struct Constants {
-    
+
     // MARK: Room Setup
-    
+
     static let tokenQuery = "api/token"
-    
+
     static let getTokenURL = TokenEndpoint.tokenEndpoint + tokenQuery
 
     static let defaultRoomID = ""
@@ -56,15 +56,17 @@ struct Constants {
     static let updatedSpeaker = Notification.Name("UPDATED_SPEAKERS")
 
     static let toggleVideoTapped = Notification.Name("TOGGLE_VIDEO_TAPPED")
-    
+
     static let updateVideoCellButton = Notification.Name("UPDATE_VIDEO_CELL_BUTTON")
-    
+
     static let toggleAudioTapped = Notification.Name("TOGGLE_AUDIO_TAPPED")
+
+    static let roleUpdated = Notification.Name("ROLE_UPDATED")
 
     // MARK: - View Constants
 
     static let meeting = "Meeting"
-    
+
     static let previewControllerIdentifier = "PreviewController"
 
     static let settings = "Settings"
@@ -116,4 +118,8 @@ struct Constants {
     static let videoResolution = "videoResolution"
 
     static let videoBitRate = "videoBitRate"
+}
+
+enum ViewModes: String {
+    case regular, audioOnly, videoOnly, speakers, pinned, spotlight, hero
 }

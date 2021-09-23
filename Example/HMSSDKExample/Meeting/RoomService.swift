@@ -1,6 +1,6 @@
 //
 //  RoomService.swift
-//  HMSVideo_Example
+//  HMSSDKExample
 //
 //  Created by Yogesh Singh on 05/03/21.
 //  Copyright © 2021 100ms. All rights reserved.

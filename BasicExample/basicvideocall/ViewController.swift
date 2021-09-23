@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     lazy var stackView: UIStackView = {
         let result = UIStackView()
         result.axis = .vertical
-        
+
         view.addSubview(result)
         result.translatesAutoresizingMaskIntoConstraints = false
         result.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -22,17 +22,17 @@ class ViewController: UIViewController {
         let heightConstraint =  result.heightAnchor.constraint(equalToConstant: 0)
         heightConstraint.isActive = true
         heightConstraint.priority = .defaultLow
-        
+
         return result
     }()
-    
+
     var trackViewMap = [HMSTrack: HMSVideoView]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         joinRoom()
     }
-    
+
     func joinRoom() {
         let config = HMSConfig(userID: UUID().uuidString, roomID: "inset room id", authToken: "inset token here")
         hmsSDK.join(config: config, delegate: self)
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         hmsSDK.localPeer?.localVideoTrack()?.setMute(true)
         hmsSDK.leave()
     }
-    
+
     func addVideoView(for track: HMSVideoTrack) {
         let videoView = HMSVideoView()
         videoView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(videoView)
         trackViewMap[track] = videoView
     }
-    
+
     func removeVideoView(for track: HMSVideoTrack) {
         trackViewMap[track]?.removeFromSuperview()
     }
@@ -58,11 +58,11 @@ class ViewController: UIViewController {
 extension ViewController: HMSUpdateListener {
     func on(join room: HMSRoom) {
     }
-    
+
     func on(room: HMSRoom, update: HMSRoomUpdate) {
-        
+
     }
-    
+
     func on(peer: HMSPeer, update: HMSPeerUpdate) {
         switch update {
         case .peerLeft:
@@ -73,7 +73,7 @@ extension ViewController: HMSUpdateListener {
             break
         }
     }
-    
+
     func on(track: HMSTrack, update: HMSTrackUpdate, for peer: HMSPeer) {
         switch update {
         case .trackAdded:
@@ -88,24 +88,24 @@ extension ViewController: HMSUpdateListener {
             break
         }
     }
-    
+
     func on(error: HMSError) {
         print(error.description)
     }
-    
+
     func on(message: HMSMessage) {
-        
+
     }
-    
+
     func on(updated speakers: [HMSSpeaker]) {
-        
+
     }
-    
+
     func onReconnecting() {
-        
+
     }
-    
+
     func onReconnected() {
-        
+
     }
 }
