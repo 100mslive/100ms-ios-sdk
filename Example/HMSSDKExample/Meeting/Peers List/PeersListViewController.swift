@@ -14,20 +14,26 @@ final class PeersListViewController: UIViewController {
     @IBOutlet private weak var participantsTitle: UIButton!
 
     @IBOutlet private  weak var table: UITableView!
-    
-    internal var interactor: HMSSDKInteractor?
 
-    internal var speakers = [HMSViewModel]()
-    
-    var onSettingsButtonTap: ((HMSPeer, UIButton) -> Void)?
+    internal var roomName: String!
+
+    @IBOutlet weak var roomNameButton: UIButton! {
+        didSet {
+            roomNameButton.setTitle(roomName, for: .normal)
+        }
+    }
+
+    internal var meetingViewModel: MeetingViewModel?
+
+    internal var speakers: [HMSViewModel]?
 
     typealias DataSource = UITableViewDiffableDataSource<PeersSection, HMSPeer>
     typealias Snapshot = NSDiffableDataSourceSnapshot<PeersSection, HMSPeer>
 
     private lazy var dataSource = makeDataSource()
 
-    var peers: [HMSPeer]? {
-        if let peers = interactor?.hmsSDK?.room?.peers {
+    internal var peers: [HMSPeer]? {
+        if let peers = meetingViewModel?.interactor?.hmsSDK?.room?.peers {
             let sortedPeers = peers.sorted { (lhs, rhs) -> Bool in
                 lhs.name.lowercased() < rhs.name.lowercased()
             }
@@ -48,8 +54,8 @@ final class PeersListViewController: UIViewController {
     }
 
     fileprivate func updatePeersCount() {
-        let count = interactor?.hmsSDK?.room?.peers.count ?? 0
-        let title = "Participants " + (count > 0 ? "(\(count))" : "")
+        let count = meetingViewModel?.interactor?.hmsSDK?.room?.peers.count ?? 0
+        let title = "Peers " + (count > 0 ? "(\(count))" : "")
         participantsTitle.setTitle(title, for: .normal)
     }
 
@@ -85,11 +91,19 @@ final class PeersListViewController: UIViewController {
         cell.peer = peer
         cell.nameLabel.text = peer.name
         if let role = peer.role?.name {
-            cell.roleLabel.text = role
+            cell.roleLabel.text = role.capitalized
         }
-    
-        cell.onSettingsButtonTap = { [weak self] button in
-            self?.onSettingsButtonTap?(peer, button)
+
+        if #available(iOS 14.0, *) {
+            if let menu = meetingViewModel?.getMenu(for: peer) {
+                cell.settingsButton.menu = menu
+                cell.settingsButton.showsMenuAsPrimaryAction = true
+                cell.settingsButton.isEnabled = true
+            } else {
+                cell.settingsButton.isEnabled = false
+            }
+        } else {
+            // Fallback on earlier versions
         }
 
         updatePeersCount()
@@ -99,7 +113,7 @@ final class PeersListViewController: UIViewController {
 
     func updateSpeaker(_ cell: PeersListTableViewCell, _ peer: HMSPeer) {
 
-        if speakers.first(where: { $0.peer.peerID == peer.peerID }) != nil {
+        if speakers?.first(where: { $0.peer.peerID == peer.peerID }) != nil {
             let animatedImage = UIImage.animatedImage(with: animatedImages(), duration: 1)
             cell.speakingImageView.image = animatedImage
         } else {

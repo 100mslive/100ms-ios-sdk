@@ -3,7 +3,9 @@
 platform :ios, '13.0'
 
 target 'HMSSDKExample' do
-  pod 'HMSSDK', '0.0.12'
+  pod 'HMSSDK'
+  pod 'Eureka'
+  pod 'SwiftyGif'
 
   target 'HMSSDKExampleTests' do
     inherit! :search_paths

@@ -6,13 +6,26 @@
 //
 
 import UIKit
-import AVKit
+import SwiftyGif
 
 final class LoginViewController: UIViewController {
 
     // MARK: - View Properties
+    @IBOutlet weak var hmsGif: UIImageView! {
+        didSet {
+            do {
+                let gif = try UIImage(gifName: "100ms.gif")
+                let imageview = UIImageView(gifImage: gif, loopCount: -1)
+                imageview.frame = hmsGif.bounds
+                hmsGif.addSubview(imageview)
+                Utilities.drawCorner(on: hmsGif)
+            } catch {
+                print(error)
+            }
+        }
+    }
 
-    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet private weak var settingsButton: UIButton!
 
     @IBOutlet private weak var containerStackView: UIStackView! {
         didSet {
@@ -70,36 +83,64 @@ final class LoginViewController: UIViewController {
     }
 
     // MARK: - View Modifiers
- 
 
-    // MARK: - Action Handlers
-
-    func observeNotifications() {
+    private func observeNotifications() {
         _ = NotificationCenter.default.addObserver(forName: Constants.deeplinkTapped,
                                                    object: nil,
-                                                   queue: .main) { notification in
+                                                   queue: .main) { [weak self] notification in
             guard let info = notification.userInfo,
-                  let roomID = info[Constants.roomIDKey] as? String else {
+                  let roomID = info[Constants.roomIDKey] as? String,
+                  let strongSelf = self,
+                  !strongSelf.checkIfInMeeting()
+            else {
                 print(#function, "Error: Could not find correct Deep link URL")
                 return
             }
 
-            self.joinMeetingIDField.text = roomID
+            self?.joinMeetingIDField.text = roomID
 
-            self.showInputAlert()
+            self?.showInputAlert()
+        }
+
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+            self?.settingsButton.imageView?.rotate()
         }
     }
+
+    private func checkIfInMeeting() -> Bool {
+        if let controllers = navigationController?.viewControllers {
+            for controller in controllers {
+                if controller.isKind(of: PreviewViewController.self) ||
+                    controller.isKind(of: MeetingViewController.self) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    private func save(_ name: String, _ room: String, _ meeting: String? = nil) {
+        let userDefaults = UserDefaults.standard
+
+        userDefaults.set(name, forKey: Constants.defaultName)
+        userDefaults.set(room, forKey: Constants.roomIDKey)
+
+        if let meeting = meeting {
+            userDefaults.set(meeting, forKey: "meeting")
+        }
+    }
+
+    // MARK: - Action Handlers
 
     @objc private func dismissKeyboard(_ sender: Any) {
         joinMeetingIDField.resignFirstResponder()
     }
 
-    
-
     @IBAction private func startMeetingTapped(_ sender: UIButton) {
+
         showInputAlert()
     }
-    
+
     private func showInputAlert() {
 
         let title = "Join a Meeting"
@@ -160,17 +201,6 @@ final class LoginViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func save(_ name: String, _ room: String, _ meeting: String? = nil) {
-        let userDefaults = UserDefaults.standard
-
-        userDefaults.set(name, forKey: Constants.defaultName)
-        userDefaults.set(room, forKey: Constants.roomIDKey)
-
-        if let meeting = meeting {
-            userDefaults.set(meeting, forKey: "meeting")
-        }
-    }
-
     @IBAction private func settingsTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.settings, bundle: nil)
                 .instantiateInitialViewController() as? SettingsViewController
@@ -181,4 +211,3 @@ final class LoginViewController: UIViewController {
         present(viewController, animated: true)
     }
 }
- 

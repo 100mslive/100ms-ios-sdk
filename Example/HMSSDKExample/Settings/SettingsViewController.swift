@@ -1,6 +1,6 @@
 //
 //  SettingsViewController.swift
-//  HMSVideo_Example
+//  HMSSDKExample
 //
 //  Created by Yogesh Singh on 27/02/21.
 //  Copyright © 2021 100ms. All rights reserved.

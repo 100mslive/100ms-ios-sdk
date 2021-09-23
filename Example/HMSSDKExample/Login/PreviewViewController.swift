@@ -10,10 +10,12 @@ import UIKit
 import HMSSDK
 
 class PreviewViewController: UIViewController {
-    
+
+    // MARK: - Instance Properties
+
     internal var user: String!
     internal var roomName: String!
-    
+
     private var videoTrack: HMSLocalVideoTrack?
     private var audioTrack: HMSLocalAudioTrack?
     private var interactor: HMSSDKInteractor!
@@ -22,20 +24,50 @@ class PreviewViewController: UIViewController {
 
     @IBOutlet private weak var publishVideoButton: UIButton!
     @IBOutlet private weak var publishAudioButton: UIButton!
-    @IBOutlet private weak var joinButton: UIButton!
-    
+    @IBOutlet private weak var joinButton: UIButton! {
+        didSet {
+            Utilities.drawCorner(on: joinButton)
+        }
+    }
+
+    // MARK: - View Modifiers
+
     override func viewDidLoad() {
-        interactor = HMSSDKInteractor(for: user, in: roomName) {}
+
         joinButton.isEnabled = false
         publishVideoButton.isHidden = true
         publishAudioButton.isHidden = true
         previewView.mirror = true
 
-        interactor.onPreview = { [weak self] room, tracks in
+        setupInteractor()
+
+        observeBroadcast()
+    }
+
+    private func setupTracks(tracks: [HMSTrack]) {
+        for track in tracks {
+            if let videoTrack = track as? HMSLocalVideoTrack {
+                self.videoTrack = videoTrack
+                previewView.setVideoTrack(videoTrack)
+                publishVideoButton.isHidden = false
+            }
+
+            if let audioTrack = track as? HMSLocalAudioTrack {
+                self.audioTrack = audioTrack
+                publishAudioButton.isHidden = false
+            }
+        }
+    }
+
+    private func setupInteractor() {
+        interactor = HMSSDKInteractor(for: user, in: roomName) {}
+        interactor.onPreview = { [weak self] _, tracks in
             self?.setupTracks(tracks: tracks)
             self?.joinButton.isEnabled = true
         }
-        
+    }
+
+    private func observeBroadcast() {
         _ = NotificationCenter.default.addObserver(forName: Constants.gotError,
                                                    object: nil,
                                                    queue: .main) { [weak self] notification in
@@ -56,27 +88,14 @@ class PreviewViewController: UIViewController {
             }
         }
     }
-    
-    private func setupTracks(tracks: [HMSTrack]) {
-        for track in tracks {
-            if let videoTrack = track as? HMSLocalVideoTrack {
-                self.videoTrack = videoTrack
-                previewView.setVideoTrack(videoTrack)
-                publishVideoButton.isHidden = false
-            }
-            
-            if let audioTrack = track as? HMSLocalAudioTrack {
-                self.audioTrack = audioTrack
-                publishAudioButton.isHidden = false
-            }
-        }
-    }
-    
+
+    // MARK: - Action Handlers
+
     @IBAction private func backButtonTapped(_ sender: UIButton) {
         interactor.leave()
         navigationController?.popViewController(animated: true)
     }
-    
+
     @IBAction private func startMeetingTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
                 .instantiateInitialViewController() as? MeetingViewController
@@ -90,7 +109,7 @@ class PreviewViewController: UIViewController {
 
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
+
     @IBAction private func cameraTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         videoTrack?.setMute(sender.isSelected)
