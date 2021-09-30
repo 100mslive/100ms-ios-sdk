@@ -175,7 +175,7 @@ final class LoginViewController: UIViewController {
         }
 
         guard let name = alertController.textFields?[0].text, !name.isEmpty,
-              let viewController = self.storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? PreviewViewController
+              let viewController = self.storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? PreJoinPreviewViewController
         else {
             dismiss(animated: true)
             let message = "Enter Name!"

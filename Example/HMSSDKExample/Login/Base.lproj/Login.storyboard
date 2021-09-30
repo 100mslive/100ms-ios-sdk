@@ -139,10 +139,10 @@
             </objects>
             <point key="canvasLocation" x="37.600000000000001" y="132.68365817091455"/>
         </scene>
-        <!--Preview View Controller-->
+        <!--Pre Join Preview View Controller-->
         <scene sceneID="cCs-zB-ROG">
             <objects>
-                <viewController storyboardIdentifier="PreviewController" id="CB4-9g-lxH" customClass="PreviewViewController" customModule="HMSSDKExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PreviewController" id="CB4-9g-lxH" customClass="PreJoinPreviewViewController" customModule="HMSSDKExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RjW-9p-BdA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

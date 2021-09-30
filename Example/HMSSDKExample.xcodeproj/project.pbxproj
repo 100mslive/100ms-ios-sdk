@@ -12,6 +12,8 @@
 		9174C9F426FCB46200FD7C04 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */; };
 		9174C9F526FCB46200FD7C04 /* ChangeAllRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174C9F326FCB46200FD7C04 /* ChangeAllRoleViewController.swift */; };
 		9174C9F726FCB53900FD7C04 /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9174C9F626FCB53900FD7C04 /* 100ms.gif */; };
+		91CB89C32705E0BF00F26322 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */; };
+		91CB89C52705E0D400F26322 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */; };
 		91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E7E144268C70F2001D988E /* PreviewViewController.swift */; };
 		E44618962E5579DC60167A75 /* libPods-HMSSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FD07183472B4CF2C889F80E /* libPods-HMSSDKExample.a */; };
 		EC8CEE71261E297F002DC12E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE40261E297F002DC12E /* Settings.storyboard */; };
@@ -61,6 +63,8 @@
 		9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
 		9174C9F326FCB46200FD7C04 /* ChangeAllRoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAllRoleViewController.swift; sourceTree = "<group>"; };
 		9174C9F626FCB53900FD7C04 /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
+		91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
+		91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
 		91E7E144268C70F2001D988E /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		C151C9723A76E1E1A685555E /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC7807E7261E2B1C0021903D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 			children = (
 				9174C9F126FCB46200FD7C04 /* Menus */,
 				EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */,
+				91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */,
 				EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */,
 				EC8CEE4D261E297F002DC12E /* HMSSDKInteractor.swift */,
 				EC8CEE5F261E297F002DC12E /* RoomService.swift */,
@@ -258,6 +263,7 @@
 			children = (
 				EC8CEE6F261E297F002DC12E /* LoginViewController.swift */,
 				91E7E144268C70F2001D988E /* PreviewViewController.swift */,
+				91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */,
 				EC8CEE48261E297F002DC12E /* Login.storyboard */,
 			);
 			path = Login;
@@ -443,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				914DCAF826BC291B00D8D348 /* TokenEndpoint.swift in Sources */,
+				91CB89C52705E0D400F26322 /* RolePreviewViewController.swift in Sources */,
 				EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */,
 				EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */,
 				91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */,
@@ -453,6 +460,7 @@
 				EC8CEE8D261E297F002DC12E /* AppDelegate.swift in Sources */,
 				EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */,
 				EC8CEE87261E297F002DC12E /* Constants.swift in Sources */,
+				91CB89C32705E0BF00F26322 /* PreJoinPreviewViewController.swift in Sources */,
 				EC8CEE7A261E297F002DC12E /* PeersListViewController.swift in Sources */,
 				EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */,
 				EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */,

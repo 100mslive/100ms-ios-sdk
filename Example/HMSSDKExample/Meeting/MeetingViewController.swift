@@ -487,7 +487,7 @@ final class MeetingViewController: UIViewController {
 
         present(alertController, animated: true)
     }
-
+    
     private func handle(roleChange request: HMSRoleChangeRequest) {
         let title = "Do you want to change your role to: \(request.suggestedRole.name)"
 
@@ -500,8 +500,22 @@ final class MeetingViewController: UIViewController {
             self?.interactor?.accept(changeRole: request)
             self?.setupButtonStates()
         })
+        alertController.addAction(UIAlertAction(title: "Preview", style: .default) { [weak self] _ in
+            self?.showRolePreview(for: request)
+        })
 
         present(alertController, animated: true)
+    }
+
+    private func showRolePreview(for request: HMSRoleChangeRequest) {
+        guard let viewController = storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? RolePreviewViewController else {
+            return
+        }
+
+        viewController.roleChangeRequest = request
+        viewController.interactor = interactor
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     private func handle(changeTrackState request: HMSChangeTrackStateRequest) {
