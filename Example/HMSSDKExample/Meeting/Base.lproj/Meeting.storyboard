@@ -396,6 +396,132 @@
             </objects>
             <point key="canvasLocation" x="82.6171875" y="62.811127379209367"/>
         </scene>
+        <!--Role Preview View Controller-->
+        <scene sceneID="N2p-5T-n6b">
+            <objects>
+                <viewController storyboardIdentifier="PreviewController" id="Ao3-xT-r7r" customClass="RolePreviewViewController" customModule="HMSSDKExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xGH-VN-Wh7">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TX6-ho-gBQ" customClass="HMSVideoView">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="854"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="Kw9-i7-Npz">
+                                <rect key="frame" x="0.0" y="332" width="390" height="180"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="2eU-DL-fy1">
+                                        <rect key="frame" x="107" y="0.0" width="176" height="64"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNR-Wo-sah">
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="64" id="5Zg-7v-fhl"/>
+                                                    <constraint firstAttribute="height" constant="64" id="YRj-Js-wcg"/>
+                                                </constraints>
+                                                <state key="normal" image="video.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <state key="selected" image="video.slash.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cameraTapped:" destination="Ao3-xT-r7r" eventType="touchUpInside" id="Qqr-AX-6Pa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-OM-OYG">
+                                                <rect key="frame" x="112" y="0.0" width="64" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="5Tz-WC-vUq"/>
+                                                    <constraint firstAttribute="width" constant="64" id="iGh-JG-QON"/>
+                                                </constraints>
+                                                <state key="normal" image="mic.circle.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <state key="selected" image="mic.slash.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="micTapped:" destination="Ao3-xT-r7r" eventType="touchUpInside" id="YUP-to-Ahg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jhu-tr-E36">
+                                        <rect key="frame" x="8" y="112" width="374" height="68"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMk-LA-3LU">
+                                                <rect key="frame" x="15" y="8" width="344" height="52"/>
+                                                <color key="backgroundColor" systemColor="linkColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="gs7-gb-bP3"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                                <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Change Role">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    </preferredSymbolConfiguration>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeRoleTapped:" destination="Ao3-xT-r7r" eventType="touchUpInside" id="hOB-EQ-A0V"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
+                                    </stackView>
+                                </subviews>
+                                <variation key="heightClass=compact-widthClass=compact" spacingType="standard"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9yy-l8-KKN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9yy-l8-KKN" firstAttribute="trailing" secondItem="Jhu-tr-E36" secondAttribute="trailing" constant="8" id="0a1-35-TOw"/>
+                            <constraint firstItem="9yy-l8-KKN" firstAttribute="trailing" secondItem="TX6-ho-gBQ" secondAttribute="trailing" id="0sn-vb-17E">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="TX6-ho-gBQ" firstAttribute="leading" secondItem="9yy-l8-KKN" secondAttribute="leading" id="4GU-zH-c2H">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="9yy-l8-KKN" firstAttribute="trailing" secondItem="Kw9-i7-Npz" secondAttribute="trailing" id="Iqi-jT-oCM"/>
+                            <constraint firstItem="Jhu-tr-E36" firstAttribute="leading" secondItem="9yy-l8-KKN" secondAttribute="leading" constant="8" id="PhA-Jb-f3E"/>
+                            <constraint firstItem="Kw9-i7-Npz" firstAttribute="centerX" secondItem="xGH-VN-Wh7" secondAttribute="centerX" id="cG5-bg-wMz"/>
+                            <constraint firstItem="9yy-l8-KKN" firstAttribute="bottom" secondItem="TX6-ho-gBQ" secondAttribute="bottom" constant="-2" id="j91-P7-tFE">
+                                <variation key="heightClass=compact-widthClass=compact" constant="-24"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="TX6-ho-gBQ" firstAttribute="top" secondItem="9yy-l8-KKN" secondAttribute="top" id="jRA-ju-Fw2">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-44"/>
+                            </constraint>
+                            <constraint firstItem="Kw9-i7-Npz" firstAttribute="leading" secondItem="9yy-l8-KKN" secondAttribute="leading" id="mX9-lA-ByO"/>
+                            <constraint firstItem="Kw9-i7-Npz" firstAttribute="centerY" secondItem="xGH-VN-Wh7" secondAttribute="centerY" id="xF2-Ap-ojQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="wIf-yN-DHD"/>
+                    <connections>
+                        <outlet property="changeRoleButton" destination="gMk-LA-3LU" id="Y66-Bu-3Yh"/>
+                        <outlet property="previewView" destination="TX6-ho-gBQ" id="QKB-4G-8Mk"/>
+                        <outlet property="publishAudioButton" destination="QFk-OM-OYG" id="CD0-e3-hgU"/>
+                        <outlet property="publishVideoButton" destination="TNR-Wo-sah" id="zrd-ZI-uMU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8dB-Mg-DQA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090" y="132"/>
+        </scene>
     </scenes>
     <resources>
         <image name="100ms-icon" width="1598" height="1598"/>
@@ -405,6 +531,7 @@
         <image name="exclamationmark.shield.fill" catalog="system" width="128" height="118"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
+        <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
         <image name="phone.down.fill" catalog="system" width="128" height="52"/>

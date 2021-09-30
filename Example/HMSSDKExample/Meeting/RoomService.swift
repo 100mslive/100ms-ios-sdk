@@ -84,7 +84,7 @@ struct RoomService {
                       "user_id": user,
                       "role": "host"]
 
-        print(#function, "URL: ", url, "\nBody: ", body)
+        print(#function, "URL: ", request.url?.absoluteString ?? "bad url", "\nBody: ", body)
 
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
@@ -115,7 +115,7 @@ struct RoomService {
                 }
             }
         } catch {
-            print(#function, error.localizedDescription)
+            print(#function, error.localizedDescription, String(data: data, encoding: .utf8) ?? "")
             return(nil, error)
         }
 
