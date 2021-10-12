@@ -46,19 +46,19 @@ final class HMSSDKInteractor: HMSUpdateListener {
          in room: String,
          _ completion: @escaping () -> Void) {
 
-        RoomService.setup(for: user, room) { [weak self] token, aRoom in
+        RoomService.setup(for: user, room) { [weak self] token in
             guard let token = token else {
                 print(#function, "Error fetching token")
                 return
             }
 
-            self?.setup(for: user, in: aRoom ?? room, token: token)
+            self?.setup(for: user, token: token, room)
 
             completion()
         }
     }
 
-    private func setup(for user: String, in room: String, token: String) {
+    private func setup(for user: String, token: String, _ room: String) {
 
         hmsSDK = HMSSDK.build { sdk in
             sdk.analyticsLevel = .verbose
@@ -73,20 +73,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
             sdk.logger = self
         }
 
-        config = HMSConfig(userName: user,
-                           userID: UUID().uuidString,
-                           roomID: room,
-                           authToken: token)
-
-        // ------------------------ cut off --------------------------------------------------------------
-        if UserDefaults.standard.bool(forKey: "useQAEnv") {
-            config = HMSConfig(userName: user,
-                               userID: UUID().uuidString,
-                               roomID: room,
-                               authToken: token,
-                               endpoint: "https://qa-init.100ms.live/init")
-        }
-        // ------------------------ end cut off ----------------------------------------------------------
+        config = HMSConfig(userName: user, authToken: token)
 
         guard let config = config else { return }
         hmsSDK?.preview(config: config, delegate: self)
@@ -165,7 +152,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(room: HMSRoom, update: HMSRoomUpdate) {
-        print(#function, room.name, update.description)
+        print(#function, room.name ?? "", update.description)
         
         if update == .browserRecordingStateUpdated || update == .rtmpStreamingStateUpdated {
             onRecordingUpdate?()
@@ -247,7 +234,7 @@ extension HMSSDKInteractor: HMSPreviewListener {
 
 extension HMSSDKInteractor: HMSLogger {
     func log(_ message: String, _ level: HMSLogLevel) {
-        guard level.rawValue >= HMSLogLevel.verbose.rawValue else { return }
+        guard level.rawValue <= HMSLogLevel.verbose.rawValue else { return }
         print(message)
     }
 }
