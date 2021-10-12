@@ -12,10 +12,10 @@ struct RoomService {
 
     static func setup(for user: String,
                       _ room: String,
-                      completion: @escaping (String?, String?) -> Void) {
+                      completion: @escaping (String?) -> Void) {
 
-        getToken(for: user, room) { (token, roomID) in
-            completion(token, roomID)
+        getToken(for: user, room) { (token) in
+            completion(token)
         }
     }
 
@@ -23,7 +23,7 @@ struct RoomService {
 
     private static func getToken(for user: String,
                                  _ room: String,
-                                 completion: @escaping (String?, String?) -> Void) {
+                                 completion: @escaping (String?) -> Void) {
 
         requestToken(for: user, room) { token, error in
 
@@ -36,10 +36,10 @@ struct RoomService {
                 NotificationCenter.default.post(name: Constants.hmsError,
                                                 object: nil,
                                                 userInfo: ["error": message])
-                completion(nil, nil)
+                completion(nil)
                 return
             }
-            completion(token, room)
+            completion(token)
         }
     }
 
