@@ -160,7 +160,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(roleChangeRequest: HMSRoleChangeRequest) {
-        print(#function, roleChangeRequest.requestedBy.name, roleChangeRequest.suggestedRole.name)
+        print(#function, roleChangeRequest.requestedBy?.name ?? "100ms app", roleChangeRequest.suggestedRole.name)
         onRoleChange?(roleChangeRequest)
     }
 
