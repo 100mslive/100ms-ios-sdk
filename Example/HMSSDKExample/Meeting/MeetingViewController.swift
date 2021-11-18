@@ -525,7 +525,7 @@ final class MeetingViewController: UIViewController {
         guard !request.mute else { return }
 
         dismiss(animated: true) { [weak self] in
-            let title = "\(request.requestedBy.name) is asking you to unmute \(request.track.kind == .video ? "video" : "audio")"
+            let title = "\(request.requestedBy?.name ?? "100ms app") is asking you to unmute \(request.track.kind == .video ? "video" : "audio")"
 
             let alertController = UIAlertController(title: title,
                                                     message: nil,
@@ -547,7 +547,7 @@ final class MeetingViewController: UIViewController {
     }
 
     private func handle(removedFromRoom notification: HMSRemovedFromRoomNotification) {
-        let title = "\(notification.requestedBy.name) removed you from this room: \(notification.reason)"
+        let title = "\(notification.requestedBy?.name ?? "100ms app") removed you from this room: \(notification.reason)"
 
         let alertController = UIAlertController(title: title,
                                                 message: nil,
