@@ -352,6 +352,8 @@ final class MeetingViewModel: NSObject,
         cell.muteButton.isSelected = getMuteButtonStatus(for: viewModel)
 
         cell.avatarLabel.text = Utilities.getAvatarName(from: viewModel.peer.name)
+        
+        cell.handIcon.isHidden = !(viewModel.peer.peerMetadataObject?.isHandRaised ?? false)
 
         setViewOptions(for: cell, using: viewModel)
 
@@ -654,23 +656,24 @@ final class MeetingViewModel: NSObject,
     }
 
     private func setMuteStatus(_ audio: HMSAudioTrack? = nil) {
+        let volume = shouldPlayAudio ? 1.0 : 0.0
 
         for model in dataSource.allModels {
             if let peer = model.peer as? HMSRemotePeer {
                 if let audio = peer.remoteAudioTrack() {
-                    audio.setPlaybackAllowed(shouldPlayAudio)
+                    audio.setVolume(volume)
                 }
                 if let auxTracks = model.peer.auxiliaryTracks {
                     for track in auxTracks {
                         if let audio = track as? HMSRemoteAudioTrack {
-                            audio.setPlaybackAllowed(shouldPlayAudio)
+                            audio.setVolume(volume)
                         }
                     }
                 }
             }
         }
         if let remoteAudio = audio as? HMSRemoteAudioTrack {
-            remoteAudio.setPlaybackAllowed(shouldPlayAudio)
+            remoteAudio.setVolume(volume)
         }
     }
 }

@@ -58,7 +58,12 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             isDegradedIcon.isHidden = true
         }
     }
-
+    @IBOutlet weak var handIcon: UIImageView! {
+        didSet {
+            handIcon.isHidden = true
+        }
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
