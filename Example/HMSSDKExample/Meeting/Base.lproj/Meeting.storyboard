@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -144,8 +144,16 @@
                                                         <action selector="moreButtonTapped:" destination="0EI-A3-zvS" eventType="touchUpInside" id="2yS-HK-pLK"/>
                                                     </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0j-ju-4Pk" userLabel="handIcon">
+                                                    <rect key="frame" x="5" y="4.9999999999999964" width="24" height="23.666666666666657"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="pid-Ar-tgb"/>
+                                                        <constraint firstAttribute="width" constant="24" id="yLX-2z-rYj"/>
+                                                    </constraints>
+                                                    <imageReference key="image" image="hand.raised.fill" catalog="system" symbolScale="medium"/>
+                                                </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-r9-nv2">
-                                                    <rect key="frame" x="0.0" y="0.99999999999999822" width="24" height="22.333333333333336"/>
+                                                    <rect key="frame" x="5" y="5.9999999999999964" width="24" height="22.333333333333336"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="3Da-xx-ea1"/>
                                                         <constraint firstAttribute="height" constant="24" id="EM1-hd-W3Z"/>
@@ -212,12 +220,14 @@
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
                                                 <constraint firstAttribute="trailing" secondItem="0rW-Vt-Pb1" secondAttribute="trailing" id="8oe-Rg-iJZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" constant="2" id="CYl-d3-NMQ"/>
+                                                <constraint firstItem="P0j-ju-4Pk" firstAttribute="leading" secondItem="y1u-r9-nv2" secondAttribute="leading" id="CuB-Pw-O9x"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
                                                 <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
-                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="XTm-zY-Oww"/>
+                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="5" id="XTm-zY-Oww"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="2" id="Yc4-VI-PBE"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="aBk-Ug-1WD"/>
-                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" id="eCq-2W-HHl"/>
+                                                <constraint firstItem="P0j-ju-4Pk" firstAttribute="top" secondItem="y1u-r9-nv2" secondAttribute="top" id="agt-6x-mBN"/>
+                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="eCq-2W-HHl"/>
                                                 <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" constant="2" id="ehd-uv-Mt4"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="2" id="swZ-Nr-YfD"/>
@@ -227,6 +237,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="avatarLabel" destination="w6D-tx-bL7" id="ekL-KC-qRr"/>
+                                            <outlet property="handIcon" destination="P0j-ju-4Pk" id="aEs-k3-PYz"/>
                                             <outlet property="isDegradedIcon" destination="y1u-r9-nv2" id="VN6-rM-9Zm"/>
                                             <outlet property="moreButton" destination="0rW-Vt-Pb1" id="5g5-zJ-7H8"/>
                                             <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
@@ -245,7 +256,7 @@
                                 <rect key="frame" x="0.0" y="766" width="390" height="44"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXn-tX-gSM">
-                                        <rect key="frame" x="8" y="0.0" width="87.666666666666671" height="44"/>
+                                        <rect key="frame" x="8" y="0.0" width="68.333333333333329" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="2r2-nP-Ppa"/>
                                         </constraints>
@@ -264,7 +275,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-0T-b7l">
-                                        <rect key="frame" x="103.66666666666669" y="0.0" width="87.333333333333314" height="44"/>
+                                        <rect key="frame" x="84.333333333333343" y="0.0" width="68.333333333333343" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="gnA-SC-CIG"/>
                                         </constraints>
@@ -283,7 +294,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg">
-                                        <rect key="frame" x="199" y="0.0" width="87.666666666666686" height="44"/>
+                                        <rect key="frame" x="160.66666666666666" y="0.0" width="68.666666666666657" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
                                         </constraints>
@@ -296,8 +307,23 @@
                                             <action selector="chatTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="3YE-2Y-Jch"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46D-2v-Gmp">
+                                        <rect key="frame" x="237.33333333333334" y="0.0" width="68.333333333333343" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="TFg-ko-WUd"/>
+                                        </constraints>
+                                        <state key="normal" image="hand.raised" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <state key="selected" image="hand.raised.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="raiseHandTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="LKk-Mz-ENc"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-Fg-dAU">
-                                        <rect key="frame" x="294.66666666666669" y="0.0" width="87.333333333333314" height="44"/>
+                                        <rect key="frame" x="313.66666666666669" y="0.0" width="68.333333333333314" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="MxJ-hy-oBa"/>
                                         </constraints>
@@ -530,6 +556,8 @@
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="exclamationmark.shield.fill" catalog="system" width="128" height="118"/>
         <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="hand.raised" catalog="system" width="128" height="128"/>
+        <image name="hand.raised.fill" catalog="system" width="128" height="124"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>

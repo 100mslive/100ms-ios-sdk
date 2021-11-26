@@ -309,6 +309,10 @@ final class MeetingViewController: UIViewController {
                     self?.viewModel?.mode = .regular
                     self?.updateSettingsButton()
                 }
+            },
+            UIAction(title: "Change my name",
+                     image: UIImage(systemName: "rectangle.and.pencil.and.ellipsis")) { [weak self] _ in
+                self?.showNamePrompt()
             }
         ]
         
@@ -434,6 +438,38 @@ final class MeetingViewController: UIViewController {
 
             self?.present(alertController, animated: true)
         }
+    }
+    
+    private func showNamePrompt() {
+        let title = "Change Name"
+        let action = "Change"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter new name"
+            textField.clearButtonMode = .always
+            textField.text =  UserDefaults.standard.string(forKey: Constants.defaultName)
+        }
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
+            guard let name = alertController.textFields?[0].text, !name.isEmpty else {
+                return
+            }
+            
+            self?.interactor.hmsSDK?.change(name: name, completion: { success, error in
+                if let error = error {
+                    self?.showActionError(error, action: "Change name")
+                } else {
+                    UserDefaults.standard.set(name, forKey: Constants.defaultName)
+                }
+            })
+        })
+
+        present(alertController, animated: true)
     }
 
     private func showMutePrompt() {
@@ -661,6 +697,16 @@ final class MeetingViewController: UIViewController {
         present(viewController, animated: true)
     }
 
+    @IBAction func raiseHandTapped(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        let meta = PeerMetadata(isHandRaised: sender.isSelected)
+        interactor?.hmsSDK?.change(metadataObject: meta) { [weak self] succes, error in
+            if let error = error {
+                self?.showActionError(error, action: "Raise hand")
+            }
+        }
+    }
+    
     @IBAction private func disconnectTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Leave Call",
                                                 message: nil,
