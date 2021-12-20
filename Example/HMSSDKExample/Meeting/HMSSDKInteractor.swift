@@ -18,6 +18,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var onChangeTrackState: ((HMSChangeTrackStateRequest) -> Void)?
     internal var onRemovedFromRoom: ((HMSRemovedFromRoomNotification) -> Void)?
     internal var onRecordingUpdate: (() -> Void)?
+    internal var onHLSUpdate: (() -> Void)?
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
 
     // MARK: - Instance Properties
@@ -154,9 +155,15 @@ final class HMSSDKInteractor: HMSUpdateListener {
     func on(room: HMSRoom, update: HMSRoomUpdate) {
         print(#function, room.name ?? "", update.description)
         
-        if update == .browserRecordingStateUpdated || update == .rtmpStreamingStateUpdated {
+        switch update {
+        case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated:
             onRecordingUpdate?()
+        case .hlsStreamingStateUpdated:
+            onHLSUpdate?()
+        default:
+            break
         }
+        
     }
 
     func on(roleChangeRequest: HMSRoleChangeRequest) {
