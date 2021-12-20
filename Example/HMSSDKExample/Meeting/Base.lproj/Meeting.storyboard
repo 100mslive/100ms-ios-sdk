@@ -249,6 +249,10 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2O-AH-YXe">
+                                <rect key="frame" x="0.0" y="89" width="390" height="677"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="100ms-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zy8-cT-272">
                                 <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                             </imageView>
@@ -350,6 +354,7 @@
                         <viewLayoutGuide key="safeArea" id="kDS-UD-GQA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="K2O-AH-YXe" firstAttribute="top" secondItem="NKq-UE-p7N" secondAttribute="bottom" id="0lS-Zz-6am"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="bottom" constant="8" symbolic="YES" id="6BK-wy-0t3"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
@@ -363,11 +368,13 @@
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="top" secondItem="e9C-pq-ppt" secondAttribute="top" id="OvR-sO-FCg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="dbh-7g-s3g" secondAttribute="trailing" constant="8" id="XEz-uO-kgn"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" constant="-4" id="Y3D-QU-DJO"/>
+                            <constraint firstItem="K2O-AH-YXe" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="YoD-sn-wZC"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="ZNn-6N-Bo0"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="bottom" secondItem="e9C-pq-ppt" secondAttribute="bottom" id="Zkr-SO-5Bf"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="bottom" secondItem="Zy8-cT-272" secondAttribute="bottom" id="bSC-CC-XTe"/>
                             <constraint firstItem="NKq-UE-p7N" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="bSm-sI-jDc"/>
                             <constraint firstItem="NKq-UE-p7N" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="cli-Gu-K2b"/>
+                            <constraint firstItem="Tb2-3p-SS0" firstAttribute="top" secondItem="K2O-AH-YXe" secondAttribute="bottom" id="dXf-x7-zJ8"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="dhU-gY-ww1"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="i1F-BP-LLz" secondAttribute="bottom" id="f0b-4f-rQl"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="8" id="frJ-19-L9J"/>
@@ -378,6 +385,7 @@
                             <constraint firstItem="Zy8-cT-272" firstAttribute="top" secondItem="kDS-UD-GQA" secondAttribute="top" id="uQe-a5-foi"/>
                             <constraint firstItem="dbh-7g-s3g" firstAttribute="leading" secondItem="e9C-pq-ppt" secondAttribute="trailing" id="vck-dG-6af"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Tb2-3p-SS0" secondAttribute="trailing" id="vqV-8I-DxR"/>
+                            <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="K2O-AH-YXe" secondAttribute="trailing" id="wuc-Oc-lgN"/>
                             <constraint firstItem="Zy8-cT-272" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="x7t-7S-JwV"/>
                         </constraints>
                         <variation key="default">
@@ -410,6 +418,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
+                        <outlet property="hlsContainer" destination="K2O-AH-YXe" id="3Dd-bc-NeZ"/>
                         <outlet property="loadingIcon" destination="Zy8-cT-272" id="f5F-JG-r68"/>
                         <outlet property="publishAudioButton" destination="hKQ-0T-b7l" id="ubh-Yl-SjS"/>
                         <outlet property="publishVideoButton" destination="qXn-tX-gSM" id="peS-c5-lIf"/>
