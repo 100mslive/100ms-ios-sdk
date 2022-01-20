@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -124,6 +124,14 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UBD-2U-nrO">
+                                                    <rect key="frame" x="5" y="32" width="118" height="0.0"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.44793202925701531" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rW-Vt-Pb1" userLabel="More Button">
                                                     <rect key="frame" x="84" y="0.0" width="44" height="44"/>
                                                     <constraints>
@@ -218,9 +226,11 @@
                                             <constraints>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="top" id="0lv-ZF-2Tc"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
+                                                <constraint firstAttribute="trailing" secondItem="UBD-2U-nrO" secondAttribute="trailing" constant="5" id="8HZ-DS-tIc"/>
                                                 <constraint firstAttribute="trailing" secondItem="0rW-Vt-Pb1" secondAttribute="trailing" id="8oe-Rg-iJZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" constant="2" id="CYl-d3-NMQ"/>
                                                 <constraint firstItem="P0j-ju-4Pk" firstAttribute="leading" secondItem="y1u-r9-nv2" secondAttribute="leading" id="CuB-Pw-O9x"/>
+                                                <constraint firstItem="UBD-2U-nrO" firstAttribute="top" secondItem="P0j-ju-4Pk" secondAttribute="bottom" constant="3.000000000000032" id="KwT-IE-iFX"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
                                                 <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
                                                 <constraint firstItem="y1u-r9-nv2" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="5" id="XTm-zY-Oww"/>
@@ -229,6 +239,7 @@
                                                 <constraint firstItem="P0j-ju-4Pk" firstAttribute="top" secondItem="y1u-r9-nv2" secondAttribute="top" id="agt-6x-mBN"/>
                                                 <constraint firstItem="y1u-r9-nv2" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="eCq-2W-HHl"/>
                                                 <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" constant="2" id="ehd-uv-Mt4"/>
+                                                <constraint firstItem="UBD-2U-nrO" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="fUQ-OK-8QO"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="2" id="swZ-Nr-YfD"/>
                                                 <constraint firstItem="0rW-Vt-Pb1" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="z1J-DT-m6W"/>
@@ -243,6 +254,7 @@
                                             <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
                                             <outlet property="nameLabel" destination="i5b-uY-ZDM" id="U3V-ov-dqn"/>
                                             <outlet property="stackView" destination="5DJ-Az-o0i" id="Ikz-3f-3nA"/>
+                                            <outlet property="statsLabel" destination="UBD-2U-nrO" id="yZo-3m-pyV"/>
                                             <outlet property="stopVideoButton" destination="obx-KY-CNX" id="PZg-Oi-nKt"/>
                                             <outlet property="videoView" destination="nEX-Q2-mQX" id="wdm-Ax-ohZ"/>
                                         </connections>
