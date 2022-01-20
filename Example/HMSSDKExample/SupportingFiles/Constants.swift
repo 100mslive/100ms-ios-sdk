@@ -36,6 +36,8 @@ struct Constants {
     static let messageReceived = NSNotification.Name("MESSAGE_RECEIVED")
 
     static let joinedRoom = NSNotification.Name("JOINED_ROOM")
+    
+    static let trackStatsUpdated = NSNotification.Name("TRACK_STATS_UPDATED")
 
     static let gotError = NSNotification.Name("GOT_ERROR")
 
@@ -108,6 +110,8 @@ struct Constants {
     static let mirrorMyVideo = "mirrorMyVideo"
 
     static let showVideoPreview = "showVideoPreview"
+    
+    static let showStats = "showStats"
 
     static let videoFrameRate = "videoFrameRate"
 

@@ -81,6 +81,14 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    
+    @IBOutlet weak var showStatsSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.showStats) as? Bool {
+                showStatsSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
 
     @IBOutlet weak var videoFrameRateField: UITextField! {
         didSet {
@@ -155,6 +163,7 @@ class SettingsViewController: UIViewController {
                          forKey: Constants.silenceThreshold)
         userDefaults.set(mirrorMyVideoSwitch.isOn, forKey: Constants.mirrorMyVideo)
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
+        userDefaults.set(showStatsSwitch.isOn, forKey: Constants.showStats)
         userDefaults.set(!videoFrameRateField.text!.isEmpty ? videoFrameRateField.text : "25",
                          forKey: Constants.videoFrameRate)
         userDefaults.set(!audioBitrateField.text!.isEmpty ? audioBitrateField.text : "0",

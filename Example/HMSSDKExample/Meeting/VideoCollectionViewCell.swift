@@ -12,7 +12,15 @@ import QuartzCore
 
 final class VideoCollectionViewCell: UICollectionViewCell {
 
-    weak var viewModel: HMSViewModel?
+    weak var viewModel: HMSViewModel? {
+        didSet {
+            videoStats = ""
+            audioStats = ""
+        }
+    }
+    
+    var videoStats: String = ""
+    var audioStats: String = ""
 
     @IBOutlet weak var moreButton: UIButton!
     var onPinToggle: (() -> Void)?
@@ -34,6 +42,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
     }
 
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var statsLabel: UILabel!
 
     @IBOutlet weak var pinButton: UIButton!
 
@@ -92,6 +102,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
                                                    queue: .main) { [weak self] notification in
             self?.updateVideoButton(notification)
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateStats(notification:)), name: Constants.trackStatsUpdated, object: nil)
     }
 
     deinit {
@@ -135,6 +147,27 @@ final class VideoCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
+    }
+    
+    @objc private func updateStats(notification: Notification) {
+        guard UserDefaults.standard.bool(forKey: Constants.showStats),
+              let peer = notification.userInfo?["peer"] as? HMSPeer,
+              let stats = notification.userInfo?["stats"],
+              viewModel?.peer.peerID == peer.peerID else {
+            return
+        }
+        
+        if let videoTrack = notification.userInfo?["track"] as? HMSVideoTrack {
+            if (videoTrack.trackId == viewModel?.videoTrack?.trackId) {
+                videoStats = statsDescription(stats: stats)
+            }
+        } else if let audioTrack = notification.userInfo?["track"] as? HMSAudioTrack {
+            if (audioTrack.source == viewModel?.videoTrack?.source || (viewModel?.videoTrack == nil && audioTrack.source == HMSCommonTrackSource.regular)) {
+                audioStats = statsDescription(stats: stats)
+            }
+        }
+        
+        statsLabel.text = [videoStats, audioStats].joined(separator: "\n");
     }
 
     private func updateMuteButtonStatus(_ sender: UIButton, _ audio: HMSAudioTrack) {
@@ -185,4 +218,32 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             avatarLabel.isHidden = !video.isMute()
         }
     }
+    
+    
+    private func statsDescription(stats: Any) -> String {
+        var components = [String]()
+        
+        if let localAudioStats = stats as? HMSLocalAudioStats {
+            components += ["Bitrate (Audio) \(String(format:"%.1f Kb/s", localAudioStats.bitrate))"]
+        } else if let localVideoStats = stats as? HMSLocalVideoStats {
+            let resolutionString = "\(localVideoStats.resolution.width)x\(localVideoStats.resolution.height)"
+            let frameRateString = String(format:"%.0f", localVideoStats.frameRate)
+            components += ["Resolution @ FPS \(resolutionString)@\(frameRateString)"]
+            components += ["Bitrate (Video) \(String(format:"%.1f Kb/s", localVideoStats.bitrate))"]
+        } else if let remoteAudioStats = stats as? HMSRemoteAudioStats {
+            components += ["Bitrate (Audio) \(String(format:"%.1f Kb/s", remoteAudioStats.bitrate))"]
+            components += ["Packets Lost (Audio) \(remoteAudioStats.packetsLost)"]
+            components += ["Jitter (Audio) \(remoteAudioStats.jitter)"]
+        } else if let remoteVideoStats = stats as? HMSRemoteVideoStats {
+            let resolutionString = "\(remoteVideoStats.resolution.width)x\(remoteVideoStats.resolution.height)"
+            let frameRateString = String(format:"%.0f", remoteVideoStats.frameRate)
+            components += ["Resolution @ FPS \(resolutionString)@\(frameRateString)"]
+            components += ["Bitrate (Video) \(String(format:"%.1f Kb/s", remoteVideoStats.bitrate))"]
+            components += ["Packets Lost (Video) \(remoteVideoStats.packetsLost)"]
+            components += ["Jitter (Video) \(remoteVideoStats.jitter)"]
+        }
+        
+        return components.joined(separator: "\n")
+    }
+    
 }
