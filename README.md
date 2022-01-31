@@ -10,6 +10,7 @@
 [![Documentation](https://img.shields.io/badge/Read-Documentation-blue)](https://docs.100ms.live/ios/v2/foundation/Basics)
 [![Discord](https://img.shields.io/discord/843749923060711464?label=Join%20on%20Discord)](https://100ms.live/discord)
 [![TestFlight](https://img.shields.io/badge/Download%20via-TestFlight-blue)](https://testflight.apple.com/join/dhUSE7N8)
+[![Activity](https://img.shields.io/github/commit-activity/m/100mslive/100ms-ios-sdk.svg)](https://github.com/100mslive/100ms-ios-sdk/releases)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](https://dashboard.100ms.live/register)
 
 # 🎉 100ms SDK ＆ Sample App 🚀
