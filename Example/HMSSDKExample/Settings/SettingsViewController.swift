@@ -81,7 +81,7 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-    
+
     @IBOutlet weak var showStatsSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.showStats) as? Bool {

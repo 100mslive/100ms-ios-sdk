@@ -21,7 +21,7 @@ class PreviewViewController: UIViewController {
 
     @IBOutlet weak var publishVideoButton: UIButton!
     @IBOutlet weak var publishAudioButton: UIButton!
-    
+
 
     // MARK: - View Modifiers
 
@@ -47,7 +47,6 @@ class PreviewViewController: UIViewController {
     }
 
     // MARK: - Action Handlers
-
 
     @IBAction func cameraTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected

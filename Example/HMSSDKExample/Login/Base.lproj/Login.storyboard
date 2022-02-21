@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -165,8 +165,8 @@
                                     <action selector="backButtonTapped:" destination="CB4-9g-lxH" eventType="touchUpInside" id="Arz-EE-WOH"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="lig-Kg-1vh">
-                                <rect key="frame" x="0.0" y="316" width="375" height="180"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lig-Kg-1vh">
+                                <rect key="frame" x="0.0" y="294" width="375" height="224"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="uet-JR-n1P">
                                         <rect key="frame" x="99.666666666666686" y="0.0" width="176" height="64"/>
@@ -213,8 +213,23 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1x-9c-s1z">
+                                        <rect key="frame" x="128" y="84" width="119" height="52"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="WYU-vS-yLb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="-8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="3 peers in room"/>
+                                        <connections>
+                                            <action selector="peerListTapped:" destination="CB4-9g-lxH" eventType="touchUpInside" id="8Wh-o9-vWJ"/>
+                                        </connections>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="uRj-if-AyW">
-                                        <rect key="frame" x="8" y="112" width="359" height="68"/>
+                                        <rect key="frame" x="8" y="156" width="359" height="68"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sar-qp-8u8">
                                                 <rect key="frame" x="15" y="8" width="329" height="52"/>
@@ -272,6 +287,7 @@
                     <navigationItem key="navigationItem" id="K7u-NR-vFb"/>
                     <connections>
                         <outlet property="joinButton" destination="sar-qp-8u8" id="b9z-ga-RIY"/>
+                        <outlet property="peerListButton" destination="q1x-9c-s1z" id="Z1e-iK-3mJ"/>
                         <outlet property="previewView" destination="yC4-5P-J60" id="Nrc-lI-BSl"/>
                         <outlet property="publishAudioButton" destination="Dlj-dE-oPY" id="Tee-VK-1Ka"/>
                         <outlet property="publishVideoButton" destination="CIN-yc-MeB" id="3nf-Q8-YqS"/>

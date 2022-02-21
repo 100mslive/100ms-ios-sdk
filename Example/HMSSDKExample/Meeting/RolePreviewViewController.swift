@@ -11,19 +11,19 @@ import HMSSDK
 
 class RolePreviewViewController: PreviewViewController {
     var roleChangeRequest: HMSRoleChangeRequest!
-    
+
     @IBOutlet private weak var changeRoleButton: UIButton! {
         didSet {
             Utilities.drawCorner(on: changeRoleButton)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Preview Role"
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +35,7 @@ class RolePreviewViewController: PreviewViewController {
             self?.setupTracks(tracks: tracks ?? [])
         })
     }
-    
+
     private func presentAlert(_ message: String) {
         let alertController = UIAlertController(title: "Error",
                                                 message: message,
@@ -47,7 +47,7 @@ class RolePreviewViewController: PreviewViewController {
     }
 
     @IBAction private func changeRoleTapped(_ sender: UIButton) {
-        interactor.hmsSDK?.accept(changeRole: roleChangeRequest, completion: { [weak self] success, error in
+        interactor.hmsSDK?.accept(changeRole: roleChangeRequest, completion: { [weak self] _, _ in
             self?.navigationController?.popViewController(animated: true)
         })
     }

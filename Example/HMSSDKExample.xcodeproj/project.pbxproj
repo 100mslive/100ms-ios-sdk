@@ -15,6 +15,7 @@
 		9174C9F726FCB53900FD7C04 /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9174C9F626FCB53900FD7C04 /* 100ms.gif */; };
 		91CB89C32705E0BF00F26322 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */; };
 		91CB89C52705E0D400F26322 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */; };
+		91E1F37F27C395A200F76E47 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1F37E27C395A200F76E47 /* PreviewPeersListViewController.swift */; };
 		91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E7E144268C70F2001D988E /* PreviewViewController.swift */; };
 		91FCE9542770C62E00034F96 /* HLSStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FCE9532770C62E00034F96 /* HLSStreamViewController.swift */; };
 		91FCE9562770C63B00034F96 /* HLSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FCE9552770C63B00034F96 /* HLSSettingsViewController.swift */; };
@@ -69,6 +70,7 @@
 		9174C9F626FCB53900FD7C04 /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
 		91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
 		91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
+		91E1F37E27C395A200F76E47 /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
 		91E7E144268C70F2001D988E /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		91FCE9532770C62E00034F96 /* HLSStreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSStreamViewController.swift; sourceTree = "<group>"; };
 		91FCE9552770C63B00034F96 /* HLSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSSettingsViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				EC8CEE51261E297F002DC12E /* PeersListViewController.swift */,
+				91E1F37E27C395A200F76E47 /* PreviewPeersListViewController.swift */,
 				EC8CEE52261E297F002DC12E /* PeersListTableViewCell.swift */,
 				EC8CEE53261E297F002DC12E /* PeersList.storyboard */,
 			);
@@ -476,6 +479,7 @@
 				EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */,
 				91FCE9562770C63B00034F96 /* HLSSettingsViewController.swift in Sources */,
 				EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */,
+				91E1F37F27C395A200F76E47 /* PreviewPeersListViewController.swift in Sources */,
 				91457ADC2751197D00DCFCBD /* PeerMetadata.swift in Sources */,
 				EC8CEE82261E297F002DC12E /* MeetingViewController.swift in Sources */,
 				9174C9F426FCB46200FD7C04 /* RTMPSettingsViewController.swift in Sources */,

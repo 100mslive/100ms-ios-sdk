@@ -12,7 +12,14 @@ class PreJoinPreviewViewController: PreviewViewController {
 
     internal var user: String!
     internal var roomName: String!
-
+    @IBOutlet weak var peerListButton: UIButton! {
+        didSet {
+            peerListButton.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 20, bottom: 10, right: 20)
+            peerListButton.isHidden = true
+            Utilities.drawCorner(on: peerListButton)
+        }
+    }
+    
     @IBOutlet private weak var joinButton: UIButton! {
         didSet {
             Utilities.drawCorner(on: joinButton)
@@ -24,6 +31,17 @@ class PreJoinPreviewViewController: PreviewViewController {
         joinButton.isEnabled = false
         setupInteractor()
         observeBroadcast()
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    func cleanup() {
+        interactor.leave()
+        UIApplication.shared.isIdleTimerDisabled = false
     }
 
     private func setupInteractor() {
@@ -32,6 +50,20 @@ class PreJoinPreviewViewController: PreviewViewController {
             self?.setupTracks(tracks: tracks)
             self?.joinButton.isEnabled = true
         }
+        
+        interactor.onMetadataUpdate = { [weak self] in
+            self?.updateParticipants()
+        }
+    }
+    
+    private func updateParticipants() {
+        guard let room = interactor.hmsSDK?.room else {
+            return
+        }
+        
+        let count = room.peerCount ?? 0
+        peerListButton.isHidden = count == 0
+        peerListButton.setTitle("\(count) peer(s) in room", for: .normal)
     }
 
     private func observeBroadcast() {
@@ -46,7 +78,7 @@ class PreJoinPreviewViewController: PreviewViewController {
                 alert.addAction(UIAlertAction(title: "Okay",
                                               style: .default,
                                               handler: { _ in
-                                                self?.interactor.leave()
+                                                self?.cleanup()
                                                 self?.navigationController?.popToRootViewController(animated: true)
                                               }))
                 strongSelf.present(alert, animated: true) {
@@ -55,9 +87,9 @@ class PreJoinPreviewViewController: PreviewViewController {
             }
         }
     }
-    
+
     @IBAction private func backButtonTapped(_ sender: UIButton) {
-        interactor.leave()
+        cleanup()
         navigationController?.popViewController(animated: true)
     }
 
@@ -73,6 +105,18 @@ class PreJoinPreviewViewController: PreviewViewController {
         viewController.interactor = interactor
 
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction private func peerListTapped(_ sender: UIButton) {
+        guard let viewController = UIStoryboard(name: Constants.peersList, bundle: nil)
+                .instantiateViewController(withIdentifier: Constants.peersListPreview) as? PreviewPeersListViewController else {
+            return
+        }
+
+        viewController.roomName = roomName
+        viewController.interactor = interactor
+
+        present(viewController, animated: true)
     }
 
 }
