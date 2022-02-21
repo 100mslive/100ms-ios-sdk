@@ -11,7 +11,7 @@ import HMSSDK
 
 struct PeerMetadata: Codable {
     let isHandRaised: Bool
-    
+
     enum CodingKeys: String, CodingKey {
         case isHandRaised = "isHandRaised"
     }
@@ -23,7 +23,7 @@ extension HMSPeer {
               let data = metadata.data(using: .utf8) else {
             return nil
         }
-        
+
         return try? JSONDecoder().decode(PeerMetadata.self, from: data)
     }
 }
@@ -35,7 +35,7 @@ extension HMSSDK {
             completion?(false, nil)
             return
         }
-        
+
         change(metadata: dataString, completion: completion)
     }
 }

@@ -15,11 +15,11 @@ protocol HLSSettingsViewControllerDelegate: AnyObject {
 }
 
 final class HLSSettingsViewController: FormViewController {
-    
-    internal weak var delegate: HLSSettingsViewControllerDelegate? = nil
-    
+
+    internal weak var delegate: HLSSettingsViewControllerDelegate?
+
     // MARK: - View Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         form +++ Section("Meeting URL")
@@ -27,31 +27,30 @@ final class HLSSettingsViewController: FormViewController {
                 $0.placeholder = "Meeting URL"
             }
         form +++ Section("")
-            <<< ButtonRow() {
+            <<< ButtonRow {
                 $0.title = "Start"
                 $0.onCellSelection { [weak self] _, _ in
                     self?.onStartButtonTap()
                 }
             }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "HLS Settings"
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     // MARK: - Action Handlers
-    
+
     private func onStartButtonTap() {
-        
+
         let values = form.values()
-        
+
         guard let meetingURL = values["meetingURL"] as? URL else {
             return
         }
-        
-        
+
         let config = HMSHLSConfig(variants: [HMSHLSMeetingURLVariant(meetingURL: meetingURL, metadata: "main stream")])
         delegate?.hlsSettingsController(self, didSelect: config)
         navigationController?.popViewController(animated: true)

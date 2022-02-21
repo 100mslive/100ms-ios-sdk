@@ -18,7 +18,7 @@ final class MeetingViewController: UIViewController {
     internal var interactor: HMSSDKInteractor!
 
     @IBOutlet weak var hlsContainer: UIView!
-    
+
     private var viewModel: MeetingViewModel?
     private var hlsController: HLSStreamViewController?
 
@@ -55,7 +55,7 @@ final class MeetingViewController: UIViewController {
     }
 
     // MARK: - View Lifecycle
-    
+
     func setupHLSController() {
         let vc = HLSStreamViewController()
         addChild(vc)
@@ -80,7 +80,7 @@ final class MeetingViewController: UIViewController {
 
         handleError()
         observeBroadcast()
-        
+
         setupHLSController()
 
         interactor.onRoleChange = { [weak self] request in
@@ -94,11 +94,11 @@ final class MeetingViewController: UIViewController {
         interactor.onRemovedFromRoom = { [weak self] notification in
             self?.handle(removedFromRoom: notification)
         }
-        
+
         interactor.onRecordingUpdate = { [weak self] in
             self?.updateSettingsButton()
         }
-        
+
         interactor.onHLSUpdate = { [weak self] in
             self?.updateHLSState()
         }
@@ -117,7 +117,7 @@ final class MeetingViewController: UIViewController {
             settingsButton.imageView?.rotate()
             navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         if isMovingFromParent {
             cleanup()
@@ -136,7 +136,7 @@ final class MeetingViewController: UIViewController {
     }
 
     // MARK: - View Modifiers
-    
+
     func updateHLSState() {
         guard interactor?.hmsSDK?.localPeer?.role?.name.hasPrefix("hls-") ?? false else {
             hlsContainer.isHidden = true
@@ -145,7 +145,7 @@ final class MeetingViewController: UIViewController {
             collectionView.isHidden = false
             return
         }
-        
+
         collectionView.isHidden = true
         hlsContainer.isHidden = false
         hlsController?.streamURL = interactor?.hmsSDK?.room?.hlsStreamingState.variants.first?.url
@@ -252,45 +252,45 @@ final class MeetingViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = false
         viewModel?.cleanup()
     }
-    
+
     // MARK: - Settings Menu Button
-    
+
     private func updateSettingsButton() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            
+
             if #available(iOS 14.0, *) {
                 self.settingsButton.menu = self.menu
                 self.settingsButton.showsMenuAsPrimaryAction = true
             } else {
                 // Fallback on earlier versions
             }
-            
+
             self.settingsButton.setImage(self.settingsButtonIcon(), for: .normal)
             self.settingsButton.tintColor = self.settingsButtonTint()
         }
     }
-    
-    private func settingsButtonIcon() -> UIImage  {
+
+    private func settingsButtonIcon() -> UIImage {
         var iconName = "gear"
-        
+
         if interactor.isStreaming {
             iconName = "dot.radiowaves.left.and.right"
         } else if interactor.isRecording {
             iconName = "recordingtape"
         }
-        
+
         return UIImage(systemName: iconName) ?? UIImage()
     }
-    
-    private func settingsButtonTint() -> UIColor  {
+
+    private func settingsButtonTint() -> UIColor {
         return interactor.isRecording ? UIColor.red : speakerButton.tintColor
     }
-    
+
     private func menuItems() -> [UIAction] {
-        
+
         let currentMode = viewModel?.mode ?? .regular
-        
+
         let actions = [
             UIAction(title: "Audio Only Mode",
                      image: UIImage(systemName: "megaphone.fill"),
@@ -354,14 +354,14 @@ final class MeetingViewController: UIViewController {
                 self?.showNamePrompt()
             }
         ]
-        
+
         return actions
     }
 
     private func roleBasedActions() -> [UIAction] {
-        
+
         var actions = [UIAction]()
-        
+
         if interactor.canRemoteMute {
             let muteRolesAction = UIAction(title: "Remote Mute Role",
                                            image: UIImage(systemName: "speaker.slash.circle.fill")) { [weak self] _ in
@@ -369,7 +369,7 @@ final class MeetingViewController: UIViewController {
                 self.showMutePrompt()
             }
             actions.append(muteRolesAction)
-            
+
             let muteAllAction = UIAction(title: "Remote Mute All",
                                          image: UIImage(systemName: "speaker.slash.fill")) { [weak self] _ in
                 guard let self = self else { return }
@@ -377,7 +377,7 @@ final class MeetingViewController: UIViewController {
             }
             actions.append(muteAllAction)
         }
-        
+
         if interactor.canChangeRole {
             let changeAllRole = UIAction(title: "Change All Role To Role",
                                          image: UIImage(systemName: "arrow.triangle.2.circlepath.circle.fill")) { [weak self] _ in
@@ -389,7 +389,7 @@ final class MeetingViewController: UIViewController {
             }
             actions.append(changeAllRole)
         }
-        
+
         let startRTMP = UIAction(title: "Start RTMP or Recording",
                                      image: UIImage(systemName: "record.circle")) { [weak self] _ in
             let rtmpSettingsController = RTMPSettingsViewController()
@@ -397,11 +397,11 @@ final class MeetingViewController: UIViewController {
             self?.navigationController?.pushViewController(rtmpSettingsController, animated: true)
         }
         actions.append(startRTMP)
-        
+
         let stopRTMP = UIAction(title: "Stop RTMP and Recording",
                                      image: UIImage(systemName: "stop.circle")) { [weak self] _ in
             guard let self = self else { return }
-            self.interactor?.hmsSDK?.stopRTMPAndRecording() { [weak self] _, error in
+            self.interactor?.hmsSDK?.stopRTMPAndRecording { [weak self] _, error in
                 if let error = error {
                     self?.showActionError(error, action: "Stop RTMP/Recording")
                     return
@@ -410,7 +410,7 @@ final class MeetingViewController: UIViewController {
             }
         }
         actions.append(stopRTMP)
-        
+
         let startHLS = UIAction(title: "Start HLS Streaming",
                                 image: UIImage(systemName: "record.circle")) { [weak self] _ in
             let hlsSettingsController = HLSSettingsViewController()
@@ -418,11 +418,11 @@ final class MeetingViewController: UIViewController {
             self?.navigationController?.pushViewController(hlsSettingsController, animated: true)
         }
         actions.append(startHLS)
-        
+
         let stopHLS = UIAction(title: "Stop HLS Streaming",
                                image: UIImage(systemName: "stop.circle")) { [weak self] _ in
             guard let self = self else { return }
-            self.interactor?.hmsSDK?.stopHLSStreaming() { [weak self] _, error in
+            self.interactor?.hmsSDK?.stopHLSStreaming { [weak self] _, error in
                 if let error = error {
                     self?.showActionError(error, action: "Stop HLS")
                     return
@@ -431,12 +431,13 @@ final class MeetingViewController: UIViewController {
             }
         }
         actions.append(stopHLS)
-        
+
         if interactor.canEndRoom {
             let endRoomAction = UIAction(title: "End Room",
                                          image: UIImage(systemName: "xmark.octagon.fill")) { [weak self] _ in
                 guard let self = self else { return }
-                self.interactor?.hmsSDK?.endRoom(lock: false, reason: "Meeting Ended") { [weak self] _, error in
+                
+                self.interactor?.hmsSDK?.endRoom(reason: "Meeting Ended") { [weak self] _, error in
                     if let error = error {
                         self?.showActionError(error, action: "End Room")
                         return
@@ -446,7 +447,7 @@ final class MeetingViewController: UIViewController {
                 }
             }
             actions.append(endRoomAction)
-            
+
             let endRoomAndLockAction = UIAction(title: "End Room And Lock",
                                                 image: UIImage(systemName: "lock.circle.fill")) { [weak self] _ in
                 guard let self = self else { return }
@@ -458,10 +459,10 @@ final class MeetingViewController: UIViewController {
             }
             actions.append(endRoomAndLockAction)
         }
-        
+
         return actions
     }
-    
+
     // MARK: - Role Change Interactors
 
     private func showRoleChangePrompt(for peer: HMSPeer, force: Bool) {
@@ -499,7 +500,7 @@ final class MeetingViewController: UIViewController {
             self?.present(alertController, animated: true)
         }
     }
-    
+
     private func showNamePrompt() {
         let title = "Change Name"
         let action = "Change"
@@ -519,8 +520,8 @@ final class MeetingViewController: UIViewController {
             guard let name = alertController.textFields?[0].text, !name.isEmpty else {
                 return
             }
-            
-            self?.interactor.hmsSDK?.change(name: name, completion: { success, error in
+
+            self?.interactor.hmsSDK?.change(name: name, completion: { _, error in
                 if let error = error {
                     self?.showActionError(error, action: "Change name")
                 } else {
@@ -583,7 +584,7 @@ final class MeetingViewController: UIViewController {
 
         present(alertController, animated: true)
     }
-    
+
     private func handle(roleChange request: HMSRoleChangeRequest) {
         let title = "Do you want to change your role to: \(request.suggestedRole.name)"
 
@@ -711,7 +712,7 @@ final class MeetingViewController: UIViewController {
         }
 
         viewController.roomName = roomName
-        
+
         viewController.meetingViewModel = viewModel
         viewController.speakers = viewModel?.speakers
 
@@ -760,13 +761,13 @@ final class MeetingViewController: UIViewController {
     @IBAction func raiseHandTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         let meta = PeerMetadata(isHandRaised: sender.isSelected)
-        interactor?.hmsSDK?.change(metadataObject: meta) { [weak self] succes, error in
+        interactor?.hmsSDK?.change(metadataObject: meta) { [weak self] _, error in
             if let error = error {
                 self?.showActionError(error, action: "Raise hand")
             }
         }
     }
-    
+
     @IBAction private func disconnectTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "Leave Call",
                                                 message: nil,
@@ -817,12 +818,11 @@ extension MeetingViewController: RTMPSettingsViewControllerDelegate {
                 self?.showActionError(error, action: "Start RTMP/Recording")
                 return
             }
-            
+
             self?.updateSettingsButton()
         }
     }
 }
-
 
 extension MeetingViewController: HLSSettingsViewControllerDelegate {
     func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig) {
@@ -831,7 +831,7 @@ extension MeetingViewController: HLSSettingsViewControllerDelegate {
                 self?.showActionError(error, action: "Start HLS Streaming")
                 return
             }
-            
+
             self?.updateSettingsButton()
         }
     }

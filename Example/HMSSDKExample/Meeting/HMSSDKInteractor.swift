@@ -19,19 +19,20 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var onRemovedFromRoom: ((HMSRemovedFromRoomNotification) -> Void)?
     internal var onRecordingUpdate: (() -> Void)?
     internal var onHLSUpdate: (() -> Void)?
+    internal var onMetadataUpdate: (() -> Void)?
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
 
     // MARK: - Instance Properties
 
     internal var messages = [HMSMessage]()
-    
+
     internal var isRecording: Bool {
         get {
             guard let room = hmsSDK?.room else { return false }
             return room.browserRecordingState.running || room.serverRecordingState.running
         }
     }
-    
+
     internal var isStreaming: Bool {
         get {
             guard let room = hmsSDK?.room else { return false }
@@ -154,16 +155,18 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func on(room: HMSRoom, update: HMSRoomUpdate) {
         print(#function, room.name ?? "", update.description)
-        
+
         switch update {
         case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated:
             onRecordingUpdate?()
         case .hlsStreamingStateUpdated:
             onHLSUpdate?()
+        case .metaDataUpdated:
+            onMetadataUpdate?()
         default:
             break
         }
-        
+
     }
 
     func on(roleChangeRequest: HMSRoleChangeRequest) {
@@ -186,23 +189,22 @@ final class HMSSDKInteractor: HMSUpdateListener {
     func on(removedFromRoom notification: HMSRemovedFromRoomNotification) {
         onRemovedFromRoom?(notification)
     }
-    
+
     func on(remoteAudioStats: HMSRemoteAudioStats, track: HMSRemoteAudioTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": remoteAudioStats, "track": track, "peer": peer])
     }
-    
+
     func on(remoteVideoStats: HMSRemoteVideoStats, track: HMSRemoteVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": remoteVideoStats, "track": track, "peer": peer])
     }
-    
+
     func on(localAudioStats: HMSLocalAudioStats, track: HMSLocalAudioTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localAudioStats, "track": track, "peer": peer])
     }
-    
+
     func on(localVideoStats: HMSLocalVideoStats, track: HMSLocalVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localVideoStats, "track": track, "peer": peer])
     }
-    
 
     // MARK: - Role Actions
 

@@ -123,12 +123,12 @@ final class MeetingViewModel: NSObject,
         interactor?.hmsSDK?.add(delegate: dataSource)
         dataSource.sortComparator = regularSort(_:_:)
     }
-    
+
     private func order(for trackSource: String?) -> Int {
         guard let trackSource = trackSource else {
             return 0
         }
-        
+
         switch trackSource {
         case HMSCommonTrackSource.regular:
             return 1
@@ -139,7 +139,7 @@ final class MeetingViewModel: NSObject,
         default:
             break
         }
-        
+
         return 0
     }
 
@@ -337,7 +337,7 @@ final class MeetingViewModel: NSObject,
         guard let videoCell = cell as? VideoCollectionViewCell else { return }
 
         videoCell.videoView.setVideoTrack(nil)
-        
+
         Utilities.applyBorder(on: cell)
     }
 
@@ -352,7 +352,7 @@ final class MeetingViewModel: NSObject,
         cell.muteButton.isSelected = getMuteButtonStatus(for: viewModel)
 
         cell.avatarLabel.text = Utilities.getAvatarName(from: viewModel.peer.name)
-        
+
         cell.handIcon.isHidden = !(viewModel.peer.peerMetadataObject?.isHandRaised ?? false)
 
         setViewOptions(for: cell, using: viewModel)

@@ -76,6 +76,7 @@ struct Constants {
     static let chat = "Chat"
 
     static let peersList = "PeersList"
+    static let peersListPreview = "PeersListPreview"
 
     static let emptyFields = "Please fill in all fields!"
 
@@ -110,7 +111,7 @@ struct Constants {
     static let mirrorMyVideo = "mirrorMyVideo"
 
     static let showVideoPreview = "showVideoPreview"
-    
+
     static let showStats = "showStats"
 
     static let videoFrameRate = "videoFrameRate"
