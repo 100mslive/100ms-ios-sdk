@@ -32,9 +32,23 @@ class HLSStreamViewController: UIViewController {
 
     var playerItem: AVPlayerItem?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
     func play() {
         guard let streamURL = streamURL else {
             return
+        }
+        
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(.playAndRecord, options: [.defaultToSpeaker])
+            try session.setActive(true) //Set to false to deactivate session
+        } catch let error as NSError {
+            print("Unable to activate audio session:  \(error.localizedDescription)")
         }
 
         // Create asset to be played
@@ -109,6 +123,14 @@ class HLSStreamViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    @objc func applicationDidEnterBackground(_ notification: Notification) {
+        playerView.player = nil
+    }
+    
+    @objc func applicationDidBecomeActive(_ notificiation: Notification) {
+        playerView.player = player
     }
 }
 

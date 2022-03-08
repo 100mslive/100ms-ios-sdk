@@ -13,6 +13,7 @@
 		9174C9F426FCB46200FD7C04 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */; };
 		9174C9F526FCB46200FD7C04 /* ChangeAllRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174C9F326FCB46200FD7C04 /* ChangeAllRoleViewController.swift */; };
 		9174C9F726FCB53900FD7C04 /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9174C9F626FCB53900FD7C04 /* 100ms.gif */; };
+		919F7D4D27D76A0100ECACAE /* RoomStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919F7D4C27D76A0100ECACAE /* RoomStateViewController.swift */; };
 		91CB89C32705E0BF00F26322 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */; };
 		91CB89C52705E0D400F26322 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */; };
 		91E1F37F27C395A200F76E47 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E1F37E27C395A200F76E47 /* PreviewPeersListViewController.swift */; };
@@ -68,6 +69,7 @@
 		9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
 		9174C9F326FCB46200FD7C04 /* ChangeAllRoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAllRoleViewController.swift; sourceTree = "<group>"; };
 		9174C9F626FCB53900FD7C04 /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
+		919F7D4C27D76A0100ECACAE /* RoomStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomStateViewController.swift; sourceTree = "<group>"; };
 		91CB89C22705E0BF00F26322 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
 		91CB89C42705E0D400F26322 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
 		91E1F37E27C395A200F76E47 /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				91FCE9552770C63B00034F96 /* HLSSettingsViewController.swift */,
 				9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */,
 				9174C9F326FCB46200FD7C04 /* ChangeAllRoleViewController.swift */,
+				919F7D4C27D76A0100ECACAE /* RoomStateViewController.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 			files = (
 				914DCAF826BC291B00D8D348 /* TokenEndpoint.swift in Sources */,
 				91CB89C52705E0D400F26322 /* RolePreviewViewController.swift in Sources */,
+				919F7D4D27D76A0100ECACAE /* RoomStateViewController.swift in Sources */,
 				EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */,
 				EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */,
 				91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */,

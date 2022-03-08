@@ -26,6 +26,13 @@ final class HLSSettingsViewController: FormViewController {
             <<< URLRow("meetingURL") {
                 $0.placeholder = "Meeting URL"
             }
+        form +++ Section("Recording")
+            <<< SwitchRow("recordingLayerSwitch") {
+                $0.title = "Single file per layer"
+            }
+            <<< SwitchRow("recordingVODSwitch") {
+                $0.title = "Enable VOD"
+            }
         form +++ Section("")
             <<< ButtonRow {
                 $0.title = "Start"
@@ -51,7 +58,16 @@ final class HLSSettingsViewController: FormViewController {
             return
         }
 
-        let config = HMSHLSConfig(variants: [HMSHLSMeetingURLVariant(meetingURL: meetingURL, metadata: "main stream")])
+        let singleFile = (values["recordingLayerSwitch"] as? Bool) ?? false
+        let vod = (values["recordingVODSwitch"] as? Bool) ?? false
+
+        var recordConfig: HMSHLSRecordingConfig? = nil
+        if singleFile || vod {
+            recordConfig = HMSHLSRecordingConfig(singleFilePerLayer: singleFile, enableVOD: vod)
+        }
+
+        let variant = HMSHLSMeetingURLVariant(meetingURL: meetingURL, metadata: "main stream")
+        let config = HMSHLSConfig(variants: [variant], recording: recordConfig)
         delegate?.hlsSettingsController(self, didSelect: config)
         navigationController?.popViewController(animated: true)
     }
