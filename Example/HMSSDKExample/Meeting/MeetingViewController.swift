@@ -101,6 +101,7 @@ final class MeetingViewController: UIViewController {
 
         interactor.onHLSUpdate = { [weak self] in
             self?.updateHLSState()
+            self?.updateSettingsButton()
         }
 
         viewModel?.updateLocalPeerTracks = { [weak self] in
@@ -361,6 +362,16 @@ final class MeetingViewController: UIViewController {
     private func roleBasedActions() -> [UIAction] {
 
         var actions = [UIAction]()
+        
+        
+        let roomState = UIAction(title: "Room State",
+                                image: UIImage(systemName: "doc.circle")) { [weak self] _ in
+            let roomStateController = RoomStateViewController()
+            roomStateController.room = self?.interactor?.hmsSDK?.room
+            self?.navigationController?.pushViewController(roomStateController, animated: true)
+        }
+        actions.append(roomState)
+        
 
         if interactor.canRemoteMute {
             let muteRolesAction = UIAction(title: "Remote Mute Role",

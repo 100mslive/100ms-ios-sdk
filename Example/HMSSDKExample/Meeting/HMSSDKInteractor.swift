@@ -29,14 +29,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var isRecording: Bool {
         get {
             guard let room = hmsSDK?.room else { return false }
-            return room.browserRecordingState.running || room.serverRecordingState.running
+            return room.browserRecordingState.running || room.serverRecordingState.running || room.hlsRecordingState.running
         }
     }
 
     internal var isStreaming: Bool {
         get {
             guard let room = hmsSDK?.room else { return false }
-            return room.rtmpStreamingState.running
+            return room.rtmpStreamingState.running || room.hlsStreamingState.running
         }
     }
 
@@ -157,7 +157,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
         print(#function, room.name ?? "", update.description)
 
         switch update {
-        case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated:
+        case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated, .hlsRecordingStateUpdated:
             onRecordingUpdate?()
         case .hlsStreamingStateUpdated:
             onHLSUpdate?()
