@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -152,22 +152,39 @@
                                                         <action selector="moreButtonTapped:" destination="0EI-A3-zvS" eventType="touchUpInside" id="2yS-HK-pLK"/>
                                                     </connections>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0j-ju-4Pk" userLabel="handIcon">
-                                                    <rect key="frame" x="5" y="4.9999999999999964" width="24" height="23.666666666666657"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="hhX-ey-ODu">
+                                                    <rect key="frame" x="5" y="5" width="74" height="24"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwL-dx-fdx" customClass="NetworkQualityView" customModule="HMSSDKExample" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="24" id="HLi-nx-G23"/>
+                                                                <constraint firstAttribute="height" constant="24" id="eaU-Sw-k8s"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-r9-nv2">
+                                                            <rect key="frame" x="25" y="0.99999999999999822" width="24" height="22.333333333333336"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="24" id="3Da-xx-ea1"/>
+                                                                <constraint firstAttribute="height" constant="24" id="EM1-hd-W3Z"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="exclamationmark.shield.fill" catalog="system" symbolScale="medium"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0j-ju-4Pk" userLabel="handIcon">
+                                                            <rect key="frame" x="50" y="-3.5527136788005009e-15" width="24" height="23.666666666666671"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="pid-Ar-tgb"/>
+                                                                <constraint firstAttribute="width" constant="24" id="yLX-2z-rYj"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="hand.raised.fill" catalog="system" symbolScale="medium"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="pid-Ar-tgb"/>
-                                                        <constraint firstAttribute="width" constant="24" id="yLX-2z-rYj"/>
+                                                        <constraint firstAttribute="height" constant="24" id="BzL-f9-6Fh"/>
                                                     </constraints>
-                                                    <imageReference key="image" image="hand.raised.fill" catalog="system" symbolScale="medium"/>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-r9-nv2">
-                                                    <rect key="frame" x="5" y="5.9999999999999964" width="24" height="22.333333333333336"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="3Da-xx-ea1"/>
-                                                        <constraint firstAttribute="height" constant="24" id="EM1-hd-W3Z"/>
-                                                    </constraints>
-                                                    <imageReference key="image" image="exclamationmark.shield.fill" catalog="system" symbolScale="medium"/>
-                                                </imageView>
+                                                </stackView>
                                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="5DJ-Az-o0i">
                                                     <rect key="frame" x="6.3333333333333357" y="80" width="115.33333333333331" height="44"/>
                                                     <subviews>
@@ -225,23 +242,22 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="top" id="0lv-ZF-2Tc"/>
+                                                <constraint firstItem="hhX-ey-ODu" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="5" id="2XA-bU-yDX"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="7Gj-8R-9V4"/>
                                                 <constraint firstAttribute="trailing" secondItem="UBD-2U-nrO" secondAttribute="trailing" constant="5" id="8HZ-DS-tIc"/>
                                                 <constraint firstAttribute="trailing" secondItem="0rW-Vt-Pb1" secondAttribute="trailing" id="8oe-Rg-iJZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="nEX-Q2-mQX" secondAttribute="trailing" constant="2" id="CYl-d3-NMQ"/>
-                                                <constraint firstItem="P0j-ju-4Pk" firstAttribute="leading" secondItem="y1u-r9-nv2" secondAttribute="leading" id="CuB-Pw-O9x"/>
-                                                <constraint firstItem="UBD-2U-nrO" firstAttribute="top" secondItem="P0j-ju-4Pk" secondAttribute="bottom" constant="3.000000000000032" id="KwT-IE-iFX"/>
+                                                <constraint firstItem="UBD-2U-nrO" firstAttribute="top" secondItem="hhX-ey-ODu" secondAttribute="bottom" constant="3" id="DBr-4t-ulE"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5DJ-Az-o0i" secondAttribute="trailing" constant="4" id="U8A-D5-YXR"/>
                                                 <constraint firstAttribute="bottom" secondItem="5DJ-Az-o0i" secondAttribute="bottom" constant="4" id="Vxq-hb-z9o"/>
-                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="5" id="XTm-zY-Oww"/>
+                                                <constraint firstItem="hhX-ey-ODu" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="XxC-Fe-36z"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="2" id="Yc4-VI-PBE"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="centerX" secondItem="eIA-rh-Vt1" secondAttribute="centerX" id="aBk-Ug-1WD"/>
-                                                <constraint firstItem="P0j-ju-4Pk" firstAttribute="top" secondItem="y1u-r9-nv2" secondAttribute="top" id="agt-6x-mBN"/>
-                                                <constraint firstItem="y1u-r9-nv2" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="eCq-2W-HHl"/>
                                                 <constraint firstAttribute="bottom" secondItem="nEX-Q2-mQX" secondAttribute="bottom" constant="2" id="ehd-uv-Mt4"/>
                                                 <constraint firstItem="UBD-2U-nrO" firstAttribute="leading" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="5" id="fUQ-OK-8QO"/>
                                                 <constraint firstItem="5DJ-Az-o0i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eIA-rh-Vt1" secondAttribute="leading" constant="4" id="sW5-U2-UCq"/>
                                                 <constraint firstItem="nEX-Q2-mQX" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" constant="2" id="swZ-Nr-YfD"/>
+                                                <constraint firstItem="0rW-Vt-Pb1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hhX-ey-ODu" secondAttribute="trailing" constant="5" id="yZ0-kT-q3O"/>
                                                 <constraint firstItem="0rW-Vt-Pb1" firstAttribute="top" secondItem="eIA-rh-Vt1" secondAttribute="top" id="z1J-DT-m6W"/>
                                                 <constraint firstItem="w6D-tx-bL7" firstAttribute="centerY" secondItem="eIA-rh-Vt1" secondAttribute="centerY" id="zzF-RU-orm"/>
                                             </constraints>
@@ -253,6 +269,7 @@
                                             <outlet property="moreButton" destination="0rW-Vt-Pb1" id="5g5-zJ-7H8"/>
                                             <outlet property="muteButton" destination="ecl-i0-jxF" id="FjE-Ev-v6v"/>
                                             <outlet property="nameLabel" destination="i5b-uY-ZDM" id="U3V-ov-dqn"/>
+                                            <outlet property="networkQualityView" destination="PwL-dx-fdx" id="JKD-iQ-i9E"/>
                                             <outlet property="stackView" destination="5DJ-Az-o0i" id="Ikz-3f-3nA"/>
                                             <outlet property="statsLabel" destination="UBD-2U-nrO" id="yZo-3m-pyV"/>
                                             <outlet property="stopVideoButton" destination="obx-KY-CNX" id="PZg-Oi-nKt"/>

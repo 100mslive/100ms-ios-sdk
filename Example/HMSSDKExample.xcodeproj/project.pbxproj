@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		910F60FB27F31F5500A9A544 /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910F60FA27F31F5500A9A544 /* NetworkQualityView.swift */; };
 		91457ADC2751197D00DCFCBD /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91457ADB2751197D00DCFCBD /* PeerMetadata.swift */; };
 		914DCAF826BC291B00D8D348 /* TokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914DCAF726BC291B00D8D348 /* TokenEndpoint.swift */; };
 		9174C9F426FCB46200FD7C04 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */; };
@@ -64,6 +65,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
+		910F60FA27F31F5500A9A544 /* NetworkQualityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
 		91457ADB2751197D00DCFCBD /* PeerMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerMetadata.swift; sourceTree = "<group>"; };
 		914DCAF726BC291B00D8D348 /* TokenEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenEndpoint.swift; sourceTree = "<group>"; };
 		9174C9F226FCB46200FD7C04 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				EC8CEE5F261E297F002DC12E /* RoomService.swift */,
 				91457ADB2751197D00DCFCBD /* PeerMetadata.swift */,
 				EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */,
+				910F60FA27F31F5500A9A544 /* NetworkQualityView.swift */,
 				EC8CEE4A261E297F002DC12E /* Meeting.storyboard */,
 				EC8CEE55261E297F002DC12E /* Chat */,
 				EC8CEE4E261E297F002DC12E /* Peers List */,
@@ -482,6 +485,7 @@
 				EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */,
 				EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */,
 				91FCE9562770C63B00034F96 /* HLSSettingsViewController.swift in Sources */,
+				910F60FB27F31F5500A9A544 /* NetworkQualityView.swift in Sources */,
 				EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */,
 				91E1F37F27C395A200F76E47 /* PreviewPeersListViewController.swift in Sources */,
 				91457ADC2751197D00DCFCBD /* PeerMetadata.swift in Sources */,

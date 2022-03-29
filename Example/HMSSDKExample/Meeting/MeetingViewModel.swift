@@ -354,6 +354,8 @@ final class MeetingViewModel: NSObject,
         cell.avatarLabel.text = Utilities.getAvatarName(from: viewModel.peer.name)
 
         cell.handIcon.isHidden = !(viewModel.peer.peerMetadataObject?.isHandRaised ?? false)
+        
+        cell.networkQualityView.quality = viewModel.peer.networkQuality?.downlinkQuality ?? -1
 
         setViewOptions(for: cell, using: viewModel)
 

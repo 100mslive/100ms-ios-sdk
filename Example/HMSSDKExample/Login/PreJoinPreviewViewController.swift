@@ -12,6 +12,7 @@ class PreJoinPreviewViewController: PreviewViewController {
 
     internal var user: String!
     internal var roomName: String!
+    @IBOutlet weak var networkQualityView: NetworkQualityView!
     @IBOutlet weak var peerListButton: UIButton! {
         didSet {
             peerListButton.contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 20, bottom: 10, right: 20)
@@ -30,7 +31,7 @@ class PreJoinPreviewViewController: PreviewViewController {
         super.viewDidLoad()
         joinButton.isEnabled = false
         setupInteractor()
-        observeBroadcast()
+        startObservingNotifications()
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
@@ -54,6 +55,9 @@ class PreJoinPreviewViewController: PreviewViewController {
         interactor.onMetadataUpdate = { [weak self] in
             self?.updateParticipants()
         }
+        interactor.onNetworkQuality = { [weak self] in
+            self?.updateNetworkQuality()
+        }
     }
     
     private func updateParticipants() {
@@ -65,29 +69,41 @@ class PreJoinPreviewViewController: PreviewViewController {
         peerListButton.isHidden = count == 0
         peerListButton.setTitle("\(count) peer(s) in room", for: .normal)
     }
-
-    private func observeBroadcast() {
-        _ = NotificationCenter.default.addObserver(forName: Constants.gotError,
-                                                   object: nil,
-                                                   queue: .main) { [weak self] notification in
-            if let strongSelf = self {
-                let message = notification.userInfo?["error"] as? String
-                let alert = UIAlertController(title: "ERROR! ❌",
-                                              message: message,
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay",
-                                              style: .default,
-                                              handler: { _ in
-                                                self?.cleanup()
-                                                self?.navigationController?.popToRootViewController(animated: true)
-                                              }))
-                strongSelf.present(alert, animated: true) {
-                    print(#function)
-                }
-            }
+    
+    private func updateNetworkQuality() {
+        guard let peer = interactor.hmsSDK?.localPeer else {
+            return
+        }
+        
+        networkQualityView.quality = peer.networkQuality?.downlinkQuality ?? -1
+    }
+    
+    @objc private func onErrorNotification(notification: Notification) {
+        let message = notification.userInfo?["error"] as? String
+        let alert = UIAlertController(title: "ERROR! ❌",
+                                      message: message,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay",
+                                      style: .default,
+                                      handler: { [weak self] _ in
+                                        self?.cleanup()
+                                        self?.navigationController?.popToRootViewController(animated: true)
+                                      }))
+        present(alert, animated: true) {
+            print(#function)
         }
     }
 
+    private func startObservingNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onErrorNotification(notification:)), name: Constants.gotError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onErrorNotification(notification:)), name: Constants.hmsError, object: nil)
+    }
+    
+    private func stopObservingNotifications() {
+        NotificationCenter.default.removeObserver(self, name: Constants.gotError, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Constants.hmsError, object: nil)
+    }
+    
     @IBAction private func backButtonTapped(_ sender: UIButton) {
         cleanup()
         navigationController?.popViewController(animated: true)
@@ -105,6 +121,7 @@ class PreJoinPreviewViewController: PreviewViewController {
         viewController.interactor = interactor
 
         navigationController?.pushViewController(viewController, animated: true)
+        stopObservingNotifications()
     }
     
     @IBAction private func peerListTapped(_ sender: UIButton) {
