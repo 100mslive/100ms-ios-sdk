@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHd-X7-1X6">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -151,6 +151,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="822"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9l-Pq-TNn" customClass="NetworkQualityView" customModule="HMSSDKExample" customModuleProvider="target">
+                                <rect key="frame" x="331" y="74" width="24" height="24"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Aul-0i-8Yx"/>
+                                    <constraint firstAttribute="width" constant="24" id="lGB-vC-tvG"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3j-HI-E6k">
                                 <rect key="frame" x="20" y="64" width="44" height="44"/>
                                 <constraints>
@@ -266,6 +274,7 @@
                                 <variation key="heightClass=compact-widthClass=compact" constant="-44"/>
                             </constraint>
                             <constraint firstItem="uRj-if-AyW" firstAttribute="leading" secondItem="LjH-wP-p2I" secondAttribute="leading" constant="8" id="9az-se-Rwi"/>
+                            <constraint firstItem="LjH-wP-p2I" firstAttribute="trailing" secondItem="z9l-Pq-TNn" secondAttribute="trailing" constant="20" id="Ict-7X-QMZ"/>
                             <constraint firstItem="LjH-wP-p2I" firstAttribute="trailing" secondItem="uRj-if-AyW" secondAttribute="trailing" constant="8" id="RRb-NJ-4tW"/>
                             <constraint firstItem="lig-Kg-1vh" firstAttribute="leading" secondItem="LjH-wP-p2I" secondAttribute="leading" id="UvM-Q9-MuX"/>
                             <constraint firstItem="lig-Kg-1vh" firstAttribute="centerX" secondItem="RjW-9p-BdA" secondAttribute="centerX" id="ZF2-ov-hlU"/>
@@ -281,12 +290,14 @@
                             <constraint firstItem="yC4-5P-J60" firstAttribute="top" secondItem="LjH-wP-p2I" secondAttribute="top" id="n2j-nu-D5Q">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-44"/>
                             </constraint>
+                            <constraint firstItem="z9l-Pq-TNn" firstAttribute="centerY" secondItem="Q3j-HI-E6k" secondAttribute="centerY" id="y0B-0y-FKO"/>
                             <constraint firstItem="Q3j-HI-E6k" firstAttribute="leading" secondItem="LjH-wP-p2I" secondAttribute="leading" constant="20" id="yXw-HO-Zy9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="K7u-NR-vFb"/>
                     <connections>
                         <outlet property="joinButton" destination="sar-qp-8u8" id="b9z-ga-RIY"/>
+                        <outlet property="networkQualityView" destination="z9l-Pq-TNn" id="cX6-FQ-qjM"/>
                         <outlet property="peerListButton" destination="q1x-9c-s1z" id="Z1e-iK-3mJ"/>
                         <outlet property="previewView" destination="yC4-5P-J60" id="Nrc-lI-BSl"/>
                         <outlet property="publishAudioButton" destination="Dlj-dE-oPY" id="Tee-VK-1Ka"/>

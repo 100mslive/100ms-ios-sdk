@@ -21,6 +21,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var onHLSUpdate: (() -> Void)?
     internal var onMetadataUpdate: (() -> Void)?
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
+    internal var onNetworkQuality: (() -> Void)?
 
     // MARK: - Instance Properties
 
@@ -75,7 +76,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
             sdk.logger = self
         }
 
-        config = HMSConfig(userName: user, authToken: token)
+        config = HMSConfig(userName: user, authToken: token, captureNetworkQualityInPreview: true)
 
         guard let config = config else { return }
         hmsSDK?.preview(config: config, delegate: self)
@@ -114,6 +115,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
                 Utilities.showToast(message: "🎉 \(peer.name)'s role updated to \(role)")
                 NotificationCenter.default.post(name: Constants.roleUpdated, object: nil)
             }
+        case .networkQualityUpdated:
+            onNetworkQuality?()
         default:
             print(#function, "Unhandled update type encountered")
         }

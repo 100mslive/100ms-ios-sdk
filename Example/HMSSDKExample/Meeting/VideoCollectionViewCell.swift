@@ -73,7 +73,13 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             handIcon.isHidden = true
         }
     }
-
+    
+    @IBOutlet weak var networkQualityView: NetworkQualityView! {
+        didSet {
+            networkQualityView.isHidden = true
+        }
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
