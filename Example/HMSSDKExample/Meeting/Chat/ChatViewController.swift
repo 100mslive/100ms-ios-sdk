@@ -151,11 +151,11 @@ final class ChatViewController: UIViewController {
 
         sender.isEnabled = false
 
-        let messageHandler: ((HMSMessage?, HMSError?) -> Void) = { [weak self, weak sender] message, error in
+        let messageHandler: ((HMSMessage?, HMSError?) -> Void) = { [weak self, weak sender] sentMessage, error in
             sender?.isEnabled = true
 
-            if let message = message {
-                self?.append(message)
+            if let sentMessage = sentMessage {
+                self?.append(sentMessage)
             } else if let error = error {
                 self?.showMessageSendError(error)
             }

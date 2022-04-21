@@ -54,7 +54,10 @@ struct RoomService {
                 guard error == nil, response != nil, let data = data else {
                     let message = error?.localizedDescription ??  "Unexpected Error"
                     print(#function, "Error: ", message)
-                    completion(nil, error)
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                    
                     return
                 }
 
