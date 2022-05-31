@@ -42,12 +42,17 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     private var config: HMSConfig?
+    
+    private var videoPlugins = [HMSVideoPlugin]()
+    var virtualBackgroundPlugin: HMSVideoPlugin?
 
     // MARK: - Setup SDK
 
     init(for user: String,
          in room: String,
          _ completion: @escaping () -> Void) {
+        
+        setupPlugins()
 
         RoomService.setup(for: user, room) { [weak self] token in
             guard let token = token else {
@@ -60,17 +65,43 @@ final class HMSSDKInteractor: HMSUpdateListener {
             completion()
         }
     }
+    
+    private func setupPlugins() {
+        if #available(iOS 15.0, *) {
+            
+            virtualBackgroundPlugin = HMSVirtualBackgroundPlugin(backgroundImage: UIImage(named: "VB1"))
+            
+            if UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled") == true {
+                virtualBackgroundPlugin?.activate()
+            }
+            
+            if let virtualBackgroundPlugin = virtualBackgroundPlugin {
+                videoPlugins.append(virtualBackgroundPlugin)
+            }
+        }
+        
+        // Adding custom plugin below for demonstration purposes.
+        // It is disabled and not used in the sample code.
+        
+        // Add our custom grayscale plugin - deactivated
+        let grayScalePlugin = GrayscaleVideoPlugin()
+        grayScalePlugin.deactivate()
+        videoPlugins.append(grayScalePlugin)
+    }
 
     private func setup(for user: String, token: String, _ room: String) {
 
         hmsSDK = HMSSDK.build { sdk in
             sdk.analyticsLevel = .verbose
+            sdk.appGroup = "group.live.100ms.videoapp"
+            
             let videoSettings = HMSVideoTrackSettings(codec: .VP8,
-                                                      resolution: .init(width: 320, height: 180),
-                                                      maxBitrate: 512,
-                                                      maxFrameRate: 25,
-                                                      cameraFacing: .front,
-                                                      trackDescription: "Just a normal video track")
+                                                          resolution: .init(width: 320, height: 180),
+                                                          maxBitrate: 512,
+                                                          maxFrameRate: 25,
+                                                          cameraFacing: .front,
+                                                      trackDescription: "Just a normal video track", videoPlugins: self.videoPlugins)
+            
             let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track")
             sdk.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
             sdk.logger = self
@@ -247,6 +278,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     internal var canEndRoom: Bool {
         hmsSDK?.localPeer?.role?.permissions.endRoom ?? false
+    }
+    
+    internal var canScreenShare: Bool {
+        hmsSDK?.localPeer?.role?.publishSettings.allowed?.contains("screen") ?? false
     }
 }
 
