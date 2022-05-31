@@ -8,6 +8,7 @@
 import UIKit
 import HMSSDK
 import MediaPlayer
+import ReplayKit
 
 final class MeetingViewController: UIViewController {
 
@@ -30,7 +31,8 @@ final class MeetingViewController: UIViewController {
             roomNameButton.titleLabel?.adjustsFontSizeToFitWidth = false
         }
     }
-
+    @IBOutlet weak var broadcasterPickerContainer: UIView!
+    
     @IBOutlet private weak var speakerButton: UIButton!
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -71,6 +73,9 @@ final class MeetingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        prepareSystemBroadcaster()
+        broadcasterPickerContainer.isHidden = !interactor.canScreenShare
 
         UIApplication.shared.isIdleTimerDisabled = true
 
@@ -115,7 +120,6 @@ final class MeetingViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            settingsButton.imageView?.rotate()
             navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
@@ -224,9 +228,6 @@ final class MeetingViewController: UIViewController {
             self?.updateHLSState()
         }
 
-        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.settingsButton.imageView?.rotate()
-        }
     }
 
     private func setupButtonStates() {
@@ -269,6 +270,8 @@ final class MeetingViewController: UIViewController {
 
             self.settingsButton.setImage(self.settingsButtonIcon(), for: .normal)
             self.settingsButton.tintColor = self.settingsButtonTint()
+            
+            self.broadcasterPickerContainer.isHidden = !self.interactor.canScreenShare
         }
     }
 
@@ -291,6 +294,8 @@ final class MeetingViewController: UIViewController {
     private func menuItems() -> [UIAction] {
 
         let currentMode = viewModel?.mode ?? .regular
+        
+        let isVBActivated = UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled")
 
         let actions = [
             UIAction(title: "Audio Only Mode",
@@ -350,6 +355,21 @@ final class MeetingViewController: UIViewController {
                     self?.updateSettingsButton()
                 }
             },
+            
+            UIAction(title: "Enable virtual background",
+                     image: UIImage(systemName: "person.crop.rectangle.fill"),
+                     state: isVBActivated ? .on : .off) { [weak self] _ in
+                 if isVBActivated {
+                     self?.interactor.virtualBackgroundPlugin?.deactivate()
+                     UserDefaults.standard.set(false, forKey: "virtualBackgroundPluginEnabled")
+                 }
+                 else {
+                     _ = self?.interactor.virtualBackgroundPlugin?.activate()
+                     UserDefaults.standard.set(true, forKey: "virtualBackgroundPluginEnabled")
+                 }
+                 self?.updateSettingsButton()
+            },
+            
             UIAction(title: "Change my name",
                      image: UIImage(systemName: "rectangle.and.pencil.and.ellipsis")) { [weak self] _ in
                 self?.showNamePrompt()
@@ -712,6 +732,25 @@ final class MeetingViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
 
         present(alertController, animated: true)
+    }
+    
+    func prepareSystemBroadcaster() {
+        let frame = CGRect(x: 0, y:0, width: 44, height: 44)
+        let systemBroadcastPicker = RPSystemBroadcastPickerView(frame: frame)
+        systemBroadcastPicker.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]
+        systemBroadcastPicker.preferredExtension = "live.100ms.videoapp.screenshare"
+        systemBroadcastPicker.showsMicrophoneButton = false
+        
+        for view in systemBroadcastPicker.subviews {
+            if let button = view as? UIButton {
+                
+                let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+                let image = UIImage(systemName: "rectangle.on.rectangle", withConfiguration: configuration)?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
+                button.setImage(image, for: .normal)
+            }
+        }
+        
+        broadcasterPickerContainer.addSubview(systemBroadcastPicker)
     }
 
     // MARK: - Button Action Handlers

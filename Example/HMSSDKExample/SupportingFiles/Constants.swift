@@ -36,7 +36,7 @@ struct Constants {
     static let messageReceived = NSNotification.Name("MESSAGE_RECEIVED")
 
     static let joinedRoom = NSNotification.Name("JOINED_ROOM")
-    
+
     static let trackStatsUpdated = NSNotification.Name("TRACK_STATS_UPDATED")
 
     static let gotError = NSNotification.Name("GOT_ERROR")
@@ -95,7 +95,7 @@ struct Constants {
     // MARK: - Settings
 
     static let defaultName = "defaultName"
-
+    
     static let roomName = "roomName"
 
     static let publishVideo = "publishVideo"

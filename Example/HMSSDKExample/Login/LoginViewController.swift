@@ -69,7 +69,6 @@ final class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         joinMeetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomIDKey) ?? Constants.defaultRoomID
-        settingsButton.imageView?.rotate()
     }
 
     override func willTransition(to newCollection: UITraitCollection,
@@ -102,9 +101,6 @@ final class LoginViewController: UIViewController {
             self?.showInputAlert()
         }
 
-        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.settingsButton.imageView?.rotate()
-        }
     }
 
     private func checkIfInMeeting() -> Bool {

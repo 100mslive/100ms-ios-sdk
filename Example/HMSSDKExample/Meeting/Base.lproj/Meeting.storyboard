@@ -12,6 +12,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Renderer View Controller-->
+        <scene sceneID="jxa-33-rWK">
+            <objects>
+                <viewController storyboardIdentifier="Renderer" id="Wji-vq-dRm" userLabel="Renderer View Controller" customClass="Renderer" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hnD-UL-2YV">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="juO-5b-3xO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="43O-Lo-TvK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-803" y="54"/>
+        </scene>
         <!--Meeting View Controller-->
         <scene sceneID="AB1-0p-zeJ">
             <objects>
@@ -71,8 +86,15 @@
                                     <action selector="muteRemoteStreamsTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="Jbp-9w-rfQ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PQ-EF-D0Z">
+                                <rect key="frame" x="206" y="45" width="44" height="42"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="efE-lH-XKC"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Kd-OJO">
-                                <rect key="frame" x="8" y="44" width="246" height="44"/>
+                                <rect key="frame" x="8" y="44" width="198" height="44"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <state key="normal" title="Room ">
                                     <color key="titleColor" systemColor="linkColor"/>
@@ -385,18 +407,21 @@
                         <constraints>
                             <constraint firstItem="K2O-AH-YXe" firstAttribute="top" secondItem="NKq-UE-p7N" secondAttribute="bottom" id="0lS-Zz-6am"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="bottom" constant="8" symbolic="YES" id="6BK-wy-0t3"/>
+                            <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="6PQ-EF-D0Z" secondAttribute="trailing" id="6FG-G7-hEe"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="DyH-bp-NTF" secondAttribute="trailing" id="93z-Xv-J5z"/>
+                            <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="6PQ-EF-D0Z" secondAttribute="bottom" constant="1" id="9MA-j1-gy1"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="Zy8-cT-272" secondAttribute="trailing" id="BaR-jR-XPe"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="top" secondItem="i1F-BP-LLz" secondAttribute="top" id="DZN-P3-ehW"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="EaT-W8-Za3"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="bottom" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="H2q-rx-LEt"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="leading" secondItem="i1F-BP-LLz" secondAttribute="trailing" id="Iix-A7-yaH"/>
-                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="kDS-UD-GQA" secondAttribute="top" id="Ny9-re-MbV"/>
+                            <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="6PQ-EF-D0Z" secondAttribute="bottom" id="Ny9-re-MbV"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="top" secondItem="e9C-pq-ppt" secondAttribute="top" id="OvR-sO-FCg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="dbh-7g-s3g" secondAttribute="trailing" constant="8" id="XEz-uO-kgn"/>
-                            <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" constant="-4" id="Y3D-QU-DJO"/>
+                            <constraint firstItem="6PQ-EF-D0Z" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" id="Y3D-QU-DJO"/>
+                            <constraint firstItem="6PQ-EF-D0Z" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="top" constant="1" id="Y7w-9P-98J"/>
                             <constraint firstItem="K2O-AH-YXe" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="YoD-sn-wZC"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="ZNn-6N-Bo0"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="bottom" secondItem="e9C-pq-ppt" secondAttribute="bottom" id="Zkr-SO-5Bf"/>
@@ -446,6 +471,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="broadcasterPickerContainer" destination="6PQ-EF-D0Z" id="esm-Pr-1Hh"/>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
                         <outlet property="hlsContainer" destination="K2O-AH-YXe" id="3Dd-bc-NeZ"/>
                         <outlet property="loadingIcon" destination="Zy8-cT-272" id="f5F-JG-r68"/>
@@ -458,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZE-GK-SnT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="82.6171875" y="62.811127379209367"/>
+            <point key="canvasLocation" x="81.538461538461533" y="62.559241706161131"/>
         </scene>
         <!--Role Preview View Controller-->
         <scene sceneID="N2p-5T-n6b">
