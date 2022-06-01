@@ -36,9 +36,6 @@ class ViewController: UIViewController {
     func joinRoom() {
         let config = HMSConfig(userID: UUID().uuidString, roomID: "inset room id", authToken: "inset token here")
         hmsSDK.join(config: config, delegate: self)
-        hmsSDK.localPeer?.localAudioTrack()?.setMute(true)
-        hmsSDK.localPeer?.localVideoTrack()?.setMute(true)
-        hmsSDK.leave()
     }
 
     func addVideoView(for track: HMSVideoTrack) {
