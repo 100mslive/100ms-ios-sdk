@@ -44,7 +44,7 @@ Here you will find everything you need to build experiences with video using 100
   end
   ```
 
-  then run `pod instal --repo-update`
+  then run `pod install --repo-update`
 
   You can also use [Swift Package Manager](https://www.100ms.live/docs/ios/v2/features/Integration#swift-package-manager) (use https://github.com/100mslive/100ms-ios-sdk.git as the package source)
   
