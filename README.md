@@ -23,7 +23,7 @@ Here you will find everything you need to build experiences with video using 100
   
 ## ☝️ Pre-requisites
 - Xcode 12 or higher
-- Support for iOS 10 or higher
+- Support for iOS 12 or higher
 
 ## 🚂 Setup Guide
   
@@ -37,12 +37,15 @@ Here you will find everything you need to build experiences with video using 100
   ```ruby
   # Podfile
   
-  platform :ios, '10.0'
+  platform :ios, '12.0'
 
   target 'MyAwesomeApp' do
     pod 'HMSSDK'
   end
   ```
+
+  then run `pod instal --repo-update`
+
   You can also use [Swift Package Manager](https://www.100ms.live/docs/ios/v2/features/Integration#swift-package-manager) (use https://github.com/100mslive/100ms-ios-sdk.git as the package source)
   
   Follow the [iOS Quick Start Guide as mentioned here](https://docs.100ms.live/ios/v2/guides/Quickstart).
