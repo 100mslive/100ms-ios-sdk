@@ -15,7 +15,9 @@ final class PreviewPeersListViewController: UIViewController {
 
     @IBOutlet private  weak var table: UITableView!
 
-    internal var roomName: String!
+    var roomName: String {
+        interactor.room
+    }
 
     @IBOutlet weak var roomNameButton: UIButton! {
         didSet {

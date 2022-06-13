@@ -76,9 +76,9 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var showVideoPreviewSwitch: UISwitch! {
         didSet {
-            if let isOn = UserDefaults.standard.object(forKey: Constants.showVideoPreview) as? Bool {
-                showVideoPreviewSwitch.setOn(isOn, animated: false)
-            }
+            let isOn = UserDefaults.standard.object(forKey: Constants.showVideoPreview) == nil || UserDefaults.standard.bool(forKey: Constants.showVideoPreview)
+            
+            showVideoPreviewSwitch.setOn(isOn, animated: false)
         }
     }
 

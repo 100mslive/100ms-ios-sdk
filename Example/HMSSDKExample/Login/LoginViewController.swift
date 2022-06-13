@@ -57,6 +57,10 @@ final class LoginViewController: UIViewController {
             Utilities.drawCorner(on: joinMeetingButton)
         }
     }
+    
+    var shouldShowPreview: Bool {
+        UserDefaults.standard.object(forKey: Constants.showVideoPreview) == nil || UserDefaults.standard.bool(forKey: Constants.showVideoPreview)
+    }
 
     // MARK: - View Lifecycle
 
@@ -174,20 +178,42 @@ final class LoginViewController: UIViewController {
             return
         }
 
-        guard let name = alertController.textFields?[0].text, !name.isEmpty,
-              let viewController = self.storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? PreJoinPreviewViewController
-        else {
+        guard let name = alertController.textFields?[0].text, !name.isEmpty else {
             dismiss(animated: true)
             let message = "Enter Name!"
             showErrorAlert(with: message)
             return
         }
-
-        viewController.user = name
-        viewController.roomName = room
-
+        
         save(name, room)
-
+        
+        if shouldShowPreview {
+            preview(name: name, room: room)
+        } else {
+            join(name: name, room: room)
+        }
+    }
+    
+    private func join(name: String, room: String) {
+        guard let viewController = UIStoryboard(name: Constants.meeting, bundle: nil)
+            .instantiateInitialViewController() as? MeetingViewController
+        else {
+            return
+        }
+        
+        viewController.interactor = HMSSDKInteractor(for: name, in: room)
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func preview(name: String, room: String) {
+        guard let viewController = self.storyboard?.instantiateViewController(identifier: Constants.previewControllerIdentifier) as? PreJoinPreviewViewController
+        else {
+            return
+        }
+        
+        viewController.interactor = HMSSDKInteractor(for: name, in: room)
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
 

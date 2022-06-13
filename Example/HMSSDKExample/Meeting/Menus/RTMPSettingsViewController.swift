@@ -49,6 +49,13 @@ final class RTMPSettingsViewController: FormViewController {
                 $0.title = "Record"
             }
         form +++ Section("")
+            <<< IntRow("rtmpResolutionHeight"){
+                $0.title = "Resolution Height"
+        }
+            <<< IntRow("rtmpResolutionWidth") {
+                $0.title = "Resolution Width"
+            }
+        form +++ Section("")
             <<< ButtonRow {
                 $0.title = "Start"
                 $0.onCellSelection { [weak self] _, _ in
@@ -75,10 +82,17 @@ final class RTMPSettingsViewController: FormViewController {
         if let inputURLs = values["rtmpURLs"] as? [Any] {
             rtmpURLs = inputURLs.compactMap { $0 as? URL }
         }
-
+        
+        var resolution: HMSVideoResolution?
+        if let height = values["rtmpResolutionHeight"] as? Int,
+           let width = values["rtmpResolutionWidth"] as? Int,
+           height > 0 && width > 0 {
+            resolution = HMSVideoResolution(width: width, height: height)
+        }
+        
         let recordingEnabled = (values["recordingSwitch"] as? Bool) ?? false
 
-        let config = HMSRTMPConfig(meetingURL: meetingURL, rtmpURLs: rtmpURLs, record: recordingEnabled)
+        let config = HMSRTMPConfig(meetingURL: meetingURL, rtmpURLs: rtmpURLs, record: recordingEnabled, resolution: resolution)
         delegate?.rtmpSettingsController(self, didSelect: config)
         navigationController?.popViewController(animated: true)
     }

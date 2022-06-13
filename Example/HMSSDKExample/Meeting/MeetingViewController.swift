@@ -13,8 +13,14 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - View Properties
 
-    internal var user: String!
-    internal var roomName: String!
+    var user: String {
+        interactor.user
+    }
+    
+    var roomName: String {
+        interactor.room
+    }
+    
     internal var interactor: HMSSDKInteractor!
 
     @IBOutlet weak var hlsContainer: UIView!
@@ -111,6 +117,8 @@ final class MeetingViewController: UIViewController {
         viewModel?.showRoleChangePrompt = { [weak self] peer, force in
             self?.showRoleChangePrompt(for: peer, force: force)
         }
+        
+        interactor.join()
     }
 
     override func viewWillAppear(_ animated: Bool) {

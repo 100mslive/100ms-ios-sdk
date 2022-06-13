@@ -9,9 +9,6 @@
 import UIKit
 
 class PreJoinPreviewViewController: PreviewViewController {
-
-    internal var user: String!
-    internal var roomName: String!
     @IBOutlet weak var networkQualityView: NetworkQualityView!
     @IBOutlet weak var peerListButton: UIButton! {
         didSet {
@@ -32,6 +29,7 @@ class PreJoinPreviewViewController: PreviewViewController {
         joinButton.isEnabled = false
         setupInteractor()
         startObservingNotifications()
+        interactor.preview()
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
@@ -46,7 +44,6 @@ class PreJoinPreviewViewController: PreviewViewController {
     }
 
     private func setupInteractor() {
-        interactor = HMSSDKInteractor(for: user, in: roomName) {}
         interactor.onPreview = { [weak self] _, tracks in
             self?.setupTracks(tracks: tracks)
             self?.joinButton.isEnabled = true
@@ -116,8 +113,6 @@ class PreJoinPreviewViewController: PreviewViewController {
            return
         }
 
-        viewController.user = user
-        viewController.roomName = roomName
         viewController.interactor = interactor
 
         navigationController?.pushViewController(viewController, animated: true)
@@ -130,7 +125,6 @@ class PreJoinPreviewViewController: PreviewViewController {
             return
         }
 
-        viewController.roomName = roomName
         viewController.interactor = interactor
 
         present(viewController, animated: true)

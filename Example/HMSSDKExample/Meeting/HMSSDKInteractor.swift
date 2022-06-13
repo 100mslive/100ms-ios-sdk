@@ -12,6 +12,8 @@ import HMSSDK
 final class HMSSDKInteractor: HMSUpdateListener {
 
     private(set) var hmsSDK: HMSSDK?
+    let user: String
+    let room: String
 
     internal var onPreview: ((HMSRoom, [HMSTrack]) -> Void)?
     internal var onRoleChange: ((HMSRoleChangeRequest) -> Void)?
@@ -46,48 +48,61 @@ final class HMSSDKInteractor: HMSUpdateListener {
     // MARK: - Setup SDK
 
     init(for user: String,
-         in room: String,
-         _ completion: @escaping () -> Void) {
-
-        RoomService.setup(for: user, room) { [weak self] token in
-            guard let token = token else {
-                print(#function, "Error fetching token")
-                return
-            }
-
-            self?.setup(for: user, token: token, room)
-
-            completion()
-        }
+         in room: String) {
+        self.user = user
+        self.room = room
+        setupSDK()
     }
-
-    private func setup(for user: String, token: String, _ room: String) {
-
+    
+    private func setupSDK() {
         hmsSDK = HMSSDK.build { sdk in
-            sdk.analyticsLevel = .verbose
             let videoSettings = HMSVideoTrackSettings(codec: .VP8,
-                                                      resolution: .init(width: 320, height: 180),
-                                                      maxBitrate: 512,
-                                                      maxFrameRate: 25,
-                                                      cameraFacing: .front,
+                                                          resolution: .init(width: 320, height: 180),
+                                                          maxBitrate: 512,
+                                                          maxFrameRate: 25,
+                                                          cameraFacing: .front,
                                                       trackDescription: "Just a normal video track")
+            
             let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track")
             sdk.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
             sdk.logger = self
         }
-
-        config = HMSConfig(userName: user, authToken: token, captureNetworkQualityInPreview: true)
-
-        guard let config = config else { return }
-        hmsSDK?.preview(config: config, delegate: self)
     }
 
-    internal func join() {
-        guard let config = config else { return }
-        hmsSDK?.join(config: config, delegate: self)
+    func fetchConfig(completion: @escaping ((HMSConfig?) -> Void)) {
+        if let config = config {
+            completion(config)
+        }
+        
+        RoomService.fetchToken(for: user, room) { [weak self] token in
+            guard let token = token, let self = self else {
+                print(#function, "Error fetching token")
+                completion(nil)
+                return
+            }
+
+            self.config = HMSConfig(userName: self.user, authToken: token, captureNetworkQualityInPreview: true)
+
+
+            completion(self.config)
+        }
+    }
+    
+    func preview() {
+        fetchConfig { [weak self] config in
+            guard let config = config, let self = self else { return }
+            self.hmsSDK?.preview(config: config, delegate: self)
+        }
     }
 
-    internal func leave() {
+    func join() {
+        fetchConfig { [weak self] config in
+            guard let config = config, let self = self else { return }
+            self.hmsSDK?.join(config: config, delegate: self)
+        }
+    }
+
+    func leave() {
         hmsSDK?.leave()
     }
 
