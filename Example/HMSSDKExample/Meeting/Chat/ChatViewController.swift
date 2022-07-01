@@ -221,6 +221,8 @@ extension ChatViewController {
         if let peer = message.sender {
             name = peer.name
             isLocal = (peer.peerID == interactor?.hmsSDK?.localPeer?.peerID)
+        } else {
+            name = "Bot"
         }
 
         guard let name = name else { return }

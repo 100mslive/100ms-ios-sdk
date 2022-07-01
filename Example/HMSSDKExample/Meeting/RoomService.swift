@@ -9,19 +9,9 @@
 import Foundation
 
 struct RoomService {
-
-    static func setup(for user: String,
-                      _ room: String,
-                      completion: @escaping (String?) -> Void) {
-
-        getToken(for: user, room) { (token) in
-            completion(token)
-        }
-    }
-
     // MARK: - Room Token
 
-    private static func getToken(for user: String,
+    static func fetchToken(for user: String,
                                  _ room: String,
                                  completion: @escaping (String?) -> Void) {
 
@@ -43,7 +33,7 @@ struct RoomService {
         }
     }
 
-    private static func requestToken(for user: String,
+    static func requestToken(for user: String,
                                      _ roomID: String,
                                      completion: @escaping (String?, Error?) -> Void) {
 

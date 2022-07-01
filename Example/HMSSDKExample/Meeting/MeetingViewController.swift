@@ -14,8 +14,14 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - View Properties
 
-    internal var user: String!
-    internal var roomName: String!
+    var user: String {
+        interactor.user
+    }
+    
+    var roomName: String {
+        interactor.room
+    }
+    
     internal var interactor: HMSSDKInteractor!
 
     @IBOutlet weak var hlsContainer: UIView!
@@ -116,6 +122,8 @@ final class MeetingViewController: UIViewController {
         viewModel?.showRoleChangePrompt = { [weak self] peer, force in
             self?.showRoleChangePrompt(for: peer, force: force)
         }
+        
+        interactor.join()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -148,11 +156,13 @@ final class MeetingViewController: UIViewController {
             hlsController?.streamURL = nil
             hlsController?.stop()
             collectionView.isHidden = false
+            interactor.hmsSDK?.resumeAfterExternalAudioPlayback()
             return
         }
 
         collectionView.isHidden = true
         hlsContainer.isHidden = false
+        interactor.hmsSDK?.prepareForExternalAudioPlayback()
         hlsController?.streamURL = interactor?.hmsSDK?.room?.hlsStreamingState.variants.first?.url
         hlsController?.play()
     }

@@ -98,7 +98,6 @@ final class MeetingViewModel: NSObject,
 
         self.interactor = interactor
         setupDataSource()
-        interactor.join()
 
         setup(collectionView)
 
