@@ -21,6 +21,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bcw-CH-SJE">
                                 <rect key="frame" x="303" y="44" width="64" height="64"/>
+                                <accessibility key="accessibilityConfiguration" identifier="login-settings-button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="FJP-AP-4Am"/>
                                     <constraint firstAttribute="width" constant="64" id="p6q-Md-1Sb"/>
@@ -45,12 +46,14 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join a Meeting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycw-3w-dwc">
                                                 <rect key="frame" x="15" y="8" width="329" height="17"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="login-join-a-meeting-button"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <color key="textColor" systemColor="linkColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Meeting ID" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="acw-NV-HwS">
                                                 <rect key="frame" x="15" y="33" width="329" height="43"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="login-meeting-id-text-field"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="join" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 <connections>
@@ -60,6 +63,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ta-CK-XYA">
                                                 <rect key="frame" x="15" y="84" width="329" height="52"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="login-join-meeting-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="HzS-Mx-OL9"/>
                                                 </constraints>
@@ -88,6 +92,7 @@
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bF0-6v-uqx">
                                 <rect key="frame" x="8" y="44" width="64" height="64"/>
+                                <accessibility key="accessibilityConfiguration" identifier="login-hms-logo"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Tfb-aR-8Rv"/>
                                     <constraint firstAttribute="width" constant="64" id="jtL-ai-u29"/>
@@ -154,6 +159,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9l-Pq-TNn" customClass="NetworkQualityView" customModule="HMSSDKExample" customModuleProvider="target">
                                 <rect key="frame" x="331" y="74" width="24" height="24"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="preview-network-quality-view"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Aul-0i-8Yx"/>
                                     <constraint firstAttribute="width" constant="24" id="lGB-vC-tvG"/>
@@ -161,6 +167,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3j-HI-E6k">
                                 <rect key="frame" x="20" y="64" width="44" height="44"/>
+                                <accessibility key="accessibilityConfiguration" identifier="preview-back-button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="V4T-78-LcG"/>
                                     <constraint firstAttribute="height" constant="44" id="hK8-78-Ofd"/>
@@ -181,6 +188,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIN-yc-MeB">
                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="preview-camera-toggle-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="DLa-Qi-rZE"/>
                                                     <constraint firstAttribute="width" constant="64" id="Slb-Ny-NUp"/>
@@ -201,6 +209,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dlj-dE-oPY">
                                                 <rect key="frame" x="112" y="0.0" width="64" height="64"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="preview-mic-toggle-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="8Fl-Jx-DcN"/>
                                                     <constraint firstAttribute="width" constant="64" id="MQd-qx-996"/>
@@ -224,6 +233,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1x-9c-s1z">
                                         <rect key="frame" x="128" y="84" width="119" height="52"/>
                                         <color key="backgroundColor" systemColor="linkColor"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="preview-peers-in-room-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="WYU-vS-yLb"/>
                                         </constraints>
@@ -242,6 +252,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sar-qp-8u8">
                                                 <rect key="frame" x="15" y="8" width="329" height="52"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="preview-join-meeting-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="5fc-GN-sls"/>
                                                 </constraints>

@@ -119,6 +119,8 @@ struct Constants {
     static let audioBitRate = "audioBitRate"
 
     static let defaultVideoSource = "defaultVideoSource"
+    
+    static let defaultAudioSource = "defaultAudioSource"
 
     static let videoResolution = "videoResolution"
 
@@ -127,4 +129,17 @@ struct Constants {
 
 enum ViewModes: String {
     case regular, audioOnly, videoOnly, speakers, pinned, spotlight, hero
+}
+
+enum AudioSourceType: Int, CaseIterable {
+    case audioMixer, webrtc
+    
+    var description: String {
+        switch self {
+        case .audioMixer:
+            return "Audio Mixer"
+        case .webrtc:
+            return "Webrtc"
+        }
+    }
 }

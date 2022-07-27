@@ -38,6 +38,7 @@
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbh-7g-s3g">
                                 <rect key="frame" x="338" y="44" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="meeting-settings-button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="FBk-xL-BtU"/>
                                     <constraint firstAttribute="width" constant="44" id="Kah-tw-fMH"/>
@@ -53,6 +54,7 @@
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9C-pq-ppt">
                                 <rect key="frame" x="294" y="44" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="meeting-camera-switch-button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="JGd-Pu-Vel"/>
                                 </constraints>
@@ -68,6 +70,7 @@
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i1F-BP-LLz">
                                 <rect key="frame" x="250" y="44" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="meeting-speaker-button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="ll8-3i-2Qf"/>
                                 </constraints>
@@ -89,12 +92,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PQ-EF-D0Z">
                                 <rect key="frame" x="206" y="45" width="44" height="42"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="meeting-screen-broadcast-button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="efE-lH-XKC"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ac1-FP-06x" userLabel="Music">
+                                <rect key="frame" x="162" y="44" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="z5s-X9-GwQ"/>
+                                </constraints>
+                                <state key="normal" image="music.note" catalog="system">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <state key="selected" image="speaker.slash.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="medium">
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    </preferredSymbolConfiguration>
+                                </state>
+                                <connections>
+                                    <action selector="musicTapped:" destination="mjG-Ba-if7" eventType="touchUpInside" id="uzy-rN-EJ3"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-Kd-OJO">
-                                <rect key="frame" x="8" y="44" width="198" height="44"/>
+                                <rect key="frame" x="8" y="44" width="154" height="44"/>
+                                <accessibility key="accessibilityConfiguration" identifier="meeting-room-name-label"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <state key="normal" title="Room ">
                                     <color key="titleColor" systemColor="linkColor"/>
@@ -134,6 +160,9 @@
                                                 <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-Q2-mQX" customClass="HMSVideoView">
                                                     <rect key="frame" x="2" y="2" width="124" height="124"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <accessibility key="accessibilityConfiguration">
+                                                        <bool key="isElement" value="YES"/>
+                                                    </accessibility>
                                                 </view>
                                                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w6D-tx-bL7">
                                                     <rect key="frame" x="32" y="32" width="64" height="64"/>
@@ -180,6 +209,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwL-dx-fdx" customClass="NetworkQualityView" customModule="HMSSDKExample" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="HLi-nx-G23"/>
                                                                 <constraint firstAttribute="height" constant="24" id="eaU-Sw-k8s"/>
@@ -187,6 +219,9 @@
                                                         </view>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y1u-r9-nv2">
                                                             <rect key="frame" x="25" y="0.99999999999999822" width="24" height="22.333333333333336"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="24" id="3Da-xx-ea1"/>
                                                                 <constraint firstAttribute="height" constant="24" id="EM1-hd-W3Z"/>
@@ -195,6 +230,9 @@
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0j-ju-4Pk" userLabel="handIcon">
                                                             <rect key="frame" x="50" y="-3.5527136788005009e-15" width="24" height="23.666666666666671"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="pid-Ar-tgb"/>
                                                                 <constraint firstAttribute="width" constant="24" id="yLX-2z-rYj"/>
@@ -312,6 +350,7 @@
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXn-tX-gSM">
                                         <rect key="frame" x="8" y="0.0" width="68.333333333333329" height="44"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="meeting-video-publish-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="2r2-nP-Ppa"/>
                                         </constraints>
@@ -331,6 +370,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-0T-b7l">
                                         <rect key="frame" x="84.333333333333343" y="0.0" width="68.333333333333343" height="44"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="meeting-audio-publish-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="gnA-SC-CIG"/>
                                         </constraints>
@@ -350,6 +390,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bq-abg">
                                         <rect key="frame" x="160.66666666666666" y="0.0" width="68.666666666666657" height="44"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="meeting-chat-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="RA3-dL-P1E"/>
                                         </constraints>
@@ -364,6 +405,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="46D-2v-Gmp">
                                         <rect key="frame" x="237.33333333333334" y="0.0" width="68.333333333333343" height="44"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="meeting-hand-raise-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="TFg-ko-WUd"/>
                                         </constraints>
@@ -379,6 +421,7 @@
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-Fg-dAU">
                                         <rect key="frame" x="313.66666666666669" y="0.0" width="68.333333333333314" height="44"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="meeting-leave-call-button"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="MxJ-hy-oBa"/>
                                         </constraints>
@@ -406,6 +449,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="K2O-AH-YXe" firstAttribute="top" secondItem="NKq-UE-p7N" secondAttribute="bottom" id="0lS-Zz-6am"/>
+                            <constraint firstItem="Ac1-FP-06x" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="top" id="2yK-ut-7Wp"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="bottom" constant="8" symbolic="YES" id="6BK-wy-0t3"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="leading" secondItem="6PQ-EF-D0Z" secondAttribute="trailing" id="6FG-G7-hEe"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="NKq-UE-p7N" secondAttribute="trailing" id="6G9-wL-MJg"/>
@@ -415,15 +459,17 @@
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="top" secondItem="i1F-BP-LLz" secondAttribute="top" id="DZN-P3-ehW"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="EaT-W8-Za3"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="bottom" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="H2q-rx-LEt"/>
+                            <constraint firstItem="6PQ-EF-D0Z" firstAttribute="leading" secondItem="Ac1-FP-06x" secondAttribute="trailing" id="IC0-ch-GA4"/>
                             <constraint firstItem="e9C-pq-ppt" firstAttribute="leading" secondItem="i1F-BP-LLz" secondAttribute="trailing" id="Iix-A7-yaH"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="6PQ-EF-D0Z" secondAttribute="bottom" id="Ny9-re-MbV"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="OJf-s2-MkC"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="top" secondItem="e9C-pq-ppt" secondAttribute="top" id="OvR-sO-FCg"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="trailing" secondItem="dbh-7g-s3g" secondAttribute="trailing" constant="8" id="XEz-uO-kgn"/>
-                            <constraint firstItem="6PQ-EF-D0Z" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" id="Y3D-QU-DJO"/>
+                            <constraint firstItem="6PQ-EF-D0Z" firstAttribute="leading" secondItem="Ac1-FP-06x" secondAttribute="trailing" id="Y3D-QU-DJO"/>
                             <constraint firstItem="6PQ-EF-D0Z" firstAttribute="top" secondItem="gdt-Kd-OJO" secondAttribute="top" constant="1" id="Y7w-9P-98J"/>
                             <constraint firstItem="K2O-AH-YXe" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" id="YoD-sn-wZC"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="ZNn-6N-Bo0"/>
+                            <constraint firstItem="Ac1-FP-06x" firstAttribute="leading" secondItem="gdt-Kd-OJO" secondAttribute="trailing" id="ZR1-vo-9JD"/>
                             <constraint firstItem="i1F-BP-LLz" firstAttribute="bottom" secondItem="e9C-pq-ppt" secondAttribute="bottom" id="Zkr-SO-5Bf"/>
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="bottom" secondItem="Zy8-cT-272" secondAttribute="bottom" id="bSC-CC-XTe"/>
                             <constraint firstItem="NKq-UE-p7N" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" id="bSm-sI-jDc"/>
@@ -432,6 +478,7 @@
                             <constraint firstItem="kDS-UD-GQA" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="top" id="dhU-gY-ww1"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="i1F-BP-LLz" secondAttribute="bottom" id="f0b-4f-rQl"/>
                             <constraint firstItem="gdt-Kd-OJO" firstAttribute="leading" secondItem="kDS-UD-GQA" secondAttribute="leading" constant="8" id="frJ-19-L9J"/>
+                            <constraint firstItem="gdt-Kd-OJO" firstAttribute="bottom" secondItem="Ac1-FP-06x" secondAttribute="bottom" id="hVb-SL-QjY"/>
                             <constraint firstItem="Tb2-3p-SS0" firstAttribute="bottom" secondItem="kDS-UD-GQA" secondAttribute="bottom" id="kEC-yb-W5b"/>
                             <constraint firstItem="DyH-bp-NTF" firstAttribute="top" secondItem="dbh-7g-s3g" secondAttribute="bottom" constant="8" symbolic="YES" id="nva-4l-9tN"/>
                             <constraint firstItem="Tb2-3p-SS0" firstAttribute="top" secondItem="DyH-bp-NTF" secondAttribute="bottom" id="o75-dd-mk7"/>
@@ -475,6 +522,7 @@
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
                         <outlet property="hlsContainer" destination="K2O-AH-YXe" id="3Dd-bc-NeZ"/>
                         <outlet property="loadingIcon" destination="Zy8-cT-272" id="f5F-JG-r68"/>
+                        <outlet property="musicButton" destination="Ac1-FP-06x" id="lIH-tf-wSH"/>
                         <outlet property="publishAudioButton" destination="hKQ-0T-b7l" id="ubh-Yl-SjS"/>
                         <outlet property="publishVideoButton" destination="qXn-tX-gSM" id="peS-c5-lIf"/>
                         <outlet property="roomNameButton" destination="gdt-Kd-OJO" id="Qlv-ck-6Nf"/>
@@ -506,6 +554,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNR-Wo-sah">
                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="rolepreview-camera-toggle-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="5Zg-7v-fhl"/>
                                                     <constraint firstAttribute="height" constant="64" id="YRj-Js-wcg"/>
@@ -526,6 +575,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFk-OM-OYG">
                                                 <rect key="frame" x="112" y="0.0" width="64" height="64"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="rolepreview-mic-toggle-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="5Tz-WC-vUq"/>
                                                     <constraint firstAttribute="width" constant="64" id="iGh-JG-QON"/>
@@ -552,6 +602,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMk-LA-3LU">
                                                 <rect key="frame" x="15" y="8" width="344" height="52"/>
                                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="rolepreview-change-role-button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="gs7-gb-bP3"/>
                                                 </constraints>
@@ -626,6 +677,7 @@
         <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
         <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="mic.slash.fill" catalog="system" width="108" height="128"/>
+        <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="phone.down.fill" catalog="system" width="128" height="52"/>
         <image name="speaker.slash.fill" catalog="system" width="124" height="128"/>
         <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
