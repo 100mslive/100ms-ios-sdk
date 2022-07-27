@@ -24,6 +24,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var onMetadataUpdate: (() -> Void)?
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
     internal var onNetworkQuality: (() -> Void)?
+    internal var pipController = PiPController()
 
     // MARK: - Instance Properties
 
@@ -58,21 +59,43 @@ final class HMSSDKInteractor: HMSUpdateListener {
         setupSDK()
     }
     
+    var audioMixerSource: HMSAudioMixerSource?
+    let audioFilePlayerNode = HMSAudioFilePlayerNode()
+    
     private func setupSDK() {
         hmsSDK = HMSSDK.build { sdk in
             sdk.appGroup = "group.live.100ms.videoapp"
             
             let videoSettings = HMSVideoTrackSettings(codec: .VP8,
-                                                          resolution: .init(width: 320, height: 180),
-                                                          maxBitrate: 512,
-                                                          maxFrameRate: 25,
-                                                          cameraFacing: .front,
+                                                      resolution: .init(width: 320, height: 180),
+                                                      maxBitrate: 512,
+                                                      maxFrameRate: 25,
+                                                      cameraFacing: .front,
                                                       trackDescription: "Just a normal video track", videoPlugins: self.videoPlugins)
             
-            let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track")
+            let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track", audioSource: self.audioSource(for: sdk))
             sdk.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
             sdk.logger = self
         }
+    }
+    
+    private func audioSource(for sdk: HMSSDK) -> HMSAudioSource? {
+        
+        let isLocalAudioFilePlaybackEnabled = AudioSourceType(rawValue: UserDefaults.standard.integer(forKey: Constants.defaultAudioSource)) == .audioMixer
+        
+        guard isLocalAudioFilePlaybackEnabled else { return nil }
+        
+        do {
+            self.audioFilePlayerNode.volume = 0.5
+            let nodes = [self.audioFilePlayerNode, HMSMicNode(), try sdk.screenBroadcastAudioReceiverNode()]
+            
+            self.audioMixerSource = try HMSAudioMixerSource(nodes: nodes)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        return self.audioMixerSource
     }
     
     private func setupPlugins() {
@@ -149,6 +172,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
         if let peer = room.peers.first {
             NotificationCenter.default.post(name: Constants.joinedRoom, object: nil, userInfo: ["peer": peer])
         }
+        
+        if let videoTrack = hmsSDK?.localPeer?.videoTrack {
+            pipController.update(track: videoTrack, name: hmsSDK?.localPeer?.name)
+        }
     }
 
     func on(peer: HMSPeer, update: HMSPeerUpdate) {
@@ -179,6 +206,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
         if let audio = track as? HMSAudioTrack {
             updatedMuteStatus?(audio)
         }
+        if let videoTrack = track as? HMSVideoTrack, videoTrack.source == HMSCommonTrackSource.screen {
+            if update == .trackAdded {
+                pipController.set(screenTrack: videoTrack)
+            }
+            else {
+                pipController.remove(screenTrack: videoTrack)
+            }
+        }
     }
 
     func on(error: HMSError) {
@@ -206,6 +241,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
         print("Speaker update " + dateString, speakers.map { $0.peer.name },
               speakers.map { kindString(from: $0.track.kind) },
               speakers.map { $0.track.source })
+        
+        if let firstSpeaker = speakers.first {
+            pipController.update(speaker: firstSpeaker)
+        }
     }
 
     func on(room: HMSRoom, update: HMSRoomUpdate) {

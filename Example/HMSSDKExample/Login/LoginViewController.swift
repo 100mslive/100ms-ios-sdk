@@ -137,14 +137,12 @@ final class LoginViewController: UIViewController {
     }
 
     @IBAction private func startMeetingTapped(_ sender: UIButton) {
-
         showInputAlert()
     }
 
     private func showInputAlert() {
 
         let title = "Join a Meeting"
-        let action = "Join"
 
         let alertController = UIAlertController(title: title,
                                                 message: nil,
@@ -154,10 +152,11 @@ final class LoginViewController: UIViewController {
             textField.placeholder = "Enter your Name"
             textField.clearButtonMode = .always
             textField.text =  UserDefaults.standard.string(forKey: Constants.defaultName)
+            textField.accessibilityIdentifier = "login-popup-enter-name-textfield"
         }
 
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
+        alertController.addAction(UIAlertAction(title: "Join", style: .default) { [weak self] _ in
             self?.handleActions(for: alertController)
         })
 

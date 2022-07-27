@@ -9,8 +9,9 @@ import UIKit
 import HMSSDK
 import MediaPlayer
 import ReplayKit
+import SwiftUI
 
-final class MeetingViewController: UIViewController {
+final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     // MARK: - View Properties
 
@@ -86,6 +87,8 @@ final class MeetingViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
 
         viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
+        
+        interactor.pipController.setup(with: self.collectionView)
 
         setupButtonStates()
 
@@ -124,6 +127,8 @@ final class MeetingViewController: UIViewController {
         }
         
         interactor.join()
+        
+        musicButton.isHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -150,19 +155,24 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - View Modifiers
 
+    var playingExternally = false
     func updateHLSState() {
         guard interactor?.hmsSDK?.localPeer?.role?.name.hasPrefix("hls-") ?? false else {
             hlsContainer.isHidden = true
             hlsController?.streamURL = nil
             hlsController?.stop()
             collectionView.isHidden = false
-            interactor.hmsSDK?.resumeAfterExternalAudioPlayback()
+            if playingExternally {
+                interactor.hmsSDK?.resumeAfterExternalAudioPlayback()
+                playingExternally = false
+            }
             return
         }
 
         collectionView.isHidden = true
         hlsContainer.isHidden = false
         interactor.hmsSDK?.prepareForExternalAudioPlayback()
+        playingExternally = true
         hlsController?.streamURL = interactor?.hmsSDK?.room?.hlsStreamingState.variants.first?.url
         hlsController?.play()
     }
@@ -306,8 +316,10 @@ final class MeetingViewController: UIViewController {
         let currentMode = viewModel?.mode ?? .regular
         
         let isVBActivated = UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled")
+        
+        let isLocalAudioFilePlaybackEnabled = AudioSourceType(rawValue: UserDefaults.standard.integer(forKey: Constants.defaultAudioSource)) == .audioMixer
 
-        let actions = [
+        var actions = [
             UIAction(title: "Audio Only Mode",
                      image: UIImage(systemName: "megaphone.fill"),
                      state: currentMode == .audioOnly ? .on : .off) { [weak self] _ in
@@ -385,8 +397,43 @@ final class MeetingViewController: UIViewController {
                 self?.showNamePrompt()
             }
         ]
+        
+        if isLocalAudioFilePlaybackEnabled {
+            actions.append(contentsOf: [UIAction(title: "Play Audio",
+                                                 image: UIImage(systemName: "music.note")) { [weak self] _ in
+                
+                let pickerController = UIDocumentPickerViewController(documentTypes: ["public.audio"], in: .import)
+                pickerController.delegate = self
+                pickerController.modalPresentationStyle = .automatic
+                pickerController.allowsMultipleSelection = true
+                self?.present(pickerController, animated: true, completion: nil)
+                
+                self?.updateSettingsButton()
+            },
+                                        
+                                        UIAction(title: "Stop Audio",
+                                                 image: UIImage(systemName: "stop.circle.fill")) { [weak self] _ in
+                
+                self?.interactor.audioFilePlayerNode.stop()
+                self?.musicButton.isHidden = true
+                
+                self?.updateSettingsButton()
+            }])
+        }
 
         return actions
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        urls.forEach {
+            do {
+                try interactor.audioFilePlayerNode.play(fileUrl: $0)
+                musicButton.isHidden = false
+            }
+            catch {
+                print(error)
+            }
+        }
     }
 
     private func roleBasedActions() -> [UIAction] {
@@ -765,6 +812,17 @@ final class MeetingViewController: UIViewController {
 
     // MARK: - Button Action Handlers
 
+    @IBOutlet weak var musicButton: UIButton!
+    @IBAction func musicTapped(_ sender: UIButton) {
+        let player = interactor.audioFilePlayerNode
+        
+        let musicController = UIHostingController(rootView: MusicControlView(player: player))
+        musicController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        musicController.modalTransitionStyle = .crossDissolve
+        musicController.view.backgroundColor = .clear
+        self.present(musicController, animated: true, completion: nil)
+    }
+    
     @IBAction private func roomNameTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.peersList, bundle: nil)
                 .instantiateInitialViewController() as? PeersListViewController else {
@@ -885,7 +943,7 @@ extension MeetingViewController: RTMPSettingsViewControllerDelegate {
 }
 
 extension MeetingViewController: HLSSettingsViewControllerDelegate {
-    func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig) {
+    func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig?) {
         interactor?.hmsSDK?.startHLSStreaming(config: config) { [weak self] _, error in
             if let error = error {
                 self?.showActionError(error, action: "Start HLS Streaming")

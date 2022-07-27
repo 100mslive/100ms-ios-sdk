@@ -11,7 +11,7 @@ import HMSSDK
 import Eureka
 
 protocol HLSSettingsViewControllerDelegate: AnyObject {
-    func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig)
+    func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig?)
 }
 
 final class HLSSettingsViewController: FormViewController {
@@ -54,8 +54,9 @@ final class HLSSettingsViewController: FormViewController {
 
         let values = form.values()
 
-        guard let meetingURL = values["meetingURL"] as? URL else {
-            return
+        var variants: [HMSHLSMeetingURLVariant]?
+        if let meetingURL = values["meetingURL"] as? URL {
+            variants = [HMSHLSMeetingURLVariant(meetingURL: meetingURL, metadata: "main stream")]
         }
 
         let singleFile = (values["recordingLayerSwitch"] as? Bool) ?? false
@@ -65,9 +66,12 @@ final class HLSSettingsViewController: FormViewController {
         if singleFile || vod {
             recordConfig = HMSHLSRecordingConfig(singleFilePerLayer: singleFile, enableVOD: vod)
         }
+        
+        var config: HMSHLSConfig?
+        if variants != nil || recordConfig != nil {
+            config = HMSHLSConfig(variants: variants, recording: recordConfig)
+        }
 
-        let variant = HMSHLSMeetingURLVariant(meetingURL: meetingURL, metadata: "main stream")
-        let config = HMSHLSConfig(variants: [variant], recording: recordConfig)
         delegate?.hlsSettingsController(self, didSelect: config)
         navigationController?.popViewController(animated: true)
     }

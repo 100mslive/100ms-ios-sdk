@@ -13,11 +13,14 @@ class SettingsViewController: UIViewController {
     // MARK: - View Properties
 
     let defaultVideoSource = ["Front Facing", "Rear Facing"]
+    let availableAudioSources = AudioSourceType.allCases
     let videoResolution = ["QVGA", "VGA", "QHD", "HD", "Full HD"]
     let videoBitRate = ["Lowest (100 kbps)", "Low (256 kbps)", "Medium (512 kbps)", "High (1 mbps)", "LAN (4 mbps)"]
 
     @IBOutlet weak var videoSourcePicker: UIPickerView!
 
+    @IBOutlet weak var audioSourcePicker: UIPickerView!
+    
     @IBOutlet weak var videoResolutionPicker: UIPickerView!
 
     @IBOutlet weak var videoBitRatePicker: UIPickerView!
@@ -129,9 +132,13 @@ class SettingsViewController: UIViewController {
 
         let userDefaults = UserDefaults.standard
 
-        let source = userDefaults.string(forKey: Constants.defaultVideoSource) ?? "Front Facing"
-        let sourceIndex = defaultVideoSource.firstIndex(of: source) ?? 0
-        videoSourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
+        let videoSource = userDefaults.string(forKey: Constants.defaultVideoSource) ?? "Front Facing"
+        let videoSourceIndex = defaultVideoSource.firstIndex(of: videoSource) ?? 0
+        videoSourcePicker.selectRow(videoSourceIndex, inComponent: 0, animated: false)
+        
+        let audioSource = AudioSourceType(rawValue: userDefaults.integer(forKey: Constants.defaultAudioSource)) ?? .audioMixer
+        let audioSourceIndex = availableAudioSources.firstIndex(of: audioSource) ?? 0
+        audioSourcePicker.selectRow(audioSourceIndex, inComponent: 0, animated: false)
 
         let resolution = userDefaults.string(forKey: Constants.videoResolution) ?? "QHD"
         let resolutionIndex = videoResolution.firstIndex(of: resolution) ?? 2
@@ -169,8 +176,11 @@ class SettingsViewController: UIViewController {
         userDefaults.set(!audioBitrateField.text!.isEmpty ? audioBitrateField.text : "0",
                          forKey: Constants.audioBitRate)
 
-        let source = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
-        userDefaults.set(source, forKey: Constants.defaultVideoSource)
+        let videoSource = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
+        userDefaults.set(videoSource, forKey: Constants.defaultVideoSource)
+        
+        let audioSource = availableAudioSources[audioSourcePicker.selectedRow(inComponent: 0)]
+        userDefaults.set(audioSource.rawValue, forKey: Constants.defaultAudioSource)
 
         let resolution = videoResolution[videoResolutionPicker.selectedRow(inComponent: 0)]
         userDefaults.set(resolution, forKey: Constants.videoResolution)
@@ -195,6 +205,8 @@ extension SettingsViewController: UIPickerViewDataSource {
             return videoResolution.count
         case 3:
             return videoBitRate.count
+        case 4:
+            return availableAudioSources.count
         default:
             return 0
         }
@@ -212,6 +224,8 @@ extension SettingsViewController: UIPickerViewDelegate {
             return videoResolution[row]
         case 3:
             return videoBitRate[row]
+        case 4:
+            return availableAudioSources[row].description
         default:
             return nil
         }

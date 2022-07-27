@@ -41,6 +41,13 @@ class SampleHandler: RPBroadcastSampleHandler {
             }
         case RPSampleBufferType.audioApp:
             // Handle audio sample buffer for app audio
+            
+            if let error = self.screenRenderer.process(audioSampleBuffer: sampleBuffer) {
+                if error.code == .noActiveMeeting {
+                    finishBroadcastWithError(NSError(domain: "ScreenShare", code: error.code.rawValue, userInfo: [NSLocalizedFailureReasonErrorKey : "You are not in a meeting."]))
+                }
+            }
+            
             break
         case RPSampleBufferType.audioMic:
             // Handle audio sample buffer for mic audio

@@ -16,6 +16,15 @@ final class VideoCollectionViewCell: UICollectionViewCell {
         didSet {
             videoStats = ""
             audioStats = ""
+            
+            if let peerName = viewModel?.peer.name {
+                self.videoView.accessibilityIdentifier = peerName + "-cell"
+                self.muteButton?.accessibilityIdentifier = peerName + "-cell-mute-mic-button"
+                self.stopVideoButton?.accessibilityIdentifier = peerName + "-cell-mute-video-button"
+                self.handIcon?.accessibilityIdentifier = peerName + "-cell-hand-icon"
+                self.isDegradedIcon?.accessibilityIdentifier = peerName + "-cell-degraded-icon"
+                self.networkQualityView?.accessibilityIdentifier = peerName + "-cell-network-quality-icon"
+            }
         }
     }
 
