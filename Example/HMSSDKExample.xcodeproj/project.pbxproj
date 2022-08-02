@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AD7B6B9E170ED3176345D1D /* libPods-HMSScreenShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C0870816347963BE410FE /* libPods-HMSScreenShare.a */; };
+		236AA3B902B452B3640355C3 /* Pods_HMSSDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */; };
+		482D58BCF9E0507A779AD512 /* Pods_HMSScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */; };
+		48358B1E5A02F3A46DB55268 /* Pods_HMSSDKExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		697034DD2062BFB265017D05 /* libPods-HMSSDKExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85156BDE7A62A9ADD28B0B01 /* libPods-HMSSDKExampleTests.a */; };
 		871697A1284FD370001777BB /* PiPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871697A0284FD370001777BB /* PiPController.swift */; };
 		87606EB328112CFD002BAB14 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87606EB228112CFD002BAB14 /* ReplayKit.framework */; };
 		87606EB628112CFD002BAB14 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87606EB528112CFD002BAB14 /* SampleHandler.swift */; };
@@ -33,7 +34,6 @@
 		91D4894927B6527300F79445 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */; };
 		91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E7E144268C70F2001D988E /* PreviewViewController.swift */; };
 		91F9FB4027D0EA7800B407A0 /* RoomStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9FB3F27D0EA7800B407A0 /* RoomStateViewController.swift */; };
-		CA8AF3CD27EFEE29A4681E5F /* libPods-HMSSDKExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7480B40A145DE68F88DD82 /* libPods-HMSSDKExample.a */; };
 		EC0ABF3726E630140007BBBE /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = EC0ABF3626E630140007BBBE /* 100ms.gif */; };
 		EC8CEE71261E297F002DC12E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE40261E297F002DC12E /* Settings.storyboard */; };
 		EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE42261E297F002DC12E /* SettingsViewController.swift */; };
@@ -100,17 +100,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
-		3E7480B40A145DE68F88DD82 /* libPods-HMSSDKExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSSDKExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		403EDD5C1A60E43B44429F56 /* Pods-HMSScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
-		536C0870816347963BE410FE /* libPods-HMSScreenShare.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSScreenShare.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* HMSSDKExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMSSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACE51AFB9204008FA782 /* HMSSDKExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMSSDKExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
 		7A486008B0556A38F062C80F /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		85156BDE7A62A9ADD28B0B01 /* libPods-HMSSDKExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HMSSDKExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		870B33762824FCEE003D34F3 /* HMSScreenShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSScreenShare-Bridging-Header.h"; sourceTree = "<group>"; };
 		870B337A2824FEA5003D34F3 /* HMSSDKExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSSDKExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		871697A0284FD370001777BB /* PiPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPController.swift; sourceTree = "<group>"; };
@@ -143,6 +141,8 @@
 		91F9FB3F27D0EA7800B407A0 /* RoomStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStateViewController.swift; sourceTree = "<group>"; };
 		A0E9FC12BF9A6AFE40BFB76E /* Pods-HMSScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.release.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		AC949E204FD39E1BA17CC0D7 /* Pods-HMSSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0ABF3626E630140007BBBE /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
 		EC7807E7261E2B1C0021903D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		EC8CEE41261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA8AF3CD27EFEE29A4681E5F /* libPods-HMSSDKExample.a in Frameworks */,
+				236AA3B902B452B3640355C3 /* Pods_HMSSDKExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				697034DD2062BFB265017D05 /* libPods-HMSSDKExampleTests.a in Frameworks */,
+				48358B1E5A02F3A46DB55268 /* Pods_HMSSDKExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87606EB328112CFD002BAB14 /* ReplayKit.framework in Frameworks */,
-				1AD7B6B9E170ED3176345D1D /* libPods-HMSScreenShare.a in Frameworks */,
+				482D58BCF9E0507A779AD512 /* Pods_HMSScreenShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,11 +219,11 @@
 			isa = PBXGroup;
 			children = (
 				877944482836A57600C1A0FB /* HMSSDKScreenShare.framework */,
-				3E7480B40A145DE68F88DD82 /* libPods-HMSSDKExample.a */,
 				87606EB228112CFD002BAB14 /* ReplayKit.framework */,
 				87606EBE28112CFE002BAB14 /* UIKit.framework */,
-				85156BDE7A62A9ADD28B0B01 /* libPods-HMSSDKExampleTests.a */,
-				536C0870816347963BE410FE /* libPods-HMSScreenShare.a */,
+				EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */,
+				B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */,
+				2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -447,8 +447,6 @@
 				87606EC928112CFE002BAB14 /* PBXTargetDependency */,
 			);
 			name = HMSSDKExample;
-			packageProductDependencies = (
-			);
 			productName = HMSVideo;
 			productReference = 607FACD01AFB9204008FA782 /* HMSSDKExample.app */;
 			productType = "com.apple.product-type.application";
@@ -550,8 +548,6 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
-			packageReferences = (
-			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -611,13 +607,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSSDK/HMSSDK.framework/HMSSDK",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSWebRTC/WebRTC.framework/WebRTC",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSBroadcastExtensionSDK/HMSBroadcastExtensionSDK.framework/HMSBroadcastExtensionSDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSBroadcastExtensionSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -964,7 +966,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -999,7 +1001,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -1085,7 +1087,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1128,7 +1130,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1164,7 +1166,7 @@
 				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1202,7 +1204,7 @@
 				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 300;
+				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
