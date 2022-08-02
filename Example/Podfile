@@ -3,6 +3,7 @@
 platform :ios, '13.0'
 
 target 'HMSSDKExample' do
+  use_frameworks!
   pod 'HMSSDK'
   pod 'Eureka'
   pod 'SwiftyGif'
@@ -14,5 +15,6 @@ target 'HMSSDKExample' do
 end
 
 target 'HMSScreenShare' do
+  use_frameworks!
   pod 'HMSBroadcastExtensionSDK'
 end
