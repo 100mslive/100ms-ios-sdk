@@ -40,6 +40,7 @@ Here you will find everything you need to build experiences with video using 100
   platform :ios, '12.0'
 
   target 'MyAwesomeApp' do
+    use_frameworks!
     pod 'HMSSDK'
   end
   ```
