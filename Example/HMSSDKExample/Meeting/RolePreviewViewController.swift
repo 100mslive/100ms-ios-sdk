@@ -28,8 +28,8 @@ class RolePreviewViewController: PreviewViewController {
         super.viewDidLoad()
 
         interactor.hmsSDK?.preview(role: roleChangeRequest.suggestedRole, completion: { [weak self] tracks, error in
-            guard error == nil else {
-                self?.presentAlert(error?.description ?? "")
+            if let error = error as? HMSError {
+                self?.presentAlert(error.localizedDescription)
                 return
             }
             self?.setupTracks(tracks: tracks ?? [])

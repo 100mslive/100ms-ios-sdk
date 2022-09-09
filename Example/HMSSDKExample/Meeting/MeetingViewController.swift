@@ -490,7 +490,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                                      image: UIImage(systemName: "stop.circle")) { [weak self] _ in
             guard let self = self else { return }
             self.interactor?.hmsSDK?.stopRTMPAndRecording { [weak self] _, error in
-                if let error = error {
+                if let error = error as? HMSError {
                     self?.showActionError(error, action: "Stop RTMP/Recording")
                     return
                 }
@@ -511,7 +511,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                                image: UIImage(systemName: "stop.circle")) { [weak self] _ in
             guard let self = self else { return }
             self.interactor?.hmsSDK?.stopHLSStreaming { [weak self] _, error in
-                if let error = error {
+                if let error = error as? HMSError {
                     self?.showActionError(error, action: "Stop HLS")
                     return
                 }
@@ -519,6 +519,13 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             }
         }
         actions.append(stopHLS)
+        
+        let sendMetadata = UIAction(title: "Send HLS Timed Metadata",
+                               image: UIImage(systemName: "tray.and.arrow.up.fill")) { [weak self] _ in
+            guard let self = self else { return }
+            self.showMetadataPrompt()
+        }
+        actions.append(sendMetadata)
 
         if interactor.canEndRoom {
             let endRoomAction = UIAction(title: "End Room",
@@ -526,7 +533,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 guard let self = self else { return }
                 
                 self.interactor?.hmsSDK?.endRoom(reason: "Meeting Ended") { [weak self] _, error in
-                    if let error = error {
+                    if let error = error as? HMSError {
                         self?.showActionError(error, action: "End Room")
                         return
                     }
@@ -610,10 +617,40 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             }
 
             self?.interactor.hmsSDK?.change(name: name, completion: { _, error in
-                if let error = error {
+                if let error = error as? HMSError {
                     self?.showActionError(error, action: "Change name")
                 } else {
                     UserDefaults.standard.set(name, forKey: Constants.defaultName)
+                }
+            })
+        })
+
+        present(alertController, animated: true)
+    }
+    
+    private func showMetadataPrompt() {
+        let title = "Enter metadata to send"
+        let action = "Send"
+
+        let alertController = UIAlertController(title: title,
+                                                message: nil,
+                                                preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.clearButtonMode = .always
+        }
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: action, style: .default) { [weak self] _ in
+            guard let metadataPayload = alertController.textFields?[0].text, !metadataPayload.isEmpty else {
+                return
+            }
+            
+            let metadata = HMSHLSTimedMetadata(payload: metadataPayload, duration: 5)
+
+            self?.interactor.hmsSDK?.sendHLSTimedMetadata([metadata], completion: { _, error in
+                if let error = error as? HMSError {
+                    self?.showActionError(error, action: "Send Metadata")
                 }
             })
         })
@@ -733,6 +770,8 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     private func handle(removedFromRoom notification: HMSRemovedFromRoomNotification) {
         let title = "\(notification.requestedBy?.name ?? "100ms app") removed you from this room: \(notification.reason)"
+        
+        interactor.pipController.roomEnded(reason: title)
 
         let alertController = UIAlertController(title: title,
                                                 message: nil,
@@ -783,7 +822,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         let title = "Could Not \(action)"
 
         let alertController = UIAlertController(title: title,
-                                                message: error.message,
+                                                message: error.localizedDescription,
                                                 preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -880,7 +919,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         sender.isSelected = !sender.isSelected
         let meta = PeerMetadata(isHandRaised: sender.isSelected)
         interactor?.hmsSDK?.change(metadataObject: meta) { [weak self] _, error in
-            if let error = error {
+            if let error = error as? HMSError {
                 self?.showActionError(error, action: "Raise hand")
             }
         }
@@ -932,7 +971,7 @@ extension MeetingViewController: ChangeAllRoleViewControllerDelegate {
 extension MeetingViewController: RTMPSettingsViewControllerDelegate {
     func rtmpSettingsController(_ rtmpSettingsController: RTMPSettingsViewController, didSelect config: HMSRTMPConfig) {
         interactor?.hmsSDK?.startRTMPOrRecording(config: config) { [weak self] _, error in
-            if let error = error {
+            if let error = error as? HMSError {
                 self?.showActionError(error, action: "Start RTMP/Recording")
                 return
             }
@@ -945,7 +984,7 @@ extension MeetingViewController: RTMPSettingsViewControllerDelegate {
 extension MeetingViewController: HLSSettingsViewControllerDelegate {
     func hlsSettingsController(_ hlsSettingsController: HLSSettingsViewController, didSelect config: HMSHLSConfig?) {
         interactor?.hmsSDK?.startHLSStreaming(config: config) { [weak self] _, error in
-            if let error = error {
+            if let error = error as? HMSError {
                 self?.showActionError(error, action: "Start HLS Streaming")
                 return
             }

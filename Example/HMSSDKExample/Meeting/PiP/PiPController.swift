@@ -17,6 +17,7 @@ class PiPModel: ObservableObject {
     @Published var isVideoActive = false
     
     @Published var pipViewEnabled = false
+    @Published var roomEndedString: String?
 }
 
 class PiPController: NSObject {
@@ -103,6 +104,7 @@ class PiPController: NSObject {
     }
     
     func set(screenTrack: HMSVideoTrack) {
+        
         model.screenTrack = screenTrack
         pipVideoCallViewController?.preferredContentSize = .init(width: 1920, height: 1080)
     }
@@ -117,6 +119,10 @@ class PiPController: NSObject {
 
     func stopPiP() {
         self.pipController?.stopPictureInPicture()
+    }
+    
+    func roomEnded(reason: String) {
+        model.roomEndedString = reason
     }
 }
 

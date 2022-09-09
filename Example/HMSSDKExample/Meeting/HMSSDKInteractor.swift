@@ -206,20 +206,21 @@ final class HMSSDKInteractor: HMSUpdateListener {
         if let audio = track as? HMSAudioTrack {
             updatedMuteStatus?(audio)
         }
-        if let videoTrack = track as? HMSVideoTrack, videoTrack.source == HMSCommonTrackSource.screen {
+        if let videoTrack = track as? HMSRemoteVideoTrack, videoTrack.source == HMSCommonTrackSource.screen {
             if update == .trackAdded {
                 pipController.set(screenTrack: videoTrack)
             }
-            else {
+            else if update == .trackRemoved {
                 pipController.remove(screenTrack: videoTrack)
             }
         }
     }
 
-    func on(error: HMSError) {
+    func on(error: Error) {
+        guard let error = error as? HMSError else { return }
         NotificationCenter.default.post(name: Constants.gotError,
                                         object: nil,
-                                        userInfo: ["error": error.message])
+                                        userInfo: ["error": "\(error.localizedDescription)"])
     }
 
     func on(message: HMSMessage) {
