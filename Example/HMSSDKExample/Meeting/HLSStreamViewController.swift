@@ -9,11 +9,16 @@
 import UIKit
 import AVFoundation
 
-class HLSStreamViewController: UIViewController {
+class HLSStreamViewController: UIViewController, AVPlayerItemMetadataCollectorPushDelegate {
 
     var player: AVPlayer?
     var playerView: PlayerView!
+    var metadataView: UILabel!
+    var metadataCollector: AVPlayerItemMetadataCollector!
     var retriesLeft = 0
+    var playerItem: AVPlayerItem?
+    var currentMetadataGroup: AVDateRangeMetadataGroup?
+    var metadataGroups = [AVDateRangeMetadataGroup]()
 
     var streamURL: URL? {
         didSet {
@@ -26,11 +31,24 @@ class HLSStreamViewController: UIViewController {
     }
 
     override func loadView() {
+        let containerView = UIView()
+        view = containerView
+        
         playerView = PlayerView()
-        view = playerView
-    }
+        containerView.addConstrained(subview: playerView)
 
-    var playerItem: AVPlayerItem?
+        metadataView = UILabel()
+        containerView.addSubview(metadataView)
+        metadataView.translatesAutoresizingMaskIntoConstraints = false
+        metadataView.backgroundColor = .lightGray
+        metadataView.textColor = .black
+        metadataView.textAlignment = .center
+        metadataView.bottomAnchor.constraint(equalTo: playerView.bottomAnchor).isActive = true
+        metadataView.leftAnchor.constraint(equalTo: playerView.leftAnchor).isActive = true
+        metadataView.rightAnchor.constraint(equalTo: playerView.rightAnchor).isActive = true
+        metadataView.heightAnchor.constraint(equalToConstant: 60.0).isActive = true
+        metadataView.isHidden = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,10 +76,15 @@ class HLSStreamViewController: UIViewController {
         let assetKeys = [
             "playable"
         ]
+        
+        metadataCollector = AVPlayerItemMetadataCollector()
+        metadataCollector.setDelegate(self, queue: DispatchQueue.main)
+        
         // Create a new AVPlayerItem with the asset and an
         // array of asset keys to be automatically loaded
         let item = AVPlayerItem(asset: asset,
                                 automaticallyLoadedAssetKeys: assetKeys)
+        item.add(metadataCollector)
 
         // Register as an observer of the player item's status property
         item.addObserver(self,
@@ -73,6 +96,9 @@ class HLSStreamViewController: UIViewController {
         if player == nil {
             player = AVPlayer(playerItem: item)
             playerView.player = player
+            player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: .main, using: { [weak self] time in
+                self?.updateMetadataView(for: time)
+            })
         } else {
             player?.replaceCurrentItem(with: item)
         }
@@ -80,6 +106,35 @@ class HLSStreamViewController: UIViewController {
 
     func stop() {
         player?.pause()
+    }
+    
+    func updateMetadataView(for currentTime: CMTime) {
+        hideCurrentMetadataViewIfNeeded()
+        
+        guard currentMetadataGroup == nil, let playerItem = playerItem else { return }
+        
+        for group in metadataGroups {
+            if group.shouldShow(for: playerItem) {
+                showMetadataView(for: group)
+                break
+            }
+        }
+    }
+    
+    func showMetadataView(for group: AVDateRangeMetadataGroup) {
+        guard currentMetadataGroup != group else { return }
+        
+        currentMetadataGroup = group
+        metadataView.isHidden = false
+        metadataView.text = group.items.first?.stringValue
+    }
+    
+    func hideCurrentMetadataViewIfNeeded() {
+        guard let currentMetadataGroup = currentMetadataGroup,
+              let playerItem = playerItem,
+              !currentMetadataGroup.shouldShow(for: playerItem) else { return }
+        self.currentMetadataGroup = nil
+        metadataView.isHidden = true
     }
 
     override func observeValue(forKeyPath keyPath: String?,
@@ -132,6 +187,13 @@ class HLSStreamViewController: UIViewController {
     @objc func applicationDidBecomeActive(_ notificiation: Notification) {
         playerView.player = player
     }
+    
+    func metadataCollector(_ metadataCollector: AVPlayerItemMetadataCollector,
+                           didCollect metadataGroups: [AVDateRangeMetadataGroup],
+                           indexesOfNewGroups: IndexSet,
+                           indexesOfModifiedGroups: IndexSet) {
+        self.metadataGroups = metadataGroups
+    }
 }
 
 class PlayerView: UIView {
@@ -146,5 +208,12 @@ class PlayerView: UIView {
         set {
             (layer as? AVPlayerLayer)?.player = newValue
         }
+    }
+}
+
+extension AVDateRangeMetadataGroup {
+    func shouldShow(for item: AVPlayerItem) -> Bool {
+        guard let endDate = endDate, let currentDate = item.currentDate() else { return false }
+        return startDate <= currentDate && currentDate < endDate
     }
 }

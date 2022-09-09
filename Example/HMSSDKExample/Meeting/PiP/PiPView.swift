@@ -16,7 +16,10 @@ struct PiPView: View {
     var body: some View {
         if model.pipViewEnabled {
             VStack {
-                if let track = model.screenTrack {
+                if let roomEndReason = model.roomEndedString {
+                    Text(roomEndReason)
+                }
+                else if let track = model.screenTrack {
                     GeometryReader { geo in
                         HMSSampleBufferSwiftUIView(track: track, contentMode: .scaleAspectFit, preferredSize: geo.size, model: model)
                             .frame(width: geo.size.width, height: geo.size.height)
@@ -27,9 +30,9 @@ struct PiPView: View {
                 }
                 else {
                     Text(model.name ?? "NA")
-                        .foregroundColor(.white)
                 }
             }
+            .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black)
         }
@@ -67,5 +70,6 @@ public struct HMSSampleBufferSwiftUIView: UIViewRepresentable {
     
     public static func dismantleUIView(_ uiView: HMSSampleBufferDisplayView, coordinator: ()) {
         uiView.isEnabled = false
+        uiView.track = nil
     }
 }

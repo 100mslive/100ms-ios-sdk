@@ -60,9 +60,9 @@ class RoomStateViewController: FormViewController {
             }
         }
         
-        if let error = room.browserRecordingState.error {
+        if let error = room.browserRecordingState.error as? HMSError {
             section <<< LabelRow() {
-                $0.title = "Error: \(error.message) (\(error.code))"
+                $0.title = "Error: \(error.localizedDescription)"
             }
         }
         form +++ section
@@ -78,9 +78,9 @@ class RoomStateViewController: FormViewController {
                 $0.title = "Started at: \(startDate)"
             }
         }
-        if let error = room.serverRecordingState.error {
+        if let error = room.serverRecordingState.error as? HMSError {
             section <<< LabelRow() {
-                $0.title = "Error: \(error.message) (\(error.code))"
+                $0.title = "Error: \(error.localizedDescription)"
             }
         }
         form +++ section
@@ -105,9 +105,9 @@ class RoomStateViewController: FormViewController {
             }
         }
         
-        if let error = room.hlsRecordingState.error {
+        if let error = room.hlsRecordingState.error as? HMSError {
             section <<< LabelRow() {
-                $0.title = "Error: \(error.message) (\(error.code))"
+                $0.title = "Error: \(error.localizedDescription)"
             }
         }
         
@@ -124,9 +124,9 @@ class RoomStateViewController: FormViewController {
                 $0.title = "Started at: \(startDate)"
             }
         }
-        if let error = room.rtmpStreamingState.error {
+        if let error = room.rtmpStreamingState.error as? HMSError {
             section <<< LabelRow() {
-                $0.title = "Error: \(error.message) (\(error.code))"
+                $0.title = "Error: \(error.localizedDescription)"
             }
         }
         form +++ section
@@ -149,9 +149,9 @@ class RoomStateViewController: FormViewController {
             count += 1
         }
         
-        if let error = room.rtmpStreamingState.error {
+        if let error = room.rtmpStreamingState.error as? HMSError {
             section <<< LabelRow() {
-                $0.title = "Error: \(error.message) (\(error.code))"
+                $0.title = "Error: \(error.localizedDescription)"
             }
         }
         form +++ section

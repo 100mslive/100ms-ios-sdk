@@ -151,7 +151,7 @@ final class ChatViewController: UIViewController {
 
         sender.isEnabled = false
 
-        let messageHandler: ((HMSMessage?, HMSError?) -> Void) = { [weak self, weak sender] sentMessage, error in
+        let messageHandler: ((HMSMessage?, Error?) -> Void) = { [weak self, weak sender] sentMessage, error in
             sender?.isEnabled = true
 
             if let sentMessage = sentMessage {
@@ -171,11 +171,12 @@ final class ChatViewController: UIViewController {
         }
     }
 
-    private func showMessageSendError(_ error: HMSError) {
+    private func showMessageSendError(_ error: Error) {
+        guard let error = error as? HMSError else { return }
         let title = "Could Not Send a Message"
 
         let alertController = UIAlertController(title: title,
-                                                message: error.message,
+                                                message: error.localizedDescription,
                                                 preferredStyle: .alert)
 
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))

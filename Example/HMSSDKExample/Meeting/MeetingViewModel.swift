@@ -394,6 +394,7 @@ final class MeetingViewModel: NSObject,
 
         cell.videoView.mirror = true
         cell.videoView.videoContentMode = .scaleAspectFill
+        cell.videoView.isZoomAndPanEnabled = false
 
         if viewModel.peer is HMSRemotePeer {
 
@@ -404,6 +405,11 @@ final class MeetingViewModel: NSObject,
                 cell.moreButton.isHidden = true
             } else {
                 cell.moreButton.isHidden = false
+            }
+            
+            // Let's enable panning and zooming in screen share view
+            if viewModel.videoTrack?.source == HMSCommonTrackSource.screen {
+                cell.videoView.isZoomAndPanEnabled = true
             }
         }
     }

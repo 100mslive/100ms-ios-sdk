@@ -29,7 +29,7 @@ extension HMSPeer {
 }
 
 extension HMSSDK {
-    func change(metadataObject: PeerMetadata, completion: ((Bool, HMSError?) -> Void)? = nil) {
+    func change(metadataObject: PeerMetadata, completion: ((Bool, Error?) -> Void)? = nil) {
         guard let data = try? JSONEncoder().encode(metadataObject),
               let dataString = String(data: data, encoding: .utf8) else {
             completion?(false, nil)
