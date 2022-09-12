@@ -27,6 +27,7 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 3. In the Example folder, run `pod install` to install dependencies of the Example app.
 4. Open the `HMSSDKExample.xcworkspace` file & Build & Run the `HMSSDKExample` target on Simulator.
 5. To run the Example app on your device, you'll need to add your Apple Developer Team in Signing & Capabilites tab of Xcode.
+6. Change the bundle id (live.100ms.videoapp) and app group name (group.live.100ms.videoapp) to something unique when runnin this example in Xcode. Once done, find the app group name string including quotes ("group.live.100ms.videoapp") in the project and replace it with your new group name (for example "group.company.appname").
 
 ## 🚶‍♀️ App User Walkthrough
 
