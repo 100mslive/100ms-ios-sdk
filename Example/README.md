@@ -38,6 +38,17 @@ For the SDK integration guide, checkout the [ReadMe here](https://github.com/100
 
 - You'll be prompted to Enter your Name. Type in the name you want to use in the Meeting Room. 
 
+Note: Please note that we use 'host' as default role name in this example app. If you have different role, replace the default 'host' role with your custom role in RoomService.swift:
+
+```
+createRequest(for url: String, _ user: String, _ room: String) -> URLRequest?
+...
+
+var body = [  "room_id": room,
+              "user_id": user,
+              "role": "host"]
+
+```
 
 https://user-images.githubusercontent.com/8512357/124134349-60e25400-daa0-11eb-95bb-fe8e45b613fa.mov
 
