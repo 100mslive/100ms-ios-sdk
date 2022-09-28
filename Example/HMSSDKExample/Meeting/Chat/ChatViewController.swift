@@ -27,7 +27,8 @@ final class ChatViewController: UIViewController {
             }
         }
     }
-
+    @IBOutlet weak var pinnedChat: UITextView!
+    
     typealias DataSource = UITableViewDiffableDataSource<ChatSection, HMSMessage>
     typealias Snapshot = NSDiffableDataSourceSnapshot<ChatSection, HMSMessage>
 
@@ -81,6 +82,8 @@ final class ChatViewController: UIViewController {
         table.estimatedRowHeight = 64
         table.rowHeight = UITableView.automaticDimension
         table.tableFooterView = stackView
+        
+        updatePinnedChat()
 
         observeBroadcast()
         handleKeyboard()
@@ -137,6 +140,25 @@ final class ChatViewController: UIViewController {
             self?.applySnapshot()
             self?.table.scrollToBottom()
         }
+        
+        _ = NotificationCenter.default.addObserver(forName: Constants.sessionMetadataReceived,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+            
+            self?.updatePinnedChat()
+        }
+    }
+    
+    private func updatePinnedChat() {
+        interactor?.hmsSDK?.getSessionMetadata(completion: { metadata, _ in
+            if let metadata = metadata {
+                self.pinnedChat.isHidden = false
+                self.pinnedChat.text = metadata
+            }
+            else {
+                self.pinnedChat.isHidden = true
+            }
+        })
     }
 
     @IBAction private func closeTapped(_ sender: UIButton) {
@@ -194,6 +216,18 @@ final class ChatViewController: UIViewController {
 
         textField.text = ""
     }
+    
+    func showActionError(_ error: HMSError, action: String) {
+        let title = "Could Not \(action)"
+
+        let alertController = UIAlertController(title: title,
+                                                message: error.localizedDescription,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+        present(alertController, animated: true)
+    }
 }
 
 extension ChatViewController {
@@ -206,6 +240,8 @@ extension ChatViewController {
                                                        for: indexPath) as? ChatTableViewCell else {
                 return nil
             }
+            
+            cell.delegate = self
 
             self.update(cell, for: message)
 
@@ -228,13 +264,8 @@ extension ChatViewController {
 
         guard let name = name else { return }
 
-        if isLocal {
-            cell.nameLabel.textAlignment = .right
-            cell.messageView.textAlignment = .right
-        } else {
-            cell.nameLabel.textAlignment = .left
-            cell.messageView.textAlignment = .left
-        }
+        cell.nameLabel.textAlignment = .left
+        cell.messageView.textAlignment = .left
 
         let attributedString = NSMutableAttributedString(string: name, attributes: [.foregroundColor: UIColor.link])
 
