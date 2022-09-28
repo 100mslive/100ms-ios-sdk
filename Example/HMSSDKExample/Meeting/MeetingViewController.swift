@@ -247,7 +247,6 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             self?.updateSettingsButton()
             self?.updateHLSState()
         }
-
     }
 
     private func setupButtonStates() {

@@ -53,7 +53,7 @@ final class Utilities {
         return avatar.uppercased()
     }
 
-    class func showToast(message: String) {
+    class func showToast(message: String, removeAfter: Int = 0) {
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
               window.subviews.first(where: { $0.tag == 101 }) == nil
               else { return }
@@ -84,12 +84,13 @@ final class Utilities {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
         view.sendSubviewToBack(blurEffectView)
-
-        UIView.animate(withDuration: 4, delay: 0.1, options: .transitionCrossDissolve, animations: {
-             view.alpha = 0.0
-        }, completion: { _ in
-            view.removeFromSuperview()
-        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(removeAfter)) {
+            UIView.animate(withDuration: 4, delay: 0.1, options: .transitionCrossDissolve, animations: {
+                view.alpha = 0.0
+            }, completion: { _ in
+                view.removeFromSuperview()
+            })
+        }
     }
 }
 

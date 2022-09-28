@@ -122,9 +122,6 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     private func setup(for user: String, token: String, _ room: String) {
-        
-
-        
         guard let config = config else { return }
         hmsSDK?.join(config: config, delegate: self)
     }
@@ -224,10 +221,16 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(message: HMSMessage) {
-
-        messages.append(message)
-        NotificationCenter.default.post(name: Constants.messageReceived, object: nil)
-        Utilities.showToast(message: "💬 \(message.sender?.name ?? "Unknown sender") sent you a message")
+        switch message.type {
+        case "chat":
+            messages.append(message)
+            NotificationCenter.default.post(name: Constants.messageReceived, object: nil)
+            Utilities.showToast(message: "💬 \(message.sender?.name ?? "Unknown sender") sent you a message")
+        case "metadata":
+            NotificationCenter.default.post(name: Constants.sessionMetadataReceived, object: nil)
+        default:
+            break
+        }
     }
 
     func on(updated speakers: [HMSSpeaker]) {

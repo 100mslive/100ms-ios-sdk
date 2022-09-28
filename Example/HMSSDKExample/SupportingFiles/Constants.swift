@@ -64,6 +64,8 @@ struct Constants {
     static let toggleAudioTapped = Notification.Name("TOGGLE_AUDIO_TAPPED")
 
     static let roleUpdated = Notification.Name("ROLE_UPDATED")
+    
+    static let sessionMetadataReceived = NSNotification.Name("sessionMetadataReceived")
 
     // MARK: - View Constants
 
