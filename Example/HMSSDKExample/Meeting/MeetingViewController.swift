@@ -890,7 +890,6 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             return
         }
         videoTrack.setMute(!sender.isSelected)
-        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishVideo)
         sender.isSelected = !sender.isSelected
         NotificationCenter.default.post(name: Constants.updateVideoCellButton,
                                         object: nil,
@@ -899,7 +898,6 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     @IBAction private func micTapped(_ sender: UIButton) {
         viewModel?.switchAudio(isOn: sender.isSelected)
-        UserDefaults.standard.set(sender.isSelected, forKey: Constants.publishAudio)
         sender.isSelected = !sender.isSelected
     }
 

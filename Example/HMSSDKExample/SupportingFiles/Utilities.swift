@@ -160,3 +160,31 @@ extension UIView {
         subview.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
+
+extension UserDefaults {
+    var publishAudio: Bool {
+        get {
+            if let value = object(forKey: Constants.publishAudio) as? Bool {
+                return value
+            }
+            
+            return true
+        }
+        set {
+            set(newValue, forKey: Constants.publishAudio)
+        }
+    }
+    
+    var publishVideo: Bool {
+        get {
+            if let value = object(forKey: Constants.publishVideo) as? Bool {
+                return value
+            }
+            
+            return true
+        }
+        set {
+            set(newValue, forKey: Constants.publishVideo)
+        }
+    }
+}
