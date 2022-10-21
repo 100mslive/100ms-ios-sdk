@@ -27,21 +27,13 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var publishVideoSwitch: UISwitch! {
         didSet {
-            if let isOn = UserDefaults.standard.object(forKey: Constants.publishVideo) as? Bool {
-                publishVideoSwitch.setOn(isOn, animated: false)
-            } else {
-                publishVideoSwitch.isOn = true
-            }
+            publishVideoSwitch.isOn = UserDefaults.standard.publishVideo
         }
     }
 
     @IBOutlet weak var publishAudioSwitch: UISwitch! {
         didSet {
-            if let isOn = UserDefaults.standard.object(forKey: Constants.publishAudio) as? Bool {
-                publishAudioSwitch.setOn(isOn, animated: false)
-            } else {
-                publishAudioSwitch.isOn = true
-            }
+            publishAudioSwitch.isOn = UserDefaults.standard.publishAudio
         }
     }
 
@@ -160,8 +152,8 @@ class SettingsViewController: UIViewController {
     func save() {
         let userDefaults = UserDefaults.standard
 
-        userDefaults.set(publishVideoSwitch.isOn, forKey: Constants.publishVideo)
-        userDefaults.set(publishAudioSwitch.isOn, forKey: Constants.publishAudio)
+        userDefaults.publishVideo = publishVideoSwitch.isOn
+        userDefaults.publishAudio = publishAudioSwitch.isOn
         userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
                          forKey: Constants.maximumRows)
         userDefaults.set(!audioPollDelayField.text!.isEmpty ? audioPollDelayField.text : "2",

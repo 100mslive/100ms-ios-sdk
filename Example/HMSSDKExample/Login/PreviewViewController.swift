@@ -36,11 +36,13 @@ class PreviewViewController: UIViewController {
             if let videoTrack = track as? HMSLocalVideoTrack {
                 self.videoTrack = videoTrack
                 previewView.setVideoTrack(videoTrack)
+                publishVideoButton.isSelected = videoTrack.isMute()
                 publishVideoButton.isHidden = false
             }
 
             if let audioTrack = track as? HMSLocalAudioTrack {
                 self.audioTrack = audioTrack
+                publishAudioButton.isSelected = audioTrack.isMute()
                 publishAudioButton.isHidden = false
             }
         }

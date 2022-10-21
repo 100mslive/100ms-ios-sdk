@@ -66,15 +66,14 @@ final class HMSSDKInteractor: HMSUpdateListener {
         hmsSDK = HMSSDK.build { sdk in
             sdk.appGroup = "group.live.100ms.videoapp"
             
-            let videoSettings = HMSVideoTrackSettings(codec: .VP8,
-                                                      resolution: .init(width: 320, height: 180),
-                                                      maxBitrate: 512,
-                                                      maxFrameRate: 25,
-                                                      cameraFacing: .front,
-                                                      trackDescription: "Just a normal video track", videoPlugins: self.videoPlugins)
+            sdk.trackSettings = HMSTrackSettings.build { videoSettingsBuilder, audioSettingsBuilder in
+                videoSettingsBuilder.initialMuteState = UserDefaults.standard.publishVideo ? .unmute : .mute
+                videoSettingsBuilder.videoPlugins = self.videoPlugins
+                
+                audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
+                audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
+            }
             
-            let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track", audioSource: self.audioSource(for: sdk))
-            sdk.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
             sdk.logger = self
         }
     }

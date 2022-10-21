@@ -230,30 +230,29 @@ Once Join succeeds, all the callbacks keep coming on every change in the room an
 ```swift
 // Basic Usage
 hms = HMSSDK.build() // ensure to keep an instance of HMSSDK alive in the class as an instance property
-let config = HMSConfig(userID: "userID", roomID: "roomID", authToken: "authToken") 
+let config = HMSConfig(userName: "user name", authToken: "auth token") 
 hms?.join(config: config, delegate: self)
 
 
 // Advanced Usage
-hms = HMSSDK.build { (hms) in
-          hms.logLevel = .verbose
-          hms.analyticsLevel = .verbose
-          let videoSettings = HMSVideoTrackSettings(maxBitrate: 512,
-                                                    maxFrameRate: 25,
-                                                    cameraFacing: .front,
-                                                    trackDescription: "Just a normal video track")
-          let audioSettings = HMSAudioTrackSettings(maxBitrate: 32, trackDescription: "Just a normal audio track")
-          hms.trackSettings = HMSTrackSettings(videoSettings: videoSettings, audioSettings: audioSettings)
-          hms.logger = self
-      }
+hms = HMSSDK.build { (sdk) in
+  sdk.appGroup = "group.live.100ms.videoapp"
+    
+  sdk.trackSettings = HMSTrackSettings.build { videoSettingsBuilder, audioSettingsBuilder in
+    videoSettingsBuilder.initialMuteState = .mute
+    videoSettingsBuilder.videoPlugins = self.videoPlugins
+        
+    audioSettingsBuilder.initialMuteState = .mute
+    audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
+  }
+    
+  sdk.logger = self
+}
 
-let config = HMSConfig(userName: "userName",
-                         userID: "userID",
-                         roomID: "roomID",
-                      authToken: "authToken",
-            shouldSkipPIIEvents: true,
-                       metaData: "someMetaData",
-                       endpoint: "wss://myWebSocketEndpoint/ws")
+let config = HMSConfig(userName: "user name",
+                      authToken: "auth token",
+                       metaData: "some metadata",
+ captureNetworkQualityInPreview: true)
 
 hms?.join(config: config, delegate: self)
 
