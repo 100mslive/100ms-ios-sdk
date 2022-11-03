@@ -391,13 +391,17 @@ final class MeetingViewModel: NSObject,
     }
 
     private func setViewOptions(for cell: VideoCollectionViewCell, using viewModel: HMSViewModel) {
-
-        cell.videoView.mirror = true
+        
+        if let localVideoTrack = cell.viewModel?.videoTrack as? HMSLocalVideoTrack {
+            cell.videoView.mirror = localVideoTrack.settings.cameraFacing == .front
+        }
+        else {
+            cell.videoView.mirror = false
+        }
+        
         cell.videoView.videoContentMode = .scaleAspectFill
 
         if viewModel.peer is HMSRemotePeer {
-
-            cell.videoView.mirror = false
 
             if viewModel.videoTrack?.source == HMSCommonTrackSource.screen || viewModel.videoTrack?.source == HMSCommonTrackSource.plugin {
                 cell.videoView.videoContentMode = .scaleAspectFit
@@ -638,6 +642,9 @@ final class MeetingViewModel: NSObject,
     internal func switchCamera() {
         if let track = interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack {
             track.switchCamera()
+            NotificationCenter.default.post(name: Constants.switchCameraTapped,
+                                            object: nil,
+                                            userInfo: ["cameraFacing": track.settings.cameraFacing])
         }
     }
 

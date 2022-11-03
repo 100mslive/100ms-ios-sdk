@@ -111,6 +111,17 @@ final class VideoCollectionViewCell: UICollectionViewCell {
                                                    queue: .main) { [weak self] notification in
             self?.updateVideoButton(notification)
         }
+        
+        _ = NotificationCenter.default.addObserver(forName: Constants.switchCameraTapped,
+                                                   object: nil,
+                                                   queue: .main) { [weak self] notification in
+            
+            if let cameraFacing = notification.userInfo?["cameraFacing"] as? HMSCameraFacing {
+                if self?.videoView.videoTrack() is HMSLocalVideoTrack {
+                    self?.videoView.mirror = cameraFacing == .front
+                }
+            }
+        }
 
         _ = NotificationCenter.default.addObserver(forName: Constants.updateVideoCellButton,
                                                    object: nil,
