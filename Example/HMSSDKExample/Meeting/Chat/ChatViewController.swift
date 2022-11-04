@@ -253,11 +253,9 @@ extension ChatViewController {
     func update(_ cell: ChatTableViewCell, for message: HMSMessage) {
 
         var name = message.sender?.name
-        var isLocal = false
 
         if let peer = message.sender {
             name = peer.name
-            isLocal = (peer.peerID == interactor?.hmsSDK?.localPeer?.peerID)
         } else {
             name = "Bot"
         }

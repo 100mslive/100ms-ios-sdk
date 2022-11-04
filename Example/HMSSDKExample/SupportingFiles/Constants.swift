@@ -58,6 +58,8 @@ struct Constants {
     static let updatedSpeaker = Notification.Name("UPDATED_SPEAKERS")
 
     static let toggleVideoTapped = Notification.Name("TOGGLE_VIDEO_TAPPED")
+    
+    static let switchCameraTapped = Notification.Name("SWITCH_CAMERA_TAPPED")
 
     static let updateVideoCellButton = Notification.Name("UPDATE_VIDEO_CELL_BUTTON")
 
