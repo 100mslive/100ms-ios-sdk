@@ -29,9 +29,9 @@ Here you will find everything you need to build experiences with video using 100
   
   1. Sign up on https://dashboard.100ms.live/register & visit the Developer tab to access your credentials.
   
-  2. Get familiarized with [Tokens & Security here](https://docs.100ms.live/ios/v2/foundation/Security-and-tokens)
+  2. Get familiarized with [Tokens & Security here](https://docs.100ms.live/ios/v2/foundation/security-and-tokens)
 
-  3. Complete the steps in [Auth Token Quick Start Guide](https://docs.100ms.live/ios/v2/guides/Token)
+  3. Complete the steps in [Auth Token Quick Start Guide](https://docs.100ms.live/ios/v2/guides/token)
   
   4. Get the HMSSDK via [Cocoapods](https://cocoapods.org/). Add the `pod 'HMSSDK'` to your Podfile as follows:
   ```ruby
@@ -47,9 +47,9 @@ Here you will find everything you need to build experiences with video using 100
 
   then run `pod install --repo-update`
 
-  You can also use [Swift Package Manager](https://www.100ms.live/docs/ios/v2/features/Integration#swift-package-manager) (use https://github.com/100mslive/100ms-ios-sdk.git as the package source)
+  You can also use [Swift Package Manager](https://www.100ms.live/docs/ios/v2/features/integration#swift-package-manager) (use https://github.com/100mslive/100ms-ios-sdk.git as the package source)
   
-  Follow the [iOS Quick Start Guide as mentioned here](https://docs.100ms.live/ios/v2/guides/Quickstart).
+  Follow the [iOS Quick Start Guide as mentioned here](https://docs.100ms.live/ios/v2/guides/quickstart).
   
 ## 🧐 Key Concepts
 
