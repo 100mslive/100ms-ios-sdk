@@ -28,6 +28,9 @@
 		9120573E2747C35C00E6CC8E /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9120573D2747C35C00E6CC8E /* PeerMetadata.swift */; };
 		9172A7B227E8949C0054AEFA /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */; };
 		917D6EEC26EF466800B5C7DE /* ChangeAllRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D6EEB26EF466800B5C7DE /* ChangeAllRoleViewController.swift */; };
+		91A44EB7292F7D400032AE75 /* HLSStatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */; };
+		91A44EB8292F7D400032AE75 /* HLSStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB6292F7D400032AE75 /* HLSStatsView.swift */; };
+		91A44EBA292F7D910032AE75 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */; };
 		91AD889726F9E66B00EE3035 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */; };
 		91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */; };
 		91C13CDB26F23F5A00036555 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */; };
@@ -131,6 +134,9 @@
 		9120573D2747C35C00E6CC8E /* PeerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerMetadata.swift; sourceTree = "<group>"; };
 		9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
 		917D6EEB26EF466800B5C7DE /* ChangeAllRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAllRoleViewController.swift; sourceTree = "<group>"; };
+		91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSStatsModel.swift; sourceTree = "<group>"; };
+		91A44EB6292F7D400032AE75 /* HLSStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSStatsView.swift; sourceTree = "<group>"; };
+		91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
 		91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
 		91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +324,16 @@
 			path = Menus;
 			sourceTree = "<group>";
 		};
+		91A44EB4292F7D400032AE75 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */,
+				91A44EB6292F7D400032AE75 /* HLSStatsView.swift */,
+			);
+			name = Stats;
+			path = HLS/Stats;
+			sourceTree = "<group>";
+		};
 		E7ED908DAB0C4CF7C5F6BE6F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +370,7 @@
 		EC8CEE4C261E297F002DC12E /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
+				91A44EB4292F7D400032AE75 /* Stats */,
 				917D6EEA26EF464D00B5C7DE /* Menus */,
 				EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */,
 				87FF5A9A288000F400B731FD /* Music Controls */,
@@ -366,6 +383,7 @@
 				EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */,
 				876E010F287D7331004B302E /* PiP */,
 				9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */,
+				91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */,
 				9120573D2747C35C00E6CC8E /* PeerMetadata.swift */,
 				EC8CEE4A261E297F002DC12E /* Meeting.storyboard */,
 				EC8CEE55261E297F002DC12E /* Chat */,
@@ -713,10 +731,12 @@
 				91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */,
 				EC8CEE78261E297F002DC12E /* HMSSDKInteractor.swift in Sources */,
 				9109731D276221EA00B76729 /* HLSStreamViewController.swift in Sources */,
+				91A44EB8292F7D400032AE75 /* HLSStatsView.swift in Sources */,
 				877455D72872C32F007B11FB /* MusicControlView.swift in Sources */,
 				877455D92872D4C9007B11FB /* VolumeView.swift in Sources */,
 				EC8CEE8D261E297F002DC12E /* AppDelegate.swift in Sources */,
 				EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */,
+				91A44EBA292F7D910032AE75 /* ImagePreviewView.swift in Sources */,
 				871697A1284FD370001777BB /* PiPController.swift in Sources */,
 				9172A7B227E8949C0054AEFA /* NetworkQualityView.swift in Sources */,
 				91D4894927B6527300F79445 /* PreviewPeersListViewController.swift in Sources */,
@@ -724,6 +744,7 @@
 				EC8CEE7A261E297F002DC12E /* PeersListViewController.swift in Sources */,
 				EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */,
 				876FDE77287C6E28006D4DCB /* PiPView.swift in Sources */,
+				91A44EB7292F7D400032AE75 /* HLSStatsModel.swift in Sources */,
 				EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */,
 				EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */,
 				EC8CEE82261E297F002DC12E /* MeetingViewController.swift in Sources */,

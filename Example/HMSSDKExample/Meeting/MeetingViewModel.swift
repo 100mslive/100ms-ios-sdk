@@ -315,21 +315,6 @@ final class MeetingViewModel: NSObject,
     }
 
     func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-
-        guard let videoCell = cell as? VideoCollectionViewCell,
-              let model = diffableDataSource?.itemIdentifier(for: indexPath)
-        else { return }
-
-        if mode == .audioOnly {
-            videoCell.videoView.setVideoTrack(nil)
-        } else {
-            videoCell.videoView.setVideoTrack(model.videoTrack)
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
 
@@ -455,29 +440,12 @@ final class MeetingViewModel: NSObject,
 
         default:
             cell.videoView.setVideoTrack(viewModel.videoTrack)
-            cell.videoView.isHidden = viewModel.videoTrack?.isDegraded() ?? false
-            cell.isDegradedIcon.isHidden = !(viewModel.videoTrack?.isDegraded() ?? false)
 
-            if let video = viewModel.videoTrack {
+            cell.videoView.isHidden = !viewModel.isVideoOn
+            cell.avatarLabel.isHidden = viewModel.isVideoOn
+            cell.isDegradedIcon.isHidden = !viewModel.isDegraded
 
-                if let remoteVideo = video as? HMSRemoteVideoTrack {
-                    var isVideoOn = true
-                    if remoteVideo.isPlaybackAllowed() {
-                        isVideoOn = !video.isMute()
-                    } else {
-                        isVideoOn = false
-                    }
-
-                    cell.stopVideoButton.isSelected = !isVideoOn
-                    cell.avatarLabel.isHidden = isVideoOn
-                } else {
-                    cell.stopVideoButton.isSelected = video.isMute()
-                    cell.avatarLabel.isHidden = !video.isMute()
-                }
-            } else {
-                cell.stopVideoButton.isSelected = true
-                cell.avatarLabel.isHidden = false
-            }
+            cell.stopVideoButton.isSelected = !viewModel.isVideoOn
         }
     }
 
@@ -716,5 +684,23 @@ extension MeetingViewModel: HMSDataSourceDelegate {
 
     func didUpdate(_ speakers: [HMSViewModel]) {
         self.speakers = speakers
+    }
+}
+
+extension HMSViewModel {
+    var isDegraded: Bool {
+        videoTrack?.isDegraded() ?? false
+    }
+    
+    var isVideoOn: Bool {
+        guard let videoTrack = videoTrack, !videoTrack.isMute(), !isDegraded  else {
+            return false
+        }
+        
+        if let remoteVideo = videoTrack as? HMSRemoteVideoTrack {
+            return remoteVideo.isPlaybackAllowed()
+        }
+        
+        return true
     }
 }

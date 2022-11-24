@@ -201,6 +201,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="pinIcon" destination="Pln-KW-6wi" id="g3b-Z6-YgP"/>
                         <outlet property="pinnedChat" destination="wTr-Wj-9MK" id="fgS-MV-nUC"/>
                         <outlet property="receiverButton" destination="USP-0B-WSu" id="LMy-Ul-2cj"/>
                         <outlet property="sendButton" destination="oGr-jo-9WQ" id="ptG-2T-KIy"/>
