@@ -86,8 +86,8 @@ extension ViewController: HMSUpdateListener {
         }
     }
 
-    func on(error: HMSError) {
-        print(error.description)
+    func on(error: Error) {
+        print(error.localizedDescription)
     }
 
     func on(message: HMSMessage) {
