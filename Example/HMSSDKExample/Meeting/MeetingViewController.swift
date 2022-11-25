@@ -29,6 +29,8 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     private var viewModel: MeetingViewModel?
     private var hlsController: HLSStreamViewController?
+    
+    private var isEarpieceOutputActivated = false
 
     @IBOutlet private weak var roomNameButton: UIButton! {
         didSet {
@@ -327,6 +329,22 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                     self?.updateSettingsButton()
                 }
             },
+            UIAction(title: "Switch to Earpiece",
+                     image: UIImage(systemName: "ear.fill"),
+                     state: self.isEarpieceOutputActivated ? .on : .off) { [weak self] _ in
+                         
+                guard let self = self else { return }
+                         
+                if self.isEarpieceOutputActivated {
+                     try? self.interactor.hmsSDK?.switchAudioOutput(to: HMSAudioOutputDevice.speaker)
+                     self.isEarpieceOutputActivated = false
+                 }
+                 else {
+                     try? self.interactor.hmsSDK?.switchAudioOutput(to: HMSAudioOutputDevice.earpiece)
+                     self.isEarpieceOutputActivated = true
+                 }
+                 self.updateSettingsButton()
+            },
             UIAction(title: "Show Active Speakers",
                      image: UIImage(systemName: "person.3.fill"),
                      state: currentMode == .speakers ? .on : .off) { [weak self] (_) in
@@ -375,6 +393,17 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                     self?.viewModel?.mode = .regular
                     self?.updateSettingsButton()
                 }
+            },
+            
+            UIAction(title: "Capture current frame",
+                     image: UIImage(systemName: "camera.circle.fill")) { [weak self] _ in
+                        
+                 if let image = self?.interactor.frameCapturePlugin?.capture() {
+                     
+                     let imagePreviewController = UIHostingController(rootView: ImagePreviewView(image: image))
+                     imagePreviewController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+                     self?.present(imagePreviewController, animated: true, completion: nil)
+                 }
             },
             
             UIAction(title: "Enable virtual background",

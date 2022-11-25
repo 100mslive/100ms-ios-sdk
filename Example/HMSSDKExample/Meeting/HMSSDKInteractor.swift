@@ -48,6 +48,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     
     private var videoPlugins = [HMSVideoPlugin]()
     var virtualBackgroundPlugin: HMSVideoPlugin?
+    var frameCapturePlugin: HMSFrameCapturePlugin?
 
     // MARK: - Setup SDK
 
@@ -110,6 +111,11 @@ final class HMSSDKInteractor: HMSUpdateListener {
             if let virtualBackgroundPlugin = virtualBackgroundPlugin {
                 videoPlugins.append(virtualBackgroundPlugin)
             }
+            
+            // HMSFrameCapturePlugin allows you to capture current local video frame
+            frameCapturePlugin = HMSFrameCapturePlugin()
+            frameCapturePlugin?.activate()
+            videoPlugins.append(frameCapturePlugin!)
         }
         
         // Adding custom plugin below for demonstration purposes.

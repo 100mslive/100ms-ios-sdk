@@ -28,6 +28,7 @@ final class ChatViewController: UIViewController {
         }
     }
     @IBOutlet weak var pinnedChat: UITextView!
+    @IBOutlet weak var pinIcon: UIImageView!
     
     typealias DataSource = UITableViewDiffableDataSource<ChatSection, HMSMessage>
     typealias Snapshot = NSDiffableDataSourceSnapshot<ChatSection, HMSMessage>
@@ -153,10 +154,12 @@ final class ChatViewController: UIViewController {
         interactor?.hmsSDK?.getSessionMetadata(completion: { metadata, _ in
             if let metadata = metadata {
                 self.pinnedChat.isHidden = false
+                self.pinIcon.isHidden = false
                 self.pinnedChat.text = metadata
             }
             else {
                 self.pinnedChat.isHidden = true
+                self.pinIcon.isHidden = true
             }
         })
     }
