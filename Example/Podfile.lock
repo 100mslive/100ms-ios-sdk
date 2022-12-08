@@ -1,7 +1,7 @@
 PODS:
-  - Eureka (5.3.6)
-  - HMSBroadcastExtensionSDK (0.0.3)
-  - HMSSDK (0.4.1):
+  - Eureka (5.4.0)
+  - HMSBroadcastExtensionSDK (0.0.5)
+  - HMSSDK (0.5.2):
     - HMSWebRTC (= 1.0.4898)
   - HMSWebRTC (1.0.4898)
   - SwiftyGif (5.4.3)
@@ -21,9 +21,9 @@ SPEC REPOS:
     - SwiftyGif
 
 SPEC CHECKSUMS:
-  Eureka: 28ad9dec6286cd7cd601fdf8e8df39bb7356a8f4
-  HMSBroadcastExtensionSDK: a69a4503a1708b5d51e2890d70f574b9cdfea760
-  HMSSDK: 3fdc3b3513a99c8e485d11112903342e1b0ad3a1
+  Eureka: fadaa9fa3d6e402d3c60f78f24edf3d7bafc9c29
+  HMSBroadcastExtensionSDK: 5fa2ca7ce516c006b3d36f5145711f7a2634aaba
+  HMSSDK: fbcca0469fe3e0d3d812dcccc30322b17e37cb1d
   HMSWebRTC: d3a9b2866e4a36a1d3834728a548a4a46309bb86
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
 
