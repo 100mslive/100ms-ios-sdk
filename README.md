@@ -13,6 +13,17 @@
 [![Activity](https://img.shields.io/github/commit-activity/m/100mslive/100ms-ios-sdk.svg)](https://github.com/100mslive/100ms-ios-sdk/releases)
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](https://dashboard.100ms.live/register)
 
+## 🎨 Features
+- [x] RTMP/HLS Streaming to multiple destinations
+- [x] Call Recording
+- [x] Virtual Background (custom video plugins for realtime effects)
+- [x] Screen Sharing
+- [x] Local Audio Playback
+- [x] Picture in picture (PiP)
+- [x] Network quality indicator
+
+👀 To see the complete list of features checkout our [documentation overview page](https://www.100ms.live/docs/ios)
+
 # 🎉 100ms SDK ＆ Sample App 🚀
 
 Here you will find everything you need to build experiences with video using 100ms iOS SDK. Dive into our SDKs, quick starts, add real-time video, voice, and screen sharing to your web and mobile applications.
