@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     }
 
     func joinRoom() {
-        let config = HMSConfig(userID: UUID().uuidString, roomID: "inset room id", authToken: "inset token here")
+        let config = HMSConfig(userName:"John Doe", authToken: "Token")
         hmsSDK.join(config: config, delegate: self)
     }
 
