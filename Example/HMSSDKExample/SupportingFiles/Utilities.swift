@@ -187,4 +187,8 @@ extension UserDefaults {
             set(newValue, forKey: Constants.publishVideo)
         }
     }
+    
+    var useBackCamera: Bool {
+        string(forKey: Constants.defaultVideoSource) == "Rear Facing"
+    }
 }

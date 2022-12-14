@@ -81,7 +81,7 @@ class HLSStreamViewController: UIViewController, AVPlayerItemMetadataCollectorPu
         
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.playAndRecord, options: [.defaultToSpeaker])
+            try session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .allowBluetooth])
             try session.setActive(true) //Set to false to deactivate session
         } catch let error as NSError {
             print("Unable to activate audio session:  \(error.localizedDescription)")
