@@ -23,7 +23,6 @@
 		877455D72872C32F007B11FB /* MusicControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877455D62872C32F007B11FB /* MusicControlView.swift */; };
 		877455D92872D4C9007B11FB /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877455D82872D4C9007B11FB /* VolumeView.swift */; };
 		879165FF280B036A006FB04A /* GrayscaleVideoPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */; };
-		9109731D276221EA00B76729 /* HLSStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109731C276221EA00B76729 /* HLSStreamViewController.swift */; };
 		9109732727636DF800B76729 /* HLSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109732627636DF800B76729 /* HLSSettingsViewController.swift */; };
 		9120573E2747C35C00E6CC8E /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9120573D2747C35C00E6CC8E /* PeerMetadata.swift */; };
 		9172A7B227E8949C0054AEFA /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */; };
@@ -33,6 +32,7 @@
 		91A44EBA292F7D910032AE75 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */; };
 		91AD889726F9E66B00EE3035 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */; };
 		91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */; };
+		91B791F92949EAA800534E00 /* HLSStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B791F82949EAA800534E00 /* HLSStreamViewController.swift */; };
 		91C13CDB26F23F5A00036555 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */; };
 		91D4894927B6527300F79445 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */; };
 		91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E7E144268C70F2001D988E /* PreviewViewController.swift */; };
@@ -129,7 +129,6 @@
 		877455D62872C32F007B11FB /* MusicControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicControlView.swift; sourceTree = "<group>"; };
 		877455D82872D4C9007B11FB /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayscaleVideoPlugin.swift; sourceTree = "<group>"; };
-		9109731C276221EA00B76729 /* HLSStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSStreamViewController.swift; sourceTree = "<group>"; };
 		9109732627636DF800B76729 /* HLSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSSettingsViewController.swift; sourceTree = "<group>"; };
 		9120573D2747C35C00E6CC8E /* PeerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerMetadata.swift; sourceTree = "<group>"; };
 		9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
@@ -139,6 +138,7 @@
 		91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
 		91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
+		91B791F82949EAA800534E00 /* HLSStreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HLSStreamViewController.swift; path = HLS/HLSStreamViewController.swift; sourceTree = "<group>"; };
 		91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
 		91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
 		91D82365281FD1E1000145E8 /* HMSScreenShareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShareRelease.entitlements; sourceTree = "<group>"; };
@@ -373,10 +373,10 @@
 				91A44EB4292F7D400032AE75 /* Stats */,
 				917D6EEA26EF464D00B5C7DE /* Menus */,
 				EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */,
+				91B791F82949EAA800534E00 /* HLSStreamViewController.swift */,
 				87FF5A9A288000F400B731FD /* Music Controls */,
 				91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */,
 				EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */,
-				9109731C276221EA00B76729 /* HLSStreamViewController.swift */,
 				EC8CEE4D261E297F002DC12E /* HMSSDKInteractor.swift */,
 				879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */,
 				EC8CEE5F261E297F002DC12E /* RoomService.swift */,
@@ -717,6 +717,7 @@
 			files = (
 				EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */,
 				91AD889726F9E66B00EE3035 /* RolePreviewViewController.swift in Sources */,
+				91B791F92949EAA800534E00 /* HLSStreamViewController.swift in Sources */,
 				ECF3ECE826BB0E7B00CC86C6 /* Constants.swift in Sources */,
 				91F9FB4027D0EA7800B407A0 /* RoomStateViewController.swift in Sources */,
 				EC8CEE88261E297F002DC12E /* FirebaseInteractor.swift in Sources */,
@@ -730,7 +731,6 @@
 				EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */,
 				91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */,
 				EC8CEE78261E297F002DC12E /* HMSSDKInteractor.swift in Sources */,
-				9109731D276221EA00B76729 /* HLSStreamViewController.swift in Sources */,
 				91A44EB8292F7D400032AE75 /* HLSStatsView.swift in Sources */,
 				877455D72872C32F007B11FB /* MusicControlView.swift in Sources */,
 				877455D92872D4C9007B11FB /* VolumeView.swift in Sources */,

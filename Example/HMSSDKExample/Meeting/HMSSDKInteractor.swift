@@ -71,6 +71,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
                 videoSettingsBuilder.initialMuteState = UserDefaults.standard.publishVideo ? .unmute : .mute
                 videoSettingsBuilder.videoPlugins = self.videoPlugins
                 videoSettingsBuilder.cameraFocusMode = .focusModeTapToAutoFocus
+                videoSettingsBuilder.cameraFacing = UserDefaults.standard.useBackCamera ? .back : .front
                 
                 audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
                 audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
