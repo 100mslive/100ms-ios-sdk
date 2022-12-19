@@ -14,13 +14,13 @@
 [![Email](https://img.shields.io/badge/Contact-Know%20More-blue)](https://dashboard.100ms.live/register)
 
 ## 🎨 Features
-- [x] RTMP/HLS Streaming to multiple destinations
-- [x] Call Recording
-- [x] Virtual Background (custom video plugins for realtime effects)
-- [x] Screen Sharing
-- [x] Local Audio Playback
-- [x] Picture in picture (PiP)
-- [x] Network quality indicator
+- [x] [RTMP](https://www.100ms.live/docs/ios/v2/features/rtmp-recording)/[HLS](https://www.100ms.live/docs/ios/v2/features/hls) Streaming to multiple destinations
+- [x] [Call Recording](https://www.100ms.live/docs/ios/v2/foundation/recordings)
+- [x] [Virtual Background](https://www.100ms.live/docs/ios/v2/plugins/virtual-background) ([custom video plugins](https://www.100ms.live/docs/ios/v2/plugins/custom-video-plugins) for realtime effects)
+- [x] [Screen Sharing](https://www.100ms.live/docs/ios/v2/features/screen-share)
+- [x] [Local Audio Playback](https://www.100ms.live/docs/ios/v2/features/audio-share)
+- [x] [Picture in picture (PiP)](https://www.100ms.live/docs/ios/v2/features/pip-mode)
+- [x] [Network quality indicator](https://www.100ms.live/docs/ios/v2/features/network-quality-reports)
 
 👀 To see the complete list of features checkout our [documentation overview page](https://www.100ms.live/docs/ios)
 
