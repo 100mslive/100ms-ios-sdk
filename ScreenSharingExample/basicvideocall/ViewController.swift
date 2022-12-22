@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  basicvideocall
 //
-//  Created by Dmitry Fedoseyev on 27.07.2021.
+//  Created by Pawan Dixit on 22.12.2022.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     }
 
     func joinRoom() {
-        let config = HMSConfig(userName: "Pawan's iPhone", authToken: "inset token here")
+        let config = HMSConfig(userName: "John Doe", authToken: "insert token here")
         hmsSDK.join(config: config, delegate: self)
         
         view.addConstrained(subview: pickerButton)
