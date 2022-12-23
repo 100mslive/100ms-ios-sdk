@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "100ms-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/100mslive/100ms-ios-sdk",
+      "state" : {
+        "revision" : "d6500e9552de6e3e7ea50653e1b8baa18d97bf82",
+        "version" : "0.5.3"
+      }
+    }
+  ],
+  "version" : 2
+}
