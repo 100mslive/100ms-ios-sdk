@@ -448,6 +448,25 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 self?.updateSettingsButton()
             }])
         }
+        
+        if interactor.canScreenShare {
+            
+            actions.append(contentsOf: [
+            
+                UIAction(title: "Start Streaming in-app content",
+                         image: UIImage(systemName: "rectangle.dashed.badge.record")) { [weak self] _ in
+                            
+                             self?.interactor.hmsSDK?.startAppScreenCapture()
+                },
+                
+                UIAction(title: "Stop Streaming in-app content",
+                         image: UIImage(systemName: "rectangle.dashed.badge.record")) { [weak self] _ in
+                            
+                             self?.interactor.hmsSDK?.stopAppScreenCapture(completion: nil)
+                },
+            ])
+            
+        }
 
         return actions
     }

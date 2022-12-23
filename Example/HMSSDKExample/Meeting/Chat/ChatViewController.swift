@@ -11,7 +11,7 @@ import HMSSDK
 
 final class ChatViewController: UIViewController {
 
-    internal var interactor: HMSSDKInteractor?
+    internal weak var interactor: HMSSDKInteractor?
 
     @IBOutlet private weak var table: UITableView!
     @IBOutlet private weak var stackView: UIStackView!
@@ -102,6 +102,12 @@ final class ChatViewController: UIViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        if let messageReceivedObserver = messageReceivedObserver {
+            NotificationCenter.default.removeObserver(messageReceivedObserver)
+        }
+        if let sessionMetadataReceivedObserver = sessionMetadataReceivedObserver {
+            NotificationCenter.default.removeObserver(sessionMetadataReceivedObserver)
+        }
     }
 
     // MARK: - View Modifiers
@@ -134,24 +140,29 @@ final class ChatViewController: UIViewController {
 
     // MARK: - Action Handlers
 
+    var messageReceivedObserver: NSObjectProtocol?
+    var sessionMetadataReceivedObserver: NSObjectProtocol?
     private func observeBroadcast() {
-        _ = NotificationCenter.default.addObserver(forName: Constants.messageReceived,
+        messageReceivedObserver = NotificationCenter.default.addObserver(forName: Constants.messageReceived,
                                                    object: nil,
                                                    queue: .main) { [weak self] _ in
             self?.applySnapshot()
             self?.table.scrollToBottom()
         }
         
-        _ = NotificationCenter.default.addObserver(forName: Constants.sessionMetadataReceived,
+        sessionMetadataReceivedObserver = NotificationCenter.default.addObserver(forName: Constants.sessionMetadataReceived,
                                                    object: nil,
-                                                   queue: .main) { [weak self] notification in
+                                                   queue: .main) { [weak self] _ in
             
             self?.updatePinnedChat()
         }
     }
     
     private func updatePinnedChat() {
-        interactor?.hmsSDK?.getSessionMetadata(completion: { metadata, _ in
+        interactor?.hmsSDK?.getSessionMetadata(completion: { [weak self] metadata, _ in
+            
+            guard let self = self else { return }
+            
             if let metadata = metadata {
                 self.pinnedChat.isHidden = false
                 self.pinIcon.isHidden = false
@@ -237,8 +248,10 @@ extension ChatViewController {
 
     func makeDataSource() -> DataSource? {
 
-        let dataSource = DataSource(tableView: table) { (table, indexPath, message) -> UITableViewCell? in
-
+        let dataSource = DataSource(tableView: table) { [weak self] (table, indexPath, message) -> UITableViewCell? in
+            
+            guard let self = self else { return nil }
+            
             guard let cell = table.dequeueReusableCell(withIdentifier: "Cell",
                                                        for: indexPath) as? ChatTableViewCell else {
                 return nil
