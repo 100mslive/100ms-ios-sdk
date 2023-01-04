@@ -18,8 +18,8 @@ struct ContentView: View {
         Group {
             if videoSDK.isJoined {
                 List {
-                    ForEach(videoSDK.tracks, id: \.self) { track in
-                        VideoView(track: track)
+                    ForEach(videoSDK.peers, id: \.self) { peer in
+                        HMSPeerTile(peer: peer)
                             .frame(height: 300)
                     }
                 }
