@@ -45,10 +45,18 @@
 			isa = PBXGroup;
 			children = (
 				8758EAB1294CB60B00FA56B3 /* VideoSDK.swift */,
+				87D7852F2965A16D00C5EF49 /* Internals */,
+			);
+			path = 100ms;
+			sourceTree = "<group>";
+		};
+		87D7852F2965A16D00C5EF49 /* Internals */ = {
+			isa = PBXGroup;
+			children = (
 				87D7852D29659DF200C5EF49 /* Models.swift */,
 				8758EAB3294CB85A00FA56B3 /* VideoView.swift */,
 			);
-			path = 100ms;
+			path = Internals;
 			sourceTree = "<group>";
 		};
 		9132154526B03E74002694A8 = {

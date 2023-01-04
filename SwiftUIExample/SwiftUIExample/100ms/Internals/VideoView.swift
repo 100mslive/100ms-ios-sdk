@@ -26,7 +26,7 @@ struct VideoView: UIViewRepresentable {
 @available(iOS 13.0.0, *)
 struct HMSPeerTile: View {
     
-    @ObservedObject var model = VideoSDK.shared
+    @ObservedObject var model = HMSPeerTileModel.shared
     
     let peer: HMSPeer
     
