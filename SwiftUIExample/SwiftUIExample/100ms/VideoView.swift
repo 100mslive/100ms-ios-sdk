@@ -26,18 +26,29 @@ struct VideoView: UIViewRepresentable {
 @available(iOS 13.0.0, *)
 struct HMSPeerTile: View {
     
+    @ObservedObject var model = VideoSDK.shared
+    
     let peer: HMSPeer
+    
+    var peerModel: HMSPeerModel? {
+        model.peerSet.first{$0.peer == peer}
+    }
+    
+    init(peer: HMSPeer) {
+        self.peer = peer
+    }
     
     var audioTrack: HMSAudioTrack? {
         peer.audioTrack
     }
     
     var localAudioTrack: HMSLocalAudioTrack? {
-        peer.audioTrack as? HMSLocalAudioTrack
+        guard let track = peer.audioTrack as? HMSLocalAudioTrack else { return nil }
+        return (peerModel?.tracks.first{$0.track.trackId == track.trackId})?.track as? HMSLocalAudioTrack
     }
     
-    var videoTrack: HMSVideoTrack? {
-        peer.videoTrack
+    var videoTrackModel: HMSTrackModel? {
+        return (peerModel?.tracks.first{$0.track.trackId == peer.videoTrack?.trackId})
     }
     
     var isLocal: Bool {
@@ -47,8 +58,8 @@ struct HMSPeerTile: View {
     var body: some View {
         ZStack {
 
-            if let videoTrack = videoTrack {
-                VideoView(track: videoTrack)
+            if let videoTrackModel = videoTrackModel, !videoTrackModel.isMuted {
+                VideoView(track: videoTrackModel.track as! HMSVideoTrack)
                     .edgesIgnoringSafeArea(.all)
             }
             else {
@@ -63,6 +74,18 @@ struct HMSPeerTile: View {
                         }
                     Spacer(minLength: 0)
                 }
+            }
+        }
+        .onAppear() {
+            let tracks = [peer.videoTrack, peer.audioTrack].compactMap{$0}
+            model.peerSet.insert(HMSPeerModel(peer: peer, tracks: tracks))
+        }
+        .onDisappear() {
+            if let peerToRemove = Array(model.peerSet).first(where: {$0.peer == peer}) {
+                model.peerSet.remove(peerToRemove)
+            }
+            else {
+                assertionFailure()
             }
         }
     }

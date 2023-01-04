@@ -10,7 +10,7 @@ import HMSSDK
 
 struct ContentView: View {
     
-    @StateObject var videoSDK = VideoSDK()
+    @StateObject var videoSDK = VideoSDK.shared
     @State var isJoining = false
     
     var body: some View {

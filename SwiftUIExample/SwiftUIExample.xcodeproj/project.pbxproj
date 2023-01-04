@@ -12,6 +12,7 @@
 		8758EAB2294CB60B00FA56B3 /* VideoSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758EAB1294CB60B00FA56B3 /* VideoSDK.swift */; };
 		8758EAB4294CB85A00FA56B3 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758EAB3294CB85A00FA56B3 /* VideoView.swift */; };
 		8758EAB7294CBF8E00FA56B3 /* SwiftUIExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8758EAB6294CBF8E00FA56B3 /* SwiftUIExampleApp.swift */; };
+		87D7852E29659DF200C5EF49 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D7852D29659DF200C5EF49 /* Models.swift */; };
 		9132155B26B03E76002694A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9132155A26B03E76002694A8 /* Assets.xcassets */; };
 		9132155E26B03E76002694A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9132155C26B03E76002694A8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -21,6 +22,7 @@
 		8758EAB1294CB60B00FA56B3 /* VideoSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSDK.swift; sourceTree = "<group>"; };
 		8758EAB3294CB85A00FA56B3 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		8758EAB6294CBF8E00FA56B3 /* SwiftUIExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIExampleApp.swift; sourceTree = "<group>"; };
+		87D7852D29659DF200C5EF49 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		9132154E26B03E74002694A8 /* SwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9132155A26B03E76002694A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9132155D26B03E76002694A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				8758EAB1294CB60B00FA56B3 /* VideoSDK.swift */,
+				87D7852D29659DF200C5EF49 /* Models.swift */,
 				8758EAB3294CB85A00FA56B3 /* VideoView.swift */,
 			);
 			path = 100ms;
@@ -156,6 +159,7 @@
 				8758EAB7294CBF8E00FA56B3 /* SwiftUIExampleApp.swift in Sources */,
 				8758EAB0294CB5EC00FA56B3 /* ContentView.swift in Sources */,
 				8758EAB2294CB60B00FA56B3 /* VideoSDK.swift in Sources */,
+				87D7852E29659DF200C5EF49 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

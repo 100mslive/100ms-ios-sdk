@@ -10,8 +10,11 @@ import HMSSDK
 
 class VideoSDK: ObservableObject {
     
+    static let shared = VideoSDK()
+    
     let hmsSDK = HMSSDK.build()
     @Published var peers = [HMSPeer]()
+    @Published var peerSet = Set<HMSPeerModel>()
     @Published var isJoined = false
     
     func joinRoom() {
@@ -44,18 +47,82 @@ extension VideoSDK: HMSUpdateListener {
     }
 
     func on(track: HMSTrack, update: HMSTrackUpdate, for peer: HMSPeer) {
-//        switch update {
-//        case .trackAdded:
-//            if let videoTrack = track as? HMSVideoTrack {
-//                tracks.append(videoTrack)
-//            }
-//        case .trackRemoved:
-//            if let videoTrack = track as? HMSVideoTrack {
-//                tracks.removeAll { $0 == videoTrack }
-//            }
-//        default:
-//            break
-//        }
+        
+        guard let _ = (peerSet.first{$0.peer == peer}) else { return }
+        
+        switch update {
+        case .trackAdded:
+            peerSet = Set(peerSet.map { peerModel in
+                if peerModel.peer == peer {
+                    var peerModelCopy = peerModel
+                    peerModelCopy.tracks.append(HMSTrackModel(track: track, isMuted: track.isMute()))
+                    return peerModelCopy
+                }
+                else {
+                    return peerModel
+                }
+            })
+            
+        case .trackRemoved:
+            peerSet = Set(peerSet.map { peerModel in
+                if peerModel.peer == peer {
+                    var peerModelCopy = peerModel
+                    peerModelCopy.tracks.removeAll{$0.track == track}
+                    return peerModelCopy
+                }
+                else {
+                    return peerModel
+                }
+            })
+        case .trackMuted:
+            
+            peerSet = Set(peerSet.map { peerModel in
+                if peerModel.peer == peer {
+                    var peerModelCopy = peerModel
+                    peerModelCopy.tracks = peerModel.tracks.map {
+                        if $0.track == track {
+                            var copy = $0
+                            copy.isMuted = true
+                            return copy
+                        }
+                        else {
+                            return $0
+                        }
+                    }
+                    
+                    return peerModelCopy
+                }
+                else {
+                    return peerModel
+                }
+            })
+            
+            
+        case.trackUnmuted:
+            
+            peerSet = Set(peerSet.map { peerModel in
+                if peerModel.peer == peer {
+                    var peerModelCopy = peerModel
+                    peerModelCopy.tracks = peerModel.tracks.map {
+                        if $0.track == track {
+                            var copy = $0
+                            copy.isMuted = false
+                            return copy
+                        }
+                        else {
+                            return $0
+                        }
+                    }
+                    
+                    return peerModelCopy
+                }
+                else {
+                    return peerModel
+                }
+            })
+        default:
+            break
+        }
     }
 
     func on(error: Error) {
