@@ -12,6 +12,8 @@ import HMSSDK
 final class MeetingViewModel: NSObject,
                               UICollectionViewDelegate,
                               UICollectionViewDelegateFlowLayout {
+    
+    weak var delegate: MeetingViewController?
 
     // MARK: - Properties
 
@@ -418,7 +420,7 @@ final class MeetingViewModel: NSObject,
 
     private func setMoreButton(for cell: VideoCollectionViewCell, using viewModel: HMSViewModel) {
         if #available(iOS 14.0, *) {
-            if let menu = getMenu(for: viewModel.peer) {
+            if let menu = getMenu(for: nil, model: viewModel) {
                 cell.moreButton.menu = menu
                 cell.moreButton.showsMenuAsPrimaryAction = true
                 cell.moreButton.isEnabled = true
@@ -490,8 +492,10 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Role based Actions
 
-    internal func getMenu(for peer: HMSPeer) -> UIMenu? {
+    internal func getMenu(for peer: HMSPeer? = nil, model: HMSViewModel? = nil) -> UIMenu? {
 
+        guard let peer = peer ?? model?.peer else { return nil }
+        
         var actions: [UIAction]?
 
         if let peer = peer as? HMSLocalPeer {
@@ -500,6 +504,16 @@ final class MeetingViewModel: NSObject,
             actions = getRemotePeerActions(peer)
         }
 
+        if let model = model {
+            
+            actions?.append(UIAction(title: "Capture Snapshot", image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+                
+                if let image = self?.cellFor(model)?.videoView.captureSnapshot() {
+                    self?.delegate?.presentSheet(with: image)
+                }
+            })
+        }
+        
         guard let actions = actions else { return nil }
 
         return UIMenu(title: "Select action for \(peer.name)",

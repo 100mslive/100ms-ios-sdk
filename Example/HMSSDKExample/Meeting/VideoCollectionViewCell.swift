@@ -247,14 +247,35 @@ final class VideoCollectionViewCell: UICollectionViewCell {
 
     private func statsDescription(stats: Any) -> String {
         var components = [String]()
+        let layerNameMap = [ HMSSimulcastLayer.high : "High", HMSSimulcastLayer.mid : "Medium", HMSSimulcastLayer.low : "Low"]
 
         if let localAudioStats = stats as? HMSLocalAudioStats {
             components += ["Bitrate (Audio) \(String(format: "%.1f Kb/s", localAudioStats.bitrate))"]
-        } else if let localVideoStats = stats as? HMSLocalVideoStats {
-            let resolutionString = "\(localVideoStats.resolution.width)x\(localVideoStats.resolution.height)"
-            let frameRateString = String(format: "%.0f", localVideoStats.frameRate)
-            components += ["Resolution @ FPS \(resolutionString)@\(frameRateString)"]
-            components += ["Bitrate (Video) \(String(format: "%.1f Kb/s", localVideoStats.bitrate))"]
+        } else if let localVideoStats = stats as? [HMSLocalVideoStats] {
+            for layerStats in localVideoStats {
+                if let layerId = layerStats.simulcastLayerId?.uintValue, let layerType = HMSSimulcastLayer(rawValue: layerId), let layerName = layerNameMap[layerType] {
+                    components += [layerName]
+                }
+                let resolutionString = "\(layerStats.resolution.width)x\(layerStats.resolution.height)"
+                let frameRateString = String(format: "%.0f", layerStats.frameRate)
+                components += ["Resolution @ FPS \(resolutionString)@\(frameRateString)"]
+                components += ["Bitrate (Video) \(String(format: "%.1f Kb/s", layerStats.bitrate))"]
+                
+                let qualityLimitations = layerStats.qualityLimitations
+                if qualityLimitations.cpu > 2 {
+                    let activeMark = qualityLimitations.reason == .CPU ? "> " : ""
+                    components += ["\(activeMark)Limited by CPU \(String(format: "%.1f", qualityLimitations.cpu))"]
+                }
+                if qualityLimitations.bandwidth > 2 {
+                    let activeMark = qualityLimitations.reason == .bandwidth ? "> " : ""
+                    components += ["\(activeMark)Limited by bandwidth \(String(format: "%.1f", qualityLimitations.bandwidth))"]
+                }
+                if qualityLimitations.other > 2 {
+                    let activeMark = qualityLimitations.reason == .other ? "> " : ""
+                    components += ["\(activeMark)Limited by other \(String(format: "%.1f", qualityLimitations.other))"]
+                }
+                components += [" "]
+            }
         } else if let remoteAudioStats = stats as? HMSRemoteAudioStats {
             components += ["Bitrate (Audio) \(String(format: "%.1f Kb/s", remoteAudioStats.bitrate))"]
             components += ["Packets Lost (Audio) \(remoteAudioStats.packetsLost)"]
