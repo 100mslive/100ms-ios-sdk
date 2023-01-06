@@ -90,6 +90,8 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
         viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
         
+        viewModel?.delegate = self
+        
         interactor.pipController.setup(with: self.collectionView)
 
         setupButtonStates()
@@ -311,6 +313,12 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
     private func settingsButtonTint() -> UIColor {
         return interactor.isRecording ? UIColor.red : speakerButton.tintColor
     }
+    
+    func presentSheet(with image: UIImage) {
+        let imagePreviewController = UIHostingController(rootView: ImagePreviewView(image: image))
+        imagePreviewController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+        self.present(imagePreviewController, animated: true, completion: nil)
+    }
 
     private func menuItems() -> [UIAction] {
 
@@ -462,7 +470,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 UIAction(title: "Stop Streaming in-app content",
                          image: UIImage(systemName: "rectangle.dashed.badge.record")) { [weak self] _ in
                             
-                             self?.interactor.hmsSDK?.stopAppScreenCapture(completion: nil)
+                             self?.interactor.hmsSDK?.stopAppScreenCapture()
                 },
             ])
             

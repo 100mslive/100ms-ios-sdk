@@ -307,7 +307,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localAudioStats, "track": track, "peer": peer])
     }
 
-    func on(localVideoStats: HMSLocalVideoStats, track: HMSLocalVideoTrack, peer: HMSPeer) {
+    func on(localVideoStats: [HMSLocalVideoStats], track: HMSLocalVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localVideoStats, "track": track, "peer": peer])
     }
 
