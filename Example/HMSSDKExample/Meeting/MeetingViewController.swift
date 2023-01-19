@@ -69,6 +69,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     func setupHLSController() {
         let vc = HLSStreamViewController()
+        vc.hmsSDK = interactor.hmsSDK
         addChild(vc)
         hlsContainer.addSubview(vc.view)
         vc.view.translatesAutoresizingMaskIntoConstraints = false
@@ -464,7 +465,20 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 UIAction(title: "Start Streaming in-app content",
                          image: UIImage(systemName: "rectangle.dashed.badge.record")) { [weak self] _ in
                             
-                             self?.interactor.hmsSDK?.startAppScreenCapture()
+                             self?.interactor.hmsSDK?.startAppScreenCapture() { error in
+                                 if error != nil {
+                                     // to spot any scenario of errors
+
+                                     let alertController = UIAlertController(title: "ScreenShare",
+                                                                             message: error?.localizedDescription,
+                                                                             preferredStyle: .alert)
+
+
+                                     alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+                                     self?.present(alertController, animated: true)
+                                 }
+                             }
                 },
                 
                 UIAction(title: "Stop Streaming in-app content",

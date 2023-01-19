@@ -25,6 +25,8 @@ class HLSStreamViewController: UIViewController, AVPlayerItemMetadataCollectorPu
     var statMonitor: HMSHLSStatsMonitor?
     let statsModel = HLSStatsModel()
     var statsTimer: Timer?
+    
+    weak var hmsSDK: HMSSDK?
 
     var streamURL: URL? {
         didSet {
@@ -115,7 +117,7 @@ class HLSStreamViewController: UIViewController, AVPlayerItemMetadataCollectorPu
             player = AVPlayer(playerItem: item)
             
             if UserDefaults.standard.bool(forKey: Constants.showStats) {
-                statMonitor = HMSHLSStatsMonitor(player: player!)
+                statMonitor = hmsSDK?.hlsStatsMonitor(player: player!)
                 statMonitor!.delegate = self
 
                 statsTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in

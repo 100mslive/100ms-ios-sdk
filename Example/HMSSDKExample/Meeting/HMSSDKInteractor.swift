@@ -295,19 +295,19 @@ final class HMSSDKInteractor: HMSUpdateListener {
         onRemovedFromRoom?(notification)
     }
 
-    func on(remoteAudioStats: HMSRemoteAudioStats, track: HMSRemoteAudioTrack, peer: HMSPeer) {
+    func on(remoteAudioStats: HMSRemoteAudioStats, track: HMSAudioTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": remoteAudioStats, "track": track, "peer": peer])
     }
 
-    func on(remoteVideoStats: HMSRemoteVideoStats, track: HMSRemoteVideoTrack, peer: HMSPeer) {
+    func on(remoteVideoStats: HMSRemoteVideoStats, track: HMSVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": remoteVideoStats, "track": track, "peer": peer])
     }
 
-    func on(localAudioStats: HMSLocalAudioStats, track: HMSLocalAudioTrack, peer: HMSPeer) {
+    func on(localAudioStats: HMSLocalAudioStats, track: HMSAudioTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localAudioStats, "track": track, "peer": peer])
     }
 
-    func on(localVideoStats: [HMSLocalVideoStats], track: HMSLocalVideoTrack, peer: HMSPeer) {
+    func on(localVideoStats: [HMSLocalVideoStats], track: HMSVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localVideoStats, "track": track, "peer": peer])
     }
 
