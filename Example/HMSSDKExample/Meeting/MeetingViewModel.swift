@@ -380,7 +380,8 @@ final class MeetingViewModel: NSObject,
     private func setViewOptions(for cell: VideoCollectionViewCell, using viewModel: HMSViewModel) {
         
         if let localVideoTrack = cell.viewModel?.videoTrack as? HMSLocalVideoTrack {
-            cell.videoView.mirror = localVideoTrack.settings.cameraFacing == .front
+            let mirrorEnabled = UserDefaults.standard.object(forKey: Constants.mirrorMyVideo) as? Bool ?? true
+            cell.videoView.mirror = localVideoTrack.settings.cameraFacing == .front && mirrorEnabled
         }
         else {
             cell.videoView.mirror = false

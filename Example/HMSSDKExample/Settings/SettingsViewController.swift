@@ -14,8 +14,6 @@ class SettingsViewController: UIViewController {
 
     let defaultVideoSource = ["Front Facing", "Rear Facing"]
     let availableAudioSources = AudioSourceType.allCases
-    let videoResolution = ["QVGA", "VGA", "QHD", "HD", "Full HD"]
-    let videoBitRate = ["Lowest (100 kbps)", "Low (256 kbps)", "Medium (512 kbps)", "High (1 mbps)", "LAN (4 mbps)"]
 
     @IBOutlet weak var videoSourcePicker: UIPickerView!
 
@@ -37,35 +35,10 @@ class SettingsViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var maximumRowsField: UITextField! {
-        didSet {
-            if let rows = UserDefaults.standard.string(forKey: Constants.maximumRows) {
-                maximumRowsField.text = rows
-            }
-        }
-    }
-
-    @IBOutlet weak var audioPollDelayField: UITextField! {
-        didSet {
-            if let delay = UserDefaults.standard.string(forKey: Constants.audioPollDelay) {
-                audioPollDelayField.text = delay
-            }
-        }
-    }
-
-    @IBOutlet weak var silenceThresholdField: UITextField! {
-        didSet {
-            if let threshold = UserDefaults.standard.string(forKey: Constants.silenceThreshold) {
-                silenceThresholdField.text = threshold
-            }
-        }
-    }
-
     @IBOutlet weak var mirrorMyVideoSwitch: UISwitch! {
         didSet {
-            if let isOn = UserDefaults.standard.object(forKey: Constants.mirrorMyVideo) as? Bool {
-                mirrorMyVideoSwitch.setOn(isOn, animated: false)
-            }
+            let isOn = UserDefaults.standard.object(forKey: Constants.mirrorMyVideo) as? Bool ?? true
+            mirrorMyVideoSwitch.setOn(isOn, animated: false)
         }
     }
 
@@ -84,22 +57,15 @@ class SettingsViewController: UIViewController {
             }
         }
     }
-
-    @IBOutlet weak var videoFrameRateField: UITextField! {
+    
+    @IBOutlet weak var autoSimulcastLayerSelectionSwitch: UISwitch! {
         didSet {
-            if let rate = UserDefaults.standard.string(forKey: Constants.videoFrameRate) {
-                videoFrameRateField.text = rate
-            }
+            let isOn = UserDefaults.standard.object(forKey: Constants.autoSimulcastLayerSelection) as? Bool ?? true
+            autoSimulcastLayerSelectionSwitch.setOn(isOn, animated: false)
         }
     }
 
-    @IBOutlet weak var audioBitrateField: UITextField! {
-        didSet {
-            if let rate = UserDefaults.standard.string(forKey: Constants.audioBitRate) {
-                audioBitrateField.text = rate
-            }
-        }
-    }
+   
 
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
@@ -131,14 +97,6 @@ class SettingsViewController: UIViewController {
         let audioSource = AudioSourceType(rawValue: userDefaults.integer(forKey: Constants.defaultAudioSource)) ?? .audioMixer
         let audioSourceIndex = availableAudioSources.firstIndex(of: audioSource) ?? 0
         audioSourcePicker.selectRow(audioSourceIndex, inComponent: 0, animated: false)
-
-        let resolution = userDefaults.string(forKey: Constants.videoResolution) ?? "QHD"
-        let resolutionIndex = videoResolution.firstIndex(of: resolution) ?? 2
-        videoResolutionPicker.selectRow(resolutionIndex, inComponent: 0, animated: false)
-
-        let bitrate = userDefaults.string(forKey: Constants.videoBitRate) ?? "High (1 mbps)"
-        let bitrateIndex = videoBitRate.firstIndex(of: bitrate) ?? 3
-        videoBitRatePicker.selectRow(bitrateIndex, inComponent: 0, animated: false)
     }
 
     // MARK: - Action Handlers
@@ -154,19 +112,11 @@ class SettingsViewController: UIViewController {
 
         userDefaults.publishVideo = publishVideoSwitch.isOn
         userDefaults.publishAudio = publishAudioSwitch.isOn
-        userDefaults.set(!maximumRowsField.text!.isEmpty ? maximumRowsField.text : "2",
-                         forKey: Constants.maximumRows)
-        userDefaults.set(!audioPollDelayField.text!.isEmpty ? audioPollDelayField.text : "2",
-                         forKey: Constants.audioPollDelay)
-        userDefaults.set(!silenceThresholdField.text!.isEmpty ? silenceThresholdField.text : "0.01",
-                         forKey: Constants.silenceThreshold)
         userDefaults.set(mirrorMyVideoSwitch.isOn, forKey: Constants.mirrorMyVideo)
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(showStatsSwitch.isOn, forKey: Constants.showStats)
-        userDefaults.set(!videoFrameRateField.text!.isEmpty ? videoFrameRateField.text : "25",
-                         forKey: Constants.videoFrameRate)
-        userDefaults.set(!audioBitrateField.text!.isEmpty ? audioBitrateField.text : "0",
-                         forKey: Constants.audioBitRate)
+        userDefaults.set(autoSimulcastLayerSelectionSwitch.isOn, forKey: Constants.autoSimulcastLayerSelection)
+        
 
         let videoSource = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
         userDefaults.set(videoSource, forKey: Constants.defaultVideoSource)
@@ -174,11 +124,6 @@ class SettingsViewController: UIViewController {
         let audioSource = availableAudioSources[audioSourcePicker.selectedRow(inComponent: 0)]
         userDefaults.set(audioSource.rawValue, forKey: Constants.defaultAudioSource)
 
-        let resolution = videoResolution[videoResolutionPicker.selectedRow(inComponent: 0)]
-        userDefaults.set(resolution, forKey: Constants.videoResolution)
-
-        let bitrate = videoBitRate[videoBitRatePicker.selectedRow(inComponent: 0)]
-        userDefaults.set(bitrate, forKey: Constants.videoBitRate)
     }
 }
 
@@ -193,11 +138,7 @@ extension SettingsViewController: UIPickerViewDataSource {
         switch pickerView.tag {
         case 0:
             return defaultVideoSource.count
-        case 2:
-            return videoResolution.count
-        case 3:
-            return videoBitRate.count
-        case 4:
+        case 1:
             return availableAudioSources.count
         default:
             return 0
@@ -212,11 +153,7 @@ extension SettingsViewController: UIPickerViewDelegate {
         switch pickerView.tag {
         case 0:
             return defaultVideoSource[row]
-        case 2:
-            return videoResolution[row]
-        case 3:
-            return videoBitRate[row]
-        case 4:
+        case 1:
             return availableAudioSources[row].description
         default:
             return nil

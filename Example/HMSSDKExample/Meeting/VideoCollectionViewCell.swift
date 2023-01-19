@@ -60,6 +60,9 @@ final class VideoCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var videoView: HMSVideoView! {
         didSet {
+            if let autoLayerSelection = UserDefaults.standard.object(forKey: Constants.autoSimulcastLayerSelection) as? Bool {
+                videoView.disableAutoSimulcastLayerSelect = !autoLayerSelection
+            }
             Utilities.applyBorder(on: videoView, skipColor: true)
         }
     }
@@ -118,7 +121,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
             
             if let cameraFacing = notification.userInfo?["cameraFacing"] as? HMSCameraFacing {
                 if self?.videoView.videoTrack() is HMSLocalVideoTrack {
-                    self?.videoView.mirror = cameraFacing == .front
+                    let mirrorEnabled = UserDefaults.standard.object(forKey: Constants.mirrorMyVideo) as? Bool ?? true
+                    self?.videoView.mirror = cameraFacing == .front && mirrorEnabled
                 }
             }
         }

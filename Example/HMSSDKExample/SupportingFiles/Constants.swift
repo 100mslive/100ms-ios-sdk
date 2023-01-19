@@ -106,29 +106,17 @@ struct Constants {
 
     static let publishAudio = "publishAudio"
 
-    static let maximumRows = "maximumRows"
-
-    static let audioPollDelay = "audioPollDelay"
-
-    static let silenceThreshold = "silenceThreshold"
-
     static let mirrorMyVideo = "mirrorMyVideo"
 
     static let showVideoPreview = "showVideoPreview"
 
     static let showStats = "showStats"
-
-    static let videoFrameRate = "videoFrameRate"
-
-    static let audioBitRate = "audioBitRate"
+    
+    static let autoSimulcastLayerSelection = "autoSimulcastLayerSelection"
 
     static let defaultVideoSource = "defaultVideoSource"
     
     static let defaultAudioSource = "defaultAudioSource"
-
-    static let videoResolution = "videoResolution"
-
-    static let videoBitRate = "videoBitRate"
 }
 
 enum ViewModes: String {
