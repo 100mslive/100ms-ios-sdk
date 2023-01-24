@@ -1,3 +1,5 @@
+# Project demontrating the screen sharing feature implementation with 100ms iOS SDK
+
 ### Follow the video walkthrough here
 https://www.youtube.com/watch?v=wMGfYtytAEc
 
