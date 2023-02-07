@@ -17,8 +17,6 @@ struct Constants {
 
     static let getTokenURL = TokenEndpoint.tokenEndpoint + tokenQuery
 
-    static let defaultRoomID = ""
-
     static let tokenKey = "token"
 
     static let idKey = "id"
@@ -117,6 +115,8 @@ struct Constants {
     static let defaultVideoSource = "defaultVideoSource"
     
     static let defaultAudioSource = "defaultAudioSource"
+    
+    static let disablePiP = "disablePiP"
 }
 
 enum ViewModes: String {

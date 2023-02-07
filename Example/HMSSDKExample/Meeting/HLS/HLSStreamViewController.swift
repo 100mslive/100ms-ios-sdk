@@ -166,7 +166,7 @@ class HLSStreamViewController: UIViewController, AVPlayerItemMetadataCollectorPu
         
         currentMetadataGroup = group
         metadataView.isHidden = false
-        metadataView.text = group.items.first?.stringValue
+        metadataView.text = group.hmsPayloadString()
     }
     
     func hideCurrentMetadataViewIfNeeded() {
@@ -240,6 +240,17 @@ extension HLSStreamViewController: HMSHLSPlaybackDelegate {
     
     func playerDidChangeResolution(videoSize: CGSize) {
         print("Resolution Changed: \(videoSize)")
+    }
+    
+    func onPlaybackFailure(error: Error) {
+        guard let error = error as? HMSError else { return }
+        
+        if error.isTerminal {
+            print("Player has encountered a terminal error, we need to restart the player: \(error.localizedDescription)")
+        }
+        else {
+            print("Player has encountered an error, but it's non-fatal and player might recover \(error.localizedDescription)")
+        }
     }
 }
 
