@@ -66,7 +66,13 @@ class SettingsViewController: UIViewController {
     }
 
    
-
+    @IBOutlet weak var disablePiPSSwitch: UISwitch! {
+        didSet {
+            let shouldDisablePiP = UserDefaults.standard.object(forKey: Constants.disablePiP) as? Bool ?? false
+            disablePiPSSwitch.setOn(shouldDisablePiP, animated: false)
+        }
+    }
+    
     @IBOutlet weak var appVersionLabel: UILabel! {
         didSet {
             if let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
@@ -116,7 +122,7 @@ class SettingsViewController: UIViewController {
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(showStatsSwitch.isOn, forKey: Constants.showStats)
         userDefaults.set(autoSimulcastLayerSelectionSwitch.isOn, forKey: Constants.autoSimulcastLayerSelection)
-        
+        userDefaults.set(disablePiPSSwitch.isOn, forKey: Constants.disablePiP)
 
         let videoSource = defaultVideoSource[videoSourcePicker.selectedRow(inComponent: 0)]
         userDefaults.set(videoSource, forKey: Constants.defaultVideoSource)

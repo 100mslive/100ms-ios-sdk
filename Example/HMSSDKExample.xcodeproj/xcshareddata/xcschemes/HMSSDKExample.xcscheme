@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1310"
-   version = "1.3">
+   LastUpgradeVersion = "1200"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      runPostActionsOnFailure = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+               BlueprintIdentifier = "857F4A6E3942AA7F98C6FC06"
                BuildableName = "HMSSDKExample.app"
                BlueprintName = "HMSSDKExample"
                ReferencedContainer = "container:HMSSDKExample.xcodeproj">
@@ -26,19 +27,31 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "NO">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "857F4A6E3942AA7F98C6FC06"
+            BuildableName = "HMSSDKExample.app"
+            BlueprintName = "HMSSDKExample"
+            ReferencedContainer = "container:HMSSDKExample.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACE41AFB9204008FA782"
+               BlueprintIdentifier = "13B6001ED42A260666748A89"
                BuildableName = "HMSSDKExampleTests.xctest"
                BlueprintName = "HMSSDKExampleTests"
                ReferencedContainer = "container:HMSSDKExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -54,31 +67,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BlueprintIdentifier = "857F4A6E3942AA7F98C6FC06"
             BuildableName = "HMSSDKExample.app"
             BlueprintName = "HMSSDKExample"
             ReferencedContainer = "container:HMSSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "DYLD_PRINT_STATISTICS"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
-      <AdditionalOptions>
-         <AdditionalOption
-            key = "MallocStackLogging"
-            value = ""
-            isEnabled = "YES">
-         </AdditionalOption>
-         <AdditionalOption
-            key = "PrefersMallocStackLoggingLite"
-            value = ""
-            isEnabled = "YES">
-         </AdditionalOption>
-      </AdditionalOptions>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -90,12 +86,14 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BlueprintIdentifier = "857F4A6E3942AA7F98C6FC06"
             BuildableName = "HMSSDKExample.app"
             BlueprintName = "HMSSDKExample"
             ReferencedContainer = "container:HMSSDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

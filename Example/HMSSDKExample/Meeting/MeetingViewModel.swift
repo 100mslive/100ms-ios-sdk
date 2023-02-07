@@ -501,18 +501,60 @@ final class MeetingViewModel: NSObject,
 
         if let peer = peer as? HMSLocalPeer {
             actions = getLocalPeerActions(peer)
+            
+            if let localVideoTrack = peer.localVideoTrack() {
+                
+                if !localVideoTrack.isMute() {
+                    
+                    actions?.append(UIAction(title: "Toggle Torch", image: UIImage(systemName: "flashlight.on.fill")) { _ in
+                        
+                        localVideoTrack.modifyCaptureDevice({ device in
+                            guard let device = device else { return }
+                            guard device.isTorchModeSupported(.on) else {
+                                self.delegate?.presentAlert(with: "Not supported", message: "Torch is not supported on this camera")
+                                return
+                            }
+                            device.torchMode = device.torchMode == .off ? .on : .off
+                        })
+                    })
+                    
+                    actions?.append(UIAction(title: "Zoom camera in/out", image: UIImage(systemName: "plus.magnifyingglass")) { _ in
+                        
+                        localVideoTrack.modifyCaptureDevice({ device in
+                            guard let device = device else { return }
+                            device.videoZoomFactor = device.videoZoomFactor == 1.0 ? 2.0 : 1.0
+                        })
+                    })
+                    
+                    actions?.append(UIAction(title: "Take photo", image: UIImage(systemName: "camera.fill")) { _ in
+                        
+                        localVideoTrack.captureImageAtMaxSupportedResolution(withFlash: false, completion: { image in
+                            if let image = image {
+                                self.delegate?.presentSheet(with: image)
+                            }
+                        })
+                    })
+                }
+            }
+            
         } else if let peer = peer as? HMSRemotePeer {
             actions = getRemotePeerActions(peer)
         }
 
-        if let model = model {
+        if let videoTrack = peer.videoTrack {
             
-            actions?.append(UIAction(title: "Capture Snapshot", image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+            if !videoTrack.isMute() {
                 
-                if let image = self?.cellFor(model)?.videoView.captureSnapshot() {
-                    self?.delegate?.presentSheet(with: image)
+                if let model = model {
+                    
+                    actions?.append(UIAction(title: "Capture Snapshot", image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+                        
+                        if let image = self?.cellFor(model)?.videoView.captureSnapshot() {
+                            self?.delegate?.presentSheet(with: image)
+                        }
+                    })
                 }
-            })
+            }
         }
         
         guard let actions = actions else { return nil }

@@ -320,6 +320,18 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         imagePreviewController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
         self.present(imagePreviewController, animated: true, completion: nil)
     }
+    
+    func presentAlert(with title: String, message: String) {
+        
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        self.present(alertController, animated: true)
+    }
 
     private func menuItems() -> [UIAction] {
 
