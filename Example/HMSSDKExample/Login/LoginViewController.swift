@@ -72,7 +72,7 @@ final class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        joinMeetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomIDKey) ?? Constants.defaultRoomID
+        joinMeetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomIDKey)
     }
 
     override func willTransition(to newCollection: UITraitCollection,

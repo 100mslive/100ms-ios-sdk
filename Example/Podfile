@@ -4,7 +4,7 @@ platform :ios, '13.0'
 
 target 'HMSSDKExample' do
   use_frameworks!
-  pod 'HMSSDK'
+  pod 'HMSSDK', '0.6.3'
   pod 'Eureka'
   pod 'SwiftyGif'
 

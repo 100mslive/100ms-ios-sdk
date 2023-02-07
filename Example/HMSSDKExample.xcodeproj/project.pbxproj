@@ -3,99 +3,98 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		236AA3B902B452B3640355C3 /* Pods_HMSSDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */; };
-		482D58BCF9E0507A779AD512 /* Pods_HMSScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */; };
-		48358B1E5A02F3A46DB55268 /* Pods_HMSSDKExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		871697A1284FD370001777BB /* PiPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871697A0284FD370001777BB /* PiPController.swift */; };
-		87606EB328112CFD002BAB14 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87606EB228112CFD002BAB14 /* ReplayKit.framework */; };
-		87606EB628112CFD002BAB14 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87606EB528112CFD002BAB14 /* SampleHandler.swift */; };
-		87606EBD28112CFE002BAB14 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87606EB228112CFD002BAB14 /* ReplayKit.framework */; };
-		87606EBF28112CFE002BAB14 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87606EBE28112CFE002BAB14 /* UIKit.framework */; };
-		87606EC228112CFE002BAB14 /* BroadcastSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87606EC128112CFE002BAB14 /* BroadcastSetupViewController.swift */; };
-		87606EC628112CFE002BAB14 /* HMSScreenShareSetupUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 87606EBC28112CFE002BAB14 /* HMSScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		87606ECA28112CFE002BAB14 /* HMSScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 87606EB128112CFD002BAB14 /* HMSScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		876FDE77287C6E28006D4DCB /* PiPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876FDE76287C6E28006D4DCB /* PiPView.swift */; };
-		877455D72872C32F007B11FB /* MusicControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877455D62872C32F007B11FB /* MusicControlView.swift */; };
-		877455D92872D4C9007B11FB /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877455D82872D4C9007B11FB /* VolumeView.swift */; };
-		879165FF280B036A006FB04A /* GrayscaleVideoPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */; };
-		9109732727636DF800B76729 /* HLSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109732627636DF800B76729 /* HLSSettingsViewController.swift */; };
-		9120573E2747C35C00E6CC8E /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9120573D2747C35C00E6CC8E /* PeerMetadata.swift */; };
-		9172A7B227E8949C0054AEFA /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */; };
-		917D6EEC26EF466800B5C7DE /* ChangeAllRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917D6EEB26EF466800B5C7DE /* ChangeAllRoleViewController.swift */; };
-		91A44EB7292F7D400032AE75 /* HLSStatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */; };
-		91A44EB8292F7D400032AE75 /* HLSStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB6292F7D400032AE75 /* HLSStatsView.swift */; };
-		91A44EBA292F7D910032AE75 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */; };
-		91AD889726F9E66B00EE3035 /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */; };
-		91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */; };
-		91B791F92949EAA800534E00 /* HLSStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B791F82949EAA800534E00 /* HLSStreamViewController.swift */; };
-		91C13CDB26F23F5A00036555 /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */; };
-		91D4894927B6527300F79445 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */; };
-		91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E7E144268C70F2001D988E /* PreviewViewController.swift */; };
-		91F9FB4027D0EA7800B407A0 /* RoomStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F9FB3F27D0EA7800B407A0 /* RoomStateViewController.swift */; };
-		EC0ABF3726E630140007BBBE /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = EC0ABF3626E630140007BBBE /* 100ms.gif */; };
-		EC8CEE71261E297F002DC12E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE40261E297F002DC12E /* Settings.storyboard */; };
-		EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE42261E297F002DC12E /* SettingsViewController.swift */; };
-		EC8CEE76261E297F002DC12E /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE48261E297F002DC12E /* Login.storyboard */; };
-		EC8CEE77261E297F002DC12E /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE4A261E297F002DC12E /* Meeting.storyboard */; };
-		EC8CEE78261E297F002DC12E /* HMSSDKInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE4D261E297F002DC12E /* HMSSDKInteractor.swift */; };
-		EC8CEE7A261E297F002DC12E /* PeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE51261E297F002DC12E /* PeersListViewController.swift */; };
-		EC8CEE7B261E297F002DC12E /* PeersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE52261E297F002DC12E /* PeersListTableViewCell.swift */; };
-		EC8CEE7C261E297F002DC12E /* PeersList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE53261E297F002DC12E /* PeersList.storyboard */; };
-		EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE56261E297F002DC12E /* ChatViewController.swift */; };
-		EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */; };
-		EC8CEE80261E297F002DC12E /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE5A261E297F002DC12E /* Chat.storyboard */; };
-		EC8CEE82261E297F002DC12E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */; };
-		EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE5F261E297F002DC12E /* RoomService.swift */; };
-		EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */; };
-		EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */; };
-		EC8CEE87261E297F002DC12E /* TokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE63261E297F002DC12E /* TokenEndpoint.swift */; };
-		EC8CEE88261E297F002DC12E /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */; };
-		EC8CEE8A261E297F002DC12E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE67261E297F002DC12E /* Utilities.swift */; };
-		EC8CEE8B261E297F002DC12E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE68261E297F002DC12E /* LaunchScreen.storyboard */; };
-		EC8CEE8C261E297F002DC12E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC8CEE6A261E297F002DC12E /* Images.xcassets */; };
-		EC8CEE8D261E297F002DC12E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE6B261E297F002DC12E /* AppDelegate.swift */; };
-		EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8CEE6F261E297F002DC12E /* LoginViewController.swift */; };
-		ECF3ECE826BB0E7B00CC86C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF3ECE726BB0E7B00CC86C6 /* Constants.swift */; };
+		00A387ADACCB096A23E0DA92 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2895437663D375598A96BF3 /* Chat.storyboard */; };
+		05AE770EB43F5D18410CB255 /* Pods_HMSSDKExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B6E80F3E1E41CB3C0F539B /* Pods_HMSSDKExampleTests.framework */; };
+		0D0B1DB21E90B8751520F093 /* PeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FF2F5F5FF73A2ECB4F521 /* PeersListViewController.swift */; };
+		18EB23970E7005E469CB9332 /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FB818469CFE1CF58F4D74C /* NetworkQualityView.swift */; };
+		19AA22554F7943D8E74741B6 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48E89F81EAB06B409884A /* ChatViewController.swift */; };
+		1CE4C43BB4EA7DDC680037FC /* BroadcastSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DF9944CCEAD707A2E708C /* BroadcastSetupViewController.swift */; };
+		257821C2CA3AB544D217CE4B /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB429F987514E9391A9A606 /* RTMPSettingsViewController.swift */; };
+		2D96C14D75916844779B533C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C55D217A5281D74CF0D8733 /* Images.xcassets */; };
+		2F262C7F99681F13B1AA7CE6 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7E1847EFE703460DD0302 /* Tests.swift */; };
+		3ECA49F20BA2E1D64AC74DB6 /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2495B8B93F454B952C45BF13 /* Meeting.storyboard */; };
+		412B1E3F26E3FB0CB8D6976A /* PeersList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF53578E1A99241026D0B5B /* PeersList.storyboard */; };
+		45DBE95C6D70E6EFBFFFF442 /* PiPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FA85C2C037868F7C4A3375 /* PiPView.swift */; };
+		463653C5C5439A2874218B7A /* HMSSDKInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C5DD8303D0F805B3838970 /* HMSSDKInteractor.swift */; };
+		4E4796E88134EA09BCED4556 /* TokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A3E3F6F07CA4EADC033FB /* TokenEndpoint.swift */; };
+		51C10E23B65D21AC2223CD7B /* HLSStatsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14758AB98C8E9AFC61C28016 /* HLSStatsModel.swift */; };
+		52C2668F8B337660F9C6B4D5 /* HMSScreenShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 68362B1438D2D0FBB17CAB2E /* HMSScreenShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		532EC6C6063350C5AD4F545D /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7971D687E57192C259F2CC3 /* SampleHandler.swift */; };
+		5846D1BDFBF1B28833DAFC07 /* Pods_HMSScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DC5C3B1D93F92ED86D67E70 /* Pods_HMSScreenShare.framework */; };
+		5B274F17D6399DD36AC13F73 /* PreviewPeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9471B8DED5A9DDEF47EFB2DA /* PreviewPeersListViewController.swift */; };
+		601487372D3041DDDB5C24E2 /* HLSStreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318F2B9147A54123040112A3 /* HLSStreamViewController.swift */; };
+		63CF21BB5A352D1928F7E709 /* MusicControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AC5FCBB332FE761AA66DF6 /* MusicControlView.swift */; };
+		69436FDEEAFE808E422000D3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1DDC479FF90B33482780B48 /* Login.storyboard */; };
+		719171EC2BC2494A2F59391A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F311ABA4605FE1F8FAE81DF /* PreviewViewController.swift */; };
+		71A85ED88606A15D9D0FDA30 /* PreJoinPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C684ACD48EE1935CDA9CB9E6 /* PreJoinPreviewViewController.swift */; };
+		71EB3E3EDC82AA8204FB1C88 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC78D931E551F95529846171 /* VolumeView.swift */; };
+		74CA0E78100B4424C5F7783B /* GrayscaleVideoPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD50AC179EFF9B1D9F2DBF4 /* GrayscaleVideoPlugin.swift */; };
+		7CF7051C99B75F2ADDD69D9A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B67C05B64874439BEBA039 /* Utilities.swift */; };
+		7D18F34DE8B8055D69849D15 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38D99F9FDDBC3C62ED966FC5 /* Settings.storyboard */; };
+		8829D8AC2B5341DDF967C816 /* HLSStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264DF62FE37D026AA32F6A5 /* HLSStatsView.swift */; };
+		8A82FD9C271BDDF778F4720D /* ChangeAllRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DCD61FF6645A19ACA8BFCC /* ChangeAllRoleViewController.swift */; };
+		8E31E6AF52E77AAA8F51B2F3 /* RoomStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9F6329BC4FF18B33167D3 /* RoomStateViewController.swift */; };
+		8E5787D8A72F4744A8BA10E7 /* Pods_HMSSDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06A87C00C93DDFD488FAB60 /* Pods_HMSSDKExample.framework */; };
+		92EC1B7EF75B1E0DDF6C1B1D /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86D7C783AA51C039047367E /* ReplayKit.framework */; };
+		94677D290C7D919C38B4F938 /* RoomService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF75728D83A676FDB104008 /* RoomService.swift */; };
+		951F4CA0EE947298F01A5C01 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86D7C783AA51C039047367E /* ReplayKit.framework */; };
+		9AECAD8B558E70BE2640C8DB /* HMSScreenShareSetupUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9878D375AFFA11426FF922D5 /* HMSScreenShareSetupUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9B018DA428482158080F289B /* HLSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844F36711AF26C8A7050438C /* HLSSettingsViewController.swift */; };
+		A5599682E45BE5C120B231E5 /* PeersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E495C1E7339B5C767E1C3 /* PeersListTableViewCell.swift */; };
+		A774163AF439A8E2914D45FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B8154D8407A9141EE4E46 /* LaunchScreen.storyboard */; };
+		AFB263213151D7C79AA6A62A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30044D6587648034D38270D /* LoginViewController.swift */; };
+		B12004B282B02844BD287F6A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C01F696AC9DBDEFBF7F45 /* ChatTableViewCell.swift */; };
+		B12D65205E7A03E5AAC14138 /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36580BA45140D5EFF239FBFD /* PeerMetadata.swift */; };
+		B7BD3FD68510A1BE31207989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438E8CB4B2FCCD81A3E3AD5 /* AppDelegate.swift */; };
+		BB1B1A7AA6256FD71A442B09 /* ImagePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A110E367BBA705B4747A9A /* ImagePreviewView.swift */; };
+		BB30784E475EE2DD62E4DA80 /* MeetingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDA8DB0EF73410436CD5ED2 /* MeetingViewModel.swift */; };
+		BDAC920D0C308AB7E5E189A6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39370BD742B1814FC99AD307 /* Constants.swift */; };
+		C52B0ABD176FB911059F2FED /* RolePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3BEFBBBA8DA793EE450D1 /* RolePreviewViewController.swift */; };
+		C6EBA3D77538F76D749B6E04 /* PiPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296FDED0F994AC38C7CB73B8 /* PiPController.swift */; };
+		D805806EC593168F0C445EFF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F73498C01E61258326110 /* SettingsViewController.swift */; };
+		E3349CFEC4C4C8AFAD91949C /* 100ms.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7CAB1DF8205222B505502F72 /* 100ms.gif */; };
+		E47F5A584542C4DE9F8FAE3F /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A705E0C88AD22596918644 /* MeetingViewController.swift */; };
+		EEBE69FFFDEF72D7ED570E6A /* FirebaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B498A9276B63C433E7CD712 /* FirebaseInteractor.swift */; };
+		FF18AB5EB7F972F3178CA05C /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873A8FA53E6F174ACC7390D6 /* VideoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
+		64856EE542A9E9C303DD924D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			containerPortal = FF6075173E51A3FF9EF4AEE5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = HMSVideo;
+			remoteGlobalIDString = 857F4A6E3942AA7F98C6FC06;
+			remoteInfo = HMSSDKExample;
 		};
-		87606EC428112CFE002BAB14 /* PBXContainerItemProxy */ = {
+		8C868289313FD6881F74859B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			containerPortal = FF6075173E51A3FF9EF4AEE5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 87606EBB28112CFE002BAB14;
+			remoteGlobalIDString = 22AAAAB4C63EA5623DA60ACC;
 			remoteInfo = HMSScreenShareSetupUI;
 		};
-		87606EC828112CFE002BAB14 /* PBXContainerItemProxy */ = {
+		ACD8DF957816C5AE9AAB8D26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			containerPortal = FF6075173E51A3FF9EF4AEE5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 87606EB028112CFD002BAB14;
+			remoteGlobalIDString = E7497A3E379BF9A65D7D9E32;
 			remoteInfo = HMSScreenShare;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		87606ECC28112CFE002BAB14 /* Embed App Extensions */ = {
+		BB5C006D13AE609E91D7310A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				87606EC628112CFE002BAB14 /* HMSScreenShareSetupUI.appex in Embed App Extensions */,
-				87606ECA28112CFE002BAB14 /* HMSScreenShare.appex in Embed App Extensions */,
+				52C2668F8B337660F9C6B4D5 /* HMSScreenShare.appex in Embed App Extensions */,
+				9AECAD8B558E70BE2640C8DB /* HMSScreenShareSetupUI.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,414 +102,369 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
-		403EDD5C1A60E43B44429F56 /* Pods-HMSScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
-		607FACD01AFB9204008FA782 /* HMSSDKExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMSSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACE51AFB9204008FA782 /* HMSSDKExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HMSSDKExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
-		7A486008B0556A38F062C80F /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		870B33762824FCEE003D34F3 /* HMSScreenShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSScreenShare-Bridging-Header.h"; sourceTree = "<group>"; };
-		870B337A2824FEA5003D34F3 /* HMSSDKExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSSDKExample-Bridging-Header.h"; sourceTree = "<group>"; };
-		871697A0284FD370001777BB /* PiPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPController.swift; sourceTree = "<group>"; };
-		87606EB128112CFD002BAB14 /* HMSScreenShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HMSScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		87606EB228112CFD002BAB14 /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
-		87606EB528112CFD002BAB14 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
-		87606EB728112CFD002BAB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87606EBC28112CFE002BAB14 /* HMSScreenShareSetupUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HMSScreenShareSetupUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		87606EBE28112CFE002BAB14 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		87606EC128112CFE002BAB14 /* BroadcastSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastSetupViewController.swift; sourceTree = "<group>"; };
-		87606EC328112CFE002BAB14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87606EC728112CFE002BAB14 /* HMSScreenShareSetupUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShareSetupUI.entitlements; sourceTree = "<group>"; };
-		87606ECB28112CFE002BAB14 /* HMSScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShare.entitlements; sourceTree = "<group>"; };
-		876FDE76287C6E28006D4DCB /* PiPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPView.swift; sourceTree = "<group>"; };
-		877455D62872C32F007B11FB /* MusicControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicControlView.swift; sourceTree = "<group>"; };
-		877455D82872D4C9007B11FB /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
-		879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayscaleVideoPlugin.swift; sourceTree = "<group>"; };
-		9109732627636DF800B76729 /* HLSSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSSettingsViewController.swift; sourceTree = "<group>"; };
-		9120573D2747C35C00E6CC8E /* PeerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerMetadata.swift; sourceTree = "<group>"; };
-		9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
-		917D6EEB26EF466800B5C7DE /* ChangeAllRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAllRoleViewController.swift; sourceTree = "<group>"; };
-		91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSStatsModel.swift; sourceTree = "<group>"; };
-		91A44EB6292F7D400032AE75 /* HLSStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSStatsView.swift; sourceTree = "<group>"; };
-		91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
-		91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
-		91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
-		91B791F82949EAA800534E00 /* HLSStreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HLSStreamViewController.swift; path = HLS/HLSStreamViewController.swift; sourceTree = "<group>"; };
-		91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
-		91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
-		91D82365281FD1E1000145E8 /* HMSScreenShareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShareRelease.entitlements; sourceTree = "<group>"; };
-		91E7E144268C70F2001D988E /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		91F9FB3F27D0EA7800B407A0 /* RoomStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStateViewController.swift; sourceTree = "<group>"; };
-		A0E9FC12BF9A6AFE40BFB76E /* Pods-HMSScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.release.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.release.xcconfig"; sourceTree = "<group>"; };
-		AC949E204FD39E1BA17CC0D7 /* Pods-HMSSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC0ABF3626E630140007BBBE /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
-		EC7807E7261E2B1C0021903D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		EC8CEE41261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
-		EC8CEE42261E297F002DC12E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		EC8CEE49261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
-		EC8CEE4B261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meeting.storyboard; sourceTree = "<group>"; };
-		EC8CEE4D261E297F002DC12E /* HMSSDKInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMSSDKInteractor.swift; sourceTree = "<group>"; };
-		EC8CEE51261E297F002DC12E /* PeersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeersListViewController.swift; sourceTree = "<group>"; };
-		EC8CEE52261E297F002DC12E /* PeersListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeersListTableViewCell.swift; sourceTree = "<group>"; };
-		EC8CEE54261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PeersList.storyboard; sourceTree = "<group>"; };
-		EC8CEE56261E297F002DC12E /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		EC8CEE5B261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
-		EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
-		EC8CEE5F261E297F002DC12E /* RoomService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
-		EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
-		EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
-		EC8CEE63261E297F002DC12E /* TokenEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenEndpoint.swift; sourceTree = "<group>"; };
-		EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseInteractor.swift; sourceTree = "<group>"; };
-		EC8CEE67261E297F002DC12E /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		EC8CEE69261E297F002DC12E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		EC8CEE6A261E297F002DC12E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		EC8CEE6B261E297F002DC12E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC8CEE6C261E297F002DC12E /* HMSSDKExample.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = HMSSDKExample.entitlements; sourceTree = "<group>"; };
-		EC8CEE6D261E297F002DC12E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EC8CEE6F261E297F002DC12E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		EC8CEE94261E29EE002DC12E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
-		EC8CEE97261E29FC002DC12E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
-		ECD4C308261E2B9F00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PeersList.strings; sourceTree = "<group>"; };
-		ECD4C309261E2BAE00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
-		ECD4C30C261E2BCE00C62563 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
-		ECF3ECE726BB0E7B00CC86C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		069F73498C01E61258326110 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		075FC4EA47BA9C3584C0CB25 /* HMSScreenShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSScreenShare-Bridging-Header.h"; sourceTree = "<group>"; };
+		0852EF6502C84C1C8AF0B079 /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
+		11D9F6329BC4FF18B33167D3 /* RoomStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStateViewController.swift; sourceTree = "<group>"; };
+		14758AB98C8E9AFC61C28016 /* HLSStatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSStatsModel.swift; sourceTree = "<group>"; };
+		1D42061C985CBCC1E0756625 /* HMSScreenShareRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShareRelease.entitlements; sourceTree = "<group>"; };
+		1F311ABA4605FE1F8FAE81DF /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		22FEB13F1D44F9D6D34449B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Meeting.strings; sourceTree = "<group>"; };
+		2764D42259AE2CA3CC0B3532 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meeting.storyboard; sourceTree = "<group>"; };
+		296FDED0F994AC38C7CB73B8 /* PiPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPController.swift; sourceTree = "<group>"; };
+		318F2B9147A54123040112A3 /* HLSStreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSStreamViewController.swift; sourceTree = "<group>"; };
+		36580BA45140D5EFF239FBFD /* PeerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerMetadata.swift; sourceTree = "<group>"; };
+		37B67C05B64874439BEBA039 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		39370BD742B1814FC99AD307 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3B498A9276B63C433E7CD712 /* FirebaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseInteractor.swift; sourceTree = "<group>"; };
+		4264DF62FE37D026AA32F6A5 /* HLSStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSStatsView.swift; sourceTree = "<group>"; };
+		45F48E89F81EAB06B409884A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		50DCD61FF6645A19ACA8BFCC /* ChangeAllRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAllRoleViewController.swift; sourceTree = "<group>"; };
+		54B6E80F3E1E41CB3C0F539B /* Pods_HMSSDKExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		570A3E3F6F07CA4EADC033FB /* TokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenEndpoint.swift; sourceTree = "<group>"; };
+		5BB7E1847EFE703460DD0302 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		5DEE66AA5E315C02F0B64CA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		666ECFED105EB311F5B51F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		68362B1438D2D0FBB17CAB2E /* HMSScreenShare.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HMSScreenShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BB429F987514E9391A9A606 /* RTMPSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTMPSettingsViewController.swift; sourceTree = "<group>"; };
+		7096554F532BA7E9F9D46F35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PeersList.strings; sourceTree = "<group>"; };
+		73D3BE80BEB8EB0BB860F1FD /* HMSSDKExample.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HMSSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78E3BEFBBBA8DA793EE450D1 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
+		79A705E0C88AD22596918644 /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
+		7C55D217A5281D74CF0D8733 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7CAB1DF8205222B505502F72 /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
+		7D2DC1AF3A52B03FC99259BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		80AC8C642C5B2CF3C0D6F226 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		8365F6D5F5C64702E621E3B5 /* HMSScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShare.entitlements; sourceTree = "<group>"; };
+		839C01F696AC9DBDEFBF7F45 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		83D08B0A91C3679D8617E15E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		842CD9C33956C36D5AA0B2C7 /* Pods-HMSScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
+		844F36711AF26C8A7050438C /* HLSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSSettingsViewController.swift; sourceTree = "<group>"; };
+		873A8FA53E6F174ACC7390D6 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		8932EAE451B3B2019EBC7110 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
+		8BB09EA688E71470FC5C795B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PeersList.storyboard; sourceTree = "<group>"; };
+		930E495C1E7339B5C767E1C3 /* PeersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersListTableViewCell.swift; sourceTree = "<group>"; };
+		9471B8DED5A9DDEF47EFB2DA /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
+		953F3E54B734295797B523DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9878D375AFFA11426FF922D5 /* HMSScreenShareSetupUI.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = HMSScreenShareSetupUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AD50AC179EFF9B1D9F2DBF4 /* GrayscaleVideoPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayscaleVideoPlugin.swift; sourceTree = "<group>"; };
+		9DC5C3B1D93F92ED86D67E70 /* Pods_HMSScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2FB818469CFE1CF58F4D74C /* NetworkQualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
+		A828399BE66D9DF332EC3F57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		AAF75728D83A676FDB104008 /* RoomService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomService.swift; sourceTree = "<group>"; };
+		B2A110E367BBA705B4747A9A /* ImagePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
+		B3A664C02BE7AB2B547F0345 /* HMSSDKExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSSDKExample.entitlements; sourceTree = "<group>"; };
+		BC317085127BF7E58315BB78 /* Pods-HMSSDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		BDD405C1AD1E580207ED88F9 /* Pods-HMSScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.release.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.release.xcconfig"; sourceTree = "<group>"; };
+		BF90789ABEE7255CAC318407 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
+		C06A87C00C93DDFD488FAB60 /* Pods_HMSSDKExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C684ACD48EE1935CDA9CB9E6 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
+		C8A492D298DBF9692B1CFE28 /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
+		C8C5DD8303D0F805B3838970 /* HMSSDKInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMSSDKInteractor.swift; sourceTree = "<group>"; };
+		D18522F7CF3061F331DA25BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D3C18AF17D4606CE82630865 /* Pods-HMSSDKExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExampleTests/Pods-HMSSDKExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D438E8CB4B2FCCD81A3E3AD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D74BA381B76C751C3584475F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D86D7C783AA51C039047367E /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
+		D9FA85C2C037868F7C4A3375 /* PiPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPView.swift; sourceTree = "<group>"; };
+		DC78D931E551F95529846171 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
+		E2FB0F4A138DF7DE7825A4EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Chat.storyboard; sourceTree = "<group>"; };
+		E7971D687E57192C259F2CC3 /* SampleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleHandler.swift; sourceTree = "<group>"; };
+		EC5DF9944CCEAD707A2E708C /* BroadcastSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastSetupViewController.swift; sourceTree = "<group>"; };
+		EEDA8DB0EF73410436CD5ED2 /* MeetingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewModel.swift; sourceTree = "<group>"; };
+		F1AC5FCBB332FE761AA66DF6 /* MusicControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicControlView.swift; sourceTree = "<group>"; };
+		F30044D6587648034D38270D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F6BCBBF996FAD66E0F365F15 /* HMSScreenShareSetupUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShareSetupUI.entitlements; sourceTree = "<group>"; };
+		F7EBE0425FB34EE832FE0FEC /* HMSSDKExampleTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HMSSDKExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85FF2F5F5FF73A2ECB4F521 /* PeersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersListViewController.swift; sourceTree = "<group>"; };
+		F88304C5A8FA0FDE4BC37220 /* HMSSDKExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSSDKExample-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		607FACCD1AFB9204008FA782 /* Frameworks */ = {
+		71A0083BE264C6B7E432FC51 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				236AA3B902B452B3640355C3 /* Pods_HMSSDKExample.framework in Frameworks */,
+				8E5787D8A72F4744A8BA10E7 /* Pods_HMSSDKExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
+		7C05F0E026AC5542CB811D99 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48358B1E5A02F3A46DB55268 /* Pods_HMSSDKExampleTests.framework in Frameworks */,
+				92EC1B7EF75B1E0DDF6C1B1D /* ReplayKit.framework in Frameworks */,
+				5846D1BDFBF1B28833DAFC07 /* Pods_HMSScreenShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87606EAE28112CFD002BAB14 /* Frameworks */ = {
+		8FE08F8B31242B1F52371A4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606EB328112CFD002BAB14 /* ReplayKit.framework in Frameworks */,
-				482D58BCF9E0507A779AD512 /* Pods_HMSScreenShare.framework in Frameworks */,
+				951F4CA0EE947298F01A5C01 /* ReplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87606EB928112CFE002BAB14 /* Frameworks */ = {
+		F52B23B56C2FA5297F901780 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606EBD28112CFE002BAB14 /* ReplayKit.framework in Frameworks */,
-				87606EBF28112CFE002BAB14 /* UIKit.framework in Frameworks */,
+				05AE770EB43F5D18410CB255 /* Pods_HMSSDKExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1041C860E962BA7C1E0CA76C /* Frameworks */ = {
+		04B636A8F527D724395CEA56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				87606EB228112CFD002BAB14 /* ReplayKit.framework */,
-				87606EBE28112CFE002BAB14 /* UIKit.framework */,
-				EB1CDD9A0A56C10A047897DD /* Pods_HMSSDKExample.framework */,
-				B0C39307FAD6A04BED18C931 /* Pods_HMSSDKExampleTests.framework */,
-				2341E7DF93F09D9A3597997E /* Pods_HMSScreenShare.framework */,
+				D86D7C783AA51C039047367E /* ReplayKit.framework */,
+				C06A87C00C93DDFD488FAB60 /* Pods_HMSSDKExample.framework */,
+				54B6E80F3E1E41CB3C0F539B /* Pods_HMSSDKExampleTests.framework */,
+				9DC5C3B1D93F92ED86D67E70 /* Pods_HMSScreenShare.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		607FACC71AFB9204008FA782 = {
+		075E2213BBE36A2D177FBE72 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
-				EC8CEE3C261E297F002DC12E /* HMSSDKExample */,
-				607FACE81AFB9204008FA782 /* Tests */,
-				87606EB428112CFD002BAB14 /* HMSScreenShare */,
-				87606EC028112CFE002BAB14 /* HMSScreenShareSetupUI */,
-				607FACD11AFB9204008FA782 /* Products */,
-				E7ED908DAB0C4CF7C5F6BE6F /* Pods */,
-				1041C860E962BA7C1E0CA76C /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		607FACD11AFB9204008FA782 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				607FACD01AFB9204008FA782 /* HMSSDKExample.app */,
-				607FACE51AFB9204008FA782 /* HMSSDKExampleTests.xctest */,
-				87606EB128112CFD002BAB14 /* HMSScreenShare.appex */,
-				87606EBC28112CFE002BAB14 /* HMSScreenShareSetupUI.appex */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		607FACE81AFB9204008FA782 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		87606EB428112CFD002BAB14 /* HMSScreenShare */ = {
-			isa = PBXGroup;
-			children = (
-				91D82365281FD1E1000145E8 /* HMSScreenShareRelease.entitlements */,
-				87606ECB28112CFE002BAB14 /* HMSScreenShare.entitlements */,
-				87606EB528112CFD002BAB14 /* SampleHandler.swift */,
-				87606EB728112CFD002BAB14 /* Info.plist */,
-				870B33762824FCEE003D34F3 /* HMSScreenShare-Bridging-Header.h */,
-			);
-			path = HMSScreenShare;
-			sourceTree = "<group>";
-		};
-		87606EC028112CFE002BAB14 /* HMSScreenShareSetupUI */ = {
-			isa = PBXGroup;
-			children = (
-				87606EC728112CFE002BAB14 /* HMSScreenShareSetupUI.entitlements */,
-				87606EC128112CFE002BAB14 /* BroadcastSetupViewController.swift */,
-				87606EC328112CFE002BAB14 /* Info.plist */,
-			);
-			path = HMSScreenShareSetupUI;
-			sourceTree = "<group>";
-		};
-		876E010F287D7331004B302E /* PiP */ = {
-			isa = PBXGroup;
-			children = (
-				876FDE76287C6E28006D4DCB /* PiPView.swift */,
-				871697A0284FD370001777BB /* PiPController.swift */,
-			);
-			path = PiP;
-			sourceTree = "<group>";
-		};
-		87FF5A9A288000F400B731FD /* Music Controls */ = {
-			isa = PBXGroup;
-			children = (
-				877455D62872C32F007B11FB /* MusicControlView.swift */,
-				877455D82872D4C9007B11FB /* VolumeView.swift */,
-			);
-			path = "Music Controls";
-			sourceTree = "<group>";
-		};
-		917D6EEA26EF464D00B5C7DE /* Menus */ = {
-			isa = PBXGroup;
-			children = (
-				917D6EEB26EF466800B5C7DE /* ChangeAllRoleViewController.swift */,
-				91C13CDA26F23F5A00036555 /* RTMPSettingsViewController.swift */,
-				9109732627636DF800B76729 /* HLSSettingsViewController.swift */,
-				91F9FB3F27D0EA7800B407A0 /* RoomStateViewController.swift */,
+				50DCD61FF6645A19ACA8BFCC /* ChangeAllRoleViewController.swift */,
+				844F36711AF26C8A7050438C /* HLSSettingsViewController.swift */,
+				11D9F6329BC4FF18B33167D3 /* RoomStateViewController.swift */,
+				6BB429F987514E9391A9A606 /* RTMPSettingsViewController.swift */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
 		};
-		91A44EB4292F7D400032AE75 /* Stats */ = {
+		1300A36D52FB39055E381557 /* HMSScreenShare */ = {
 			isa = PBXGroup;
 			children = (
-				91A44EB5292F7D400032AE75 /* HLSStatsModel.swift */,
-				91A44EB6292F7D400032AE75 /* HLSStatsView.swift */,
+				075FC4EA47BA9C3584C0CB25 /* HMSScreenShare-Bridging-Header.h */,
+				8365F6D5F5C64702E621E3B5 /* HMSScreenShare.entitlements */,
+				1D42061C985CBCC1E0756625 /* HMSScreenShareRelease.entitlements */,
+				5DEE66AA5E315C02F0B64CA4 /* Info.plist */,
+				E7971D687E57192C259F2CC3 /* SampleHandler.swift */,
 			);
-			name = Stats;
-			path = HLS/Stats;
+			path = HMSScreenShare;
 			sourceTree = "<group>";
 		};
-		E7ED908DAB0C4CF7C5F6BE6F /* Pods */ = {
+		1F80658BDEC943A9F29D9F55 /* Meeting */ = {
 			isa = PBXGroup;
 			children = (
-				3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */,
-				734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */,
-				AC949E204FD39E1BA17CC0D7 /* Pods-HMSSDKExampleTests.debug.xcconfig */,
-				7A486008B0556A38F062C80F /* Pods-HMSSDKExampleTests.release.xcconfig */,
-				403EDD5C1A60E43B44429F56 /* Pods-HMSScreenShare.debug.xcconfig */,
-				A0E9FC12BF9A6AFE40BFB76E /* Pods-HMSScreenShare.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		EC8CEE3C261E297F002DC12E /* HMSSDKExample */ = {
-			isa = PBXGroup;
-			children = (
-				EC8CEE6E261E297F002DC12E /* Login */,
-				EC8CEE4C261E297F002DC12E /* Meeting */,
-				EC8CEE3D261E297F002DC12E /* Settings */,
-				EC8CEE62261E297F002DC12E /* SupportingFiles */,
-			);
-			path = HMSSDKExample;
-			sourceTree = "<group>";
-		};
-		EC8CEE3D261E297F002DC12E /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				EC8CEE42261E297F002DC12E /* SettingsViewController.swift */,
-				EC8CEE40261E297F002DC12E /* Settings.storyboard */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		EC8CEE4C261E297F002DC12E /* Meeting */ = {
-			isa = PBXGroup;
-			children = (
-				91A44EB4292F7D400032AE75 /* Stats */,
-				917D6EEA26EF464D00B5C7DE /* Menus */,
-				EC8CEE5D261E297F002DC12E /* MeetingViewController.swift */,
-				91B791F82949EAA800534E00 /* HLSStreamViewController.swift */,
-				87FF5A9A288000F400B731FD /* Music Controls */,
-				91AD889626F9E66B00EE3035 /* RolePreviewViewController.swift */,
-				EC8CEE61261E297F002DC12E /* MeetingViewModel.swift */,
-				EC8CEE4D261E297F002DC12E /* HMSSDKInteractor.swift */,
-				879165FE280B036A006FB04A /* GrayscaleVideoPlugin.swift */,
-				EC8CEE5F261E297F002DC12E /* RoomService.swift */,
-				EC8CEE60261E297F002DC12E /* VideoCollectionViewCell.swift */,
-				876E010F287D7331004B302E /* PiP */,
-				9172A7B127E8949C0054AEFA /* NetworkQualityView.swift */,
-				91A44EB9292F7D910032AE75 /* ImagePreviewView.swift */,
-				9120573D2747C35C00E6CC8E /* PeerMetadata.swift */,
-				EC8CEE4A261E297F002DC12E /* Meeting.storyboard */,
-				EC8CEE55261E297F002DC12E /* Chat */,
-				EC8CEE4E261E297F002DC12E /* Peers List */,
-				870B337A2824FEA5003D34F3 /* HMSSDKExample-Bridging-Header.h */,
+				9AD50AC179EFF9B1D9F2DBF4 /* GrayscaleVideoPlugin.swift */,
+				F88304C5A8FA0FDE4BC37220 /* HMSSDKExample-Bridging-Header.h */,
+				C8C5DD8303D0F805B3838970 /* HMSSDKInteractor.swift */,
+				B2A110E367BBA705B4747A9A /* ImagePreviewView.swift */,
+				2495B8B93F454B952C45BF13 /* Meeting.storyboard */,
+				79A705E0C88AD22596918644 /* MeetingViewController.swift */,
+				EEDA8DB0EF73410436CD5ED2 /* MeetingViewModel.swift */,
+				A2FB818469CFE1CF58F4D74C /* NetworkQualityView.swift */,
+				36580BA45140D5EFF239FBFD /* PeerMetadata.swift */,
+				78E3BEFBBBA8DA793EE450D1 /* RolePreviewViewController.swift */,
+				AAF75728D83A676FDB104008 /* RoomService.swift */,
+				873A8FA53E6F174ACC7390D6 /* VideoCollectionViewCell.swift */,
+				C6A9009DB92112E511D73AB0 /* Chat */,
+				A62BE02081DD3C26443A6E68 /* HLS */,
+				075E2213BBE36A2D177FBE72 /* Menus */,
+				F49FCC6C42B46A627A8CA7A3 /* Music Controls */,
+				98280DB49088894680F925B0 /* Peers List */,
+				CEE0074BED28F05309148CBF /* PiP */,
 			);
 			path = Meeting;
 			sourceTree = "<group>";
 		};
-		EC8CEE4E261E297F002DC12E /* Peers List */ = {
+		470C8CC42E37E5924EF7A404 = {
 			isa = PBXGroup;
 			children = (
-				EC8CEE51261E297F002DC12E /* PeersListViewController.swift */,
-				91D4894827B6527200F79445 /* PreviewPeersListViewController.swift */,
-				EC8CEE52261E297F002DC12E /* PeersListTableViewCell.swift */,
-				EC8CEE53261E297F002DC12E /* PeersList.storyboard */,
+				1300A36D52FB39055E381557 /* HMSScreenShare */,
+				DC8901C85A0AA75655669B00 /* HMSScreenShareSetupUI */,
+				8C56EB81A3D94A56DE07829F /* HMSSDKExample */,
+				9FEE45121F0DC81D18D39F17 /* Tests */,
+				04B636A8F527D724395CEA56 /* Frameworks */,
+				92574F9EBE52FFB9B7440823 /* Products */,
+				BBD63BAF6D77273D46D0B976 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		5FBE9BB590C491029B9CF0E1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F1DDC479FF90B33482780B48 /* Login.storyboard */,
+				F30044D6587648034D38270D /* LoginViewController.swift */,
+				C684ACD48EE1935CDA9CB9E6 /* PreJoinPreviewViewController.swift */,
+				1F311ABA4605FE1F8FAE81DF /* PreviewViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7DC1B0BBC56CC4CACF2571E9 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				14758AB98C8E9AFC61C28016 /* HLSStatsModel.swift */,
+				4264DF62FE37D026AA32F6A5 /* HLSStatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		8C56EB81A3D94A56DE07829F /* HMSSDKExample */ = {
+			isa = PBXGroup;
+			children = (
+				5FBE9BB590C491029B9CF0E1 /* Login */,
+				1F80658BDEC943A9F29D9F55 /* Meeting */,
+				EED9BA3E66510154A3496D96 /* Settings */,
+				E1CCD1DB7FFCA54D77F29DE6 /* SupportingFiles */,
+			);
+			path = HMSSDKExample;
+			sourceTree = "<group>";
+		};
+		92574F9EBE52FFB9B7440823 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68362B1438D2D0FBB17CAB2E /* HMSScreenShare.appex */,
+				9878D375AFFA11426FF922D5 /* HMSScreenShareSetupUI.appex */,
+				73D3BE80BEB8EB0BB860F1FD /* HMSSDKExample.app */,
+				F7EBE0425FB34EE832FE0FEC /* HMSSDKExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		98280DB49088894680F925B0 /* Peers List */ = {
+			isa = PBXGroup;
+			children = (
+				EDF53578E1A99241026D0B5B /* PeersList.storyboard */,
+				930E495C1E7339B5C767E1C3 /* PeersListTableViewCell.swift */,
+				F85FF2F5F5FF73A2ECB4F521 /* PeersListViewController.swift */,
+				9471B8DED5A9DDEF47EFB2DA /* PreviewPeersListViewController.swift */,
 			);
 			path = "Peers List";
 			sourceTree = "<group>";
 		};
-		EC8CEE55261E297F002DC12E /* Chat */ = {
+		9FEE45121F0DC81D18D39F17 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				EC8CEE56261E297F002DC12E /* ChatViewController.swift */,
-				EC8CEE59261E297F002DC12E /* ChatTableViewCell.swift */,
-				EC8CEE5A261E297F002DC12E /* Chat.storyboard */,
+				D18522F7CF3061F331DA25BA /* Info.plist */,
+				5BB7E1847EFE703460DD0302 /* Tests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A62BE02081DD3C26443A6E68 /* HLS */ = {
+			isa = PBXGroup;
+			children = (
+				318F2B9147A54123040112A3 /* HLSStreamViewController.swift */,
+				7DC1B0BBC56CC4CACF2571E9 /* Stats */,
+			);
+			path = HLS;
+			sourceTree = "<group>";
+		};
+		BBD63BAF6D77273D46D0B976 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0852EF6502C84C1C8AF0B079 /* Pods-HMSSDKExample.debug.xcconfig */,
+				C8A492D298DBF9692B1CFE28 /* Pods-HMSSDKExample.release.xcconfig */,
+				D3C18AF17D4606CE82630865 /* Pods-HMSSDKExampleTests.debug.xcconfig */,
+				BC317085127BF7E58315BB78 /* Pods-HMSSDKExampleTests.release.xcconfig */,
+				842CD9C33956C36D5AA0B2C7 /* Pods-HMSScreenShare.debug.xcconfig */,
+				BDD405C1AD1E580207ED88F9 /* Pods-HMSScreenShare.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C6A9009DB92112E511D73AB0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				B2895437663D375598A96BF3 /* Chat.storyboard */,
+				839C01F696AC9DBDEFBF7F45 /* ChatTableViewCell.swift */,
+				45F48E89F81EAB06B409884A /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		EC8CEE62261E297F002DC12E /* SupportingFiles */ = {
+		CEE0074BED28F05309148CBF /* PiP */ = {
 			isa = PBXGroup;
 			children = (
-				EC8CEE6B261E297F002DC12E /* AppDelegate.swift */,
-				ECF3ECE726BB0E7B00CC86C6 /* Constants.swift */,
-				EC8CEE64261E297F002DC12E /* FirebaseInteractor.swift */,
-				EC8CEE63261E297F002DC12E /* TokenEndpoint.swift */,
-				EC8CEE67261E297F002DC12E /* Utilities.swift */,
-				EC8CEE6A261E297F002DC12E /* Images.xcassets */,
-				EC8CEE6C261E297F002DC12E /* HMSSDKExample.entitlements */,
-				EC8CEE6D261E297F002DC12E /* Info.plist */,
-				EC0ABF3626E630140007BBBE /* 100ms.gif */,
-				EC8CEE68261E297F002DC12E /* LaunchScreen.storyboard */,
+				296FDED0F994AC38C7CB73B8 /* PiPController.swift */,
+				D9FA85C2C037868F7C4A3375 /* PiPView.swift */,
+			);
+			path = PiP;
+			sourceTree = "<group>";
+		};
+		DC8901C85A0AA75655669B00 /* HMSScreenShareSetupUI */ = {
+			isa = PBXGroup;
+			children = (
+				EC5DF9944CCEAD707A2E708C /* BroadcastSetupViewController.swift */,
+				F6BCBBF996FAD66E0F365F15 /* HMSScreenShareSetupUI.entitlements */,
+				7D2DC1AF3A52B03FC99259BD /* Info.plist */,
+			);
+			path = HMSScreenShareSetupUI;
+			sourceTree = "<group>";
+		};
+		E1CCD1DB7FFCA54D77F29DE6 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7CAB1DF8205222B505502F72 /* 100ms.gif */,
+				D438E8CB4B2FCCD81A3E3AD5 /* AppDelegate.swift */,
+				39370BD742B1814FC99AD307 /* Constants.swift */,
+				3B498A9276B63C433E7CD712 /* FirebaseInteractor.swift */,
+				B3A664C02BE7AB2B547F0345 /* HMSSDKExample.entitlements */,
+				7C55D217A5281D74CF0D8733 /* Images.xcassets */,
+				953F3E54B734295797B523DC /* Info.plist */,
+				BC1B8154D8407A9141EE4E46 /* LaunchScreen.storyboard */,
+				570A3E3F6F07CA4EADC033FB /* TokenEndpoint.swift */,
+				37B67C05B64874439BEBA039 /* Utilities.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		EC8CEE6E261E297F002DC12E /* Login */ = {
+		EED9BA3E66510154A3496D96 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				EC8CEE6F261E297F002DC12E /* LoginViewController.swift */,
-				91E7E144268C70F2001D988E /* PreviewViewController.swift */,
-				91AD889826F9E6F400EE3035 /* PreJoinPreviewViewController.swift */,
-				EC8CEE48261E297F002DC12E /* Login.storyboard */,
+				38D99F9FDDBC3C62ED966FC5 /* Settings.storyboard */,
+				069F73498C01E61258326110 /* SettingsViewController.swift */,
 			);
-			path = Login;
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F49FCC6C42B46A627A8CA7A3 /* Music Controls */ = {
+			isa = PBXGroup;
+			children = (
+				F1AC5FCBB332FE761AA66DF6 /* MusicControlView.swift */,
+				DC78D931E551F95529846171 /* VolumeView.swift */,
+			);
+			path = "Music Controls";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		607FACCF1AFB9204008FA782 /* HMSSDKExample */ = {
+		13B6001ED42A260666748A89 /* HMSSDKExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HMSSDKExample" */;
+			buildConfigurationList = EE8380592D78EAB1246CBFDD /* Build configuration list for PBXNativeTarget "HMSSDKExampleTests" */;
 			buildPhases = (
-				8DB70A62722B5F658EC064DE /* [CP] Check Pods Manifest.lock */,
-				607FACCC1AFB9204008FA782 /* Sources */,
-				607FACCD1AFB9204008FA782 /* Frameworks */,
-				607FACCE1AFB9204008FA782 /* Resources */,
-				08F232F8F6679FBB1673E333 /* [CP] Embed Pods Frameworks */,
-				87606ECC28112CFE002BAB14 /* Embed App Extensions */,
+				CAE9C9AC961289D128D33EA2 /* [CP] Check Pods Manifest.lock */,
+				1BDFB3A26CBE332B9ABCD5CC /* Sources */,
+				F52B23B56C2FA5297F901780 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				87606EC528112CFE002BAB14 /* PBXTargetDependency */,
-				87606EC928112CFE002BAB14 /* PBXTargetDependency */,
-			);
-			name = HMSSDKExample;
-			productName = HMSVideo;
-			productReference = 607FACD01AFB9204008FA782 /* HMSSDKExample.app */;
-			productType = "com.apple.product-type.application";
-		};
-		607FACE41AFB9204008FA782 /* HMSSDKExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HMSSDKExampleTests" */;
-			buildPhases = (
-				E05647FC92873BBF7B1B525D /* [CP] Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+				9C0C042E3565DF2EE3373DA4 /* PBXTargetDependency */,
 			);
 			name = HMSSDKExampleTests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* HMSSDKExampleTests.xctest */;
+			productName = HMSSDKExampleTests;
+			productReference = F7EBE0425FB34EE832FE0FEC /* HMSSDKExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		87606EB028112CFD002BAB14 /* HMSScreenShare */ = {
+		22AAAAB4C63EA5623DA60ACC /* HMSScreenShareSetupUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87606ED228112CFE002BAB14 /* Build configuration list for PBXNativeTarget "HMSScreenShare" */;
+			buildConfigurationList = 5509D6539B5409E64BE21353 /* Build configuration list for PBXNativeTarget "HMSScreenShareSetupUI" */;
 			buildPhases = (
-				7790EC82F403AE146DB03D53 /* [CP] Check Pods Manifest.lock */,
-				87606EAD28112CFD002BAB14 /* Sources */,
-				87606EAE28112CFD002BAB14 /* Frameworks */,
-				87606EAF28112CFD002BAB14 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HMSScreenShare;
-			productName = HMSScreenShare;
-			productReference = 87606EB128112CFD002BAB14 /* HMSScreenShare.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		87606EBB28112CFE002BAB14 /* HMSScreenShareSetupUI */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 87606ED128112CFE002BAB14 /* Build configuration list for PBXNativeTarget "HMSScreenShareSetupUI" */;
-			buildPhases = (
-				87606EB828112CFE002BAB14 /* Sources */,
-				87606EB928112CFE002BAB14 /* Frameworks */,
-				87606EBA28112CFE002BAB14 /* Resources */,
+				DD7F110B2F8394902FC29320 /* Sources */,
+				8FE08F8B31242B1F52371A4A /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -518,131 +472,128 @@
 			);
 			name = HMSScreenShareSetupUI;
 			productName = HMSScreenShareSetupUI;
-			productReference = 87606EBC28112CFE002BAB14 /* HMSScreenShareSetupUI.appex */;
+			productReference = 9878D375AFFA11426FF922D5 /* HMSScreenShareSetupUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		857F4A6E3942AA7F98C6FC06 /* HMSSDKExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50E5BCF9AC71D999A04D6C82 /* Build configuration list for PBXNativeTarget "HMSSDKExample" */;
+			buildPhases = (
+				E99A5F433D113073D210CE38 /* [CP] Check Pods Manifest.lock */,
+				E718EE2B864DF36B9EC96F17 /* Sources */,
+				494D8C70E3A113C51CEB1739 /* Resources */,
+				BB5C006D13AE609E91D7310A /* Embed App Extensions */,
+				71A0083BE264C6B7E432FC51 /* Frameworks */,
+				1781F61D9720E8A9A7A67512 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E855B589737C3D012243D505 /* PBXTargetDependency */,
+				C7D6311A50DFC0222700A7B1 /* PBXTargetDependency */,
+			);
+			name = HMSSDKExample;
+			productName = HMSSDKExample;
+			productReference = 73D3BE80BEB8EB0BB860F1FD /* HMSSDKExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7497A3E379BF9A65D7D9E32 /* HMSScreenShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD5AF66CF5C0A042F211BCD3 /* Build configuration list for PBXNativeTarget "HMSScreenShare" */;
+			buildPhases = (
+				71072AA25F9A33B0F21C93CE /* [CP] Check Pods Manifest.lock */,
+				AB611BE5E6C1A7BF4C7C1541 /* Sources */,
+				7C05F0E026AC5542CB811D99 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HMSScreenShare;
+			productName = HMSScreenShare;
+			productReference = 68362B1438D2D0FBB17CAB2E /* HMSScreenShare.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		607FACC81AFB9204008FA782 /* Project object */ = {
+		FF6075173E51A3FF9EF4AEE5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = 100ms;
+				LastUpgradeCheck = 1200;
 				TargetAttributes = {
-					607FACCF1AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
+					22AAAAB4C63EA5623DA60ACC = {
 						DevelopmentTeam = 5N85PP82A9;
-						LastSwiftMigration = 1330;
 						ProvisioningStyle = Manual;
 					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 1160;
-						TestTargetID = 607FACCF1AFB9204008FA782;
-					};
-					87606EB028112CFD002BAB14 = {
-						CreatedOnToolsVersion = 13.3;
+					857F4A6E3942AA7F98C6FC06 = {
 						DevelopmentTeam = 5N85PP82A9;
-						LastSwiftMigration = 1330;
 						ProvisioningStyle = Manual;
 					};
-					87606EBB28112CFE002BAB14 = {
-						CreatedOnToolsVersion = 13.3;
+					E7497A3E379BF9A65D7D9E32 = {
 						DevelopmentTeam = 5N85PP82A9;
 						ProvisioningStyle = Manual;
 					};
 				};
 			};
-			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "HMSSDKExample" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 2ECBBFA07BCCACB478DC287A /* Build configuration list for PBXProject "HMSSDKExample" */;
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = 607FACC71AFB9204008FA782;
-			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
+			mainGroup = 470C8CC42E37E5924EF7A404;
+			productRefGroup = 92574F9EBE52FFB9B7440823 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				607FACCF1AFB9204008FA782 /* HMSSDKExample */,
-				607FACE41AFB9204008FA782 /* HMSSDKExampleTests */,
-				87606EB028112CFD002BAB14 /* HMSScreenShare */,
-				87606EBB28112CFE002BAB14 /* HMSScreenShareSetupUI */,
+				857F4A6E3942AA7F98C6FC06 /* HMSSDKExample */,
+				13B6001ED42A260666748A89 /* HMSSDKExampleTests */,
+				E7497A3E379BF9A65D7D9E32 /* HMSScreenShare */,
+				22AAAAB4C63EA5623DA60ACC /* HMSScreenShareSetupUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		607FACCE1AFB9204008FA782 /* Resources */ = {
+		494D8C70E3A113C51CEB1739 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC8CEE80261E297F002DC12E /* Chat.storyboard in Resources */,
-				EC8CEE76261E297F002DC12E /* Login.storyboard in Resources */,
-				EC8CEE7C261E297F002DC12E /* PeersList.storyboard in Resources */,
-				EC0ABF3726E630140007BBBE /* 100ms.gif in Resources */,
-				EC8CEE77261E297F002DC12E /* Meeting.storyboard in Resources */,
-				EC8CEE8B261E297F002DC12E /* LaunchScreen.storyboard in Resources */,
-				EC8CEE8C261E297F002DC12E /* Images.xcassets in Resources */,
-				EC8CEE71261E297F002DC12E /* Settings.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87606EAF28112CFD002BAB14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87606EBA28112CFE002BAB14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E3349CFEC4C4C8AFAD91949C /* 100ms.gif in Resources */,
+				00A387ADACCB096A23E0DA92 /* Chat.storyboard in Resources */,
+				2D96C14D75916844779B533C /* Images.xcassets in Resources */,
+				A774163AF439A8E2914D45FF /* LaunchScreen.storyboard in Resources */,
+				69436FDEEAFE808E422000D3 /* Login.storyboard in Resources */,
+				3ECA49F20BA2E1D64AC74DB6 /* Meeting.storyboard in Resources */,
+				412B1E3F26E3FB0CB8D6976A /* PeersList.storyboard in Resources */,
+				7D18F34DE8B8055D69849D15 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08F232F8F6679FBB1673E333 /* [CP] Embed Pods Frameworks */ = {
+		1781F61D9720E8A9A7A67512 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSSDK/HMSSDK.framework/HMSSDK",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSWebRTC/WebRTC.framework/WebRTC",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/HMSBroadcastExtensionSDK/HMSBroadcastExtensionSDK.framework/HMSBroadcastExtensionSDK",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HMSBroadcastExtensionSDK.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7790EC82F403AE146DB03D53 /* [CP] Check Pods Manifest.lock */ = {
+		71072AA25F9A33B0F21C93CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -664,29 +615,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8DB70A62722B5F658EC064DE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E05647FC92873BBF7B1B525D /* [CP] Check Pods Manifest.lock */ = {
+		CAE9C9AC961289D128D33EA2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -708,444 +637,223 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E99A5F433D113073D210CE38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		607FACCC1AFB9204008FA782 /* Sources */ = {
+		1BDFB3A26CBE332B9ABCD5CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC8CEE85261E297F002DC12E /* VideoCollectionViewCell.swift in Sources */,
-				91AD889726F9E66B00EE3035 /* RolePreviewViewController.swift in Sources */,
-				91B791F92949EAA800534E00 /* HLSStreamViewController.swift in Sources */,
-				ECF3ECE826BB0E7B00CC86C6 /* Constants.swift in Sources */,
-				91F9FB4027D0EA7800B407A0 /* RoomStateViewController.swift in Sources */,
-				EC8CEE88261E297F002DC12E /* FirebaseInteractor.swift in Sources */,
-				EC8CEE72261E297F002DC12E /* SettingsViewController.swift in Sources */,
-				917D6EEC26EF466800B5C7DE /* ChangeAllRoleViewController.swift in Sources */,
-				9120573E2747C35C00E6CC8E /* PeerMetadata.swift in Sources */,
-				91E7E145268C70F2001D988E /* PreviewViewController.swift in Sources */,
-				EC8CEE8A261E297F002DC12E /* Utilities.swift in Sources */,
-				9109732727636DF800B76729 /* HLSSettingsViewController.swift in Sources */,
-				91C13CDB26F23F5A00036555 /* RTMPSettingsViewController.swift in Sources */,
-				EC8CEE86261E297F002DC12E /* MeetingViewModel.swift in Sources */,
-				91AD889926F9E6F400EE3035 /* PreJoinPreviewViewController.swift in Sources */,
-				EC8CEE78261E297F002DC12E /* HMSSDKInteractor.swift in Sources */,
-				91A44EB8292F7D400032AE75 /* HLSStatsView.swift in Sources */,
-				877455D72872C32F007B11FB /* MusicControlView.swift in Sources */,
-				877455D92872D4C9007B11FB /* VolumeView.swift in Sources */,
-				EC8CEE8D261E297F002DC12E /* AppDelegate.swift in Sources */,
-				EC8CEE84261E297F002DC12E /* RoomService.swift in Sources */,
-				91A44EBA292F7D910032AE75 /* ImagePreviewView.swift in Sources */,
-				871697A1284FD370001777BB /* PiPController.swift in Sources */,
-				9172A7B227E8949C0054AEFA /* NetworkQualityView.swift in Sources */,
-				91D4894927B6527300F79445 /* PreviewPeersListViewController.swift in Sources */,
-				EC8CEE87261E297F002DC12E /* TokenEndpoint.swift in Sources */,
-				EC8CEE7A261E297F002DC12E /* PeersListViewController.swift in Sources */,
-				EC8CEE7F261E297F002DC12E /* ChatTableViewCell.swift in Sources */,
-				876FDE77287C6E28006D4DCB /* PiPView.swift in Sources */,
-				91A44EB7292F7D400032AE75 /* HLSStatsModel.swift in Sources */,
-				EC8CEE8F261E297F002DC12E /* LoginViewController.swift in Sources */,
-				EC8CEE7D261E297F002DC12E /* ChatViewController.swift in Sources */,
-				EC8CEE82261E297F002DC12E /* MeetingViewController.swift in Sources */,
-				879165FF280B036A006FB04A /* GrayscaleVideoPlugin.swift in Sources */,
-				EC8CEE7B261E297F002DC12E /* PeersListTableViewCell.swift in Sources */,
+				2F262C7F99681F13B1AA7CE6 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
+		AB611BE5E6C1A7BF4C7C1541 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				532EC6C6063350C5AD4F545D /* SampleHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87606EAD28112CFD002BAB14 /* Sources */ = {
+		DD7F110B2F8394902FC29320 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606EB628112CFD002BAB14 /* SampleHandler.swift in Sources */,
+				1CE4C43BB4EA7DDC680037FC /* BroadcastSetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87606EB828112CFE002BAB14 /* Sources */ = {
+		E718EE2B864DF36B9EC96F17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87606EC228112CFE002BAB14 /* BroadcastSetupViewController.swift in Sources */,
+				B7BD3FD68510A1BE31207989 /* AppDelegate.swift in Sources */,
+				8A82FD9C271BDDF778F4720D /* ChangeAllRoleViewController.swift in Sources */,
+				B12004B282B02844BD287F6A /* ChatTableViewCell.swift in Sources */,
+				19AA22554F7943D8E74741B6 /* ChatViewController.swift in Sources */,
+				BDAC920D0C308AB7E5E189A6 /* Constants.swift in Sources */,
+				EEBE69FFFDEF72D7ED570E6A /* FirebaseInteractor.swift in Sources */,
+				74CA0E78100B4424C5F7783B /* GrayscaleVideoPlugin.swift in Sources */,
+				9B018DA428482158080F289B /* HLSSettingsViewController.swift in Sources */,
+				51C10E23B65D21AC2223CD7B /* HLSStatsModel.swift in Sources */,
+				8829D8AC2B5341DDF967C816 /* HLSStatsView.swift in Sources */,
+				601487372D3041DDDB5C24E2 /* HLSStreamViewController.swift in Sources */,
+				463653C5C5439A2874218B7A /* HMSSDKInteractor.swift in Sources */,
+				BB1B1A7AA6256FD71A442B09 /* ImagePreviewView.swift in Sources */,
+				AFB263213151D7C79AA6A62A /* LoginViewController.swift in Sources */,
+				E47F5A584542C4DE9F8FAE3F /* MeetingViewController.swift in Sources */,
+				BB30784E475EE2DD62E4DA80 /* MeetingViewModel.swift in Sources */,
+				63CF21BB5A352D1928F7E709 /* MusicControlView.swift in Sources */,
+				18EB23970E7005E469CB9332 /* NetworkQualityView.swift in Sources */,
+				B12D65205E7A03E5AAC14138 /* PeerMetadata.swift in Sources */,
+				A5599682E45BE5C120B231E5 /* PeersListTableViewCell.swift in Sources */,
+				0D0B1DB21E90B8751520F093 /* PeersListViewController.swift in Sources */,
+				C6EBA3D77538F76D749B6E04 /* PiPController.swift in Sources */,
+				45DBE95C6D70E6EFBFFFF442 /* PiPView.swift in Sources */,
+				71A85ED88606A15D9D0FDA30 /* PreJoinPreviewViewController.swift in Sources */,
+				5B274F17D6399DD36AC13F73 /* PreviewPeersListViewController.swift in Sources */,
+				719171EC2BC2494A2F59391A /* PreviewViewController.swift in Sources */,
+				257821C2CA3AB544D217CE4B /* RTMPSettingsViewController.swift in Sources */,
+				C52B0ABD176FB911059F2FED /* RolePreviewViewController.swift in Sources */,
+				94677D290C7D919C38B4F938 /* RoomService.swift in Sources */,
+				8E31E6AF52E77AAA8F51B2F3 /* RoomStateViewController.swift in Sources */,
+				D805806EC593168F0C445EFF /* SettingsViewController.swift in Sources */,
+				4E4796E88134EA09BCED4556 /* TokenEndpoint.swift in Sources */,
+				7CF7051C99B75F2ADDD69D9A /* Utilities.swift in Sources */,
+				FF18AB5EB7F972F3178CA05C /* VideoCollectionViewCell.swift in Sources */,
+				71EB3E3EDC82AA8204FB1C88 /* VolumeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
+		9C0C042E3565DF2EE3373DA4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* HMSSDKExample */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+			target = 857F4A6E3942AA7F98C6FC06 /* HMSSDKExample */;
+			targetProxy = 64856EE542A9E9C303DD924D /* PBXContainerItemProxy */;
 		};
-		87606EC528112CFE002BAB14 /* PBXTargetDependency */ = {
+		C7D6311A50DFC0222700A7B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 87606EBB28112CFE002BAB14 /* HMSScreenShareSetupUI */;
-			targetProxy = 87606EC428112CFE002BAB14 /* PBXContainerItemProxy */;
+			target = 22AAAAB4C63EA5623DA60ACC /* HMSScreenShareSetupUI */;
+			targetProxy = 8C868289313FD6881F74859B /* PBXContainerItemProxy */;
 		};
-		87606EC928112CFE002BAB14 /* PBXTargetDependency */ = {
+		E855B589737C3D012243D505 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 87606EB028112CFD002BAB14 /* HMSScreenShare */;
-			targetProxy = 87606EC828112CFE002BAB14 /* PBXContainerItemProxy */;
+			target = E7497A3E379BF9A65D7D9E32 /* HMSScreenShare */;
+			targetProxy = ACD8DF957816C5AE9AAB8D26 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EC8CEE40261E297F002DC12E /* Settings.storyboard */ = {
+		2495B8B93F454B952C45BF13 /* Meeting.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC8CEE41261E297F002DC12E /* Base */,
-				ECD4C30C261E2BCE00C62563 /* en */,
-			);
-			name = Settings.storyboard;
-			sourceTree = "<group>";
-		};
-		EC8CEE48261E297F002DC12E /* Login.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC8CEE49261E297F002DC12E /* Base */,
-				EC8CEE97261E29FC002DC12E /* en */,
-			);
-			name = Login.storyboard;
-			sourceTree = "<group>";
-		};
-		EC8CEE4A261E297F002DC12E /* Meeting.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC8CEE4B261E297F002DC12E /* Base */,
-				EC8CEE94261E29EE002DC12E /* en */,
+				2764D42259AE2CA3CC0B3532 /* Base */,
+				22FEB13F1D44F9D6D34449B7 /* en */,
 			);
 			name = Meeting.storyboard;
 			sourceTree = "<group>";
 		};
-		EC8CEE53261E297F002DC12E /* PeersList.storyboard */ = {
+		38D99F9FDDBC3C62ED966FC5 /* Settings.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC8CEE54261E297F002DC12E /* Base */,
-				ECD4C308261E2B9F00C62563 /* en */,
+				83D08B0A91C3679D8617E15E /* Base */,
+				80AC8C642C5B2CF3C0D6F226 /* en */,
 			);
-			name = PeersList.storyboard;
+			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
-		EC8CEE5A261E297F002DC12E /* Chat.storyboard */ = {
+		B2895437663D375598A96BF3 /* Chat.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC8CEE5B261E297F002DC12E /* Base */,
-				ECD4C309261E2BAE00C62563 /* en */,
+				E2FB0F4A138DF7DE7825A4EC /* Base */,
+				BF90789ABEE7255CAC318407 /* en */,
 			);
 			name = Chat.storyboard;
 			sourceTree = "<group>";
 		};
-		EC8CEE68261E297F002DC12E /* LaunchScreen.storyboard */ = {
+		BC1B8154D8407A9141EE4E46 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EC8CEE69261E297F002DC12E /* Base */,
-				EC7807E7261E2B1C0021903D /* en */,
+				666ECFED105EB311F5B51F88 /* Base */,
+				D74BA381B76C751C3584475F /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EDF53578E1A99241026D0B5B /* PeersList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8BB09EA688E71470FC5C795B /* Base */,
+				7096554F532BA7E9F9D46F35 /* en */,
+			);
+			name = PeersList.storyboard;
+			sourceTree = "<group>";
+		};
+		F1DDC479FF90B33482780B48 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A828399BE66D9DF332EC3F57 /* Base */,
+				8932EAE451B3B2019EBC7110 /* en */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		607FACED1AFB9204008FA782 /* Debug */ = {
+		06409710FE76BABA9DD1DC7F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 300;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 305;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
+				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		607FACEE1AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 300;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_BITCODE = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		607FACF01AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3991E0947B12A0F9E84E1ADB /* Pods-HMSSDKExample.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 305;
-				DEVELOPMENT_TEAM = 5N85PP82A9;
-				ENABLE_BITCODE = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
-				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.72;
-				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "HMSSDKExample/Meeting/HMSSDKExample-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		607FACF11AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 734B1D7A6C1764B998A1C53C /* Pods-HMSSDKExample.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 305;
-				DEVELOPMENT_TEAM = 5N85PP82A9;
-				ENABLE_BITCODE = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
-				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1.72;
-				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "HMSSDKExample/Meeting/HMSSDKExample-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC949E204FD39E1BA17CC0D7 /* Pods-HMSSDKExampleTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CURRENT_PROJECT_VERSION = 300;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSSDKExample.app/HMSSDKExample";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		607FACF41AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A486008B0556A38F062C80F /* Pods-HMSSDKExampleTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CURRENT_PROJECT_VERSION = 300;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSSDKExample.app/HMSSDKExample";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		87606ECD28112CFE002BAB14 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 403EDD5C1A60E43B44429F56 /* Pods-HMSScreenShare.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = HMSScreenShare/HMSScreenShare.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 305;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5N85PP82A9;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HMSScreenShare/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShare;
+				INFOPLIST_FILE = HMSScreenShareSetupUI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShareSetupUI;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.1.72;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare;
+				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare.setup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare.setup";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "HMSScreenShare/HMSScreenShare-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Release;
 		};
-		87606ECE28112CFE002BAB14 /* Release */ = {
+		1660497375F4B9D0E23A9DBD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0E9FC12BF9A6AFE40BFB76E /* Pods-HMSScreenShare.release.xcconfig */;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		3A19B00B8FB512D3A6F2931E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC317085127BF7E58315BB78 /* Pods-HMSSDKExampleTests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSSDKExample.app/HMSSDKExample";
+			};
+			name = Release;
+		};
+		66917588E8CA557C465B6556 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDD405C1AD1E580207ED88F9 /* Pods-HMSScreenShare.release.xcconfig */;
+			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HMSScreenShare/HMSScreenShareRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1153,152 +861,194 @@
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HMSScreenShare/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShare;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.1.72;
-				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "HMSScreenShare/HMSScreenShare-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		87606ECF28112CFE002BAB14 /* Debug */ = {
+		72FB4D48FB66190D7924E386 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8A492D298DBF9692B1CFE28 /* Pods-HMSSDKExample.release.xcconfig */;
 			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 305;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 5N85PP82A9;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HMSScreenShareSetupUI/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShareSetupUI;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.1.72;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare.setup;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare.setup";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		87606ED028112CFE002BAB14 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 305;
 				DEVELOPMENT_TEAM = 5N85PP82A9;
 				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HMSScreenShareSetupUI/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShareSetupUI;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
+				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.1.72;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare.setup;
+				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare.setup";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
-				SKIP_INSTALL = YES;
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
+		81C3032F613CEB15C57B094A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 842CD9C33956C36D5AA0B2C7 /* Pods-HMSScreenShare.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HMSScreenShare/HMSScreenShareRelease.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 305;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HMSScreenShare/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShare;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.1.72;
+				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "HMSScreenShare/HMSScreenShare-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		832411D19918B12AD465AED8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0852EF6502C84C1C8AF0B079 /* Pods-HMSSDKExample.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 305;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = HMSSDKExample/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.1.72;
+				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9DA100F98B73AE249B668C1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AFC4013F43308F684EFE83E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HMSScreenShareSetupUI/HMSScreenShareSetupUI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 305;
+				DEVELOPMENT_TEAM = 5N85PP82A9;
+				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HMSScreenShareSetupUI/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HMSScreenShareSetupUI;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 100ms. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.1.72;
+				PRODUCT_BUNDLE_IDENTIFIER = live.100ms.videoapp.screenshare.setup;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development live.100ms.videoapp.screenshare.setup";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1C64ECAF128774A365A4443 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3C18AF17D4606CE82630865 /* Pods-HMSSDKExampleTests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Tests/Info.plist;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HMSSDKExample.app/HMSSDKExample";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "HMSSDKExample" */ = {
+		2ECBBFA07BCCACB478DC287A /* Build configuration list for PBXProject "HMSSDKExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACED1AFB9204008FA782 /* Debug */,
-				607FACEE1AFB9204008FA782 /* Release */,
+				9DA100F98B73AE249B668C1C /* Debug */,
+				1660497375F4B9D0E23A9DBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HMSSDKExample" */ = {
+		50E5BCF9AC71D999A04D6C82 /* Build configuration list for PBXNativeTarget "HMSSDKExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACF01AFB9204008FA782 /* Debug */,
-				607FACF11AFB9204008FA782 /* Release */,
+				832411D19918B12AD465AED8 /* Debug */,
+				72FB4D48FB66190D7924E386 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HMSSDKExampleTests" */ = {
+		5509D6539B5409E64BE21353 /* Build configuration list for PBXNativeTarget "HMSScreenShareSetupUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
+				AFC4013F43308F684EFE83E1 /* Debug */,
+				06409710FE76BABA9DD1DC7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		87606ED128112CFE002BAB14 /* Build configuration list for PBXNativeTarget "HMSScreenShareSetupUI" */ = {
+		EE8380592D78EAB1246CBFDD /* Build configuration list for PBXNativeTarget "HMSSDKExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87606ECF28112CFE002BAB14 /* Debug */,
-				87606ED028112CFE002BAB14 /* Release */,
+				B1C64ECAF128774A365A4443 /* Debug */,
+				3A19B00B8FB512D3A6F2931E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		87606ED228112CFE002BAB14 /* Build configuration list for PBXNativeTarget "HMSScreenShare" */ = {
+		FD5AF66CF5C0A042F211BCD3 /* Build configuration list for PBXNativeTarget "HMSScreenShare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87606ECD28112CFE002BAB14 /* Debug */,
-				87606ECE28112CFE002BAB14 /* Release */,
+				81C3032F613CEB15C57B094A /* Debug */,
+				66917588E8CA557C465B6556 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
+	rootObject = FF6075173E51A3FF9EF4AEE5 /* Project object */;
 }
