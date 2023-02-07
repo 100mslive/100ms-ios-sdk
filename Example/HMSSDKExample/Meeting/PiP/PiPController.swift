@@ -37,6 +37,10 @@ class PiPController: NSObject {
         
         guard #available(iOS 15.0, *) else { return }
         
+        if UserDefaults.standard.object(forKey: Constants.disablePiP) as? Bool ?? false {
+            return
+        }
+        
         guard AVPictureInPictureController.isPictureInPictureSupported() else { return }
         
         self.targetView = targetView
