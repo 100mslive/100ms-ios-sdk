@@ -50,11 +50,11 @@ public struct HMSSampleBufferSwiftUIView: UIViewRepresentable {
         
         let sampleBufferView = HMSSampleBufferDisplayView(frame: .zero)
         sampleBufferView.track = track
+        sampleBufferView.videoContentMode = contentMode
         
         if let preferredSize = preferredSize {
             sampleBufferView.preferredSize = preferredSize
         }
-        sampleBufferView.contentMode = contentMode
         sampleBufferView.isEnabled = true
         
         return sampleBufferView
