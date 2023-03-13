@@ -117,6 +117,7 @@ struct Constants {
     static let defaultAudioSource = "defaultAudioSource"
     
     static let disablePiP = "disablePiP"
+    static let enableOrientationLock = "enableOrientationLock"
 }
 
 enum ViewModes: String {

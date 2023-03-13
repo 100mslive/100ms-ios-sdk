@@ -73,6 +73,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
                 videoSettingsBuilder.cameraFocusMode = .focusModeTapToAutoFocus
                 videoSettingsBuilder.cameraFacing = UserDefaults.standard.useBackCamera ? .back : .front
                 
+                if UserDefaults.standard.bool(forKey: Constants.enableOrientationLock) {
+                    videoSettingsBuilder.cameraOrientationLock = .landscape
+                }
+                
                 audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
                 audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
             }
