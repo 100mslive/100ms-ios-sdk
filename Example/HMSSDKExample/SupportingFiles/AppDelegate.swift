@@ -14,7 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UserDefaults.standard.set(false, forKey: Constants.enableOrientationLock)
         return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        if UserDefaults.standard.bool(forKey: Constants.enableOrientationLock) {
+            return .landscape
+        }
+        else {
+            return .all
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
