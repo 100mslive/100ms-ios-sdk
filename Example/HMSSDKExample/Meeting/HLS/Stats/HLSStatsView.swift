@@ -24,6 +24,7 @@ struct HLSStatsView: View {
             Text("VideoSize: \(model.videoSize.width.digitsRemovedFromEnd()) X \(model.videoSize.height.digitsRemovedFromEnd())")
             Text("WatchDuration: \(model.watchDuration.digitsRemovedFromEnd()) ms")
         }
+        .minimumScaleFactor(0.1)
         .foregroundColor(alternateAppearance ? .white : .blue)
         .padding()
         .background(alternateAppearance ? Color.blue : Color.clear)

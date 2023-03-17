@@ -100,8 +100,6 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         handleError()
         observeBroadcast()
 
-        setupHLSController()
-
         interactor.onRoleChange = { [weak self] request in
             self?.handle(roleChange: request)
         }
@@ -164,7 +162,6 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
     func updateHLSState() {
         guard interactor?.hmsSDK?.localPeer?.role?.name.hasPrefix("hls-") ?? false else {
             hlsContainer.isHidden = true
-            hlsController?.streamURL = nil
             hlsController?.stop()
             collectionView.isHidden = false
             if playingExternally {
@@ -178,8 +175,17 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         hlsContainer.isHidden = false
         interactor.hmsSDK?.prepareForExternalAudioPlayback()
         playingExternally = true
-        hlsController?.streamURL = interactor?.hmsSDK?.room?.hlsStreamingState.variants.first?.url
-        hlsController?.play()
+        if let streamUrl = interactor?.hmsSDK?.room?.hlsStreamingState.variants.first?.url {
+            
+            if hlsController == nil {
+                setupHLSController()
+            }
+            
+            hlsController?.play(url: streamUrl)
+        }
+        else {
+            hlsController?.stop()
+        }
     }
 
     private func observeBroadcast() {
