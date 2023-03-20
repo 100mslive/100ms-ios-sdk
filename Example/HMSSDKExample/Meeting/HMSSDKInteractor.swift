@@ -8,6 +8,7 @@
 
 import Foundation
 import HMSSDK
+import HMSAnalyticsSDK
 
 final class HMSSDKInteractor: HMSUpdateListener {
 
