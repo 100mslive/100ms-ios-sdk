@@ -144,16 +144,28 @@ final class HMSSDKInteractor: HMSUpdateListener {
             return
         }
         
-        RoomService.fetchToken(for: user, room) { [weak self] token in
-            guard let token = token, let self = self else {
-                print(#function, "Error fetching token")
-                completion(nil)
-                return
+        if room.filter({$0 == "-"}).count == 2 {
+            
+        
+            HMSSDK.getAuthTokenByRoomCode(room, userID: user) { [weak self] token, error in
+                guard let token = token, let self = self else {
+                    print(#function, "Error fetching token")
+                    completion(nil)
+                    NotificationCenter.default.post(name: Constants.gotError,
+                                                    object: nil,
+                                                    userInfo: ["error": "Error fetching token"])
+                    return
+                }
+
+                self.config = HMSConfig(userName: self.user, authToken: token, captureNetworkQualityInPreview: true)
+
+                completion(self.config)
             }
-
-            self.config = HMSConfig(userName: self.user, authToken: token, captureNetworkQualityInPreview: true)
-
-            completion(self.config)
+        }
+        else {
+            NotificationCenter.default.post(name: Constants.gotError,
+                                            object: nil,
+                                            userInfo: ["error": "Not a room code, pls enter a valid room code."])
         }
     }
     
