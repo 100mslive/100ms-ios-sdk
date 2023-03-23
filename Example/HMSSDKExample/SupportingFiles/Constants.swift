@@ -12,10 +12,6 @@ import Foundation
 struct Constants {
 
     // MARK: Room Setup
-    
-    static let tokenQuery = "api/token"
-
-    static let getTokenURL = TokenEndpoint.tokenEndpoint + tokenQuery
 
     static let tokenKey = "token"
 
