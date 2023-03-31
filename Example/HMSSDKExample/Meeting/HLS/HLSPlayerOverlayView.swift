@@ -25,65 +25,72 @@ struct HLSPlayerOverlayView: View {
             
             HStack {
                 
+                
+                
                 if let state = model.state {
-                    switch state {
-                    case .playing:
-                        Text("Playing")
-                    case .stopped:
-                        Text("Stopped")
-                    case .paused:
-                        Text("Paused")
-                    case .buffering:
-                        Text("Buffering")
-                    case .failed:
-                        Text("Failed")
-                    case .unknown:
-                        Text("Unknown")
-                    @unknown default:
-                        Text("Unknown")
+                    
+                    if UserDefaults.standard.bool(forKey: Constants.testMode) {
+                        switch state {
+                        case .playing:
+                            Text("Playing")
+                        case .stopped:
+                            Text("Stopped")
+                        case .paused:
+                            Text("Paused")
+                        case .buffering:
+                            Text("Buffering")
+                        case .failed:
+                            Text("Failed")
+                        case .unknown:
+                            Text("Unknown")
+                        @unknown default:
+                            Text("Unknown")
+                        }
                     }
                     
                     Spacer(minLength: 0)
                     
                     HStack(spacing: 10) {
                         
-                        Image(systemName: "gobackward.5")
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .padding(.horizontal, 5)
-                            .background(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .onTapGesture {
-                                player?.seekBackward(seconds: 5)
-                                let impactMed = UIImpactFeedbackGenerator(style: .light)
-                                impactMed.impactOccurred()
-                            }
+                        if UserDefaults.standard.bool(forKey: Constants.testMode) {
+                            Image(systemName: "gobackward.5")
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .padding(.horizontal, 5)
+                                .background(Color.blue)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .onTapGesture {
+                                    player?.seekBackward(seconds: 5)
+                                    let impactMed = UIImpactFeedbackGenerator(style: .light)
+                                    impactMed.impactOccurred()
+                                }
+                            
+                            Image(systemName: "goforward.5")
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .padding(.horizontal, 5)
+                                .background(Color.blue)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .onTapGesture {
+                                    player?.seekForward(seconds: 5)
+                                    let impactMed = UIImpactFeedbackGenerator(style: .light)
+                                    impactMed.impactOccurred()
+                                }
+                            
+                            Image(systemName: state == .playing ? "pause" : "play")
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .padding(.horizontal, 5)
+                                .background(Color.blue)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .onTapGesture {
+                                    state == .playing ? player?.pause() : player?.resume()
+                                    let impactMed = UIImpactFeedbackGenerator(style: .light)
+                                    impactMed.impactOccurred()
+                                }
+                        }
                         
-                        Image(systemName: "goforward.5")
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .padding(.horizontal, 5)
-                            .background(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .onTapGesture {
-                                player?.seekForward(seconds: 5)
-                                let impactMed = UIImpactFeedbackGenerator(style: .light)
-                                impactMed.impactOccurred()
-                            }
-                        
-                        Image(systemName: state == .playing ? "pause" : "play")
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .padding(.horizontal, 5)
-                            .background(Color.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 5))
-                            .onTapGesture {
-                                state == .playing ? player?.pause() : player?.resume()
-                                let impactMed = UIImpactFeedbackGenerator(style: .light)
-                                impactMed.impactOccurred()
-                            }
-                        
-                        Text("Live")
+                        Text("Go Live")
                             .frame(width: 80)
                             .foregroundColor(.white)
                             .padding(5)

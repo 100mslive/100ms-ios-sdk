@@ -57,6 +57,13 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    @IBOutlet weak var testModeSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.testMode) as? Bool {
+                testModeSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
     @IBOutlet weak var lockOrientationSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.enableOrientationLock) as? Bool {
@@ -128,6 +135,7 @@ class SettingsViewController: UIViewController {
         userDefaults.set(mirrorMyVideoSwitch.isOn, forKey: Constants.mirrorMyVideo)
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(showStatsSwitch.isOn, forKey: Constants.showStats)
+        userDefaults.set(testModeSwitch.isOn, forKey: Constants.testMode)
         userDefaults.set(lockOrientationSwitch.isOn, forKey: Constants.enableOrientationLock)
         userDefaults.set(autoSimulcastLayerSelectionSwitch.isOn, forKey: Constants.autoSimulcastLayerSelection)
         userDefaults.set(disablePiPSSwitch.isOn, forKey: Constants.disablePiP)
