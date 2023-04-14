@@ -4,9 +4,11 @@ platform :ios, '13.0'
 
 target 'HMSSDKExample' do
   use_frameworks!
-  pod 'HMSSDK', '0.9.1'
+  pod 'HMSSDK', '0.9.2'
   pod 'HMSHLSPlayerSDK'
-  pod 'Eureka'
+  pod 'SwiftyBeaver', '1.9.5'
+  pod 'Zip', '2.1.2'
+  pod 'Eureka', '5.4.0'
   pod 'SwiftyGif'
 
   target 'HMSSDKExampleTests' do

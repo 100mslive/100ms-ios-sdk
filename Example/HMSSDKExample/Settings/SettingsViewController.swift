@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MessageUI
+import Zip
 
 class SettingsViewController: UIViewController {
 
@@ -147,6 +149,55 @@ class SettingsViewController: UIViewController {
         userDefaults.set(audioSource.rawValue, forKey: Constants.defaultAudioSource)
 
     }
+    
+    @IBAction func sendLogsTapped(_ sender: UIButton) {
+        guard let logFolderURL = Constants.logFoloderURL else { return }
+        do {
+            var files = [URL]()
+            guard let enumerator = FileManager.default.enumerator(at: logFolderURL, includingPropertiesForKeys: nil) else {
+                return
+            }
+            
+            for case let fileURL as URL in enumerator {
+                if fileURL.lastPathComponent.contains(Constants.logFileName) {
+                    files.append(fileURL)
+                }
+            }
+            
+            let zipFilePath = try Zip.quickZipFiles(files, fileName: "logs")
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.setSubject("Bug report")
+                mail.setMessageBody("Please describe what you were doing when the issue occured. ", isHTML: true)
+                mail.mailComposeDelegate = self
+
+                if let data = NSData(contentsOf: zipFilePath) {
+                    mail.addAttachmentData(data as Data, mimeType: "application/zip" , fileName: "logs.zip")
+                }
+                
+                present(mail, animated: true)
+            }
+            else {
+                showLogError("default email client is not configured on this device")
+            }
+            
+        }
+        catch {
+            showLogError("Something went wrong: \(error)")
+        }
+    }
+    
+    private func showLogError(_ message: String) {
+        let title = "Could Not Email Logs"
+
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+        present(alertController, animated: true)
+    }
 }
 
 // MARK: - Picker View
@@ -179,6 +230,16 @@ extension SettingsViewController: UIPickerViewDelegate {
             return availableAudioSources[row].description
         default:
             return nil
+        }
+    }
+}
+
+extension SettingsViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true) { [weak self] in
+            if let error = error {
+                self?.showLogError("Something went wrong: \(error)")
+            }
         }
     }
 }

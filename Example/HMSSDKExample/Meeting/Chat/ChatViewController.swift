@@ -84,6 +84,9 @@ final class ChatViewController: UIViewController {
         table.rowHeight = UITableView.automaticDimension
         table.tableFooterView = stackView
         
+        interactor?.onPinnedMessage = { [weak self] in
+            self?.updatePinnedChat()
+        }
         updatePinnedChat()
 
         observeBroadcast()
@@ -159,20 +162,15 @@ final class ChatViewController: UIViewController {
     }
     
     private func updatePinnedChat() {
-        interactor?.hmsSDK?.getSessionMetadata(completion: { [weak self] metadata, _ in
-            
-            guard let self = self else { return }
-            
-            if let metadata = metadata {
-                self.pinnedChat.isHidden = false
-                self.pinIcon.isHidden = false
-                self.pinnedChat.text = metadata
-            }
-            else {
-                self.pinnedChat.isHidden = true
-                self.pinIcon.isHidden = true
-            }
-        })
+        if let metadata = interactor?.pinnedMessage, !metadata.isEmpty {
+            self.pinnedChat.isHidden = false
+            self.pinIcon.isHidden = false
+            self.pinnedChat.text = metadata
+        }
+        else {
+            self.pinnedChat.isHidden = true
+            self.pinIcon.isHidden = true
+        }
     }
 
     @IBAction private func closeTapped(_ sender: UIButton) {

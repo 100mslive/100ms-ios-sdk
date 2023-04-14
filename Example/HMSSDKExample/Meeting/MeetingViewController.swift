@@ -327,6 +327,14 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         self.present(imagePreviewController, animated: true, completion: nil)
     }
     
+    func showTicTacToe() {
+        guard let store = interactor?.sessionStore else { return }
+        let model = TicTacToeModel(store: store)
+        let gameController = UIHostingController(rootView: TicTacToeView(model: model))
+        gameController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+        self.present(gameController, animated: true, completion: nil)
+    }
+    
     func presentAlert(with title: String, message: String) {
         
         let alertController = UIAlertController(title: title,
@@ -452,6 +460,13 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 self?.showNamePrompt()
             }
         ]
+        
+        if interactor?.sessionStore != nil {
+            actions.append(UIAction(title: "Play TicTacToe",
+                     image: UIImage(systemName: "gamecontroller")) { [weak self] _ in
+                self?.showTicTacToe()
+            })
+        }
         
         if isLocalAudioFilePlaybackEnabled {
             actions.append(contentsOf: [UIAction(title: "Play Audio",

@@ -57,7 +57,7 @@
                                 <rect key="frame" x="0.0" y="99" width="390" height="711"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2b8-Ig-PA0">
-                                        <rect key="frame" x="0.0" y="20" width="390" height="655"/>
+                                        <rect key="frame" x="0.0" y="20" width="390" height="707"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="CAM-Z1-axX">
                                                 <rect key="frame" x="15" y="8" width="360" height="31"/>
@@ -264,6 +264,17 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R58-lK-AVz">
+                                                <rect key="frame" x="15" y="655" width="360" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="nfQ-Bq-1i2"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Send Logs"/>
+                                                <connections>
+                                                    <action selector="sendLogsTapped:" destination="YWG-tV-MYB" eventType="touchUpInside" id="HJ0-FY-zPh"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <edgeInsets key="layoutMargins" top="8" left="15" bottom="8" right="15"/>
                                     </stackView>

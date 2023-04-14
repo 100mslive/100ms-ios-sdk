@@ -46,14 +46,11 @@ final class ChatTableViewCell: UITableViewCell {
                 
                 let pinnedChatText = (self.nameLabel.text ?? "NA") + ": " + self.messageView.text
                 
-                self.delegate?.interactor?.hmsSDK?.setSessionMetadata(pinnedChatText, completion: { _, error in
+                self.delegate?.interactor?.setPinnedMessage(pinnedChatText) { _, error in
                     if let error = error as? HMSError {
                         self.delegate?.showActionError(error, action: "pin chat")
-                    } else {
-                        self.delegate?.interactor?.hmsSDK?.sendBroadcastMessage(type: "metadata", message: "refresh")
-                        NotificationCenter.default.post(name: Constants.sessionMetadataReceived, object: nil, userInfo: ["metadata" : "\(pinnedChatText)"])
                     }
-                })
+                }
             }
         ]
 
