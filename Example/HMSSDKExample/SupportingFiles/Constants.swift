@@ -115,6 +115,16 @@ struct Constants {
     
     static let disablePiP = "disablePiP"
     static let enableOrientationLock = "enableOrientationLock"
+    
+    static var logFoloderURL: URL? = {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
+    }()
+    
+    static var logFileName = "100ms.log"
+    
+    static var logFileURL: URL? = {
+        logFoloderURL?.appendingPathComponent(logFileName, isDirectory: false)
+    }()
 }
 
 enum ViewModes: String {

@@ -68,6 +68,12 @@ final class MeetingViewModel: NSObject,
     private lazy var diffableDataSource = makeDataSource()
 
     private var pinnedTiles = Set<String>()
+    
+    private var spotlightTrackId: String? {
+        didSet {
+            dataSource.reload()
+        }
+    }
 
     internal var speakers = [HMSViewModel]() {
         didSet {
@@ -107,6 +113,10 @@ final class MeetingViewModel: NSObject,
 
         self.interactor?.updatedMuteStatus = { [weak self] audio in
             self?.setMuteStatus(audio)
+        }
+        
+        self.interactor?.onSpotlight = { [weak self] trackId in
+            self?.spotlightTrackId = trackId
         }
     }
 
@@ -154,6 +164,8 @@ final class MeetingViewModel: NSObject,
 
         if lhsTrackSource != rhsTrackSource {
             return lhsTrackSource > rhsTrackSource
+        } else if isSpotlight(lhs) != isSpotlight(rhs) {
+            return isSpotlight(lhs) && !isSpotlight(rhs)
         } else if isPinned(lhs) != isPinned(rhs) {
             return isPinned(lhs) && !isPinned(rhs)
         } else if lhsAuxTracks != rhsAuxTracks {
@@ -309,7 +321,7 @@ final class MeetingViewModel: NSObject,
         if viewModel.videoTrack?.source == HMSCommonTrackSource.screen ||
             viewModel.videoTrack?.source == HMSCommonTrackSource.plugin ||
             mode == .pinned ||
-            isLandscape {
+            isLandscape || isSpotlight(viewModel) {
             return true
         }
 
@@ -553,6 +565,16 @@ final class MeetingViewModel: NSObject,
                             self?.delegate?.presentSheet(with: image)
                         }
                     })
+                    
+                    if isSpotlight(model) {
+                        actions?.append(UIAction(title: "Remove from spotlight", image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+                            self?.interactor?.setSpotlight(trackId: nil)
+                        })
+                    } else {
+                        actions?.append(UIAction(title: "Spotlight for everyone", image: UIImage(systemName: "photo.circle")) { [weak self] _ in
+                            self?.interactor?.setSpotlight(trackId: videoTrack.trackId)
+                        })
+                    }
                 }
             }
         }
@@ -663,13 +685,23 @@ final class MeetingViewModel: NSObject,
     private func isPinned(_ model: HMSViewModel) -> Bool {
         pinnedTiles.contains(model.identifier)
     }
+    
+    private func isSpotlight(_ model: HMSViewModel) -> Bool {
+        guard let trackId = model.videoTrack?.trackId, let spotlightTrackId = spotlightTrackId else {
+            return false
+        }
+        return spotlightTrackId == trackId
+    }
 
     internal func switchCamera() {
         if let track = interactor?.hmsSDK?.localPeer?.videoTrack as? HMSLocalVideoTrack {
-            track.switchCamera()
-            NotificationCenter.default.post(name: Constants.switchCameraTapped,
-                                            object: nil,
-                                            userInfo: ["cameraFacing": track.settings.cameraFacing])
+
+            track.switchCamera() { error in
+                
+                NotificationCenter.default.post(name: Constants.switchCameraTapped,
+                                                object: nil,
+                                                userInfo: ["cameraFacing": track.settings.cameraFacing])
+            }
         }
     }
 

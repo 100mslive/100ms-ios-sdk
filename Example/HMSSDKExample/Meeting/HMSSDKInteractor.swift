@@ -9,6 +9,7 @@
 import Foundation
 import HMSSDK
 import HMSAnalyticsSDK
+import SwiftyBeaver
 
 final class HMSSDKInteractor: HMSUpdateListener {
 
@@ -26,10 +27,23 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
     internal var onNetworkQuality: (() -> Void)?
     internal var pipController = PiPController()
+    
+    let log = SwiftyBeaver.self
+
+    internal var sessionStore: HMSSessionStore?
+    internal var onSpotlight: ((String?) -> Void)?
+    private static let spotlightKey = "spotlight"
+    private static let pinnedMessageKey = "pinnedMessage"
 
     // MARK: - Instance Properties
 
     internal var messages = [HMSMessage]()
+    internal var onPinnedMessage: (() -> Void)?
+    internal var pinnedMessage: String? {
+        didSet {
+            onPinnedMessage?()
+        }
+    }
 
     internal var isRecording: Bool {
         get {
@@ -57,12 +71,21 @@ final class HMSSDKInteractor: HMSUpdateListener {
          in room: String) {
         self.user = user
         self.room = room
+        setupLogging()
         setupPlugins()
         setupSDK()
     }
     
     var audioMixerSource: HMSAudioMixerSource?
     let audioFilePlayerNode = HMSAudioFilePlayerNode()
+    
+    private func setupLogging() {
+        let console = ConsoleDestination()
+        let file = FileDestination(logFileURL: Constants.logFileURL)
+        file.logFileAmount = 2
+        log.addDestination(console)
+        log.addDestination(file)
+    }
     
     private func setupSDK() {
         hmsSDK = HMSSDK.build { sdk in
@@ -99,7 +122,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
             self.audioMixerSource = try HMSAudioMixerSource(nodes: nodes)
         }
         catch {
-            print(error.localizedDescription)
+            log.error("Error creating audio source: \(error.localizedDescription)")
         }
         
         return self.audioMixerSource
@@ -149,7 +172,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
         
             hmsSDK?.getAuthTokenByRoomCode(room, userID: user) { [weak self] token, error in
                 guard let token = token, let self = self else {
-                    print(#function, "Error fetching token")
+                    self?.log.error("Error fetching token: \(error?.localizedDescription ?? "unknown")")
                     completion(nil)
                     NotificationCenter.default.post(name: Constants.gotError,
                                                     object: nil,
@@ -182,9 +205,20 @@ final class HMSSDKInteractor: HMSUpdateListener {
             self.hmsSDK?.join(config: config, delegate: self)
         }
     }
-
+    
     func leave() {
         hmsSDK?.leave()
+    }
+    
+    func setSpotlight(trackId: String?) {
+        guard let sessionStore = sessionStore else { return }
+        
+        sessionStore.set(trackId ?? "", forKey: HMSSDKInteractor.spotlightKey)
+    }
+    
+    func setPinnedMessage(_ text: String?, completion: @escaping ((Any?, Error?) -> Void)) {
+        guard let sessionStore = sessionStore else { return }
+        sessionStore.set(text ?? "", forKey: HMSSDKInteractor.pinnedMessageKey, completion: completion)
     }
 
     // MARK: - HMSSDK Listener Callbacks
@@ -201,7 +235,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func on(peer: HMSPeer, update: HMSPeerUpdate) {
 
-        print(#function, peer.name, update.description)
+        log.verbose(#function, peer.name, update.description)
 
         NotificationCenter.default.post(name: Constants.peersUpdated, object: nil, userInfo: ["peer": peer])
 
@@ -218,12 +252,13 @@ final class HMSSDKInteractor: HMSUpdateListener {
         case .networkQualityUpdated:
             onNetworkQuality?()
         default:
-            print(#function, "Unhandled update type encountered")
+            log.verbose(#function, "Unhandled update type encountered")
         }
     }
 
     func on(track: HMSTrack, update: HMSTrackUpdate, for peer: HMSPeer) {
-        print("#!", #function, peer.name, update.description, track.trackId, kindString(from: track.kind), track.source)
+        log.verbose(#function, context: [peer.name, update.description, track.trackId, kindString(from: track.kind), track.source])
+        
         if let audio = track as? HMSAudioTrack {
             updatedMuteStatus?(audio)
         }
@@ -258,25 +293,11 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(updated speakers: [HMSSpeaker]) {
-
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        let second = calendar.component(.second, from: date)
-        let dateString = "\(hour):\(minutes):\(second)"
-
-        print("Speaker update " + dateString, speakers.map { $0.peer.name },
-              speakers.map { kindString(from: $0.track.kind) },
-              speakers.map { $0.track.source })
-        
-        if let firstSpeaker = speakers.first {
-            pipController.update(speaker: firstSpeaker)
-        }
+        speakers.first.map(pipController.update)
     }
 
     func on(room: HMSRoom, update: HMSRoomUpdate) {
-        print(#function, room.name ?? "", update.description)
+        log.verbose(#function, room.name ?? "", update.description)
 
         switch update {
         case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated, .hlsRecordingStateUpdated:
@@ -292,7 +313,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func on(roleChangeRequest: HMSRoleChangeRequest) {
-        print(#function, roleChangeRequest.requestedBy?.name ?? "100ms app", roleChangeRequest.suggestedRole.name)
+        log.verbose(#function, roleChangeRequest.requestedBy?.name ?? "100ms app", roleChangeRequest.suggestedRole.name)
         onRoleChange?(roleChangeRequest)
     }
 
@@ -326,6 +347,21 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
     func on(localVideoStats: [HMSLocalVideoStats], track: HMSVideoTrack, peer: HMSPeer) {
         NotificationCenter.default.post(name: Constants.trackStatsUpdated, object: peer, userInfo: ["stats": localVideoStats, "track": track, "peer": peer])
+    }
+    
+    func on(sessionStoreAvailable store: HMSSessionStore) {
+        sessionStore = store
+        store.observeChanges(forKeys: [HMSSDKInteractor.spotlightKey, HMSSDKInteractor.pinnedMessageKey]) { [weak self] key, value in
+            switch key {
+            case HMSSDKInteractor.spotlightKey:
+                self?.onSpotlight?(value as? String)
+            case HMSSDKInteractor.pinnedMessageKey:
+                self?.pinnedMessage = value as? String
+            default:
+                break
+                
+            }
+        }
     }
 
     // MARK: - Role Actions
@@ -377,7 +413,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
 extension HMSSDKInteractor: HMSPreviewListener {
     func onPreview(room: HMSRoom, localTracks: [HMSTrack]) {
-        print(#function, localTracks.map { $0.kind.rawValue }, localTracks.map { $0.source })
+        log.verbose(#function, context: [localTracks.map { $0.kind.rawValue }, localTracks.map { $0.source }])
         onPreview?(room, localTracks)
     }
 }
@@ -386,8 +422,16 @@ extension HMSSDKInteractor: HMSPreviewListener {
 
 extension HMSSDKInteractor: HMSLogger {
     func log(_ message: String, _ level: HMSLogLevel) {
-        guard level.rawValue <= HMSLogLevel.verbose.rawValue else { return }
-        print(message)
+        switch level {
+        case .error:
+            log.error(message)
+        case .warning:
+            log.warning(message)
+        case .verbose:
+            log.verbose(message)
+        default:
+            break
+        }
     }
 }
 
