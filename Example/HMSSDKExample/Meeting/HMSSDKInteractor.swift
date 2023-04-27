@@ -103,6 +103,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
                 
                 audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
                 audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
+                
+                if UserDefaults.standard.bool(forKey: Constants.musicMode) {
+                    audioSettingsBuilder.audioMode = .music
+                }
             }
             
             sdk.logger = self

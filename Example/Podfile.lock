@@ -4,7 +4,7 @@ PODS:
   - HMSBroadcastExtensionSDK (0.0.7)
   - HMSHLSPlayerSDK (0.0.2):
     - HMSAnalyticsSDK (= 0.0.2)
-  - HMSSDK (0.9.1):
+  - HMSSDK (0.9.2):
     - HMSAnalyticsSDK (= 0.0.2)
     - HMSWebRTC (= 1.0.5115)
   - HMSWebRTC (1.0.5115)
@@ -16,7 +16,7 @@ DEPENDENCIES:
   - Eureka (= 5.4.0)
   - HMSBroadcastExtensionSDK
   - HMSHLSPlayerSDK
-  - HMSSDK (= 0.9.1)
+  - HMSSDK (= 0.9.2)
   - SwiftyBeaver (= 1.9.5)
   - SwiftyGif
   - Zip (= 2.1.2)
@@ -38,12 +38,12 @@ SPEC CHECKSUMS:
   HMSAnalyticsSDK: 4d2a88a729b1eb42f3d25f217c28937ec318a5b7
   HMSBroadcastExtensionSDK: d22df4b2c22843efe4a1779478889076db8eaabd
   HMSHLSPlayerSDK: 6a54ad4d12f3dc2270d1ecd24019d71282a4f6a3
-  HMSSDK: e1a2d6dc4f4881b7e6a854de61a06e2cc0afc848
+  HMSSDK: 1bd8f954ecccf50611c9b9af431798ffed7fcb30
   HMSWebRTC: d74cd5e5ecfe701219dd4042ec67fed02ea5d6db
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
   SwiftyGif: 6c3eafd0ce693cad58bb63d2b2fb9bacb8552780
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 0a5db05fe2f909651575a961b6f5cc2bac387d6f
+PODFILE CHECKSUM: b6c3a2c33c23c12f85828aac6b613761c01b1f3e
 
 COCOAPODS: 1.11.3

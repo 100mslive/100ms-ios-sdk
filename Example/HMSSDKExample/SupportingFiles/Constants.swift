@@ -106,6 +106,7 @@ struct Constants {
 
     static let showStats = "showStats"
     static let testMode = "testMode"
+    static let musicMode = "musicMode"
     
     static let autoSimulcastLayerSelection = "autoSimulcastLayerSelection"
 
