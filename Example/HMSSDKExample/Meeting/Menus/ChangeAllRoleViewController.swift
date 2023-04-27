@@ -25,12 +25,6 @@ final class ChangeAllRoleViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         form +++ Section("")
-            <<< SegmentedRow<String> {
-                $0.title = "Roles to change"
-                $0.options = ["All", "Specific"]
-                $0.value = "All"
-                $0.tag = "roleFilterType"
-            }
             <<< MultipleSelectorRow<String> {
                 $0.hidden = Condition.function(["roleFilter"], { form in
                     return ((form.rowBy(tag: "roleFilter") as? SegmentedRow)?.value ?? "") == "All"
@@ -63,11 +57,9 @@ final class ChangeAllRoleViewController: FormViewController {
     // MARK: - Action Handlers
 
     private func onChangeButtonTap() {
-        let row: SegmentedRow<String>? = form.rowBy(tag: "roleFilterType")
         var roleFilter: [HMSRole]?
 
-        if row?.value == "Specific",
-           let specificRoleFilter = (form.rowBy(tag: "roleNameFilter") as? MultipleSelectorRow<String>)?.value {
+        if let specificRoleFilter = (form.rowBy(tag: "roleNameFilter") as? MultipleSelectorRow<String>)?.value {
             roleFilter = specificRoleFilter.compactMap { name in knownRoles.first(where: { $0.name == name  }) }
         }
 

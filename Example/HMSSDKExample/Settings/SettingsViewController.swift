@@ -66,6 +66,15 @@ class SettingsViewController: UIViewController {
             }
         }
     }
+    
+    @IBOutlet weak var musicModeSwitch: UISwitch! {
+        didSet {
+            if let isOn = UserDefaults.standard.object(forKey: Constants.musicMode) as? Bool {
+                musicModeSwitch.setOn(isOn, animated: false)
+            }
+        }
+    }
+    
     @IBOutlet weak var lockOrientationSwitch: UISwitch! {
         didSet {
             if let isOn = UserDefaults.standard.object(forKey: Constants.enableOrientationLock) as? Bool {
@@ -138,6 +147,7 @@ class SettingsViewController: UIViewController {
         userDefaults.set(showVideoPreviewSwitch.isOn, forKey: Constants.showVideoPreview)
         userDefaults.set(showStatsSwitch.isOn, forKey: Constants.showStats)
         userDefaults.set(testModeSwitch.isOn, forKey: Constants.testMode)
+        userDefaults.set(musicModeSwitch.isOn, forKey: Constants.musicMode)
         userDefaults.set(lockOrientationSwitch.isOn, forKey: Constants.enableOrientationLock)
         userDefaults.set(autoSimulcastLayerSelectionSwitch.isOn, forKey: Constants.autoSimulcastLayerSelection)
         userDefaults.set(disablePiPSSwitch.isOn, forKey: Constants.disablePiP)

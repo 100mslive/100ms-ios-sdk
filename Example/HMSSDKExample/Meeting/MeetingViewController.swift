@@ -440,7 +440,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                      self?.present(imagePreviewController, animated: true, completion: nil)
                  }
             },
-            
+
             UIAction(title: "Enable virtual background",
                      image: UIImage(systemName: "person.crop.rectangle.fill"),
                      state: isVBActivated ? .on : .off) { [weak self] _ in
