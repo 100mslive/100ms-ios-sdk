@@ -5,21 +5,16 @@ platform :ios, '13.0'
 target 'HMSSDKExample' do
   use_frameworks!
   pod 'HMSSDK', '0.9.3'
-  pod 'HMSHLSPlayerSDK'
+  pod 'HMSHLSPlayerSDK', '0.0.2'
   pod 'SwiftyBeaver', '1.9.5'
   pod 'Zip', '2.1.2'
   pod 'Eureka', '5.4.0'
   pod 'SwiftyGif'
-
-  target 'HMSSDKExampleTests' do
-    inherit! :search_paths
-  end
-  
 end
 
 target 'HMSScreenShare' do
   use_frameworks!
-  pod 'HMSBroadcastExtensionSDK'
+  pod 'HMSBroadcastExtensionSDK', '0.0.9'
 end
 
 # Workaround for M1 simulator issue
