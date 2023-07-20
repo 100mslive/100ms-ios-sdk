@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        setupLogging()
         UserDefaults.standard.set(false, forKey: Constants.enableOrientationLock)
         return true
     }
@@ -44,4 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             view.removeFromSuperview()
         }
     }
+    
+    private func setupLogging() {
+        let log = SwiftyBeaver.self
+        let console = ConsoleDestination()
+        let file = FileDestination(logFileURL: Constants.logFileURL)
+        file.logFileAmount = 2
+        log.addDestination(console)
+        log.addDestination(file)
+    }
+    
 }

@@ -27,6 +27,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
     internal var onNetworkQuality: (() -> Void)?
     internal var pipController = PiPController()
+    internal var previousRole: HMSRole?
     
     let log = SwiftyBeaver.self
 
@@ -44,6 +45,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
             onPinnedMessage?()
         }
     }
+    
+    internal var onPoll: ((HMSPoll) -> Void)?
 
     internal var isRecording: Bool {
         get {
@@ -71,7 +74,6 @@ final class HMSSDKInteractor: HMSUpdateListener {
          in room: String) {
         self.user = user
         self.room = room
-        setupLogging()
         setupPlugins()
         setupSDK()
     }
@@ -79,13 +81,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     var audioMixerSource: HMSAudioMixerSource?
     let audioFilePlayerNode = HMSAudioFilePlayerNode()
     
-    private func setupLogging() {
-        let console = ConsoleDestination()
-        let file = FileDestination(logFileURL: Constants.logFileURL)
-        file.logFileAmount = 2
-        log.addDestination(console)
-        log.addDestination(file)
-    }
+    
     
     private func setupSDK() {
         hmsSDK = HMSSDK.build { sdk in
@@ -204,8 +200,23 @@ final class HMSSDKInteractor: HMSUpdateListener {
     }
 
     func join() {
+        hmsSDK?.interactivityCenter.addPollUpdateListner { [weak self] poll, update in
+            switch update {
+            case .started:
+                self?.onPoll?(poll)
+            case .resultsUpdated:
+                self?.onPollResults?(poll)
+            case .stopped:
+                self?.onPoll?(poll)
+                break
+            @unknown default:
+                break
+            }
+        }
+        
         fetchConfig { [weak self] config in
             guard let config = config, let self = self else { return }
+            self.previousRole = hmsSDK?.localPeer?.role
             self.hmsSDK?.join(config: config, delegate: self)
         }
     }
@@ -245,10 +256,17 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
         switch update {
         case .peerJoined:
-            Utilities.showToast(message: "🙌 \(peer.name) joined!")
+            if !peer.isLocal {
+                Utilities.showToast(message: "🙌 \(peer.name) joined!")
+            }
         case .peerLeft:
             Utilities.showToast(message: "👋 \(peer.name) left!")
         case .roleUpdated:
+            if peer.isLocal && previousRole == nil {
+                previousRole = peer.role
+                return
+            }
+            
             if let role = peer.role?.name {
                 Utilities.showToast(message: "🎉 \(peer.name)'s role updated to \(role)")
                 NotificationCenter.default.post(name: Constants.roleUpdated, object: nil)
@@ -305,6 +323,9 @@ final class HMSSDKInteractor: HMSUpdateListener {
 
         switch update {
         case .browserRecordingStateUpdated, .rtmpStreamingStateUpdated, .hlsRecordingStateUpdated:
+            if room.browserRecordingState.initialising {
+                Utilities.showToast(message: "Recording is preparing to start")
+            }
             onRecordingUpdate?()
         case .hlsStreamingStateUpdated:
             onHLSUpdate?()
@@ -367,7 +388,9 @@ final class HMSSDKInteractor: HMSUpdateListener {
             }
         }
     }
-
+    
+    var onPollResults:((HMSPoll)->Void)?
+    
     // MARK: - Role Actions
 
     internal func changeRole(for peer: HMSPeer, to role: HMSRole, force: Bool = false) {
@@ -410,6 +433,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
     
     internal var canScreenShare: Bool {
         hmsSDK?.localPeer?.role?.publishSettings.allowed?.contains("screen") ?? false
+    }
+    
+    internal var canWritePolls: Bool {
+        hmsSDK?.localPeer?.role?.permissions.pollWrite ?? false
     }
 }
 
