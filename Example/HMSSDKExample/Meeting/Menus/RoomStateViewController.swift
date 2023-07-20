@@ -50,9 +50,15 @@ class RoomStateViewController: FormViewController {
     }
 
     func setupBrowserRecording() {
-        guard room.browserRecordingState.running else { return }
+        guard room.browserRecordingState.running || room.browserRecordingState.initialising else { return }
         
         let section = Section("Browser recording")
+        
+        if room.browserRecordingState.initialising {
+            section <<< LabelRow() {
+                $0.title = "Initialising"
+            }
+        }
         
         if let startDate = room.browserRecordingState.startedAt {
             section <<< LabelRow() {

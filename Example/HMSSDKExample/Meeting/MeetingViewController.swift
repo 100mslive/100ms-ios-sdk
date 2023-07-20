@@ -60,7 +60,14 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             updateSettingsButton()
         }
     }
-
+    @IBOutlet weak var viewPollView: UIView!
+    
+    @IBAction func viewPollTapped(_ sender: Any) {
+        showPoll()
+    }
+    
+    
+    
     private var menu: UIMenu {
         UIMenu(children: menuItems() + roleBasedActions())
     }
@@ -92,6 +99,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         viewModel = MeetingViewModel(self.user, self.roomName, collectionView, interactor: interactor)
         
         viewModel?.delegate = self
+        setupViewPollToastState()
         
         interactor.pipController.setup(with: self.collectionView)
 
@@ -119,6 +127,10 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         interactor.onHLSUpdate = { [weak self] in
             self?.updateHLSState()
             self?.updateSettingsButton()
+        }
+        
+        interactor.onPoll = { [weak self] poll in
+            self?.setupViewPollToastState()
         }
 
         viewModel?.updateLocalPeerTracks = { [weak self] in
@@ -334,7 +346,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         gameController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
         self.present(gameController, animated: true, completion: nil)
     }
-    
+
     func presentAlert(with title: String, message: String) {
         
         let alertController = UIAlertController(title: title,
@@ -578,6 +590,14 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 self?.navigationController?.pushViewController(changeAllRoleController, animated: true)
             }
             actions.append(changeAllRole)
+        }
+        
+        if interactor.canWritePolls {
+            let createPoll = UIAction(title: "Create Poll",
+                                      image: UIImage(systemName: "book")) { [weak self] _ in
+                self?.showPollCreate()
+            }
+            actions.append(createPoll)
         }
 
         let startRTMP = UIAction(title: "Start RTMP or Recording",
@@ -962,6 +982,33 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         musicController.modalTransitionStyle = .crossDissolve
         musicController.view.backgroundColor = .clear
         self.present(musicController, animated: true, completion: nil)
+    }
+    
+    @IBAction func showPollCreate() {
+        guard let center = interactor?.hmsSDK?.interactivityCenter, let role = interactor?.hmsSDK?.localPeer?.role else { return }
+        let pollAdminRoles = interactor?.roles?.filter({ $0.name == "host" || $0.name == "teacher" }) ?? []
+        let model = PollCreateModel(interactivityCenter: center, limitViewResultsToRoles: pollAdminRoles, currentRole: role)
+        model.onPollStart = { [weak self] in
+            self?.setupViewPollToastState()
+            self?.dismiss(animated: true)
+        }
+
+        let pollController = UIHostingController(rootView: PollCreateView(model: model))
+        pollController.view.backgroundColor = .red
+        self.present(pollController, animated: true, completion: nil)
+    }
+    
+    func showPoll() {
+        guard let center = interactor?.hmsSDK?.interactivityCenter, let poll = interactor?.hmsSDK?.interactivityCenter.polls.last(where: { $0.state == .started }), let role = interactor?.hmsSDK?.localPeer?.role else { return }
+        let model = PollVoteViewModel(poll: poll, interactivityCenter: center, currentRole: role, peerList: interactor?.hmsSDK?.room?.peers ?? [])
+        let pollController = UIHostingController(rootView: PollVoteView(model: model))
+        pollController.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+        self.present(pollController, animated: true, completion: nil)
+    }
+    
+    func setupViewPollToastState() {
+        let hasLivePolls = interactor?.hmsSDK?.interactivityCenter.polls.first(where: { $0.state == .started }) != nil
+        viewPollView.isHidden = !hasLivePolls
     }
     
     @IBAction private func roomNameTapped(_ sender: UIButton) {
