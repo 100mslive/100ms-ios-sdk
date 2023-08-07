@@ -48,7 +48,7 @@ class QuestionCreateViewModel: ObservableObject, Identifiable {
     }
     
     func addQuestion() {
-        let createModel = QuestionCreateModel(pollModel: pollModel, index: 0, count: 0, showAnswerSelection: pollModel.createdPoll?.type == .quiz, saved: false) { [weak self] questionModel in
+        let createModel = QuestionCreateModel(pollModel: pollModel, index: 0, count: 0, showAnswerSelection: pollModel.createdPoll?.category == .quiz, saved: false) { [weak self] questionModel in
             self?.saveQuestions(questionToSave: questionModel)
         } onDelete: { [weak self] questionModel in
             self?.deleteQuestion(questionToDelete: questionModel)
@@ -101,7 +101,7 @@ class QuestionCreateViewModel: ObservableObject, Identifiable {
                 .withTitle(question.text.trimmingCharacters(in: .whitespacesAndNewlines))
             
             for option in question.questionOptions {
-                if poll.type == .quiz {
+                if poll.category == .quiz {
                     _ = builder.addQuizOption(with: option.text.trimmingCharacters(in: .whitespacesAndNewlines), isCorrect: option.selected)
                 } else {
                     _ = builder.addOption(with: option.text.trimmingCharacters(in: .whitespacesAndNewlines))

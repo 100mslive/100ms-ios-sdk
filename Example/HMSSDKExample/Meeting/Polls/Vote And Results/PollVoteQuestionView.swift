@@ -20,7 +20,7 @@ struct PollVoteQuestionView: View {
                 Spacer()
             }
             VStack(alignment: .leading, spacing: 16) {
-                if model.poll.type == .poll || model.canVote || model.poll.state == .stopped {
+                if model.poll.category == .poll || model.canVote || model.poll.state == .stopped {
                     ForEach(model.questionOptions) { option in
                         PollVoteQuestionOptionView(model: option)
                     }

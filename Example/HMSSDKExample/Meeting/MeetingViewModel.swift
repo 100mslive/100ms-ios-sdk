@@ -72,6 +72,14 @@ final class MeetingViewModel: NSObject,
     private var spotlightTrackId: String? {
         didSet {
             dataSource.reload()
+            var trackIDs = Set<String>()
+            if let oldValue = oldValue, !oldValue.isEmpty {
+                trackIDs.insert(oldValue)
+            }
+            if let spotlightTrackId = spotlightTrackId, !spotlightTrackId.isEmpty {
+                trackIDs.insert(spotlightTrackId)
+            }
+            updateMenuForTracks(trackIDs)
         }
     }
 
@@ -500,6 +508,14 @@ final class MeetingViewModel: NSObject,
                                                    object: nil,
                                                    queue: .main) { [weak self] _ in
             self?.cleanup()
+        }
+    }
+    
+    func updateMenuForTracks(_ trackIDs: Set<String>) {
+        for model in dataSource.allModels {
+            if let modelID = model.videoTrack?.trackId, trackIDs.contains(modelID), let cell = cellFor(model) {
+                setMoreButton(for: cell, using: model)
+            }
         }
     }
 
