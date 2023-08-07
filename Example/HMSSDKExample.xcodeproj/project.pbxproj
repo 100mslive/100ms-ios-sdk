@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00A387ADACCB096A23E0DA92 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2895437663D375598A96BF3 /* Chat.storyboard */; };
 		017E7029C76F22885200CE2F /* PollVoteQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE5C9D6C1E0F47950ABB68 /* PollVoteQuestionViewModel.swift */; };
-		05E6479B7EE822D24445C68C /* Pods_HMSScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D4DA7AE031404290091D16 /* Pods_HMSScreenShare.framework */; };
 		0D0B1DB21E90B8751520F093 /* PeersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85FF2F5F5FF73A2ECB4F521 /* PeersListViewController.swift */; };
 		1850C1771556D52C164155B1 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2615BBB7369533D3A66C87F9 /* SwitchView.swift */; };
 		18EB23970E7005E469CB9332 /* NetworkQualityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FB818469CFE1CF58F4D74C /* NetworkQualityView.swift */; };
@@ -19,9 +18,11 @@
 		21E5529BE3DE7BC9E518445E /* QuestionOptionCreateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CFC787680F4B22A3C065CA /* QuestionOptionCreateModel.swift */; };
 		2378B3475D39E518E87D9A5E /* PollSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D923E8C23C2674367621BBE /* PollSummaryViewModel.swift */; };
 		257821C2CA3AB544D217CE4B /* RTMPSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB429F987514E9391A9A606 /* RTMPSettingsViewController.swift */; };
+		25CE7153BA82631930CDE412 /* Pods_HMSScreenShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14E8F6940951B4270CA3DA3 /* Pods_HMSScreenShare.framework */; };
 		2A75A9381F768B5C58917059 /* HMSUIColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C95DD57118849D106DA4C3 /* HMSUIColorTheme.swift */; };
 		2D8D074A3905D00A6D7A5513 /* HLSPlayerOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA2D24CD11F2951B785ED6E /* HLSPlayerOverlayView.swift */; };
 		2D96C14D75916844779B533C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C55D217A5281D74CF0D8733 /* Images.xcassets */; };
+		335B8CD3AFB745A485A4F37A /* Pods_HMSSDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFDC5DED45389892197B8F3F /* Pods_HMSSDKExample.framework */; };
 		3ECA49F20BA2E1D64AC74DB6 /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2495B8B93F454B952C45BF13 /* Meeting.storyboard */; };
 		412B1E3F26E3FB0CB8D6976A /* PeersList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF53578E1A99241026D0B5B /* PeersList.storyboard */; };
 		45DBE95C6D70E6EFBFFFF442 /* PiPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FA85C2C037868F7C4A3375 /* PiPView.swift */; };
@@ -66,7 +67,6 @@
 		A10F60F92757496FB5887506 /* PollStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AD73F48304A6A7739E1A20 /* PollStyles.swift */; };
 		A5599682E45BE5C120B231E5 /* PeersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E495C1E7339B5C767E1C3 /* PeersListTableViewCell.swift */; };
 		A774163AF439A8E2914D45FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1B8154D8407A9141EE4E46 /* LaunchScreen.storyboard */; };
-		AD966EEA5FF9AAC4F47946F1 /* Pods_HMSSDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A5449F414D1F4DB59E7AAC /* Pods_HMSSDKExample.framework */; };
 		AFB263213151D7C79AA6A62A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30044D6587648034D38270D /* LoginViewController.swift */; };
 		B12004B282B02844BD287F6A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839C01F696AC9DBDEFBF7F45 /* ChatTableViewCell.swift */; };
 		B12D65205E7A03E5AAC14138 /* PeerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36580BA45140D5EFF239FBFD /* PeerMetadata.swift */; };
@@ -134,9 +134,9 @@
 		069F73498C01E61258326110 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		075FC4EA47BA9C3584C0CB25 /* HMSScreenShare-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSScreenShare-Bridging-Header.h"; sourceTree = "<group>"; };
 		0B285E765925E66FC4EF748F /* QuestionCreateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCreateModel.swift; sourceTree = "<group>"; };
+		0B481DF82401A97BB885C3C4 /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
 		11D9F6329BC4FF18B33167D3 /* RoomStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStateViewController.swift; sourceTree = "<group>"; };
 		14758AB98C8E9AFC61C28016 /* HLSStatsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSStatsModel.swift; sourceTree = "<group>"; };
-		16A5449F414D1F4DB59E7AAC /* Pods_HMSSDKExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17A56661D43E37A0A7389D0B /* PollVoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollVoteView.swift; sourceTree = "<group>"; };
 		19671F9169CD55394BAE9669 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
 		1CAE5C9D6C1E0F47950ABB68 /* PollVoteQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollVoteQuestionViewModel.swift; sourceTree = "<group>"; };
@@ -174,14 +174,12 @@
 		721F0E8E0A96A7C8AE53BB0D /* PollTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTypeButton.swift; sourceTree = "<group>"; };
 		73D3BE80BEB8EB0BB860F1FD /* HMSSDKExample.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HMSSDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		740540A1B0F0EFA1A6326AAC /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
-		76AA9EFE42F4654B4BAD3E63 /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
 		78E3BEFBBBA8DA793EE450D1 /* RolePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolePreviewViewController.swift; sourceTree = "<group>"; };
 		79A705E0C88AD22596918644 /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		7AC71C13D74EB16560B21CD1 /* PollTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTextField.swift; sourceTree = "<group>"; };
 		7C55D217A5281D74CF0D8733 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7CAB1DF8205222B505502F72 /* 100ms.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 100ms.gif; sourceTree = "<group>"; };
 		7D2DC1AF3A52B03FC99259BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		7F9E3A001C613562655DBFEC /* Pods-HMSScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
 		804968A0D74FEAD5A6D8EE59 /* Inter-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.ttf"; sourceTree = "<group>"; };
 		80AC8C642C5B2CF3C0D6F226 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 		8365F6D5F5C64702E621E3B5 /* HMSScreenShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSScreenShare.entitlements; sourceTree = "<group>"; };
@@ -191,8 +189,6 @@
 		873A8FA53E6F174ACC7390D6 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		8932EAE451B3B2019EBC7110 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
 		8BB09EA688E71470FC5C795B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PeersList.storyboard; sourceTree = "<group>"; };
-		8C6CC3287B92ED747E5895B2 /* Pods-HMSSDKExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.release.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.release.xcconfig"; sourceTree = "<group>"; };
-		92D4DA7AE031404290091D16 /* Pods_HMSScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		930E495C1E7339B5C767E1C3 /* PeersListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersListTableViewCell.swift; sourceTree = "<group>"; };
 		9471B8DED5A9DDEF47EFB2DA /* PreviewPeersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPeersListViewController.swift; sourceTree = "<group>"; };
 		953F3E54B734295797B523DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -202,6 +198,7 @@
 		9A97F09EF41362BD0ACBA2D3 /* PollVoteQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollVoteQuestionView.swift; sourceTree = "<group>"; };
 		9AD50AC179EFF9B1D9F2DBF4 /* GrayscaleVideoPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayscaleVideoPlugin.swift; sourceTree = "<group>"; };
 		9EA2D24CD11F2951B785ED6E /* HLSPlayerOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLSPlayerOverlayView.swift; sourceTree = "<group>"; };
+		A14E8F6940951B4270CA3DA3 /* Pods_HMSScreenShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSScreenShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FB818469CFE1CF58F4D74C /* NetworkQualityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityView.swift; sourceTree = "<group>"; };
 		A4C1AD0D89F94B1394449D22 /* PollVoteQuestionOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollVoteQuestionOptionView.swift; sourceTree = "<group>"; };
 		A6648C829F23C02F859C5FCE /* Inter-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.ttf"; sourceTree = "<group>"; };
@@ -210,14 +207,16 @@
 		B2A110E367BBA705B4747A9A /* ImagePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewView.swift; sourceTree = "<group>"; };
 		B31DD660889F54117D22B96D /* PollVoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollVoteViewModel.swift; sourceTree = "<group>"; };
 		B3A664C02BE7AB2B547F0345 /* HMSSDKExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HMSSDKExample.entitlements; sourceTree = "<group>"; };
+		B69A831DE5266FA027AADA1C /* Pods-HMSSDKExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSSDKExample.debug.xcconfig"; path = "Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample.debug.xcconfig"; sourceTree = "<group>"; };
 		B6CFC787680F4B22A3C065CA /* QuestionOptionCreateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionOptionCreateModel.swift; sourceTree = "<group>"; };
 		BC0CFEB6D285F60AF248B448 /* PollQuestionsCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollQuestionsCreateView.swift; sourceTree = "<group>"; };
 		BF90789ABEE7255CAC318407 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Chat.strings; sourceTree = "<group>"; };
-		C0DC549861CC6B5C16FD92C8 /* Pods-HMSScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.release.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		C308F45700BBAB68E7002EB9 /* PollListEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollListEntryView.swift; sourceTree = "<group>"; };
 		C684ACD48EE1935CDA9CB9E6 /* PreJoinPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreJoinPreviewViewController.swift; sourceTree = "<group>"; };
 		C8C5DD8303D0F805B3838970 /* HMSSDKInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMSSDKInteractor.swift; sourceTree = "<group>"; };
 		CA85DE019C47AEC0A4692ACF /* QuizVoteQuestionOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizVoteQuestionOptionView.swift; sourceTree = "<group>"; };
+		CFDC5DED45389892197B8F3F /* Pods_HMSSDKExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HMSSDKExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EA572E08ACB6947C311B5B /* Pods-HMSScreenShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.release.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.release.xcconfig"; sourceTree = "<group>"; };
 		D438E8CB4B2FCCD81A3E3AD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D74BA381B76C751C3584475F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D86D7C783AA51C039047367E /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
@@ -238,15 +237,16 @@
 		F85FF2F5F5FF73A2ECB4F521 /* PeersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeersListViewController.swift; sourceTree = "<group>"; };
 		F88304C5A8FA0FDE4BC37220 /* HMSSDKExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMSSDKExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		FDC2391DFC354E74614A57A4 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		FF1811584299575DE3C939A8 /* Pods-HMSScreenShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HMSScreenShare.debug.xcconfig"; path = "Target Support Files/Pods-HMSScreenShare/Pods-HMSScreenShare.debug.xcconfig"; sourceTree = "<group>"; };
 		FF1DC7FCD3EE6826A519FA1F /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		141BD4B9FD011FEE91A23E21 /* Frameworks */ = {
+		4A09191F5DD04AEB68488291 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD966EEA5FF9AAC4F47946F1 /* Pods_HMSSDKExample.framework in Frameworks */,
+				335B8CD3AFB745A485A4F37A /* Pods_HMSSDKExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92EC1B7EF75B1E0DDF6C1B1D /* ReplayKit.framework in Frameworks */,
-				05E6479B7EE822D24445C68C /* Pods_HMSScreenShare.framework in Frameworks */,
+				25CE7153BA82631930CDE412 /* Pods_HMSScreenShare.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +274,8 @@
 			isa = PBXGroup;
 			children = (
 				D86D7C783AA51C039047367E /* ReplayKit.framework */,
-				16A5449F414D1F4DB59E7AAC /* Pods_HMSSDKExample.framework */,
-				92D4DA7AE031404290091D16 /* Pods_HMSScreenShare.framework */,
+				CFDC5DED45389892197B8F3F /* Pods_HMSSDKExample.framework */,
+				A14E8F6940951B4270CA3DA3 /* Pods_HMSScreenShare.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -364,7 +364,7 @@
 				8C56EB81A3D94A56DE07829F /* HMSSDKExample */,
 				04B636A8F527D724395CEA56 /* Frameworks */,
 				92574F9EBE52FFB9B7440823 /* Products */,
-				BFED6F892432F8D51A91AED1 /* Pods */,
+				A68C1F3EB64ADE9A836C6DF3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -456,6 +456,18 @@
 			path = HLS;
 			sourceTree = "<group>";
 		};
+		A68C1F3EB64ADE9A836C6DF3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B69A831DE5266FA027AADA1C /* Pods-HMSSDKExample.debug.xcconfig */,
+				0B481DF82401A97BB885C3C4 /* Pods-HMSSDKExample.release.xcconfig */,
+				FF1811584299575DE3C939A8 /* Pods-HMSScreenShare.debug.xcconfig */,
+				D2EA572E08ACB6947C311B5B /* Pods-HMSScreenShare.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B8B2D6D6F6CB5F97C09B5A1E /* Questions Create */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,18 +479,6 @@
 				B6CFC787680F4B22A3C065CA /* QuestionOptionCreateModel.swift */,
 			);
 			path = "Questions Create";
-			sourceTree = "<group>";
-		};
-		BFED6F892432F8D51A91AED1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				76AA9EFE42F4654B4BAD3E63 /* Pods-HMSSDKExample.debug.xcconfig */,
-				8C6CC3287B92ED747E5895B2 /* Pods-HMSSDKExample.release.xcconfig */,
-				7F9E3A001C613562655DBFEC /* Pods-HMSScreenShare.debug.xcconfig */,
-				C0DC549861CC6B5C16FD92C8 /* Pods-HMSScreenShare.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		C6A9009DB92112E511D73AB0 /* Chat */ = {
@@ -602,12 +602,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50E5BCF9AC71D999A04D6C82 /* Build configuration list for PBXNativeTarget "HMSSDKExample" */;
 			buildPhases = (
-				E4FEF8155B2831828BA267BB /* [CP] Check Pods Manifest.lock */,
+				1473F07C01024DCA9A964ED2 /* [CP] Check Pods Manifest.lock */,
 				E718EE2B864DF36B9EC96F17 /* Sources */,
 				494D8C70E3A113C51CEB1739 /* Resources */,
 				BB5C006D13AE609E91D7310A /* Embed App Extensions */,
-				141BD4B9FD011FEE91A23E21 /* Frameworks */,
-				58EDBE2F0F8C5828574D9AFE /* [CP] Embed Pods Frameworks */,
+				4A09191F5DD04AEB68488291 /* Frameworks */,
+				7F394B0DE28A4C67C3E09A2F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -624,7 +624,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FD5AF66CF5C0A042F211BCD3 /* Build configuration list for PBXNativeTarget "HMSScreenShare" */;
 			buildPhases = (
-				215DC266259718CFFD557CD9 /* [CP] Check Pods Manifest.lock */,
+				4DB7A9EC4A175D54655D60E9 /* [CP] Check Pods Manifest.lock */,
 				AB611BE5E6C1A7BF4C7C1541 /* Sources */,
 				7C05F0E026AC5542CB811D99 /* Frameworks */,
 			);
@@ -707,7 +707,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		215DC266259718CFFD557CD9 /* [CP] Check Pods Manifest.lock */ = {
+		1473F07C01024DCA9A964ED2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DB7A9EC4A175D54655D60E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -729,7 +751,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		58EDBE2F0F8C5828574D9AFE /* [CP] Embed Pods Frameworks */ = {
+		7F394B0DE28A4C67C3E09A2F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -744,28 +766,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HMSSDKExample/Pods-HMSSDKExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4FEF8155B2831828BA267BB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HMSSDKExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1014,7 +1014,7 @@
 		};
 		66917588E8CA557C465B6556 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0DC549861CC6B5C16FD92C8 /* Pods-HMSScreenShare.release.xcconfig */;
+			baseConfigurationReference = D2EA572E08ACB6947C311B5B /* Pods-HMSScreenShare.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HMSScreenShare/HMSScreenShareRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1044,7 +1044,7 @@
 		};
 		72FB4D48FB66190D7924E386 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C6CC3287B92ED747E5895B2 /* Pods-HMSSDKExample.release.xcconfig */;
+			baseConfigurationReference = 0B481DF82401A97BB885C3C4 /* Pods-HMSSDKExample.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1067,7 +1067,7 @@
 		};
 		81C3032F613CEB15C57B094A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F9E3A001C613562655DBFEC /* Pods-HMSScreenShare.debug.xcconfig */;
+			baseConfigurationReference = FF1811584299575DE3C939A8 /* Pods-HMSScreenShare.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HMSScreenShare/HMSScreenShareRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1097,7 +1097,7 @@
 		};
 		832411D19918B12AD465AED8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76AA9EFE42F4654B4BAD3E63 /* Pods-HMSSDKExample.debug.xcconfig */;
+			baseConfigurationReference = B69A831DE5266FA027AADA1C /* Pods-HMSSDKExample.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = HMSSDKExample/SupportingFiles/HMSSDKExample.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

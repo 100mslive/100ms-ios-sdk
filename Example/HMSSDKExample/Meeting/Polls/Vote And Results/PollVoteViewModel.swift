@@ -128,7 +128,7 @@ class PollVoteViewModel: ObservableObject, Identifiable {
     }
     
     func setupSummaryIfNeeded() {
-        switch (poll.type, isAdmin) {
+        switch (poll.category, isAdmin) {
         case (.poll, true):
             setupPollAdminSummary()
         case (.quiz, true):

@@ -26,7 +26,7 @@ class QuestionCreateModel: ObservableObject, Identifiable {
     internal init(pollModel: PollCreateModel, index: Int, count: Int, question: HMSPollQuestion, saved: Bool, onSave: @escaping ((QuestionCreateModel)->Void), onDelete: @escaping ((QuestionCreateModel)->Void)) {
         self.index = index
         self.count = count
-        self.showAnswerSelection = pollModel.createdPoll?.type == .quiz
+        self.showAnswerSelection = pollModel.createdPoll?.category == .quiz
         self.questionOptions = [QuestionOptionCreateModel]()
         self.pollModel = pollModel
         self.onSave = onSave

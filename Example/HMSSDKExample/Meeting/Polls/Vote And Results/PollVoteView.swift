@@ -26,7 +26,7 @@ struct PollVoteView: View {
                 } label: {
                     Label("", systemImage: "chevron.left").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textHighEmph)
                 }
-                Text(model.poll.type == .poll ? "Poll" : "Quiz").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textHighEmph).font(HMSUIThemeCenter.sharedTheme.fonts.heading6Semibold20)
+                Text(model.poll.category == .poll ? "Poll" : "Quiz").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textHighEmph).font(HMSUIThemeCenter.sharedTheme.fonts.heading6Semibold20)
                 PollStateBadgeView(pollState: model.poll.state, endDate: model.endDate)
                 Spacer().frame(height: 16)
             }
@@ -36,7 +36,7 @@ struct PollVoteView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !model.startedByName.isEmpty {
-                        Text("\(model.startedByName) started a \(model.poll.type == .poll ? "poll" : "quiz")").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textMediumEmph).font(HMSUIThemeCenter.sharedTheme.fonts.subtitle1)
+                        Text("\(model.startedByName) started a \(model.poll.category == .poll ? "poll" : "quiz")").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textMediumEmph).font(HMSUIThemeCenter.sharedTheme.fonts.subtitle1)
                     }
                     if let summary = model.summary {
                         Text("Participation Summary").foregroundColor(HMSUIThemeCenter.sharedTheme.colors.textMediumEmph).font(HMSUIThemeCenter.sharedTheme.fonts.subtitle2)
@@ -55,7 +55,7 @@ struct PollVoteView: View {
                                     presentationMode.wrappedValue.dismiss()
                                 }
                             } label: {
-                                Text("End \(model.poll.type == .poll ? "Poll" : "Quiz")")
+                                Text("End \(model.poll.category == .poll ? "Poll" : "Quiz")")
                             }.buttonStyle(ActionButtonStyle(isWide: false))
                         }
                     }
