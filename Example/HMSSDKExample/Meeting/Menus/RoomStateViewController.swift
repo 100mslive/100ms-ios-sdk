@@ -41,6 +41,10 @@ class RoomStateViewController: FormViewController {
             $0.title = "Room name: \(room.name ?? "N/A")"
         }
         
+        section <<< LabelRow() {
+            $0.title = "Peer count: \(room.peerCount ?? 0)"
+        }
+        
         if let metadata = room.metaData {
             section <<< LabelRow() {
                 $0.title = "Room meta: \(metadata)"
