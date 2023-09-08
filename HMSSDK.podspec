@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HMSSDK'
-  s.version          = '0.9.10'
+  s.version          = '0.9.11'
   s.summary          = 'HMS Videoconferencing iOS SDK'
 
   s.description      = <<-DESC
@@ -10,8 +10,8 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/100mslive/100ms-ios-sdk/'
   s.license          = { :type => 'MIT'}
   s.author           = { 'Dmitry Fedoseyev' => 'dmitry@100ms.live', 'Yogesh Singh' => 'yogesh@100ms.live', 'Pawan Dixit' => 'pawan@100ms.live'}
-  s.source           = { :http => 'https://github.com/100mslive/100ms-ios-sdk/releases/download/0.9.10/HMSSDK.xcframework.zip',
-                           :sha256 => '4263e4842d189b16131ea22365f909bb8228df1c0428aff83d49fdc321ec5970'
+  s.source           = { :http => 'https://github.com/100mslive/100ms-ios-sdk/releases/download/0.9.11/HMSSDK.xcframework.zip',
+                           :sha256 => '4a8d727059c99867f8ad2adb2e4c655eda660a14cd83464826bff5f44786f5f6'
 						}
   s.ios.deployment_target = '12.0'
   s.vendored_frameworks = 'HMSSDK.xcframework'
