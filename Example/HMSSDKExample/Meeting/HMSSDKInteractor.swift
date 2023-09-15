@@ -23,6 +23,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     internal var onRemovedFromRoom: ((HMSRemovedFromRoomNotification) -> Void)?
     internal var onRecordingUpdate: (() -> Void)?
     internal var onHLSUpdate: (() -> Void)?
+    internal var onHandRaiseUpdate: (() -> Void)?
     internal var onMetadataUpdate: (() -> Void)?
     internal var updatedMuteStatus: ((HMSAudioTrack) -> Void)?
     internal var onNetworkQuality: (() -> Void)?
@@ -247,6 +248,15 @@ final class HMSSDKInteractor: HMSUpdateListener {
             pipController.update(track: videoTrack, name: hmsSDK?.localPeer?.name)
         }
     }
+    
+    func onPeerListUpdate(added: [HMSPeer], removed: [HMSPeer]) {
+        added.forEach {
+            NotificationCenter.default.post(name: Constants.peersUpdated, object: nil, userInfo: ["peer": $0])
+        }
+        removed.forEach {
+            NotificationCenter.default.post(name: Constants.peersUpdated, object: nil, userInfo: ["peer": $0])
+        }
+    }
 
     func on(peer: HMSPeer, update: HMSPeerUpdate) {
 
@@ -273,6 +283,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
             }
         case .networkQualityUpdated:
             onNetworkQuality?()
+        case .handRaiseUpdated:
+            if peer.isLocal {
+                onHandRaiseUpdate?()
+            }
         default:
             log.verbose(#function, "Unhandled update type encountered")
         }

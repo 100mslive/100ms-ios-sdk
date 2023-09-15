@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mjG-Ba-if7">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -543,6 +543,7 @@
                     <connections>
                         <outlet property="broadcasterPickerContainer" destination="6PQ-EF-D0Z" id="esm-Pr-1Hh"/>
                         <outlet property="collectionView" destination="DyH-bp-NTF" id="pNW-T6-NPM"/>
+                        <outlet property="handRaiseButton" destination="46D-2v-Gmp" id="LNK-tz-sXx"/>
                         <outlet property="hlsContainer" destination="K2O-AH-YXe" id="3Dd-bc-NeZ"/>
                         <outlet property="loadingIcon" destination="Zy8-cT-272" id="f5F-JG-r68"/>
                         <outlet property="musicButton" destination="Ac1-FP-06x" id="lIH-tf-wSH"/>

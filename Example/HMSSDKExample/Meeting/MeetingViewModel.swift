@@ -628,6 +628,10 @@ final class MeetingViewModel: NSObject,
             actions.append(UIAction(title: "Force Change Role", image: UIImage(systemName: "arrow.up.and.person.rectangle.portrait")) { [weak self] _ in
                 self?.showRoleChangePrompt?(peer, true)
             })
+            
+            actions.append(UIAction(title: "Lower Hand", image: UIImage(systemName: "arrow.up.and.person.rectangle.portrait")) { [weak self] _ in
+                self?.interactor?.hmsSDK?.lowerRemotePeerHand(peer)
+            })
         }
 
         if interactor.canRemoteMute {

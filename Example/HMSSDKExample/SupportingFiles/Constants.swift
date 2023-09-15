@@ -74,6 +74,7 @@ struct Constants {
     static let chat = "Chat"
 
     static let peersList = "PeersList"
+    static let paginatedPeersList = "PaginatedPeersList"
     static let peersListPreview = "PeersListPreview"
 
     static let emptyFields = "Please fill in all fields!"
