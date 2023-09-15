@@ -93,6 +93,7 @@ final class PeersListViewController: UIViewController {
         if let role = peer.role?.name {
             cell.roleLabel.text = role.capitalized
         }
+        cell.handRaiseButton.isHidden = !peer.isHandRaised
 
         if #available(iOS 14.0, *) {
             if let menu = meetingViewModel?.getMenu(for: peer) {

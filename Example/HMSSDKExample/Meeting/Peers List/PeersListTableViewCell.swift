@@ -27,6 +27,7 @@ final class PeersListTableViewCell: UITableViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var videoButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var handRaiseButton: UIImageView!
 
     private var wasHighlighted = false
 

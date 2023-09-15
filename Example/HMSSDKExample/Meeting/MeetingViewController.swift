@@ -48,6 +48,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     @IBOutlet private weak var publishVideoButton: UIButton!
     @IBOutlet private weak var publishAudioButton: UIButton!
+    @IBOutlet private weak var handRaiseButton: UIButton!
 
     @IBOutlet private weak var loadingIcon: UIImageView! {
         didSet {
@@ -131,6 +132,10 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         
         interactor.onPoll = { [weak self] poll in
             self?.setupViewPollToastState()
+        }
+        
+        interactor.onHandRaiseUpdate = { [weak self] in
+            self?.setupButtonStates()
         }
 
         viewModel?.updateLocalPeerTracks = { [weak self] in
@@ -290,6 +295,8 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         } else {
             publishAudioButton.isHidden = true
         }
+        
+        handRaiseButton.isSelected = localPeer.isHandRaised
     }
 
     private func cleanup() {
@@ -1064,12 +1071,21 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     @IBAction func raiseHandTapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        let meta = PeerMetadata(isHandRaised: sender.isSelected)
-        interactor?.hmsSDK?.change(metadataObject: meta) { [weak self] _, error in
-            if let error = error as? HMSError {
-                self?.showActionError(error, action: "Raise hand")
+        
+        if sender.isSelected {
+            interactor?.hmsSDK?.raiseLocalPeerHand() { [weak self] _, error in
+                if let error = error as? HMSError {
+                    self?.showActionError(error, action: "Raise hand")
+                }
+            }
+        } else {
+            interactor?.hmsSDK?.lowerLocalPeerHand() { [weak self] _, error in
+                if let error = error as? HMSError {
+                    self?.showActionError(error, action: "Raise hand")
+                }
             }
         }
+        
     }
 
     @IBAction private func disconnectTapped(_ sender: UIButton) {
