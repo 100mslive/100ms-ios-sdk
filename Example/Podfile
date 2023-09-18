@@ -14,7 +14,7 @@ end
 
 target 'HMSScreenShare' do
   use_frameworks!
-  pod 'HMSBroadcastExtensionSDK', '0.0.9'
+  pod 'HMSBroadcastExtensionSDK', '1.0.0'
 end
 
 # Workaround for M1 simulator issue
