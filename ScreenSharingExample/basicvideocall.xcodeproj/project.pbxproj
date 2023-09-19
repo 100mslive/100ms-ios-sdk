@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,8 @@
 		872563BF294B3CE700777D03 /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872563A4294B281000777D03 /* ReplayKit.framework */; };
 		872563C2294B3CE700777D03 /* SampleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872563C1294B3CE700777D03 /* SampleHandler.swift */; };
 		872563C6294B3CE700777D03 /* BasicExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 872563BE294B3CE700777D03 /* BasicExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		872563CD294B3D6200777D03 /* HMSBroadcastExtensionSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 872563CC294B3D6200777D03 /* HMSBroadcastExtensionSDK */; };
+		875E6AD82AB8C67B00DC005A /* HMSBroadcastExtensionSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 875E6AD72AB8C67B00DC005A /* HMSBroadcastExtensionSDK */; };
+		875E6ADA2AB8C68800DC005A /* HMSBroadcastExtensionSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 875E6AD92AB8C68800DC005A /* HMSBroadcastExtensionSDK */; };
 		9132155226B03E74002694A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132155126B03E74002694A8 /* AppDelegate.swift */; };
 		9132155426B03E74002694A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132155326B03E74002694A8 /* SceneDelegate.swift */; };
 		9132155626B03E74002694A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132155526B03E74002694A8 /* ViewController.swift */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				875E6ADA2AB8C68800DC005A /* HMSBroadcastExtensionSDK in Frameworks */,
 				872563BF294B3CE700777D03 /* ReplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				872563CD294B3D6200777D03 /* HMSBroadcastExtensionSDK in Frameworks */,
+				875E6AD82AB8C67B00DC005A /* HMSBroadcastExtensionSDK in Frameworks */,
 				8725639C294B264600777D03 /* HMSSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +152,9 @@
 			dependencies = (
 			);
 			name = BasicExtension;
+			packageProductDependencies = (
+				875E6AD92AB8C68800DC005A /* HMSBroadcastExtensionSDK */,
+			);
 			productName = BasicExtension;
 			productReference = 872563BE294B3CE700777D03 /* BasicExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -171,7 +176,7 @@
 			name = basicvideocall;
 			packageProductDependencies = (
 				8725639B294B264600777D03 /* HMSSDK */,
-				872563CC294B3D6200777D03 /* HMSBroadcastExtensionSDK */,
+				875E6AD72AB8C67B00DC005A /* HMSBroadcastExtensionSDK */,
 			);
 			productName = basicvideocall;
 			productReference = 9132154E26B03E74002694A8 /* basicvideocall.app */;
@@ -205,7 +210,7 @@
 			mainGroup = 9132154526B03E74002694A8;
 			packageReferences = (
 				8725639A294B264600777D03 /* XCRemoteSwiftPackageReference "100ms-ios-sdk" */,
-				872563CB294B3D6200777D03 /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */,
+				875E6AD62AB8C67B00DC005A /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */,
 			);
 			productRefGroup = 9132154F26B03E74002694A8 /* Products */;
 			projectDirPath = "";
@@ -543,12 +548,12 @@
 				minimumVersion = 0.5.3;
 			};
 		};
-		872563CB294B3D6200777D03 /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */ = {
+		875E6AD62AB8C67B00DC005A /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/100mslive/100ms-ios-broadcast-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.5;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -559,9 +564,14 @@
 			package = 8725639A294B264600777D03 /* XCRemoteSwiftPackageReference "100ms-ios-sdk" */;
 			productName = HMSSDK;
 		};
-		872563CC294B3D6200777D03 /* HMSBroadcastExtensionSDK */ = {
+		875E6AD72AB8C67B00DC005A /* HMSBroadcastExtensionSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 872563CB294B3D6200777D03 /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */;
+			package = 875E6AD62AB8C67B00DC005A /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */;
+			productName = HMSBroadcastExtensionSDK;
+		};
+		875E6AD92AB8C68800DC005A /* HMSBroadcastExtensionSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 875E6AD62AB8C67B00DC005A /* XCRemoteSwiftPackageReference "100ms-ios-broadcast-sdk" */;
 			productName = HMSBroadcastExtensionSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
