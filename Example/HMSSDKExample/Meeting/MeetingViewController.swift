@@ -375,6 +375,11 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         let isLocalAudioFilePlaybackEnabled = AudioSourceType(rawValue: UserDefaults.standard.integer(forKey: Constants.defaultAudioSource)) == .audioMixer
 
         var actions = [
+            UIAction(title: "Show new peer list",
+                     image: UIImage(systemName: "megaphone.fill")) { [weak self] _ in
+                         self?.showNewPeerList()
+            },
+            
             UIAction(title: "Audio Only Mode",
                      image: UIImage(systemName: "megaphone.fill"),
                      state: currentMode == .audioOnly ? .on : .off) { [weak self] _ in
@@ -1021,6 +1026,20 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
     @IBAction private func roomNameTapped(_ sender: UIButton) {
         guard let viewController = UIStoryboard(name: Constants.peersList, bundle: nil)
                 .instantiateInitialViewController() as? PeersListViewController else {
+            return
+        }
+
+        viewController.roomName = roomName
+
+        viewController.meetingViewModel = viewModel
+        viewController.speakers = viewModel?.speakers
+
+        present(viewController, animated: true)
+    }
+    
+    func showNewPeerList() {
+        guard let viewController = UIStoryboard(name: Constants.peersList, bundle: nil)
+                .instantiateViewController(identifier: Constants.paginatedPeersList) as? PaginatedPeersListViewController else {
             return
         }
 
