@@ -4,7 +4,7 @@ platform :ios, '13.0'
 
 target 'HMSSDKExample' do
   use_frameworks!
-  pod 'HMSSDK', '1.1.0'
+  pod 'HMSSDK', '1.2.0'
   pod 'HMSHLSPlayerSDK', '0.0.2'
   pod 'SwiftyBeaver', '1.9.5'
   pod 'Zip', '2.1.2'
