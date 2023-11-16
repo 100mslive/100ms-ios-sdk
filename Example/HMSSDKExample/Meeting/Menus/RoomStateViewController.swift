@@ -54,16 +54,13 @@ class RoomStateViewController: FormViewController {
     }
 
     func setupBrowserRecording() {
-        guard room.browserRecordingState.running || room.browserRecordingState.initialising else { return }
-        
         let section = Section("Browser recording")
         
-        if room.browserRecordingState.initialising {
-            section <<< LabelRow() {
-                $0.title = "Initialising"
-            }
+        let state = room.browserRecordingState.state
+        section <<< LabelRow() {
+            $0.title = "State: \(state.displayString())"
         }
-        
+    
         if let startDate = room.browserRecordingState.startedAt {
             section <<< LabelRow() {
                 $0.title = "Started at: \(startDate)"
@@ -79,10 +76,13 @@ class RoomStateViewController: FormViewController {
     }
     
     func setupServerRecording() {
-        guard room.serverRecordingState.running else { return }
-        
         let section = Section("Server recording")
 
+        let state = room.serverRecordingState.state
+        section <<< LabelRow() {
+            $0.title = "State: \(state.displayString())"
+        }
+        
         if let startDate = room.serverRecordingState.startedAt {
             section <<< LabelRow() {
                 $0.title = "Started at: \(startDate)"
@@ -97,17 +97,13 @@ class RoomStateViewController: FormViewController {
     }
     
     func setupHLSRecording() {
-        guard room.hlsRecordingState.running else { return }
-        
         let section = Section("HLS recording")
-        
+
+        let state = room.hlsRecordingState.state
         section <<< LabelRow() {
-            $0.title = "Single file per layer: \(room.hlsRecordingState.singleFilePerLayer ? "ON" : "OFF")"
+            $0.title = "State: \(state.displayString())"
         }
         
-        section <<< LabelRow() {
-            $0.title = "Enable VOD: \(room.hlsRecordingState.enableVOD ? "ON" : "OFF")"
-        }
 
         if let startDate = room.hlsRecordingState.startedAt {
             section <<< LabelRow() {
@@ -125,9 +121,12 @@ class RoomStateViewController: FormViewController {
     }
     
     func setupRTMPStreaming() {
-        guard room.rtmpStreamingState.running else { return }
-        
         let section = Section("RTMP")
+
+        let state = room.rtmpStreamingState.state
+        section <<< LabelRow() {
+            $0.title = "State: \(state.displayString())"
+        }
 
         if let startDate = room.rtmpStreamingState.startedAt {
             section <<< LabelRow() {
@@ -143,9 +142,13 @@ class RoomStateViewController: FormViewController {
     }
     
     func setupHLSStreaming() {
-        guard room.hlsStreamingState.running else { return }
-        
         let section = Section("HLS")
+        
+        let state = room.hlsStreamingState.state
+        section <<< LabelRow() {
+            $0.title = "State: \(state.displayString())"
+        }
+        
         var count = 1
         for variant in room.hlsStreamingState.variants {
             section <<< TextAreaRow() {
