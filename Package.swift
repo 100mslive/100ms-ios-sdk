@@ -16,8 +16,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "HMSSDK",
-            url: "https://github.com/100mslive/100ms-ios-sdk/releases/download/1.4.0/HMSSDK.xcframework.zip",
-            checksum: "e18067e94b14faa6db7c7fe3f476de360c603c770a86f735704672e67fb25612"
+            url: "https://github.com/100mslive/100ms-ios-sdk/releases/download/1.4.1/HMSSDK.xcframework.zip",
+            checksum: "26aff3b0eb7ede275afc8e7f38563d0f250df0ca77524156d7023299e707da8a"
         ),
         .binaryTarget(
             name: "WebRTC",
