@@ -98,6 +98,10 @@ final class HMSSDKInteractor: HMSUpdateListener {
                     videoSettingsBuilder.cameraOrientationLock = .landscape
                 }
                 
+                if #available(iOS 16.0, *) {
+                    videoSettingsBuilder.isMultitaskingCameraAccessEnabled = true
+                }
+                
                 audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
                 audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
                 
