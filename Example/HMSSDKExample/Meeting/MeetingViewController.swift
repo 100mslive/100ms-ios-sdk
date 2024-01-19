@@ -546,6 +546,20 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             ])
             
         }
+        
+        if let videoFilterPlugin = interactor.videoFilterPlugin {
+            actions.append(contentsOf: [UIAction(title: "Color Controls",
+                                                 image: UIImage(systemName: "rainbow")) { [weak self] _ in
+                
+                let controller = UIHostingController(rootView: ColorControlsView(videoFilterPlugin: videoFilterPlugin))
+                controller.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                controller.modalTransitionStyle = .crossDissolve
+                controller.view.backgroundColor = .clear
+                self?.present(controller, animated: true, completion: nil)
+                
+                self?.updateSettingsButton()
+            }])
+        }
 
         return actions
     }

@@ -68,6 +68,8 @@ final class HMSSDKInteractor: HMSUpdateListener {
     private var videoPlugins = [HMSVideoPlugin]()
     var virtualBackgroundPlugin: HMSVideoPlugin?
     var frameCapturePlugin: HMSFrameCapturePlugin?
+    
+    var videoFilterPlugin: HMSVideoFilterPlugin?
 
     // MARK: - Setup SDK
 
@@ -137,6 +139,12 @@ final class HMSSDKInteractor: HMSUpdateListener {
         if #available(iOS 15.0, *) {
             
             virtualBackgroundPlugin = HMSVirtualBackgroundPlugin(backgroundImage: UIImage(named: "VB1"))
+            
+            videoFilterPlugin = HMSVideoFilterPlugin()
+            videoFilterPlugin?.activate()
+            if let videoFilterPlugin {
+                videoPlugins.append(videoFilterPlugin)
+            }
             
             if UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled") == true {
                 virtualBackgroundPlugin?.activate()
