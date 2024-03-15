@@ -4,8 +4,9 @@ platform :ios, '13.0'
 
 target 'HMSSDKExample' do
   use_frameworks!
-  pod 'HMSSDK', '1.6.0'
+  pod 'HMSSDK', '1.7.0'
   pod 'HMSHLSPlayerSDK', '0.0.2'
+  pod 'HMSNoiseCancellationModels', '1.0.0'
   pod 'SwiftyBeaver', '1.9.5'
   pod 'Zip', '2.1.2'
   pod 'Eureka', '5.4.0'
