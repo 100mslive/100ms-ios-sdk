@@ -10,6 +10,7 @@ import Foundation
 import HMSSDK
 import HMSAnalyticsSDK
 import SwiftyBeaver
+import HMSNoiseCancellationModels
 
 final class HMSSDKInteractor: HMSUpdateListener {
 
@@ -84,7 +85,7 @@ final class HMSSDKInteractor: HMSUpdateListener {
     var audioMixerSource: HMSAudioMixerSource?
     let audioFilePlayerNode = HMSAudioFilePlayerNode()
     
-    
+    var noiseCancellationPlugin: HMSNoiseCancellationPlugin?
     
     private func setupSDK() {
         hmsSDK = HMSSDK.build { sdk in
@@ -106,6 +107,13 @@ final class HMSSDKInteractor: HMSUpdateListener {
                 
                 audioSettingsBuilder.initialMuteState = UserDefaults.standard.publishAudio ? .unmute : .mute
                 audioSettingsBuilder.audioSource = self.audioSource(for: sdk)
+                
+                if let pathForNCModel = HMSNoiseCancellationModels.path(for: .smallFullBand) {
+                    
+                    self.noiseCancellationPlugin = HMSNoiseCancellationPlugin(modelPath: pathForNCModel, initialState: .disabled)
+                }
+                
+                audioSettingsBuilder.noiseCancellationPlugin = self.noiseCancellationPlugin
                 
                 if UserDefaults.standard.bool(forKey: Constants.musicMode) {
                     audioSettingsBuilder.audioMode = .music

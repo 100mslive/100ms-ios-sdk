@@ -372,6 +372,8 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         
         let isVBActivated = UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled")
         
+        let isNCActivated = self.interactor.noiseCancellationPlugin?.isEnabled()
+        
         let isLocalAudioFilePlaybackEnabled = AudioSourceType(rawValue: UserDefaults.standard.integer(forKey: Constants.defaultAudioSource)) == .audioMixer
 
         var actions = [
@@ -557,6 +559,22 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
                 controller.view.backgroundColor = .clear
                 self?.present(controller, animated: true, completion: nil)
                 
+                self?.updateSettingsButton()
+            }
+            ])
+        }
+        
+        if let noiseCancellationPlugin = interactor.noiseCancellationPlugin, noiseCancellationPlugin.isNoiseCancellationAvailable {
+            actions.append(contentsOf:
+                [UIAction(title: "Enable noise cancellation",
+                                      image: UIImage(systemName: "waveform.badge.mic"),
+                                      state: noiseCancellationPlugin.isEnabled() ? .on : .off) { [weak self] _ in
+                if !noiseCancellationPlugin.isEnabled() {
+                    try? noiseCancellationPlugin.enable()
+                }
+                else {
+                    try? noiseCancellationPlugin.disable()
+                }
                 self?.updateSettingsButton()
             }])
         }
