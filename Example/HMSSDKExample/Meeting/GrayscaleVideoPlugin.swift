@@ -48,6 +48,7 @@ class GrayscaleVideoPlugin: HMSVideoPlugin {
     let ciContext = CIContext(options: nil)
     
     override func process(_ frame: CVPixelBuffer) -> CVPixelBuffer {
+        
         let inputImage = CIImage(cvPixelBuffer: frame)
         
         guard let outputImage = inputImage.grayscale else { return frame }
