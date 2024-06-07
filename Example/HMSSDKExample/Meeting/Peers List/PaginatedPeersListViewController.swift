@@ -9,12 +9,13 @@
 import UIKit
 import HMSSDK
 
-final class PaginatedPeersListViewController: UIViewController {
+final class PaginatedPeersListViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet private weak var participantsTitle: UIButton!
 
     @IBOutlet private  weak var table: UITableView!
     @IBOutlet private  weak var loadMoreButton: UIButton!
+    @IBOutlet private  weak var searchBar: UISearchBar!
 
     internal var roomName: String!
 
@@ -38,9 +39,38 @@ final class PaginatedPeersListViewController: UIViewController {
         observeParticipants()
 
         applySnapshot()
+        
+        searchBar.delegate = self
 
         iterator = meetingViewModel?.interactor?.hmsSDK?.getPeerListIterator(options: HMSPeerListIteratorOptions(limit: 10))
         loadPeers()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchPeers(searchText)
+    }
+    
+    var currentQuery: String = ""
+    
+    func searchPeers(_ query: String) {
+        self.loadMoreButton.isHidden = true
+        
+        currentQuery = query
+        
+        if query.isEmpty {
+            self.peers = []
+            self.applySnapshot()
+            return
+        }
+        
+        meetingViewModel?.interactor?.hmsSDK?.findPeersByName(query) { [weak self] foundPeers, error in
+            guard let self = self, let foundPeers = foundPeers else { return }
+            
+            guard self.currentQuery == query else { return }
+            
+            self.peers = foundPeers
+            self.applySnapshot()
+        }
     }
     
     func loadPeers() {

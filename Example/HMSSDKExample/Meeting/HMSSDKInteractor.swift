@@ -146,7 +146,15 @@ final class HMSSDKInteractor: HMSUpdateListener {
     private func setupPlugins() {
         if #available(iOS 15.0, *) {
             
-            virtualBackgroundPlugin = HMSVirtualBackgroundPlugin(backgroundImage: UIImage(named: "VB1"))
+            let vbPlugin = HMSVirtualBackgroundPlugin(backgroundImage: UIImage(named: "VBPortrait"))
+            vbPlugin.imageDataSource = { info in
+                if info.orientation == .down || info.orientation == .up {
+                    return UIImage(named: "VBLandscape")!
+                }
+                return UIImage(named: "VBPortrait")!
+            }
+            
+            virtualBackgroundPlugin = vbPlugin
             
             videoFilterPlugin = HMSVideoFilterPlugin()
             videoFilterPlugin?.activate()
