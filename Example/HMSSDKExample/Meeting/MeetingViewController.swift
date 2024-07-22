@@ -301,7 +301,15 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
     private func cleanup() {
         UIApplication.shared.isIdleTimerDisabled = false
-        viewModel?.cleanup()
+        viewModel?.cleanup() { success, error in
+            if let error = error {
+                print(#function, error as Any)
+                return
+            }
+            print(#function, success)
+            
+            NotificationCenter.default.post(name: Constants.meetingLeft, object: nil)
+        }
     }
 
     // MARK: - Settings Menu Button
@@ -370,7 +378,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
         let currentMode = viewModel?.mode ?? .regular
         
-        let isVBActivated = UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled")
+        let vbType = UserDefaults.standard.string(forKey: "virtualBackgroundType")
         
         let isNCActivated = self.interactor.noiseCancellationPlugin?.isEnabled()
         
@@ -469,14 +477,40 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
 
             UIAction(title: "Enable virtual background",
                      image: UIImage(systemName: "person.crop.rectangle.fill"),
-                     state: isVBActivated ? .on : .off) { [weak self] _ in
-                 if isVBActivated {
+                     state: vbType == "background" ? .on : .off) { [weak self] _ in
+                 if vbType == "background" {
                      self?.interactor.virtualBackgroundPlugin?.deactivate()
-                     UserDefaults.standard.set(false, forKey: "virtualBackgroundPluginEnabled")
+                     UserDefaults.standard.set("none", forKey: "virtualBackgroundType")
                  }
                  else {
+                     if #available(iOS 15.0, *) {
+                         (self?.interactor.virtualBackgroundPlugin as? HMSVirtualBackgroundPlugin)?.operatingMode = .init(imageDataSource: { info in
+                             if info.orientation == .down || info.orientation == .up {
+                                 return UIImage(named: "VBLandscape")!
+                             }
+                             return UIImage(named: "VBPortrait")!
+                         })
+                     }
                      _ = self?.interactor.virtualBackgroundPlugin?.activate()
-                     UserDefaults.standard.set(true, forKey: "virtualBackgroundPluginEnabled")
+                     UserDefaults.standard.set("background", forKey: "virtualBackgroundType")
+                 }
+                 self?.updateSettingsButton()
+            },
+            UIAction(title: "Enable blur background",
+                     image: UIImage(systemName: "person.crop.rectangle.fill"),
+                     state: vbType == "blur" ? .on : .off) { [weak self] _ in
+                 if vbType == "blur" {
+                     self?.interactor.virtualBackgroundPlugin?.deactivate()
+                     UserDefaults.standard.set("none", forKey: "virtualBackgroundType")
+                 }
+                 else {
+                     if #available(iOS 15.0, *) {
+                         if let plugin = (self?.interactor.virtualBackgroundPlugin as? HMSVirtualBackgroundPlugin) {
+                             plugin.operatingMode = .init(blurIntensity: 40)
+                         }
+                     }
+                     _ = self?.interactor.virtualBackgroundPlugin?.activate()
+                     UserDefaults.standard.set("blur", forKey: "virtualBackgroundType")
                  }
                  self?.updateSettingsButton()
             },
