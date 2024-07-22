@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyGif
+import HMSSDK
 
 final class LoginViewController: UIViewController {
 
@@ -105,6 +106,11 @@ final class LoginViewController: UIViewController {
             self?.showInputAlert()
         }
 
+        NotificationCenter.default.addObserver(forName: Constants.meetingLeft,
+                                               object: nil,
+                                               queue: .main) { [weak self] _ in
+            self?.collectFeedback()
+        }
     }
 
     private func checkIfInMeeting() -> Bool {
@@ -231,4 +237,89 @@ final class LoginViewController: UIViewController {
 
         present(viewController, animated: true)
     }
+    
+    // MARK: - Session Feedback
+    
+    /// Function to prompt the user to provide feedback on the session.
+    private func collectFeedback() {
+        
+        // Create an alert controller to display feedback options.
+        let alert = UIAlertController(title: SessionFeedback.feedbackTitle,
+                                      message: SessionFeedback.feedbackSubTitle,
+                                      preferredStyle: .actionSheet)
+        
+        // Add actions for various feedback options.
+        alert.addAction(UIAlertAction(title: SessionFeedback.awful, style: .default, handler: { [weak self] action in
+            self?.submitFeedback(.awful)
+        }))
+        alert.addAction(UIAlertAction(title: SessionFeedback.bad, style: .default, handler: { [weak self] action in
+            self?.submitFeedback(.bad)
+        }))
+        alert.addAction(UIAlertAction(title: SessionFeedback.fair, style: .default, handler: { [weak self] action in
+            self?.submitFeedback(.fair)
+        }))
+        alert.addAction(UIAlertAction(title: SessionFeedback.good, style: .default, handler: { [weak self] action in
+            self?.submitFeedback(.good)
+        }))
+        alert.addAction(UIAlertAction(title: SessionFeedback.great, style: .default, handler: { [weak self] action in
+            self?.submitFeedback(.great)
+        }))
+        
+        // Add cancel action.
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            // Log the cancel action.
+            print(#function, action.title as Any)
+        }))
+        
+        // Present the alert controller to the user.
+        self.present(alert, animated: true)
+    }
+
+    /// Function to submit feedback provided by the user.
+    ///
+    /// - Parameter rating: The rating provided by the user.
+    private func submitFeedback(_ rating: HMSFeedbackRatingUI) {
+        
+        // Create an alert controller to gather additional comments from the user.
+        let alert = UIAlertController(title: rating.toString(),
+                                      message: rating.getQuestion(),
+                                      preferredStyle: .alert)
+        
+        // Add text fields for reasons and additional comments.
+        alert.addTextField { textField in
+            textField.placeholder = "Reasons?" // Example: "Bad Audio"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "Additional Comments?" // Example: "Could not hear others"
+        }
+        
+        // Add submit action.
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
+            
+            // Create a feedback object with the provided information.
+            let feedback = HMSSessionFeedback(question: SessionFeedback.feedbackTitle,
+                                              rating: rating.toInt(),
+                                              minRating: 1,
+                                              maxRating: 5,
+                                              reasons: ["\(alert.textFields![0].text ?? "")"],
+                                              comment: alert.textFields![1].text)
+            
+            // Submit the feedback to the SDK.
+            HMSSDK.submitFeedback(feedback) { success, error in
+                
+                // Create an alert to inform the user about the submission status.
+                let alert = UIAlertController(title: "Feedback Submitted",
+                                              message: "\(success)",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                
+                // Present the alert to the user.
+                self.present(alert, animated: true)
+            }
+        }))
+        
+        // Present the alert controller to the user.
+        self.present(alert, animated: true)
+    }
+
 }

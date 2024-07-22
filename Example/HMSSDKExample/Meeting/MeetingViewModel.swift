@@ -688,10 +688,12 @@ final class MeetingViewModel: NSObject,
 
     // MARK: - Action Handlers
 
-    internal func cleanup() {
+    internal func cleanup(completion: ((Bool, Error?) -> Void)? = nil) {
         dataSource.delegate = nil
         dataSource.sortComparator = nil
-        interactor?.hmsSDK?.leave()
+        interactor?.hmsSDK?.leave { success, error in
+            completion?(success, error)
+        }
         interactor = nil
     }
 

@@ -62,6 +62,8 @@ struct Constants {
     static let roleUpdated = Notification.Name("ROLE_UPDATED")
     
     static let sessionMetadataReceived = NSNotification.Name("sessionMetadataReceived")
+    
+    static let meetingLeft = NSNotification.Name("MeetingViewControllerCleanup")
 
     // MARK: - View Constants
 

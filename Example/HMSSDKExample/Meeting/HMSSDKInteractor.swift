@@ -146,24 +146,34 @@ final class HMSSDKInteractor: HMSUpdateListener {
     private func setupPlugins() {
         if #available(iOS 15.0, *) {
             
-            let vbPlugin = HMSVirtualBackgroundPlugin(backgroundImage: UIImage(named: "VBPortrait"))
-            vbPlugin.imageDataSource = { info in
-                if info.orientation == .down || info.orientation == .up {
-                    return UIImage(named: "VBLandscape")!
-                }
-                return UIImage(named: "VBPortrait")!
+            var vbPlugin: HMSVirtualBackgroundPlugin?
+            
+            if UserDefaults.standard.string(forKey: "virtualBackgroundType") == nil {
+                UserDefaults.standard.set("none", forKey: "virtualBackgroundType")
+            }
+
+            if UserDefaults.standard.string(forKey: "virtualBackgroundType") == "blur" {
+                vbPlugin = HMSVirtualBackgroundPlugin(operatingMode: .init(blurIntensity: 40))
+            }
+            else {
+                vbPlugin = HMSVirtualBackgroundPlugin(operatingMode: .init(imageDataSource: { info in
+                    if info.orientation == .down || info.orientation == .up {
+                        return UIImage(named: "VBLandscape")!
+                    }
+                    return UIImage(named: "VBPortrait")!
+                }))
             }
             
             virtualBackgroundPlugin = vbPlugin
+            
+            if UserDefaults.standard.string(forKey: "virtualBackgroundType") != "none" {
+                virtualBackgroundPlugin?.activate()
+            }
             
             videoFilterPlugin = HMSVideoFilterPlugin()
             videoFilterPlugin?.activate()
             if let videoFilterPlugin {
                 videoPlugins.append(videoFilterPlugin)
-            }
-            
-            if UserDefaults.standard.bool(forKey: "virtualBackgroundPluginEnabled") == true {
-                virtualBackgroundPlugin?.activate()
             }
             
             if let virtualBackgroundPlugin = virtualBackgroundPlugin {
