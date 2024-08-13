@@ -255,6 +255,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
 
         if let localAudioStats = stats as? HMSLocalAudioStats {
             components += ["Bitrate (Audio) \(String(format: "%.1f Kb/s", localAudioStats.bitrate))"]
+            components += ["Packets Lost (Audio) \(localAudioStats.packetsLost)"]
+            components += ["Jitter (Audio) \(localAudioStats.jitter)"]
         } else if let localVideoStats = stats as? [HMSLocalVideoStats] {
             for layerStats in localVideoStats {
                 if let layerId = layerStats.simulcastLayerId?.uintValue, let layerType = HMSSimulcastLayer(rawValue: layerId), let layerName = layerNameMap[layerType] {
@@ -278,6 +280,8 @@ final class VideoCollectionViewCell: UICollectionViewCell {
                     let activeMark = qualityLimitations.reason == .other ? "> " : ""
                     components += ["\(activeMark)Limited by other \(String(format: "%.1f", qualityLimitations.other))"]
                 }
+                components += ["Packets Lost \(layerStats.packetsLost)"]
+                components += ["Jitter \(layerStats.jitter)"]
                 components += [" "]
             }
         } else if let remoteAudioStats = stats as? HMSRemoteAudioStats {

@@ -73,14 +73,14 @@ final class PeersListViewController: UIViewController {
 
     func makeDataSource() -> DataSource? {
 
-        let dataSource = DataSource(tableView: table) { (table, indexPath, peer) -> UITableViewCell? in
+        let dataSource = DataSource(tableView: table) { [weak self] (table, indexPath, peer) -> UITableViewCell? in
 
             guard let cell = table.dequeueReusableCell(withIdentifier: "Cell",
                                                        for: indexPath) as? PeersListTableViewCell else {
                 return nil
             }
 
-            self.update(cell, for: peer)
+            self?.update(cell, for: peer)
 
             return cell
         }
