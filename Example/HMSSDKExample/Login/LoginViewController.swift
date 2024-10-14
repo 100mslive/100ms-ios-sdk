@@ -40,6 +40,8 @@ final class LoginViewController: UIViewController {
             Utilities.drawCorner(on: joinMeetingIDField)
         }
     }
+    
+    private var collectFeedbackOnAppear = false
 
     @IBOutlet private weak var joinMeetingStackView: UIStackView! {
         didSet {
@@ -75,6 +77,14 @@ final class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         joinMeetingIDField.text = UserDefaults.standard.string(forKey: Constants.roomIDKey)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (collectFeedbackOnAppear) {
+            collectFeedbackOnAppear = false
+            collectFeedback()
+        }
+    }
 
     override func willTransition(to newCollection: UITraitCollection,
                                  with coordinator: UIViewControllerTransitionCoordinator) {
@@ -109,7 +119,7 @@ final class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: Constants.meetingLeft,
                                                object: nil,
                                                queue: .main) { [weak self] _ in
-            self?.collectFeedback()
+            self?.collectFeedbackOnAppear = true
         }
     }
 
