@@ -5,7 +5,7 @@ PODS:
   - HMSHLSPlayerSDK (0.0.2):
     - HMSAnalyticsSDK (= 0.0.2)
   - HMSNoiseCancellationModels (1.0.0)
-  - HMSSDK (1.16.3):
+  - HMSSDK (1.16.4):
     - HMSAnalyticsSDK (= 0.0.2)
     - HMSWebRTC (= 1.0.6171)
   - HMSWebRTC (1.0.6171)
@@ -18,7 +18,7 @@ DEPENDENCIES:
   - HMSBroadcastExtensionSDK (= 1.0.0)
   - HMSHLSPlayerSDK (= 0.0.2)
   - HMSNoiseCancellationModels (= 1.0.0)
-  - HMSSDK (= 1.16.3)
+  - HMSSDK (= 1.16.4)
   - SwiftyBeaver (= 1.9.5)
   - SwiftyGif
   - Zip (= 2.1.2)
@@ -42,12 +42,12 @@ SPEC CHECKSUMS:
   HMSBroadcastExtensionSDK: 0757d80497fddec3952858eb14892fb274f9f3c3
   HMSHLSPlayerSDK: 6a54ad4d12f3dc2270d1ecd24019d71282a4f6a3
   HMSNoiseCancellationModels: a3bda1405a16015632f4bcabd46ce48f35103b02
-  HMSSDK: 2cf66bf3db4a486bbde35a18153c0a49403c0c1f
+  HMSSDK: 7413992215e2ebb562868f75fa48f7e1f7589ae8
   HMSWebRTC: f6f4f02a665fda6d9d8a5b223272045c3d9486fb
   SwiftyBeaver: 84069991dd5dca07d7069100985badaca7f0ce82
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: df11b902b91b048952f8c287209b6df19cb74527
+PODFILE CHECKSUM: 10af3db6f3edc7b922267971f4b2d50f9ab1207e
 
 COCOAPODS: 1.15.2
