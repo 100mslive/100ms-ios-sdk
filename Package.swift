@@ -8,7 +8,7 @@ let package = Package(
     products: [
         .library(
             name: "HMSSDK",
-            targets: ["HMSSDK", "WebRTC", "HMSSDKDependencies"])
+            targets: ["HMSSDK", "HMSWebRTC", "HMSSDKDependencies"])
     ],
     dependencies: [
         .package(name: "HMSAnalyticsSDK", url: "https://github.com/100mslive/100ms-ios-analytics-sdk", from: "0.0.2"),
@@ -16,13 +16,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "HMSSDK",
-            url: "https://github.com/100mslive/100ms-ios-sdk/releases/download/1.16.8/HMSSDK.xcframework.zip",
-            checksum: "fbaf0e7cd5802277d5f6e649f9adb8700411bb5cb0b1ff44794fd058f9e43693"
+            url: "https://github.com/100mslive/100ms-ios-sdk/releases/download/1.17.0/HMSSDK.xcframework.zip",
+            checksum: "9eba80db214353c9501e5edd3e9b93b3b49f5d6230d25f10cc7e970ecbe8891d"
         ),
         .binaryTarget(
-            name: "WebRTC",
-            url: "https://github.com/100mslive/webrtc-ios/releases/download/1.0.6172/WebRTC.xcframework.zip",
-            checksum: "4b4e0d6fe7934deb544ec0c812bf00665c8b57b210573ad58be9e7d7c4c590f6"
+            name: "HMSWebRTC",
+            url: "https://github.com/100mslive/webrtc-ios/releases/download/1.0.6173/HMSWebRTC.xcframework.zip",
+            checksum: "629db2db22918b716175886454aaa3c0c1f03b0761578ba89cab257d4100e278"
         ),
         .target(name: "HMSSDKDependencies", dependencies: ["HMSAnalyticsSDK"], path: "dependencies")
     ]
