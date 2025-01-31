@@ -10,7 +10,7 @@ import HMSSDK
 
 struct ContentView: View {
     
-    @StateObject var videoSDK = VideoSDK()
+    @StateObject var videoSDK = VideoSDK.shared
     @State var isJoining = false
     
     var body: some View {
@@ -18,8 +18,8 @@ struct ContentView: View {
         Group {
             if videoSDK.isJoined {
                 List {
-                    ForEach(videoSDK.tracks, id: \.self) { track in
-                        VideoView(track: track)
+                    ForEach(videoSDK.peers, id: \.self) { peer in
+                        HMSPeerTile(peer: peer)
                             .frame(height: 300)
                     }
                 }
