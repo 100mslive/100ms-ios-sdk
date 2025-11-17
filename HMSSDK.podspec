@@ -16,7 +16,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '12.0'
   s.vendored_frameworks = 'HMSSDK.xcframework'
   
-  s.dependency 'HMSWebRTC', '1.0.6174'
+  s.dependency 'HMSWebRTC', '1.0.6175'
   s.dependency 'HMSAnalyticsSDK', '0.0.2'
  
 end
