@@ -70,7 +70,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
     
     
     private var menu: UIMenu {
-        UIMenu(children: menuItems() + roleBasedActions())
+        UIMenu(children: menuItems() + (roleBasedActions() as [UIMenuElement]))
     }
 
     // MARK: - View Lifecycle
@@ -374,7 +374,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         self.present(alertController, animated: true)
     }
 
-    private func menuItems() -> [UIAction] {
+    private func menuItems() -> [UIMenuElement] {
 
         let currentMode = viewModel?.mode ?? .regular
         
@@ -384,7 +384,7 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
         
         let isLocalAudioFilePlaybackEnabled = AudioSourceType(rawValue: UserDefaults.standard.integer(forKey: Constants.defaultAudioSource)) == .audioMixer
 
-        var actions = [
+        var actions: [UIMenuElement] = [
             UIAction(title: "Show new peer list",
                      image: UIImage(systemName: "megaphone.fill")) { [weak self] _ in
                          self?.showNewPeerList()
@@ -613,9 +613,41 @@ final class MeetingViewController: UIViewController, UIDocumentPickerDelegate {
             }])
         }
 
+        if let orientationLockMenu = cameraOrientationLockMenu() {
+            actions.append(orientationLockMenu)
+        }
+
         return actions
     }
-    
+
+    private func cameraOrientationLockMenu() -> UIMenu? {
+
+        guard let localVideoTrack = interactor?.hmsSDK?.localPeer?.localVideoTrack() else { return nil }
+
+        let currentLock = localVideoTrack.settings.cameraOrientationLock
+
+        let options: [(title: String, mask: UIInterfaceOrientationMask)] = [
+            ("Follow Device (All)", .all),
+            ("Portrait", .portrait),
+            ("Portrait Upside Down", .portraitUpsideDown),
+            ("Landscape Left", .landscapeLeft),
+            ("Landscape Right", .landscapeRight),
+            ("Landscape (Both)", .landscape)
+        ]
+
+        let actions = options.map { option in
+            UIAction(title: option.title,
+                     state: currentLock == option.mask ? .on : .off) { [weak self, weak localVideoTrack] _ in
+                localVideoTrack?.setCameraOrientationLock(option.mask)
+                self?.updateSettingsButton()
+            }
+        }
+
+        return UIMenu(title: "Camera Orientation Lock",
+                      image: UIImage(systemName: "rotate.right"),
+                      children: actions)
+    }
+
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         urls.forEach {
             do {
